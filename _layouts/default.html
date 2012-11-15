@@ -3,184 +3,48 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-	<meta charset="utf-8">
-    <title>{{ page.title }}</title>
-	{% if page.description %}
-	<meta name="description" content="{{ page.description }}">
-	{% endif %}
-	
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-	<link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-	<link href="/static/style.css" rel="stylesheet" type="text/css" />
-
-	<!-- Add jQuery library -->
-	<script type="text/javascript" src="/static/jquery-1.7.min.js"></script>
-
-	<!-- Add mousewheel plugin (this is optional) -->
-	<script type="text/javascript" src="/static/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
-
-	<!-- Add fancyBox -->
-	<link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.0" type="text/css" media="screen" />
-	<script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.0"></script>
-
-	<!-- Optionally add helpers - button, thumbnail and/or media -->
-	<link rel="stylesheet" href="/static/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.3" type="text/css" media="screen" />
-	<script type="text/javascript" src="/static/fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.3"></script>
-	<script type="text/javascript" src="/static/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.3"></script>
-	<link rel="stylesheet" href="/static/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.6" type="text/css" media="screen" />
-	<script type="text/javascript" src="/static/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.6"></script>
-	
-	<script type="text/javascript">
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-33534593-1']);
-	  _gaq.push(['_setDomainName', 'foldingtext.com']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-	</script>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			var fancybox = $(".fancybox").fancybox({
-				padding : 5,
-				margin: 50,
-				maxHeight: 550,
-				loop : false,
-			});
-			var hash = window.location.hash;
-			if (hash === '#screenshots') {
-				$(".screenshotsfirst").trigger("click");
-			}
-		});
-	</script>
-	
-	<script type="text/javascript">
-		$(document).ready(function() {
-			var fancybox = $(".fancyvideo5").fancybox({
-				padding : 5,
-				'width': 960,
-				'height': 600,
-				'autoScale': false,
-				'autoDimensions': false,
-				'content': '&nbsp;',
-				'afterLoad': function() {
-					if ($.browser.mozilla) {
-						$('.fancybox-inner')
-						.html('<video poster="/static/gallery/screencastposter.png" id="screencast" width="960" height="600" controls><source src="/static/gallery/screencast.webm" type="video/webm">your browser does not support the HTML 5 video tag</video>')
-						.css({'overflow':'hidden'});
-					} else if ($.browser.webkit) {
-						$('.fancybox-inner')
-						.html('<video poster="/static/gallery/screencastposter.png" id="screencast" width="960" height="600" controls><source src="/static/gallery/screencast.mp4" type="video/mp4">your browser does not support the HTML 5 video tag</video>')
-						.css({'overflow':'hidden'});
-					} else {
-						$('.fancybox-inner')
-						.html('<video poster="/static/gallery/screencastposter.png" id="screencast" width="960" height="600" controls><source src="/static/gallery/screencast.mp4" type="video/mp4"><source src="/static/gallery/screencast.ogv" type="video/ogg"><source src="/static/gallery/screencast.webm" type="video/webm">your browser does not support the HTML 5 video tag</video>')
-						.css({'overflow':'hidden'});
-					}
-					
-					var screencast = document.getElementById('screencast');
-					if (screencast) {
-						screencast.play();
-					}
-				},
-				'beforeClose': function() {
-					var screencast = document.getElementById('screencast');
-					if (screencast) {
-						screencast.pause();
-					}
-				},
-				'afterClose': function() {
-					$(".fancybox-inner").empty();
-				}
-			});
-			
-			var hash = window.location.hash;
-			if (hash === '#watchmovie') {
-				fancybox.trigger("click");	
-			}
-		});	
-	</script>
+		{% include head.html %}
   </head>
 
   <body>
     <div class="container">
+		<header>
+			{% if page.home %}
+			
+			<h1><a class="fancyvideo5" href="/static/gallery/screencastposter.png"><img src="/static/logo.svg" height="64px"/>
+			<span>FoldingText – Plain text productivity</span></a></h1>
+			
+			{% else %}
 
-	<header>
-		<h1><a class="fancyvideo5" href="/static/gallery/screencastposter.png"><img src="/static/logo.svg" height="63"/>
-		<span>FoldingText – Plain text productivity</span></a></h1>
-	</header>
+			{% capture url_parts %} {{ page.url | remove: "/index.html" | replace:'/'," " }}{% endcapture %}
+			{% capture num_parts %}{{ url_parts | number_of_words | minus: 1}}{% endcapture %}
+			{% assign previous="" %}
+			{% if num_parts != "-1" %}
+			<ul id="breadcrumb">
+				<li><a href="/">home</a></li>
+
+				{% for unused in site.breadcrumb_iterator limit:num_parts %}
+				{% capture first_word %}{{ url_parts | truncatewords:1 | remove:"..."}}{% endcapture %}
+				{% capture previous %}{{ previous }}/{{ first_word }}{% endcapture %}
+
+				<li><a href="{{previous}}">{{ first_word }}</a></li>
+
+				{% capture url_parts %}{{ url_parts | remove_first:first_word }}{% endcapture %}
+				{% endfor %}
+			</ul>
+			{% endif %}
+			
+			<h1>{{ page.title }}</h1>
+
+			{% endif %}
+		</header>
 	
-	
-      <div class="content">
-        {{ content }}
-      </div>
-
-	<footer>
-
-		<div class="col">
-			<h3>Get App</h3>
-			<ul>
-			<li><a href="http://click.linksynergy.com/fs-bin/stat?id=DLLdAJR91KE&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=https%253A%252F%252Fitunes.apple.com%252Fus%252Fapp%252Ffoldingtext%252Fid540003654%253Fmt%253D12%2526uo%253D4%2526partnerId%253D30" onClick="_gaq.push(['_trackEvent', 'links', 'appstore', 'App Store']);"><img src="/static/appstore.svg" /></a></li>
-			</ul>
+		<div class="content">
+			{{ content }}
 		</div>
 
-		<div class="col">
-			<h3>Use For</h3>
-
-			<ul>
-			<li>Writing</li>
-			<li>Planning</li>
-			<li>Scheduling</li>
-			<li>To-do Lists</li>
-			<li>Note-taking</li>
-			<li>And more…</li>
-			</ul>
-		</div>
-
-		<div class="col">
-			<h3 id="learn_more">Learn More</h3>
-
-			<ul>				
-			<li><a class="fancyvideo5" onClick="_gaq.push(['_trackEvent', 'links', 'screencast2', 'Screencast 2']);" href="/static/gallery/screencastposter.png">Watch Movie</a></li>
-			<li><a class="fancybox screenshotsfirst" onClick="_gaq.push(['_trackEvent', 'links', 'gallery', 'Gallery']);" rel="group" href="/static/gallery/1-simple.png">Screenshots</a></li>
-			<li><a href="http://support.foldingtext.com">Support</a></li>
-			<li><a href="http://support.foldingtext.com/discussions">Forums</a></li>
-			<li><a href="http://support.foldingtext.com/kb">FAQs</a></li>
-			</ul>
-		</div>
-
-		<div class="col">
-			<h3>Follow Us</h3>
-
-			<ul>
-			<li><a href="https://twitter.com/intent/user?screen_name=foldingtext">Twitter</a></li>
-			<li><a href="https://plus.google.com/103835916412808164341">Google+</a></li>
-			<li><a href="http://www.facebook.com/FoldingText">Facebook</a></li>
-			</ul>
-		</div>
-
-		<h4><br /><a class="addthis_button_compact"><img width="0" height="0" />Bookmark &amp; Share</a></h4>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
-		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-502d98dc67f365a1"></script>
-
-		<div style="display:none;">
-			<a class="fancybox" rel="group" href="/static/gallery/2-surprisingly_adept.png">b</a>
-			<a class="fancybox" rel="group" href="/static/gallery/3-productivity_platform.png">b</a>		
-		</div>
-		<!--
-		<img src="/static/next.svg">
-		<img src="/static/prev.svg">
-		<img src="/static/close.svg">
-		-->
-	</footer>
+		{% include footer.html %}
+		
     </div>
   </body>
 </html>

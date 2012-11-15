@@ -65,10 +65,10 @@ hr:after {
 	color: rgb(20%,20%,20%);
 }
 
-ul {
+ul, ol {
 	padding: 0;
 }
-			
+		
 a {
 	color: black;
 }
@@ -76,6 +76,15 @@ a {
 a:hover {
 	color: black;
 	text-decoration: underline;
+}
+
+#breadcrumb {
+	list-style-type: none;
+	text-transform:capitalize;
+}
+
+#breadcrumb li:after{
+	content:" »";
 }
 
 blockquote a {
@@ -180,4 +189,9 @@ footer h4 {
 
 #fancybox-loading div {
 	background: url('/static/loadingBackground.svg') center center no-repeat;
+}
+
+.gist .gist-file .gist-data {
+	max-height:20rem;
+	background:white !important;
 }
