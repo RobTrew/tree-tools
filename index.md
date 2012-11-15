@@ -1,7 +1,7 @@
 ---
 home: true
 layout: default
-title: FoldingText — Plain text productivity for geeks
+title: Plain text productivity for geeks
 description: Plain text productivity for geeks. As you type, FoldingText auto-formats your document into sections, lists, and paragraphs. Fold sections to see the big picture. Focus to see the details.
 ---
 
