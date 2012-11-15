@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Autofocus System
-description: Use this script to implement a version of [Mark Foster's](http://markforster.squarespace.com/autofocus-system/) autofocus time management system.
+description: Use this script to implement a version of [Mark Forster's](http://markforster.squarespace.com/autofocus-system/) Autofocus time management system.
 ---
 
 {{page.description}}
