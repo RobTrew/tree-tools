@@ -78,6 +78,19 @@ a:hover {
 	text-decoration: underline;
 }
 
+pre {
+	font-family: Courier, monospace;
+	font-size: 1.6rem;
+	padding:1rem;
+	background: rgb(90%,90%,90%);
+}
+
+code {
+	font-family: Courier, monospace;
+	font-size: 1.6rem;
+	background: rgb(90%,90%,90%);
+}
+
 #breadcrumb {
 	list-style-type: none;
 	text-transform:capitalize;
