@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Mark selected line as heading, or deepen its heading level
+title: Make Header
 description: Assign this script to a keystroke to simplify marking lines as headers
 ---
 
