@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Archive Done
+title: Archive Done Script
 description: Use this script to move completed todo items to the _# Archive_ heading in your document.
 ---
 

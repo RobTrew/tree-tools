@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Make Header
+title: Make Header Script
 description: Use this script to simplify marking lines as headers, and increasing header indentation level.
 ---
 

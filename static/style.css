@@ -28,6 +28,15 @@ h1, h2, h3, h4, h5, h6 {
 	margin:1rem 0;
 }
 
+h1.title:before {
+	font-weight:normal;
+	content:"# ";
+}
+
+h1.title {
+	text-indent: -2rem;
+}
+
 small {
 	font-size: 1.6rem;	
 }
@@ -94,10 +103,6 @@ code {
 #breadcrumb {
 	list-style-type: none;
 	text-transform:capitalize;
-}
-
-#breadcrumb li:after{
-	content:" »";
 }
 
 blockquote a {

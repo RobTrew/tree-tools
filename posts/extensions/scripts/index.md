@@ -7,6 +7,6 @@ Scripts allow you to automate FoldingText to create your own workflows and save 
 
 {% for post in site.categories.scripts %}
 
-- [**{{ post.title }}**]({{ post.url }}) {{ post.description | strip_html }}
+- [**{{ post.title }} Script**]({{ post.url }}) {{ post.description | strip_html }}
 
 {% endfor %}
