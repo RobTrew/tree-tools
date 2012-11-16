@@ -1,20 +1,14 @@
 ---
 layout: default
 title: Make Header
-description: Assign this script to a keystroke to simplify marking lines as headers
+description: Use this script to simplify marking lines as headers, and increasing header indentation level.
 ---
 
 {{page.description}}
 
-Applescript giving a single keystroke route to either marking the selected line as a header (the cursor can be anywhere in the line) or deepening its header level (adding a further hash).
+This script makes it easy to quickly mark a line as a heading. It automates moving to the start of the line, deleting any existing list or other formatting, and then typing a `#`. If you run it on a line that's already a heading it will increase the heading level by inserting an additional `#` at the start of the line.
 
-Saves the keystrokes involved in:
-
-- Moving to the start of the line,
-- deleting any existing list or other formatting
-- typing a #
-
-(repeated keystrokes/runs will deepen the heading level). 
+This script is most useful if you [assign a keyboard shortcut](./using_scripts/) to it, then you can make a header in a single keystroke.
 
 - [**View Script**](https://gist.github.com/gists/4087248)
 - [**Download Script**](https://gist.github.com/gists/4087248/download)
