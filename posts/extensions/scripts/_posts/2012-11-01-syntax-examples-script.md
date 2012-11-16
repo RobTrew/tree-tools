@@ -3,7 +3,6 @@ layout: default
 title: Syntax Examples Script
 description: Use these scripts to learn FoldingText's different scripting syntaxes.
 ---
-!!!!!
 
 {{page.description}}
 
