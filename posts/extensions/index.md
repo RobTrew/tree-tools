@@ -3,7 +3,7 @@ layout: default
 title: Extensions
 ---
 
-FoldingText provides a simple and flexible place for you to work. When you need more, extensions can automate, style, and add new behavior to FoldingText. Please try these ones, or [share](./share) your own.
+Extensions automate, _will_ style, and _will_ add new behavior to FoldingText. This page collects useful extensions to get you started. Please try these ones, or [share](./share) your own.
 
 - [**Scripts**](./scripts) allow you to automate FoldingText to create your own workflows and save time.
 
