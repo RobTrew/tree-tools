@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>FE549827-F589-4E05-9803-2007A4BEEDD7-15078-0000A23BA2AB31D0</key>
+			<key>A017E232-19CA-4ECE-B567-BCAF4A9AFE63-15078-0000A90D0A6984D5</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -47,30 +47,102 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>257</integer>
-								<integer>329</integer>
-								<integer>132</integer>
+								<integer>263</integer>
+								<integer>339</integer>
+								<integer>137</integer>
 							</array>
 							<key>5</key>
 							<array>
-								<integer>250</integer>
+								<integer>205</integer>
+								<integer>85</integer>
+								<integer>261</integer>
+								<integer>68</integer>
 								<integer>104</integer>
-								<integer>318</integer>
-								<integer>83</integer>
-								<integer>127</integer>
 							</array>
 						</dict>
 					</dict>
 					<key>resultState</key>
 					<dict>
+						<key>explorerState</key>
+						<dict>
+							<key>dividerPos</key>
+							<real>333.33334350585938</real>
+							<key>scope2.changedItems</key>
+							<true/>
+							<key>scope2.emptyElements</key>
+							<false/>
+							<key>scope2.filledElements</key>
+							<true/>
+							<key>scope2.props</key>
+							<true/>
+							<key>scope2.unchangedItems</key>
+							<true/>
+							<key>showScopeBar</key>
+							<true/>
+						</dict>
+						<key>fileSpecState</key>
+						<dict/>
 						<key>modes</key>
 						<array>
 							<string>mode.best</string>
 						</array>
 						<key>positions2</key>
-						<dict/>
+						<dict>
+							<key>positions</key>
+							<dict/>
+						</dict>
 						<key>prettyPrint</key>
 						<false/>
+						<key>sourceState</key>
+						<dict>
+							<key>text</key>
+							<dict>
+								<key>LNSSelection</key>
+								<array>
+									<dict>
+										<key>length</key>
+										<integer>0</integer>
+										<key>location</key>
+										<integer>4</integer>
+									</dict>
+								</array>
+								<key>LNSTextViewShowInvisibles</key>
+								<false/>
+								<key>LNSTextViewShowSpaces</key>
+								<false/>
+								<key>LNSTextViewShowTabStops</key>
+								<false/>
+								<key>LNSTextViewWrapLines</key>
+								<true/>
+								<key>LNSVisibleRect</key>
+								<string>{{0, 0}, {424, 168}}</string>
+							</dict>
+						</dict>
+						<key>textState</key>
+						<dict>
+							<key>text</key>
+							<dict>
+								<key>LNSSelection</key>
+								<array>
+									<dict>
+										<key>length</key>
+										<integer>0</integer>
+										<key>location</key>
+										<integer>24</integer>
+									</dict>
+								</array>
+								<key>LNSTextViewShowInvisibles</key>
+								<false/>
+								<key>LNSTextViewShowSpaces</key>
+								<false/>
+								<key>LNSTextViewShowTabStops</key>
+								<false/>
+								<key>LNSTextViewWrapLines</key>
+								<true/>
+								<key>LNSVisibleRect</key>
+								<string>{{0, 0}, {424, 168}}</string>
+							</dict>
+						</dict>
 					</dict>
 					<key>stackVisible</key>
 					<false/>
@@ -111,9 +183,9 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>311</integer>
-								<integer>283</integer>
-								<integer>281</integer>
+								<integer>312</integer>
+								<integer>285</integer>
+								<integer>282</integer>
 							</array>
 						</dict>
 					</dict>
@@ -150,9 +222,9 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>298</integer>
-								<integer>309</integer>
-								<integer>247</integer>
+								<integer>299</integer>
+								<integer>311</integer>
+								<integer>248</integer>
 							</array>
 						</dict>
 					</dict>
@@ -174,7 +246,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>3211</integer>
+								<integer>1230</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -186,7 +258,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 877}, {721, 726}}</string>
+						<string>{{0, 450}, {721, 747}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -204,14 +276,14 @@
 					<key>tab.bps</key>
 					<real>433</real>
 					<key>tab.debug</key>
-					<real>433</real>
+					<real>439</real>
 					<key>tab.rsrcs</key>
 					<real>433</real>
 				</dict>
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>FE549827-F589-4E05-9803-2007A4BEEDD7-15078-0000A23BA2AB31D0</string>
+				<string>A017E232-19CA-4ECE-B567-BCAF4A9AFE63-15078-0000A90D0A6984D5</string>
 				<key>windowFrame</key>
 				<string>8 59 1189 819 0 0 1440 878 </string>
 			</dict>
@@ -222,7 +294,7 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>FE549827-F589-4E05-9803-2007A4BEEDD7-15078-0000A23BA2AB31D0</string>
+				<string>A017E232-19CA-4ECE-B567-BCAF4A9AFE63-15078-0000A90D0A6984D5</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
