@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>67526B2B-ED2D-42CB-AC83-68E991DFF488-15078-0000ACB1F6F60171</key>
+			<key>B3236AD3-D3E2-4AE4-8BAF-FED62A87D2FE-15078-0000ACF79B921DFC</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -246,7 +246,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>3797</integer>
+								<integer>1770</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -258,7 +258,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 907}, {721, 726}}</string>
+						<string>{{0, 541}, {721, 726}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -283,9 +283,9 @@
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>67526B2B-ED2D-42CB-AC83-68E991DFF488-15078-0000ACB1F6F60171</string>
+				<string>B3236AD3-D3E2-4AE4-8BAF-FED62A87D2FE-15078-0000ACF79B921DFC</string>
 				<key>windowFrame</key>
-				<string>698 59 1189 819 0 0 1440 878 </string>
+				<string>343 59 1189 819 0 0 1440 878 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -294,13 +294,13 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>67526B2B-ED2D-42CB-AC83-68E991DFF488-15078-0000ACB1F6F60171</string>
+				<string>B3236AD3-D3E2-4AE4-8BAF-FED62A87D2FE-15078-0000ACF79B921DFC</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>698 59 1189 819 0 0 1440 878 </string>
+					<string>343 59 1189 819 0 0 1440 878 </string>
 				</dict>
 			</dict>
 		</array>
