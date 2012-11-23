@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>DisplayKind</key>
+						<string>None</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteAppleScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>-- PREPARE CLIPBOARD FOR PASTE AS FOLDINGTEXT MARKDOWN:-- CODE BLOCK | QUOTE BLOCK | ORDERED LIST | UNORDERED LIST-- Draft Ver 0.2-- Copyright Robin Trew 2012property pblnStripBlankLines : falseproperty piQuote : 1property piCode : 2property piUnList : 3property piNumList : 4--- EDIT THIS PROPERTY TO SPECIFY CLIPBOARD TRANSFORM NEEDED ------ CHOOSE ONE OF FOUR PI PROPERTIES ABOVEproperty piType : piCode------------------------------------------------------------------------------------------property pstrQuote : "^&gt; "property pstrUnList : "^[-*+] "property pstrNumList : "^[0-9]*\\. "property pstrCode : "^    "property plstPrefixPatterns : {pstrQuote, pstrCode, pstrUnList, pstrNumList}property plstPrefix : {"&gt; ", "    ", "- ", "1. "}property pStripBlanks : "-e '/^$/d'"on run	-- GET THE CLIPBOARD INTO AN LF-DELIMITED FORM	set {dlm, my text item delimiters} to {my text item delimiters, linefeed}	set lstLines to (paragraphs of (the clipboard as text))	set {strLines, lngLines} to {lstLines as string, length of lstLines}		set strPrefixPattern to item piType of plstPrefixPatterns	set blnList to (piType is in {piUnList, piNumList})	set blnConflict to blnList	if blnConflict then		set my text item delimiters to "|"		set strConflictingPrefixes to plstPrefixPatterns as string	end if		-- PRUNE UNTIL THE LINES ARE READY OR NO CONFLICTING PREFIXES REMAIN	set blnReady to AllMatch(strLines, lngLines, strPrefixPattern)	repeat while (not blnReady) and blnConflict		set blnConflict to AllMatch(strLines, lngLines, strConflictingPrefixes)		if blnConflict then			set strLines to PrunePrefixes(strLines, strConflictingPrefixes)			set blnReady to AllMatch(strLines, lngLines, strPrefixPattern)		end if	end repeat		-- ADD ANY NEEDED PREFIXES	if not blnReady then		-- PREPEND PREFIXES, REMOVING BLANK LINES If REQUIRED		set strTransforms to "-e 's/^/" &amp; (item piType of plstPrefix) &amp; "/g'"		if (pblnStripBlankLines or blnList) then ¬			set strTransforms to pStripBlanks &amp; space &amp; strTransforms		set strLines to (do shell script "echo " &amp; quoted form of strLines &amp; " | sed " &amp; strTransforms)	end if		set my text item delimiters to dlm	set the clipboard to strLines	strLinesend runon PrunePrefixes(strLines, strPrefixes)	set strCMD to "echo " &amp; quoted form of strLines &amp; " | sed -Ee 's/" &amp; strPrefixes &amp; "//'"	set my text item delimiters to linefeed	return ((paragraphs of (do shell script strCMD)) as string)end PrunePrefixeson AllMatch(strLines, lngLines, strPattern)	try		set lngMatch to (do shell script "echo " &amp; quoted form of strLines &amp; " | grep -Ec " &amp; ¬			quoted form of (strPattern &amp; "|^$"))	on error		set lngMatch to 0	end try	return (lngLines - lngMatch) &lt; 1end AllMatch</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>Variable</string>
+					</dict>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>SelectMenuItem</string>
+						<key>Menu</key>
+						<array>
+							<string>Edit</string>
+							<string>Paste</string>
+						</array>
+						<key>StopOnFailure</key>
+						<true/>
+						<key>TargetApplication</key>
+						<dict>
+							<key>BundleIdentifier</key>
+							<string>com.foldingtext.FoldingText</string>
+							<key>Creator</key>
+							<integer>1061109567</integer>
+							<key>FileType</key>
+							<integer>1095782476</integer>
+							<key>Name</key>
+							<string>FoldingText.app</string>
+							<key>NewFile</key>
+							<string>/Applications/FoldingText.app</string>
+						</dict>
+						<key>TargetingType</key>
+						<string>Specific</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>Name</key>
+				<string>1. Paste as CODE BLOCK</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>9</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>2304</integer>
+						<key>TriggerRepeat</key>
+						<false/>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>A1D42307-1A8E-48FD-929F-395ABD889F3D</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>FoldingText</string>
+		<key>Targeting</key>
+		<dict>
+			<key>Targeting</key>
+			<string>Included</string>
+			<key>TargetingApps</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.foldingtext.FoldingText</string>
+					<key>Creator</key>
+					<integer>1061109567</integer>
+					<key>FileType</key>
+					<integer>1095782476</integer>
+					<key>Name</key>
+					<string>FoldingText.app</string>
+					<key>NewFile</key>
+					<string>/Applications/FoldingText.app</string>
+				</dict>
+			</array>
+		</dict>
+		<key>UID</key>
+		<string>E5412F4B-870D-45A6-A959-43F4A024DB39</string>
+	</dict>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>DisplayKind</key>
+						<string>None</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteAppleScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>-- PREPARE CLIPBOARD FOR PASTE AS FOLDINGTEXT MARKDOWN:-- CODE BLOCK | QUOTE BLOCK | ORDERED LIST | UNORDERED LIST-- Draft Ver 0.2-- Copyright Robin Trew 2012property pblnStripBlankLines : falseproperty piQuote : 1property piCode : 2property piUnList : 3property piNumList : 4--- EDIT THIS PROPERTY TO SPECIFY CLIPBOARD TRANSFORM NEEDED ------ CHOOSE ONE OF FOUR PI PROPERTIES ABOVEproperty piType : piNumList------------------------------------------------------------------------------------------property pstrQuote : "^&gt; "property pstrUnList : "^[-*+] "property pstrNumList : "^[0-9]*\\. "property pstrCode : "^    "property plstPrefixPatterns : {pstrQuote, pstrCode, pstrUnList, pstrNumList}property plstPrefix : {"&gt; ", "    ", "- ", "1. "}property pStripBlanks : "-e '/^$/d'"on run	-- GET THE CLIPBOARD INTO AN LF-DELIMITED FORM	set {dlm, my text item delimiters} to {my text item delimiters, linefeed}	set lstLines to (paragraphs of (the clipboard as text))	set {strLines, lngLines} to {lstLines as string, length of lstLines}		set strPrefixPattern to item piType of plstPrefixPatterns	set blnList to (piType is in {piUnList, piNumList})	set blnConflict to blnList	if blnConflict then		set my text item delimiters to "|"		set strConflictingPrefixes to plstPrefixPatterns as string	end if		-- PRUNE UNTIL THE LINES ARE READY OR NO CONFLICTING PREFIXES REMAIN	set blnReady to AllMatch(strLines, lngLines, strPrefixPattern)	repeat while (not blnReady) and blnConflict		set blnConflict to AllMatch(strLines, lngLines, strConflictingPrefixes)		if blnConflict then			set strLines to PrunePrefixes(strLines, strConflictingPrefixes)			set blnReady to AllMatch(strLines, lngLines, strPrefixPattern)		end if	end repeat		-- ADD ANY NEEDED PREFIXES	if not blnReady then		-- PREPEND PREFIXES, REMOVING BLANK LINES If REQUIRED		set strTransforms to "-e 's/^/" &amp; (item piType of plstPrefix) &amp; "/g'"		if (pblnStripBlankLines or blnList) then ¬			set strTransforms to pStripBlanks &amp; space &amp; strTransforms		set strLines to (do shell script "echo " &amp; quoted form of strLines &amp; " | sed " &amp; strTransforms)	end if		set my text item delimiters to dlm	set the clipboard to strLines	strLinesend runon PrunePrefixes(strLines, strPrefixes)	set strCMD to "echo " &amp; quoted form of strLines &amp; " | sed -Ee 's/" &amp; strPrefixes &amp; "//'"	set my text item delimiters to linefeed	return ((paragraphs of (do shell script strCMD)) as string)end PrunePrefixeson AllMatch(strLines, lngLines, strPattern)	try		set lngMatch to (do shell script "echo " &amp; quoted form of strLines &amp; " | grep -Ec " &amp; ¬			quoted form of (strPattern &amp; "|^$"))	on error		set lngMatch to 0	end try	return (lngLines - lngMatch) &lt; 1end AllMatch</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>Variable</string>
+					</dict>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>SelectMenuItem</string>
+						<key>Menu</key>
+						<array>
+							<string>Edit</string>
+							<string>Paste</string>
+						</array>
+						<key>StopOnFailure</key>
+						<true/>
+						<key>TargetApplication</key>
+						<dict>
+							<key>BundleIdentifier</key>
+							<string>com.foldingtext.FoldingText</string>
+							<key>Creator</key>
+							<integer>1061109567</integer>
+							<key>FileType</key>
+							<integer>1095782476</integer>
+							<key>Name</key>
+							<string>FoldingText.app</string>
+							<key>NewFile</key>
+							<string>/Applications/FoldingText.app</string>
+						</dict>
+						<key>TargetingType</key>
+						<string>Specific</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>Name</key>
+				<string>2. Paste as NUMBERED LIST</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>9</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>2304</integer>
+						<key>TriggerRepeat</key>
+						<false/>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>23172F9C-9EFD-48B7-9CD4-595E5123E81A</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>FoldingText</string>
+		<key>Targeting</key>
+		<dict>
+			<key>Targeting</key>
+			<string>Included</string>
+			<key>TargetingApps</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.foldingtext.FoldingText</string>
+					<key>Creator</key>
+					<integer>1061109567</integer>
+					<key>FileType</key>
+					<integer>1095782476</integer>
+					<key>Name</key>
+					<string>FoldingText.app</string>
+					<key>NewFile</key>
+					<string>/Applications/FoldingText.app</string>
+				</dict>
+			</array>
+		</dict>
+		<key>UID</key>
+		<string>E5412F4B-870D-45A6-A959-43F4A024DB39</string>
+	</dict>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>DisplayKind</key>
+						<string>None</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteAppleScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>-- PREPARE CLIPBOARD FOR PASTE AS FOLDINGTEXT MARKDOWN:-- CODE BLOCK | QUOTE BLOCK | ORDERED LIST | UNORDERED LIST-- Draft Ver 0.2-- Copyright Robin Trew 2012property pblnStripBlankLines : falseproperty piQuote : 1property piCode : 2property piUnList : 3property piNumList : 4--- EDIT THIS PROPERTY TO SPECIFY CLIPBOARD TRANSFORM NEEDED ------ CHOOSE ONE OF FOUR PI PROPERTIES ABOVEproperty piType : piUnList------------------------------------------------------------------------------------------property pstrQuote : "^&gt; "property pstrUnList : "^[-*+] "property pstrNumList : "^[0-9]*\\. "property pstrCode : "^    "property plstPrefixPatterns : {pstrQuote, pstrCode, pstrUnList, pstrNumList}property plstPrefix : {"&gt; ", "    ", "- ", "1. "}property pStripBlanks : "-e '/^$/d'"on run	-- GET THE CLIPBOARD INTO AN LF-DELIMITED FORM	set {dlm, my text item delimiters} to {my text item delimiters, linefeed}	set lstLines to (paragraphs of (the clipboard as text))	set {strLines, lngLines} to {lstLines as string, length of lstLines}		set strPrefixPattern to item piType of plstPrefixPatterns	set blnList to (piType is in {piUnList, piNumList})	set blnConflict to blnList	if blnConflict then		set my text item delimiters to "|"		set strConflictingPrefixes to plstPrefixPatterns as string	end if		-- PRUNE UNTIL THE LINES ARE READY OR NO CONFLICTING PREFIXES REMAIN	set blnReady to AllMatch(strLines, lngLines, strPrefixPattern)	repeat while (not blnReady) and blnConflict		set blnConflict to AllMatch(strLines, lngLines, strConflictingPrefixes)		if blnConflict then			set strLines to PrunePrefixes(strLines, strConflictingPrefixes)			set blnReady to AllMatch(strLines, lngLines, strPrefixPattern)		end if	end repeat		-- ADD ANY NEEDED PREFIXES	if not blnReady then		-- PREPEND PREFIXES, REMOVING BLANK LINES If REQUIRED		set strTransforms to "-e 's/^/" &amp; (item piType of plstPrefix) &amp; "/g'"		if (pblnStripBlankLines or blnList) then ¬			set strTransforms to pStripBlanks &amp; space &amp; strTransforms		set strLines to (do shell script "echo " &amp; quoted form of strLines &amp; " | sed " &amp; strTransforms)	end if		set my text item delimiters to dlm	set the clipboard to strLines	strLinesend runon PrunePrefixes(strLines, strPrefixes)	set strCMD to "echo " &amp; quoted form of strLines &amp; " | sed -Ee 's/" &amp; strPrefixes &amp; "//'"	set my text item delimiters to linefeed	return ((paragraphs of (do shell script strCMD)) as string)end PrunePrefixeson AllMatch(strLines, lngLines, strPattern)	try		set lngMatch to (do shell script "echo " &amp; quoted form of strLines &amp; " | grep -Ec " &amp; ¬			quoted form of (strPattern &amp; "|^$"))	on error		set lngMatch to 0	end try	return (lngLines - lngMatch) &lt; 1end AllMatch</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>Variable</string>
+					</dict>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>SelectMenuItem</string>
+						<key>Menu</key>
+						<array>
+							<string>Edit</string>
+							<string>Paste</string>
+						</array>
+						<key>StopOnFailure</key>
+						<true/>
+						<key>TargetApplication</key>
+						<dict>
+							<key>BundleIdentifier</key>
+							<string>com.foldingtext.FoldingText</string>
+							<key>Creator</key>
+							<integer>1061109567</integer>
+							<key>FileType</key>
+							<integer>1095782476</integer>
+							<key>Name</key>
+							<string>FoldingText.app</string>
+							<key>NewFile</key>
+							<string>/Applications/FoldingText.app</string>
+						</dict>
+						<key>TargetingType</key>
+						<string>Specific</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>Name</key>
+				<string>3. Paste as BULLET LIST</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>9</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>2304</integer>
+						<key>TriggerRepeat</key>
+						<false/>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>0C09E212-89DF-4B8D-8985-855856562C41</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>FoldingText</string>
+		<key>Targeting</key>
+		<dict>
+			<key>Targeting</key>
+			<string>Included</string>
+			<key>TargetingApps</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.foldingtext.FoldingText</string>
+					<key>Creator</key>
+					<integer>1061109567</integer>
+					<key>FileType</key>
+					<integer>1095782476</integer>
+					<key>Name</key>
+					<string>FoldingText.app</string>
+					<key>NewFile</key>
+					<string>/Applications/FoldingText.app</string>
+				</dict>
+			</array>
+		</dict>
+		<key>UID</key>
+		<string>E5412F4B-870D-45A6-A959-43F4A024DB39</string>
+	</dict>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>DisplayKind</key>
+						<string>None</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteAppleScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>-- PREPARE CLIPBOARD FOR PASTE AS FOLDINGTEXT MARKDOWN:-- CODE BLOCK | QUOTE BLOCK | ORDERED LIST | UNORDERED LIST-- Draft Ver 0.2-- Copyright Robin Trew 2012property pblnStripBlankLines : falseproperty piQuote : 1property piCode : 2property piUnList : 3property piNumList : 4--- EDIT THIS PROPERTY TO SPECIFY CLIPBOARD TRANSFORM NEEDED ------ CHOOSE ONE OF FOUR PI PROPERTIES ABOVEproperty piType : piQuote------------------------------------------------------------------------------------------property pstrQuote : "^&gt; "property pstrUnList : "^[-*+] "property pstrNumList : "^[0-9]*\\. "property pstrCode : "^    "property plstPrefixPatterns : {pstrQuote, pstrCode, pstrUnList, pstrNumList}property plstPrefix : {"&gt; ", "    ", "- ", "1. "}property pStripBlanks : "-e '/^$/d'"on run	-- GET THE CLIPBOARD INTO AN LF-DELIMITED FORM	set {dlm, my text item delimiters} to {my text item delimiters, linefeed}	set lstLines to (paragraphs of (the clipboard as text))	set {strLines, lngLines} to {lstLines as string, length of lstLines}		set strPrefixPattern to item piType of plstPrefixPatterns	set blnList to (piType is in {piUnList, piNumList})	set blnConflict to blnList	if blnConflict then		set my text item delimiters to "|"		set strConflictingPrefixes to plstPrefixPatterns as string	end if		-- PRUNE UNTIL THE LINES ARE READY OR NO CONFLICTING PREFIXES REMAIN	set blnReady to AllMatch(strLines, lngLines, strPrefixPattern)	repeat while (not blnReady) and blnConflict		set blnConflict to AllMatch(strLines, lngLines, strConflictingPrefixes)		if blnConflict then			set strLines to PrunePrefixes(strLines, strConflictingPrefixes)			set blnReady to AllMatch(strLines, lngLines, strPrefixPattern)		end if	end repeat		-- ADD ANY NEEDED PREFIXES	if not blnReady then		-- PREPEND PREFIXES, REMOVING BLANK LINES If REQUIRED		set strTransforms to "-e 's/^/" &amp; (item piType of plstPrefix) &amp; "/g'"		if (pblnStripBlankLines or blnList) then ¬			set strTransforms to pStripBlanks &amp; space &amp; strTransforms		set strLines to (do shell script "echo " &amp; quoted form of strLines &amp; " | sed " &amp; strTransforms)	end if		set my text item delimiters to dlm	set the clipboard to strLines	strLinesend runon PrunePrefixes(strLines, strPrefixes)	set strCMD to "echo " &amp; quoted form of strLines &amp; " | sed -Ee 's/" &amp; strPrefixes &amp; "//'"	set my text item delimiters to linefeed	return ((paragraphs of (do shell script strCMD)) as string)end PrunePrefixeson AllMatch(strLines, lngLines, strPattern)	try		set lngMatch to (do shell script "echo " &amp; quoted form of strLines &amp; " | grep -Ec " &amp; ¬			quoted form of (strPattern &amp; "|^$"))	on error		set lngMatch to 0	end try	return (lngLines - lngMatch) &lt; 1end AllMatch</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>Variable</string>
+					</dict>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>SelectMenuItem</string>
+						<key>Menu</key>
+						<array>
+							<string>Edit</string>
+							<string>Paste</string>
+						</array>
+						<key>StopOnFailure</key>
+						<true/>
+						<key>TargetApplication</key>
+						<dict>
+							<key>BundleIdentifier</key>
+							<string>com.foldingtext.FoldingText</string>
+							<key>Creator</key>
+							<integer>1061109567</integer>
+							<key>FileType</key>
+							<integer>1095782476</integer>
+							<key>Name</key>
+							<string>FoldingText.app</string>
+							<key>NewFile</key>
+							<string>/Applications/FoldingText.app</string>
+						</dict>
+						<key>TargetingType</key>
+						<string>Specific</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>Name</key>
+				<string>4. Paste as QUOTE</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>9</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>2304</integer>
+						<key>TriggerRepeat</key>
+						<false/>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>13E5F1E1-43C0-4AAA-927F-925BFAA81EBC</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>FoldingText</string>
+		<key>Targeting</key>
+		<dict>
+			<key>Targeting</key>
+			<string>Included</string>
+			<key>TargetingApps</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.foldingtext.FoldingText</string>
+					<key>Creator</key>
+					<integer>1061109567</integer>
+					<key>FileType</key>
+					<integer>1095782476</integer>
+					<key>Name</key>
+					<string>FoldingText.app</string>
+					<key>NewFile</key>
+					<string>/Applications/FoldingText.app</string>
+				</dict>
+			</array>
+		</dict>
+		<key>UID</key>
+		<string>E5412F4B-870D-45A6-A959-43F4A024DB39</string>
+	</dict>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>DisplayKind</key>
+						<string>None</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteAppleScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>-- PREPARE CLIPBOARD FOR PASTE AS FOLDINGTEXT MARKDOWN:-- CODE BLOCK | QUOTE BLOCK | ORDERED LIST | UNORDERED LIST-- Draft Ver 0.2-- Copyright Robin Trew 2012property pblnStripBlankLines : trueproperty piQuote : 1property piCode : 2property piUnList : 3property piNumList : 4--- EDIT THIS PROPERTY TO SPECIFY CLIPBOARD TRANSFORM NEEDED ------ CHOOSE ONE OF FOUR PI PROPERTIES ABOVEproperty piType : piQuote------------------------------------------------------------------------------------------property pstrQuote : "^&gt; "property pstrUnList : "^[-*+] "property pstrNumList : "^[0-9]*\\. "property pstrCode : "^    "property plstPrefixPatterns : {pstrQuote, pstrCode, pstrUnList, pstrNumList}property plstPrefix : {"&gt; ", "    ", "- ", "1. "}property pStripBlanks : "-e '/^$/d'"on run	-- GET THE CLIPBOARD INTO AN LF-DELIMITED FORM	set {dlm, my text item delimiters} to {my text item delimiters, linefeed}	set lstLines to (paragraphs of (the clipboard as text))	set {strLines, lngLines} to {lstLines as string, length of lstLines}		set strPrefixPattern to item piType of plstPrefixPatterns	set blnList to (piType is in {piUnList, piNumList})	set blnConflict to blnList	if blnConflict then		set my text item delimiters to "|"		set strConflictingPrefixes to plstPrefixPatterns as string	end if		-- PRUNE UNTIL THE LINES ARE READY OR NO CONFLICTING PREFIXES REMAIN	set blnReady to AllMatch(strLines, lngLines, strPrefixPattern)	repeat while (not blnReady) and blnConflict		set blnConflict to AllMatch(strLines, lngLines, strConflictingPrefixes)		if blnConflict then			set strLines to PrunePrefixes(strLines, strConflictingPrefixes)			set blnReady to AllMatch(strLines, lngLines, strPrefixPattern)		end if	end repeat		-- ADD ANY NEEDED PREFIXES	if not blnReady then		-- PREPEND PREFIXES, REMOVING BLANK LINES If REQUIRED		set strTransforms to "-e 's/^/" &amp; (item piType of plstPrefix) &amp; "/g'"		if (pblnStripBlankLines or blnList) then ¬			set strTransforms to pStripBlanks &amp; space &amp; strTransforms		set strLines to (do shell script "echo " &amp; quoted form of strLines &amp; " | sed " &amp; strTransforms)	end if		set my text item delimiters to dlm	set the clipboard to strLines	strLinesend runon PrunePrefixes(strLines, strPrefixes)	set strCMD to "echo " &amp; quoted form of strLines &amp; " | sed -Ee 's/" &amp; strPrefixes &amp; "//'"	set my text item delimiters to linefeed	return ((paragraphs of (do shell script strCMD)) as string)end PrunePrefixeson AllMatch(strLines, lngLines, strPattern)	try		set lngMatch to (do shell script "echo " &amp; quoted form of strLines &amp; " | grep -Ec " &amp; ¬			quoted form of (strPattern &amp; "|^$"))	on error		set lngMatch to 0	end try	return (lngLines - lngMatch) &lt; 1end AllMatch</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>Variable</string>
+					</dict>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>SelectMenuItem</string>
+						<key>Menu</key>
+						<array>
+							<string>Edit</string>
+							<string>Paste</string>
+						</array>
+						<key>StopOnFailure</key>
+						<true/>
+						<key>TargetApplication</key>
+						<dict>
+							<key>BundleIdentifier</key>
+							<string>com.foldingtext.FoldingText</string>
+							<key>Creator</key>
+							<integer>1061109567</integer>
+							<key>FileType</key>
+							<integer>1095782476</integer>
+							<key>Name</key>
+							<string>FoldingText.app</string>
+							<key>NewFile</key>
+							<string>/Applications/FoldingText.app</string>
+						</dict>
+						<key>TargetingType</key>
+						<string>Specific</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>Name</key>
+				<string>5. Paste as QUOTE (strip blank lines)</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>9</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>2304</integer>
+						<key>TriggerRepeat</key>
+						<false/>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>E642C430-0458-4BDE-8607-CBF529808F60</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>FoldingText</string>
+		<key>Targeting</key>
+		<dict>
+			<key>Targeting</key>
+			<string>Included</string>
+			<key>TargetingApps</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.foldingtext.FoldingText</string>
+					<key>Creator</key>
+					<integer>1061109567</integer>
+					<key>FileType</key>
+					<integer>1095782476</integer>
+					<key>Name</key>
+					<string>FoldingText.app</string>
+					<key>NewFile</key>
+					<string>/Applications/FoldingText.app</string>
+				</dict>
+			</array>
+		</dict>
+		<key>UID</key>
+		<string>E5412F4B-870D-45A6-A959-43F4A024DB39</string>
+	</dict>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>DisplayKind</key>
+						<string>None</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteAppleScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>-- Markdown link pasting for FoldingText DEV 1.1-- Roughly based on http://support.foldingtext.com/discussions/suggestions/26-markdown-link-pastingproperty pVer : "0.03"on run	-- GET THE CLIPBOARD TEXT	set strClip to (the clipboard) as text	tell application "FoldingText"		-- AS LONG AS WE HAVE A DOCUMENT		set lstDocs to documents		if length of lstDocs &lt; 1 then return		tell item 1 of lstDocs			-- READ ANY SELECTION AND COMPOSE AN MD LINK WITH THE CLIPBOARD			set {strSeln, recSelnRange} to {|text|, textRange} of (read selection)			if text 1 of strClip ≠ "[" and text -1 of strClip ≠ ")" then				set strMD to "[" &amp; strSeln &amp; "](" &amp; strClip &amp; ")"			else				set strMD to strClip			end if						-- SQUARE BRACKET THE SELECTION			update selection with changes {|text|:strMD}						if length of strSeln &lt; 1 then				-- AND IF THE SELECTION IS JUST AN INSERTION POINT								-- FIRST PAUSE A MOMENT (WITHOUT THIS, WE CAN LOSE THE SUBSEQUENT CURSOR MOVE)				do shell script "sleep 0.2"								-- AND THEN MOVE THE CURSOR TO A POSITION BETWEEN THE SQUARE BRACKETS				set lngPosn to (location of recSelnRange) + 1				update selection with changes {textRange:{|length|:0, location:lngPosn}}				activate			end if		end tell	end tellend run</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>Variable</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>Name</key>
+				<string>6. Paste URL as MD Link</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>32</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>256</integer>
+						<key>TriggerRepeat</key>
+						<false/>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>4196467E-B4B5-4B51-942A-028506BACB3C</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>FoldingText</string>
+		<key>Targeting</key>
+		<dict>
+			<key>Targeting</key>
+			<string>Included</string>
+			<key>TargetingApps</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.foldingtext.FoldingText</string>
+					<key>Creator</key>
+					<integer>1061109567</integer>
+					<key>FileType</key>
+					<integer>1095782476</integer>
+					<key>Name</key>
+					<string>FoldingText.app</string>
+					<key>NewFile</key>
+					<string>/Applications/FoldingText.app</string>
+				</dict>
+			</array>
+		</dict>
+		<key>UID</key>
+		<string>E5412F4B-870D-45A6-A959-43F4A024DB39</string>
+	</dict>
+</array>
+</plist>
