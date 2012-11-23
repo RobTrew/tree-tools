@@ -1,0 +1,238 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fnil\fcharset0 Verdana;}
+{\colortbl;\red255\green255\blue255;\red37\green17\blue79;\red0\green0\blue0;\red0\green0\blue255;
+\red61\green124\blue2;\red0\green22\blue176;\red38\green18\blue82;\red108\green5\blue211;}
+\deftab480
+\pard\pardeftab480\slleading20\pardirnatural
+
+\f0\i\fs24 \cf2 -- Copyright (C) 2012 Robin Trew
+\i0 \cf3 \
+\pard\pardeftab480\slleading20\pardirnatural
+
+\i \cf2 --
+\i0 \cf3 \
+
+\i \cf2 -- Permission is hereby granted, free of charge, 
+\i0 \cf3 \
+
+\i \cf2 -- to any person obtaining a copy of this software 
+\i0 \cf3 \
+
+\i \cf2 -- and associated documentation files (the "Software"), 
+\i0 \cf3 \
+
+\i \cf2 -- to deal in the Software without restriction, 
+\i0 \cf3 \
+
+\i \cf2 -- including without limitation the rights to use, copy, 
+\i0 \cf3 \
+
+\i \cf2 -- modify, merge, publish, distribute, sublicense, 
+\i0 \cf3 \
+
+\i \cf2 -- and/or sell copies of the Software, and to permit persons 
+\i0 \cf3 \
+
+\i \cf2 -- to whom the Software is furnished to do so, 
+\i0 \cf3 \
+
+\i \cf2 -- subject to the following conditions:
+\i0 \cf3 \
+\
+
+\i \cf2 -- *******
+\i0 \cf3 \
+
+\i \cf2 -- The above copyright notice and this permission notice 
+\i0 \cf3 \
+
+\i \cf2 -- shall be included in ALL copies 
+\i0 \cf3 \
+
+\i \cf2 -- or substantial portions of the Software.
+\i0 \cf3 \
+
+\i \cf2 -- *******
+\i0 \cf3 \
+\
+
+\i \cf2 -- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+\i0 \cf3 \
+
+\i \cf2 -- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+\i0 \cf3 \
+
+\i \cf2 -- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+\i0 \cf3 \
+
+\i \cf2 -- IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
+\i0 \cf3 \
+
+\i \cf2 -- DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+\i0 \cf3 \
+
+\i \cf2 -- TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+\i0 \cf3 \
+
+\i \cf2 -- OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+\i0 \cf3 \
+\
+\cf4 property\cf3  \cf5 pTitle\cf3  : "Import OPML file to FoldingText"\
+\cf4 property\cf3  \cf5 pVer\cf3  : "0.006"\
+\cf4 property\cf3  \cf5 pAuthor\cf3  : "Robin Trew"\
+\
+\cf4 property\cf3  \cf5 plngHeaderLevels\cf3  : 2 
+\i \cf2 -- Make the top N (N \uc0\u8805  0) levels of the OPML outline into Markdown hash headers 
+\i0 \cf3 \
+\
+\cf4 property\cf3  \cf5 pSrcFolder\cf3  : (
+\b \cf6 path to
+\b0 \cf3  \cf7 desktop\cf3 )\
+\cf4 property\cf3  \cf5 pPythonScript\cf3  : "OPML2FT.py"\
+\
+
+\i \cf2 -- ver 0.003 compatible with Keyboard Maestro
+\i0 \cf3 \
+
+\i \cf2 -- ver 0.004 removed leading blank line from imported document
+\i0 \cf3 \
+
+\i \cf2 -- ver 0.005 fixed memory (between runs) of most recent folder
+\i0 \cf3 \
+
+\i \cf2 -- ver 0.006 corrected bug which prevented importation of OPML with _note attributes
+\i0 \cf3 \
+\
+\cf4 on\cf3  
+\b \cf4 run
+\b0 \cf3 \
+	
+\i \cf2 -- CHOOSE AN OPML FILE
+\i0 \cf3 \
+	\cf4 tell\cf3  
+\i \cf4 application
+\i0 \cf3  "Finder"\
+		\cf5 pSrcFolder\cf3 \
+		\cf4 if\cf3  
+\b \cf4 exists
+\b0 \cf3  \cf5 pSrcFolder\cf3  \cf4 then\cf3 \
+			\cf4 set\cf3  \cf5 strSrcFolder\cf3  \cf4 to\cf3  \cf8 POSIX path\cf3  \cf4 of\cf3  \cf5 pSrcFolder\cf3 \
+		\cf4 else\cf3 \
+			\cf4 set\cf3  \cf5 strSrcFolder\cf3  \cf4 to\cf3  \cf8 POSIX path\cf3  \cf4 of\cf3  (
+\b \cf6 path to
+\b0 \cf3  \cf7 home folder\cf3 )\
+		\cf4 end\cf3  \cf4 if\cf3 \
+	\cf4 end\cf3  \cf4 tell\cf3 \
+	\
+	\cf4 tell\cf3  
+\i \cf4 application
+\i0 \cf3  "FoldingText"\
+		
+\b \cf4 activate
+\b0 \cf3 \
+		\cf4 set\cf3  \cf5 strOPMLFile\cf3  \cf4 to\cf3  (\cf8 POSIX path\cf3  \cf4 of\cf3  \'ac\
+			(
+\b \cf6 choose file
+\b0 \cf3  \cf6 with prompt\cf3  \cf5 pTitle\cf3  \cf6 default location\cf3  \cf5 strSrcFolder\cf3 ))\
+		\
+		
+\i \cf2 -- REMEMBER THIS FOLDER FOR THE NEXT RUN - VALUES OF APPLESCRIPT PROPERTIES PERSIST BETWEEN RUNS
+\i0 \cf3 \
+		\cf4 set\cf3  \{\cf5 dlm\cf3 , \cf4 my\cf3  \cf8 text item delimiters\cf3 \} \cf4 to\cf3  \{\cf4 my\cf3  \cf8 text item delimiters\cf3 , "/"\}\
+		\cf4 set\cf3  \cf5 pSrcFolder\cf3  \cf4 to\cf3  
+\i \cf6 POSIX file
+\i0 \cf3  ((
+\i \cf4 items
+\i0 \cf3  1 \cf4 thru\cf3  -2 \cf4 of\cf3  (
+\i \cf4 text items
+\i0 \cf3  \cf4 of\cf3  \cf5 strOPMLFile\cf3 )) \cf4 as\cf3  
+\i \cf4 string
+\i0 \cf3 ) \cf4 as\cf3  
+\i \cf4 alias
+\i0 \cf3 \
+		\cf4 set\cf3  \cf4 my\cf3  \cf8 text item delimiters\cf3  \cf4 to\cf3  \cf5 dlm\cf3 \
+		\
+		\cf4 if\cf3  \cf5 strOPMLFile\cf3  \cf4 does not\cf3  \cf4 end\cf3  \cf4 with\cf3  ".opml" \cf4 then\cf3 \
+			
+\b \cf4 activate
+\b0 \cf3 \
+			
+\b \cf6 display dialog
+\b0 \cf3  \cf5 strOPMLFile\cf3  & \cf8 return\cf3  & \cf8 return\cf3  & \'ac\
+				"File must have .opml extension" \cf6 buttons\cf3  \{"OK"\} \cf6 default button\cf3  "OK" \cf6 with title\cf3  \cf5 pTitle\cf3  & "  ver. " & \cf5 pVer\cf3 \
+			\cf4 return\cf3 \
+		\cf4 end\cf3  \cf4 if\cf3 \
+		\
+		
+\i \cf2 -- GET THE PATH OF THE PYTHON SCRIPT
+\i0 \cf3 \
+		\cf4 set\cf3  \cf5 strScript\cf3  \cf4 to\cf3  \cf4 my\cf3  \cf5 GetScript\cf3 (\cf5 pPythonScript\cf3 )\
+		\
+		
+\i \cf2 -- GET AN FT TEXT VERSION
+\i0 \cf3 \
+		\cf4 set\cf3  \cf5 strTmpPath\cf3  \cf4 to\cf3  \cf8 POSIX path\cf3  \cf4 of\cf3  (
+\b \cf6 path to
+\b0 \cf3  \cf7 temporary items\cf3 ) & "tmp.ft"\
+		\cf4 set\cf3  \cf5 strCMD\cf3  \cf4 to\cf3  "python " & \cf5 strScript\cf3  & " --infile=" & \cf8 quoted form\cf3  \cf4 of\cf3  \cf5 strOPMLFile\cf3  & " --outfile=" & \cf8 quoted form\cf3  \cf4 of\cf3  \cf5 strTmpPath\cf3 \
+		\cf4 if\cf3  \cf5 plngHeaderLevels\cf3  > 0 \cf4 then\cf3  \cf4 set\cf3  \cf5 strCMD\cf3  \cf4 to\cf3  \cf5 strCMD\cf3  & \cf8 space\cf3  & "--headlevels=" & (\cf5 plngHeaderLevels\cf3  \cf4 as\cf3  
+\i \cf4 string
+\i0 \cf3 )\
+		\cf4 try\cf3 \
+			
+\b \cf6 do shell script
+\b0 \cf3  \cf5 strCMD\cf3 \
+		\cf4 on\cf3  \cf4 error\cf3 \
+			
+\b \cf4 activate
+\b0 \cf3 \
+			
+\b \cf6 display dialog
+\b0 \cf3  \cf5 strOPMLFile\cf3  & \cf8 return\cf3  & \cf8 return\cf3  & "could not be read as an OPML file" \cf6 buttons\cf3  \{"OK"\} \cf6 default button\cf3  "OK" \cf6 with title\cf3  \cf5 pTitle\cf3  & "  ver. " & \cf5 pVer\cf3 \
+			\cf4 return\cf3 \
+		\cf4 end\cf3  \cf4 try\cf3 \
+		\cf4 set\cf3  \cf5 strFT\cf3  \cf4 to\cf3  \cf4 my\cf3  \cf5 readFile\cf3 (\cf5 strTmpPath\cf3 )\
+		\
+		
+\i \cf2 -- CREATE A NEW FT DOC CONTAINING THE IMPORTED TEXT
+\i0 \cf3 \
+		\cf4 tell\cf3  (
+\b \cf4 make
+\b0 \cf3  \cf4 new\cf3  
+\i \cf4 document
+\i0 \cf3 ) \cf4 to\cf3  
+\b \cf4 update text
+\b0 \cf3  \cf4 it\cf3  \cf4 with text\cf3  \cf5 strFT\cf3 \
+		
+\b \cf4 activate
+\b0 \cf3 \
+	\cf4 end\cf3  \cf4 tell\cf3 \
+\cf4 end\cf3  
+\b \cf4 run
+\b0 \cf3 \
+\
+\cf4 on\cf3  \cf5 GetScript\cf3 (\cf5 strFileName\cf3 )\
+	\cf4 return\cf3  \cf8 quoted form\cf3  \cf4 of\cf3  (\cf8 POSIX path\cf3  \cf4 of\cf3  (
+\b \cf6 path to resource
+\b0 \cf3  \cf5 strFileName\cf3 ))\
+\cf4 end\cf3  \cf5 GetScript\cf3 \
+\
+\cf4 on\cf3  \cf5 readFile\cf3 (\cf5 strPath\cf3 )\
+	\cf4 set\cf3  \cf5 oFile\cf3  \cf4 to\cf3  (
+\b \cf6 open for access
+\b0 \cf3  (
+\i \cf6 POSIX file
+\i0 \cf3  \cf5 strPath\cf3 ))\
+	\cf4 set\cf3  \cf5 strText\cf3  \cf4 to\cf3  (
+\b \cf6 read
+\b0 \cf3  \cf5 oFile\cf3  \cf6 for\cf3  (
+\b \cf6 get eof
+\b0 \cf3  \cf5 oFile\cf3 ) \cf6 as\cf3  \'ab
+\i \cf4 class
+\i0 \cf3  utf8\'bb)\
+	
+\b \cf6 close access
+\b0 \cf3  \cf5 oFile\cf3 \
+	\cf4 return\cf3  \cf5 strText\cf3 \
+\cf4 end\cf3  \cf5 readFile\cf3 \
+}

@@ -20,14 +20,14 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>658005A9-341C-44A8-B140-B02840A1632D-15078-0000B466121A62AD</key>
+			<key>A19F4108-B9C2-4180-A037-31E61CCE1684-15078-00009F98EBFC87C2</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
 					<key>expressionsState</key>
 					<dict>
 						<key>dividerPos</key>
-						<real>150</real>
+						<real>143</real>
 						<key>scope2.changedItems</key>
 						<true/>
 						<key>scope2.emptyElements</key>
@@ -47,17 +47,17 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>256</integer>
-								<integer>327</integer>
-								<integer>135</integer>
+								<integer>259</integer>
+								<integer>328</integer>
+								<integer>131</integer>
 							</array>
 							<key>5</key>
 							<array>
-								<integer>205</integer>
-								<integer>85</integer>
-								<integer>261</integer>
-								<integer>68</integer>
-								<integer>104</integer>
+								<integer>185</integer>
+								<integer>76</integer>
+								<integer>235</integer>
+								<integer>61</integer>
+								<integer>94</integer>
 							</array>
 						</dict>
 					</dict>
@@ -66,7 +66,7 @@
 						<key>explorerState</key>
 						<dict>
 							<key>dividerPos</key>
-							<real>333.33334350585938</real>
+							<real>149.33332824707031</real>
 							<key>scope2.changedItems</key>
 							<true/>
 							<key>scope2.emptyElements</key>
@@ -80,8 +80,6 @@
 							<key>showScopeBar</key>
 							<true/>
 						</dict>
-						<key>fileSpecState</key>
-						<dict/>
 						<key>modes</key>
 						<array>
 							<string>mode.best</string>
@@ -103,7 +101,7 @@
 										<key>length</key>
 										<integer>0</integer>
 										<key>location</key>
-										<integer>4</integer>
+										<integer>5</integer>
 									</dict>
 								</array>
 								<key>LNSTextViewShowInvisibles</key>
@@ -115,7 +113,7 @@
 								<key>LNSTextViewWrapLines</key>
 								<true/>
 								<key>LNSVisibleRect</key>
-								<string>{{0, 0}, {424, 168}}</string>
+								<string>{{0, 0}, {255, 148}}</string>
 							</dict>
 						</dict>
 						<key>textState</key>
@@ -140,7 +138,7 @@
 								<key>LNSTextViewWrapLines</key>
 								<true/>
 								<key>LNSVisibleRect</key>
-								<string>{{0, 0}, {424, 168}}</string>
+								<string>{{0, 0}, {255, 210}}</string>
 							</dict>
 						</dict>
 					</dict>
@@ -149,7 +147,7 @@
 					<key>variablesState</key>
 					<dict>
 						<key>dividerPos</key>
-						<real>150</real>
+						<real>143</real>
 						<key>scope2.changedItems</key>
 						<true/>
 						<key>scope2.emptyElements</key>
@@ -246,7 +244,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>3403</integer>
+								<integer>3051</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -258,14 +256,14 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 893}, {890, 726}}</string>
+						<string>{{0, 619}, {890, 726}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
 						<false/>
 					</dict>
 					<key>instanceID</key>
-					<string>AACACCFE-3626-40A9-A7D6-F1CD585E6DBF-15078-0000A6D127DBFE65</string>
+					<string>3C4540A3-B4C5-4295-B62E-3CAECD46C5A7-22369-00007BBE64604223</string>
 					<key>resultBarVisible</key>
 					<false/>
 				</dict>
@@ -283,7 +281,7 @@
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>658005A9-341C-44A8-B140-B02840A1632D-15078-0000B466121A62AD</string>
+				<string>A19F4108-B9C2-4180-A037-31E61CCE1684-15078-00009F98EBFC87C2</string>
 				<key>windowFrame</key>
 				<string>8 59 1189 819 0 0 1440 878 </string>
 			</dict>
@@ -294,7 +292,7 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>658005A9-341C-44A8-B140-B02840A1632D-15078-0000B466121A62AD</string>
+				<string>A19F4108-B9C2-4180-A037-31E61CCE1684-15078-00009F98EBFC87C2</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
