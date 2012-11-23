@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>B3236AD3-D3E2-4AE4-8BAF-FED62A87D2FE-15078-0000ACF79B921DFC</key>
+			<key>EF670E0A-F49C-4B0F-B2D9-3CE6BE5B05CD-209-00000ADFADE89CEE</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -47,9 +47,9 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>256</integer>
+								<integer>257</integer>
 								<integer>328</integer>
-								<integer>134</integer>
+								<integer>133</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -66,7 +66,7 @@
 						<key>explorerState</key>
 						<dict>
 							<key>dividerPos</key>
-							<real>333.33334350585938</real>
+							<real>318.33334350585938</real>
 							<key>scope2.changedItems</key>
 							<true/>
 							<key>scope2.emptyElements</key>
@@ -80,8 +80,6 @@
 							<key>showScopeBar</key>
 							<true/>
 						</dict>
-						<key>fileSpecState</key>
-						<dict/>
 						<key>modes</key>
 						<array>
 							<string>mode.best</string>
@@ -93,56 +91,6 @@
 						</dict>
 						<key>prettyPrint</key>
 						<false/>
-						<key>sourceState</key>
-						<dict>
-							<key>text</key>
-							<dict>
-								<key>LNSSelection</key>
-								<array>
-									<dict>
-										<key>length</key>
-										<integer>0</integer>
-										<key>location</key>
-										<integer>4</integer>
-									</dict>
-								</array>
-								<key>LNSTextViewShowInvisibles</key>
-								<false/>
-								<key>LNSTextViewShowSpaces</key>
-								<false/>
-								<key>LNSTextViewShowTabStops</key>
-								<false/>
-								<key>LNSTextViewWrapLines</key>
-								<true/>
-								<key>LNSVisibleRect</key>
-								<string>{{0, 0}, {424, 168}}</string>
-							</dict>
-						</dict>
-						<key>textState</key>
-						<dict>
-							<key>text</key>
-							<dict>
-								<key>LNSSelection</key>
-								<array>
-									<dict>
-										<key>length</key>
-										<integer>0</integer>
-										<key>location</key>
-										<integer>24</integer>
-									</dict>
-								</array>
-								<key>LNSTextViewShowInvisibles</key>
-								<false/>
-								<key>LNSTextViewShowSpaces</key>
-								<false/>
-								<key>LNSTextViewShowTabStops</key>
-								<false/>
-								<key>LNSTextViewWrapLines</key>
-								<true/>
-								<key>LNSVisibleRect</key>
-								<string>{{0, 0}, {424, 168}}</string>
-							</dict>
-						</dict>
 					</dict>
 					<key>stackVisible</key>
 					<false/>
@@ -246,7 +194,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>1770</integer>
+								<integer>12530</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -258,14 +206,14 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 541}, {721, 726}}</string>
+						<string>{{0, 5680}, {721, 686}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
 						<false/>
 					</dict>
 					<key>instanceID</key>
-					<string>AACACCFE-3626-40A9-A7D6-F1CD585E6DBF-15078-0000A6D127DBFE65</string>
+					<string>0F7985FC-0FE4-43CE-96A9-39CA71776892-38350-00019AD38D2E3F09</string>
 					<key>resultBarVisible</key>
 					<false/>
 				</dict>
@@ -283,9 +231,9 @@
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>B3236AD3-D3E2-4AE4-8BAF-FED62A87D2FE-15078-0000ACF79B921DFC</string>
+				<string>EF670E0A-F49C-4B0F-B2D9-3CE6BE5B05CD-209-00000ADFADE89CEE</string>
 				<key>windowFrame</key>
-				<string>343 59 1189 819 0 0 1440 878 </string>
+				<string>8 59 1189 819 0 0 1440 878 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -294,13 +242,13 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>B3236AD3-D3E2-4AE4-8BAF-FED62A87D2FE-15078-0000ACF79B921DFC</string>
+				<string>EF670E0A-F49C-4B0F-B2D9-3CE6BE5B05CD-209-00000ADFADE89CEE</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>343 59 1189 819 0 0 1440 878 </string>
+					<string>8 59 1189 819 0 0 1440 878 </string>
 				</dict>
 			</dict>
 		</array>
