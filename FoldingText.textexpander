@@ -1,112 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>groupInfo</key>
-	<dict>
-		<key>expandAfterMode</key>
-		<integer>0</integer>
-		<key>groupName</key>
-		<string>FoldingText</string>
-	</dict>
-	<key>snippetsTE2</key>
-	<array>
-		<dict>
-			<key>abbreviation</key>
-			<string>@du</string>
-			<key>abbreviationMode</key>
-			<integer>0</integer>
-			<key>creationDate</key>
-			<date>2012-11-24T23:03:24Z</date>
-			<key>flags</key>
-			<integer>0</integer>
-			<key>label</key>
-			<string></string>
-			<key>lastUsed</key>
-			<date>2012-11-25T12:25:53Z</date>
-			<key>modificationDate</key>
-			<date>2012-11-25T12:24:13Z</date>
-			<key>plainText</key>
-			<string>due(%snippet:nlt%)</string>
-			<key>snippetType</key>
-			<integer>0</integer>
-			<key>useCount</key>
-			<integer>0</integer>
-			<key>uuidString</key>
-			<string>DCD61060-751F-4436-B9F5-322B0EB5B166</string>
-		</dict>
-		<dict>
-			<key>abbreviation</key>
-			<string>@st</string>
-			<key>abbreviationMode</key>
-			<integer>0</integer>
-			<key>creationDate</key>
-			<date>2012-11-24T22:11:38Z</date>
-			<key>flags</key>
-			<integer>0</integer>
-			<key>label</key>
-			<string></string>
-			<key>lastUsed</key>
-			<date>2012-11-25T12:26:00Z</date>
-			<key>modificationDate</key>
-			<date>2012-11-25T12:24:17Z</date>
-			<key>plainText</key>
-			<string>start(%snippet:nlt%)</string>
-			<key>snippetType</key>
-			<integer>0</integer>
-			<key>useCount</key>
-			<integer>1</integer>
-			<key>uuidString</key>
-			<string>E30E9285-4FC6-412F-8B97-2540ED130407</string>
-		</dict>
-		<dict>
-			<key>abbreviation</key>
-			<string>nlt</string>
-			<key>abbreviationMode</key>
-			<integer>0</integer>
-			<key>creationDate</key>
-			<date>2012-11-24T21:52:58Z</date>
-			<key>flags</key>
-			<integer>1</integer>
-			<key>label</key>
-			<string>Get YYYY-mm-dd HH:MM from informal expression</string>
-			<key>lastUsed</key>
-			<date>2012-11-25T12:26:42Z</date>
-			<key>modificationDate</key>
-			<date>2012-11-25T12:23:13Z</date>
-			<key>plainText</key>
-			<string>property pTitle : "Get a datetime in FT format"property pVer : "0.03"property pOK : "OK"property pCancel : "Cancel"property pstrDefault : "now"property pblnSeconds : false---- To install Mike Taylor and Darshana Chhajed's Python parsedatetime module:-- 	Visit https://github.com/bear/parsedatetime--  		(Licence: https://github.com/bear/parsedatetime/blob/master/LICENSE.txt)--	Download and expand https://github.com/bear/parsedatetime/archive/master.zip--	in Terminal.app cd to the unzipped folder --	(e.g. type cd + space and drag/drop the folder to the Terminal.app command line, then tap return)--	sudo python setup.py installon run	set {strPhrase, blnEsc} to {pstrDefault, false}	tell application id "sevs"		set strAPP to item 1 of (get name of processes whose frontmost is true) -- for restoring focus post dialog		activate		repeat until blnEsc			set strDefaultTime to my ParseTime(strPhrase, pblnSeconds)			if pblnSeconds then				set strSeconds to "Exclude seconds"			else				set strSeconds to "Include seconds"			end if			try				tell (display dialog "Result:" &amp; tab &amp; strDefaultTime default answer strPhrase buttons {pCancel, strSeconds, pOK} ¬					cancel button pCancel default button pOK with title pTitle &amp; "  ver. " &amp; pVer)					set {strButton, strPhrase} to {button returned, text returned}					set blnEsc to strButton = pOK					if not blnEsc then set pblnSeconds to not pblnSeconds					set strDefaultTime to my ParseTime(strPhrase, pblnSeconds)				end tell			on error				set blnEsc to true			end try		end repeat	end tell	tell application strAPP to activate -- restore the focus lost to the dialog (lest we lose the expanded text)	do shell script ("sleep .1")	return strDefaultTimeend run-- Use Mike Taylor and Darshana Chhajed's Python parsedatetime module -- to get a parse of a natural language expression as a series of integers {year, month, day, hour, minute}-- (defaults, if parse fails, to current time)on ParseTime(strPhrase, blnSeconds)	set strSec to ""	if blnSeconds then set strSec to ":%S"		set str to do shell script ¬		"python -c 'import sys, time, parsedatetime as pdt; print time.strftime(\"%Y-%m-%d %H:%M" &amp; ¬		strSec &amp; "\", time.struct_time(pdt.Calendar().parse(sys.argv[1])[0]))' " &amp; ¬		quoted form of strPhraseend ParseTime</string>
-			<key>snippetType</key>
-			<integer>2</integer>
-			<key>useCount</key>
-			<integer>8</integer>
-			<key>uuidString</key>
-			<string>3C54AA1B-1647-48C8-BD74-F062E590969C</string>
-		</dict>
-		<dict>
-			<key>abbreviation</key>
-			<string>dnt</string>
-			<key>abbreviationMode</key>
-			<integer>0</integer>
-			<key>creationDate</key>
-			<date>2012-11-23T19:39:10Z</date>
-			<key>flags</key>
-			<integer>0</integer>
-			<key>label</key>
-			<string>Done tag with time</string>
-			<key>lastUsed</key>
-			<date>2012-11-24T23:09:47Z</date>
-			<key>modificationDate</key>
-			<date>2012-11-23T19:42:09Z</date>
-			<key>plainText</key>
-			<string>@done(%Y-%m-%d %H:%M:%S)</string>
-			<key>snippetType</key>
-			<integer>0</integer>
-			<key>useCount</key>
-			<integer>4</integer>
-			<key>uuidString</key>
-			<string>DF8CB206-CFEC-4398-91BA-A8D389712D02</string>
-		</dict>
-	</array>
-</dict>
-</plist>
