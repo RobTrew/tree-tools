@@ -1,0 +1,1 @@
+-- Clear any @fold tags from the documenton run	tell application "FoldingText"		set lstDocs to documents		if length of lstDocs < 1 then return				tell item 1 of lstDocs			HTTP request method "PATCH" URI "/nodes.json?path=//@fold" body (make JSON {removeTags:{"fold"}})		end tell	end tellend run
