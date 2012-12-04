@@ -17,6 +17,6 @@ To make use of it:
 3. The script will close and restart FoldingText, activating the chosen theme.
 
 
-- [**View Script**](https://gist.github.com/gists/4105865/)
-- [**Download Script**](https://gist.github.com/gists/4105865/download)
+- [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Themes/ChooseFoldingTextTheme-03.applescript)
+- [**Download Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Themes/ChooseFoldingTextTheme-03.scpt?raw=true)
 
