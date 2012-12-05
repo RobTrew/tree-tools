@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Export to Omni or OPML
-description: Exports selected lines and their sub-branches to Omni apps or OPML 
+description: Exports selected lines and their descendants to Omni apps or OPML 
 ---
 
 {{page.description}}
