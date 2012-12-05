@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Import OPML file
+title: Import OPML Script
 description: Imports an OPML file as a FoldingText outline 
 ---
 
