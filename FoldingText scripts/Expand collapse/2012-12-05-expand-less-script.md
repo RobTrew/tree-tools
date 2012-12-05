@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Expand less
+title: Expand Less Script
 description: Collapses the current document one more level 
 ---
 

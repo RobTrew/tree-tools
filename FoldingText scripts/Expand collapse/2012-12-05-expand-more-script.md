@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Expand more
+title: Expand More Script
 description: Expands the current document one more level 
 ---
 

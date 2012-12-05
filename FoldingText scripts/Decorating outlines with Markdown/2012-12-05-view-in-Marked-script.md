@@ -1,6 +1,6 @@
 ---
 layout: default
-title: View in Marked
+title: View in Marked Script
 description: Preview the current FoldingText document in Brett Terpstra's [Marked](http://markedapp.com) 
 ---
 

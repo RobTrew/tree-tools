@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Export to Omni or OPML
+title: Export to Omni or OPML Script
 description: Exports selected lines and their descendants to Omni apps or OPML 
 ---
 

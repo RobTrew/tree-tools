@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Set FoldingText outline header levels
+title: Set FoldingText Outline Header Levels Script
 description: Format the top N levels of an outline as hash headers
 ---
 

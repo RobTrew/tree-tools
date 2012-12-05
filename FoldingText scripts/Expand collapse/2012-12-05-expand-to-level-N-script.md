@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Expand to level N
+title: Expand to Level N Script
 description: Automatically sets the level of folding in the open FoldingText document 
 ---
 
