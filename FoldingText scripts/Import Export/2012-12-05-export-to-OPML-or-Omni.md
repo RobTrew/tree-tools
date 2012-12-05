@@ -6,7 +6,7 @@ description: Exports selected lines and their sub-branches to Omni apps or OPML
 
 {{page.description}}
 
-An applescript which exports the line selected in FoldingText, with all of its descendants, to an OPML file, or to an Omni applications which are installed on the system.
+An applescript which exports the line selected in FoldingText, with all of its descendants, to an OPML file, or to any Omni applications which are installed on the system.
 
 The list of export choices offered by the script will depend on which, if any, Omni apps are installed, and may include OmniOutliner, OmniFocus, and OmniGraffle as well as the default OPML.
 
