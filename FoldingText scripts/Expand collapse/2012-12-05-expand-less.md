@@ -9,6 +9,7 @@ description: Collapses the current document one more level
 An applescript which automatically collapses the document a little more.
 
 The script:
+
 1. Finds the highest level line which is currently folded,
 2. then finds all the lines which are one level higher than this,
 3. and folds all these higher lines.
