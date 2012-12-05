@@ -86,7 +86,7 @@
 \i0 \cf3 \
 \
 \cf4 property\cf3  \cf5 pTitle\cf3  : "Export from FoldingText"\
-\cf4 property\cf3  \cf5 pVer\cf3  : "0.17"\
+\cf4 property\cf3  \cf5 pVer\cf3  : "0.18"\
 \cf4 property\cf3  \cf5 pAuthor\cf3  : "Robin Trew"\
 \cf4 property\cf3  \cf5 pSite\cf3  : "Originally published on http://forums.omnigroup.com"\
 \
@@ -481,11 +481,17 @@
 			
 \i \cf2 -- AND WHICH HAVE EITHER TEXT OR PROGENY
 \i0 \cf3 \
-			\cf4 set\cf3  \cf5 lstSeln\cf3  \cf4 to\cf3  
+			\cf4 try\cf3 \
+				\cf4 set\cf3  \cf5 lstSeln\cf3  \cf4 to\cf3  
 \b \cf4 read nodes
 \b0 \cf3  \cf4 at path\cf3  (\cf5 |nodePath|\cf3  \cf4 of\cf3  (
 \b \cf4 read selection
 \b0 \cf3  \cf4 it\cf3 ))\
+			\cf4 on\cf3  \cf4 error\cf3 \
+				\cf4 set\cf3  \cf5 lstSeln\cf3  \cf4 to\cf3  
+\b \cf4 read nodes
+\b0 \cf3  \cf4 at path\cf3  "/@type!=empty"\
+			\cf4 end\cf3  \cf4 try\cf3 \
 			\
 			\cf4 if\cf3  \cf9 length\cf3  \cf4 of\cf3  \cf5 lstSeln\cf3  < 1 \cf4 then\cf3  \cf4 return\cf3  \{\}\
 			\cf4 if\cf3  \cf5 |type|\cf3  \cf4 of\cf3  (
