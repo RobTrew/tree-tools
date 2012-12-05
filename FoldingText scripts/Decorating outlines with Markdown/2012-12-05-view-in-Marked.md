@@ -16,7 +16,7 @@ If this is not your preferred behaviour, or does not suit your display setup, yo
 *property pblnPositionWindows : false*
 
 
----
+
 
 - [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Decorating%20outlines%20with%20Markdown/ViewInMarked.applescript)
  
