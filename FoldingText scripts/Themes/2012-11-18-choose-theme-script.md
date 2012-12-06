@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Choose and activate a FoldingText theme
-description: This script offers a menu of the themes in the FoldingText theme folder, and restarts FT to activate the selected theme.
+title: Choose and activate a FoldingText theme – Script
+description: Offers a menu of the themes in the FoldingText theme folder, and restarts FT to activate the selected theme.
 ---
 
 {{page.description}}
 
-This script allows you to quickly and easily switch themes in FoldingText. 
+An applescript which allows you to quickly and easily switch themes in FoldingText. 
 To make use of it:
 
 1. Copy two or more themes, using names other than User.fttheme, to the FoldingText theme folder:
