@@ -6,7 +6,7 @@ description: Imports an OPML file as a FoldingText outline
 
 {{page.description}}
 
-An applescript which offers a file choose dialog, enabling to you to select and import an OPML file, which becomes an OPML outline.
+An applescript which offers a file choose dialog, enabling to you to select and import an OPML file, which becomes a FoldingText outline.
 
 ![Choose file dialog](https://raw.github.com/RobTrew/tree-tools/master/FoldingText%20scripts/Import%20Export/OpenOPML.png)
 
