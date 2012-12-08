@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Toggle Focus Script
-description: Focus in or focus out with any selected parent node – header or non-header 
+description: Focus in or focus out with any selected parent node (header or non-header)
 ---
 
 {{page.description}}

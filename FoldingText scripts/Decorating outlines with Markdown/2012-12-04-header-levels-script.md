@@ -8,7 +8,7 @@ description: Use this script to change your outline between list items and headi
 
 This script presents a popup choice of outline levels. You choose the level to which you want to use header items, and the rest of the structure will be formatted as list items.
 
-This script works best when you are only working with list and heading items. Other item types (like example normal paragraphs) are ignored.
+This script works best when you are only working with list and heading items. Other item types (like normal paragraphs, for example) are ignored.
 
 Lets see how this script works. Here we start with a simple outline of list items with three levels:
 
