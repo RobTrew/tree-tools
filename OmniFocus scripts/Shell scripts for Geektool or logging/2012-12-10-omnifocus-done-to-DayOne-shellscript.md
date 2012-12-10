@@ -15,12 +15,12 @@ Shell script which logs, to the [DayOne](http://dayoneapp.com) application, any 
 - It avoids duplication of items logged earlier, if the script is called several times in one day.
 - It can be called automatically from Hazel, whenever a change in the OmniFocus cache is detected, if that suits your workflow.
 
+Hazel settings:
+
 ![Hazel settings](https://raw.github.com/RobTrew/tree-tools/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/HazelSettings4DayOneLog.png)
 
 
 The default output format is broadly that of TaskPaper or FoldingText:
-
-    DONE TODAY (6)
 
     Project A:
     - task1 @done(yyyy-mm-dd HH:MM)
