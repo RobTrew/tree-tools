@@ -48,7 +48,7 @@ else # Log the whole file, then copy done file to logged file
 fi
 # then if the log_now file contains entries log them, and append the list to the logged today
 if [ -s $LOG_NOW_FILE ] ; then
-echo -n "" > "tmp_pretty.txt"
+echo "" > "tmp_pretty.txt"
 cat $LOG_NOW_FILE | awk '
 BEGIN {FS="\|"; prj=0; str=""}
 {
