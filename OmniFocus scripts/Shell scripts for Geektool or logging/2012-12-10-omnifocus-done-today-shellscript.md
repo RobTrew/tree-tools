@@ -12,17 +12,17 @@ Shell script which lists OmniFocus tasks marked as completed since midnight last
 
 The default output format is broadly that of TaskPaper or FoldingText:
 
-DONE TODAY (6)
+    DONE TODAY (6)
 
-Project A:
-- task1 @done(yyyy-mm-dd HH:MM)
-- task2 @done(yyyy-mm-dd HH:MM)
-- taskN @done(yyyy-mm-dd HH:MM)
+    Project A:
+    - task1 @done(yyyy-mm-dd HH:MM)
+    - task2 @done(yyyy-mm-dd HH:MM)
+    - taskN @done(yyyy-mm-dd HH:MM)
 
-Project B:
-- taskX @done(yyyy-mm-dd HH:MM)
-- taskY @done(yyyy-mm-dd HH:MM)
-- taskZ @done(yyyy-mm-dd HH:MM)
+    Project B:
+    - taskX @done(yyyy-mm-dd HH:MM)
+    - taskY @done(yyyy-mm-dd HH:MM)
+    - taskZ @done(yyyy-mm-dd HH:MM)
 
 
 - [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/OmniFocusDoneToday.sh)
