@@ -24,5 +24,9 @@ The default output format is broadly that of TaskPaper or FoldingText:
     - taskY @done(yyyy-mm-dd HH:MM)
     - taskZ @done(yyyy-mm-dd HH:MM)
 
+For GeekTool, use the simple print at the end of the Awk code
+For DayOne, comment out the simple print line, and uncomment:
+    # print str | "/usr/local/bin/dayone new" # /usr/local/bin/dayone -h for options
+
 
 - [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/OmniFocusDoneToday.sh)
