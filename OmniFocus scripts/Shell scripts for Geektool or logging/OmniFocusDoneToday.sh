@@ -34,8 +34,8 @@ BEGIN {FS="\|"; prj=0; str=""}
 	}
 	if ($7!=prj) {str = str ":\n- " $7 " @done(" $4 "-" $2 "-" $3 " " $5 ")\n"}
 	else {{str = str ": @done(" $4 "-" $2 "-" $3 " " $5 ")\n"}}
-	#print str # GeekTool etc, or use the line below for DayOne
-	print str | "/usr/local/bin/dayone new" # /usr/local/bin/dayone -h for options
+	print str # GeekTool etc, or use the line below for DayOne
+	#print str | "/usr/local/bin/dayone new" # /usr/local/bin/dayone -h for options
 }'
 # For more details of the dayone command line tool, try:
 # man -t 'dayone' | pstopdf -i -o ~/Desktop/dayone.pdf
