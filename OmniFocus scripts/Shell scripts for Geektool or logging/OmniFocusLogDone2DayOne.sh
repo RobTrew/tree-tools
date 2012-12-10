@@ -3,7 +3,7 @@
 # Logs today's OmniFocus DONE items in DAYONE, 
 # Avoiding duplication if called several times in one day
 # ( Maintains a text file list of which items have already been logged today )
-# Intended for Hazel use.
+# Should be compatible with for Hazel use.
 
 DONE_LOG_FOLDER="$HOME"
 DONE_TODAY_FILE="$DONE_LOG_FOLDER/DoneToday.txt"
