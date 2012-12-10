@@ -10,7 +10,7 @@ Shell script which lists OmniFocus tasks marked as completed since midnight last
 
 (The script directly queries the OmniFocus Sqlite cache, and doesn't require OmniFocus to be running).
 
-The output format is broadly that of TaskPaper or FoldingText:
+The default output format is broadly that of TaskPaper or FoldingText:
 
 DONE TODAY (6)
 
