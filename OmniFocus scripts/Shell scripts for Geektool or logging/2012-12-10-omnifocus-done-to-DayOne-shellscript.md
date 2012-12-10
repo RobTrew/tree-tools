@@ -23,11 +23,12 @@ Hazel settings:
 - Works best with Day One Preferences > Appearances: +**Markdown** -**Link Twitter @names**
 - If you need *Link Twitter names* then it will probably make sense to edit the '@' characters out of the script
 
+
     Project A:
     - task1 @done(HH:MM)
     - task2 @done(HH:MM)
     - taskN @done(HH:MM)
-
+    
     Project B:
     - taskX @done(HH:MM)
     - taskY @done(HH:MM)
