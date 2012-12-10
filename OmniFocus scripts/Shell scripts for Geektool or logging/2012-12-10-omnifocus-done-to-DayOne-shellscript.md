@@ -20,17 +20,17 @@ Hazel settings:
 ![Hazel settings](https://raw.github.com/RobTrew/tree-tools/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/HazelSettings4DayOneLog.png)
 
 
-The default output format is broadly that of TaskPaper or FoldingText:
+The default output format is broadly that of TaskPaper or FoldingText, but with times only.
 
     Project A:
-    - task1 @done(yyyy-mm-dd HH:MM)
-    - task2 @done(yyyy-mm-dd HH:MM)
-    - taskN @done(yyyy-mm-dd HH:MM)
+    - task1 @done(HH:MM)
+    - task2 @done(HH:MM)
+    - taskN @done(HH:MM)
 
     Project B:
-    - taskX @done(yyyy-mm-dd HH:MM)
-    - taskY @done(yyyy-mm-dd HH:MM)
-    - taskZ @done(yyyy-mm-dd HH:MM)
+    - taskX @done(HH:MM)
+    - taskY @done(HH:MM)
+    - taskZ @done(HH:MM)
 
 
 - [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/OmniFocusLogDone2DayOne.sh)
