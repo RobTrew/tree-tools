@@ -30,5 +30,9 @@ Usage:
 
     `print str | "/usr/local/bin/dayone new" # /usr/local/bin/dayone -h for options`
 
+- For a PDF version of the man page for the DayOne command line utility:
+
+	`man -t 'dayone' | pstopdf -i -o ~/Desktop/dayone.pdf`
+
 
 - [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/OmniFocusDoneToday.sh)
