@@ -1,5 +1,5 @@
 #!/bin/sh
-# Ver 0.05
+# Ver 0.01
 # Lists items done today in the OmniFocus Sqlite cache
 OFOC="com.omnigroup.OmniFocus"
 if [ ! -d "$HOME/Library/Caches/$OFOC" ]; then OFOC=$OFOC.MacAppStore; fi
