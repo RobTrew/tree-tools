@@ -6,7 +6,7 @@ if [ ! -d "$HOME/Library/Caches/$OFOC" ]; then OFOC=$OFOC.MacAppStore; fi
 OFQUERY="sqlite3 $HOME/Library/Caches/$OFOC/OmniFocusDatabase2"
 START_OF_DAY=$(date -v0H -v0M -v0S +%s) #Midnight at the start of today: set the time component to 00:00
 
-# Suggestions welcome here - not sure this simple arithmetic works New Zealand's DST +1300 UTC
+# Suggestions welcome here - not sure this simple arithmetic works for New Zealand's DST +1300 UTC
 ZONERESET=$(date +%z | awk '
 {if (substr($1,1,1)!="+") {printf "+"} else {printf "-"} print substr($1,2,4)}') 
 YEARZERO=$(date -j -f "%Y-%m-%d %H:%M:%S %z" "2001-01-01 0:0:0 $ZONERESET" "+%s")
