@@ -27,6 +27,10 @@ Hazel settings to monitor changes in the OmniFocus cache folder:
 
 ![Hazel settings](https://raw.github.com/RobTrew/tree-tools/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/HazelSettings4DayOneLog.png)
 
+Or, for sparser and more aggregated logging events, some variant of:
+
+![Hazel gaps between logging events](https://raw.github.com/RobTrew/tree-tools/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/HazelLoggingIntervals.png)
+
 - The default output format is broadly that of TaskPaper or FoldingText, but with times only. 
 - Works best with Day One Preferences > Appearances:  **+ Markdown** **- Link Twitter @names**
 - If you need *Link Twitter names* then it will probably make sense to edit the '@' characters out of the script
