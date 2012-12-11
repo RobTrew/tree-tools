@@ -3,7 +3,17 @@
 # Logs today's OmniFocus DONE items in DAYONE, 
 # Avoiding duplication if called several times in one day
 # ( Maintains a text file list of which items have already been logged today )
-# Should be compatible with for Hazel use.
+
+# Can be used with [HAZEL](http://www.noodlesoft.com/hazel.php) rules like:
+## Watch:   ~/Library/Caches/com.omnigroup.OmniFocus
+## or:      ~/Library/Caches/com.omnigroup.OmniFocus.MacAppStore
+##  Date Last Modifed is after Date last Matched
+##  <AND> Date last Modified is not in the last 5 mins
+
+# (The delay reduces the number of log events, 
+# allowing time for a small set of actions within one project to be marked as done, 
+# without undue fragmentation into separate DayOne Log events)
+
 
 DONE_LOG_FOLDER="$HOME"
 DONE_TODAY_FILE="$DONE_LOG_FOLDER/DoneToday.txt"
