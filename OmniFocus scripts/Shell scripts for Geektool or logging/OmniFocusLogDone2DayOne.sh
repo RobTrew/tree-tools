@@ -46,7 +46,7 @@ if [ -f $LOGGED_TODAY_FILE ]; then
 else # Log the whole file, then copy done file to logged file
    cp -f $DONE_TODAY_FILE $LOG_NOW_FILE
 fi
-# then if the log_now file contains entries log them, and append the list to the logged today
+# then if the log_now file contains entries, log them, and append the newly logged list to the existing logged list
 if [ -s $LOG_NOW_FILE ] ; then
 echo "" > "tmp_pretty.txt"
 cat $LOG_NOW_FILE | awk '
