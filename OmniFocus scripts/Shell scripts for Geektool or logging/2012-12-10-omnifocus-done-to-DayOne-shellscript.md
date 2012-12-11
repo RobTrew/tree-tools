@@ -15,6 +15,10 @@ Shell script which logs, to the [DayOne](http://dayoneapp.com) application, any 
 - It avoids duplication of items logged earlier, if the script is called several times in one day.
 - It can be called automatically from Hazel, whenever a change in the OmniFocus cache is detected, if that suits your workflow.
 
+##Usage:
+
+This script requires installation of the Day One [command line interface](http://dayoneapp.com/tools/).
+
 Hazel settings to monitor changes in the OmniFocus cache folder:
 - *~/Library/Caches/com.omnigroup.OmniFocus*
 - or *~/Library/Caches/com.omnigroup.OmniFocus.MacAppStore*
