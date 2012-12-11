@@ -61,6 +61,9 @@ BEGIN {FS="\|"; prj=0; str=""}
 cat tmp_pretty.txt | /usr/local/bin/dayone new
 rm tmp_pretty.txt
 cat $LOG_NOW_FILE >> $LOGGED_TODAY_FILE  # Append the list of logged tasks to avoid duplication
+
+# Optional acoustic feedback on completion... Comment the next line out if it's distracting
+afplay /System/Library/Sounds/Pop.aiff
 fi
 
 # For more details of the dayone command line tool, try:
