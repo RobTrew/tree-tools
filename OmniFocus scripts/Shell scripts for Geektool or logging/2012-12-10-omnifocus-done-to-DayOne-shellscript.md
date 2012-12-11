@@ -34,6 +34,8 @@ Hazel settings:
     - taskY @done(HH:MM)
     - taskZ @done(HH:MM)
 ```
-
+Viewing the results in DayOne:
+- When DayOne first opens it defaults to displaying a fresh editing session, and displays a **Done** at upper right.
+- To view the text created by automatic logging events, you will need to click the Done button, to exit the current editing session.
 
 - [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/OmniFocusLogDone2DayOne.sh)
