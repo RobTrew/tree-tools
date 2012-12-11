@@ -27,9 +27,13 @@ Hazel settings to monitor changes in the OmniFocus cache folder:
 
 ![Hazel settings](https://raw.github.com/RobTrew/tree-tools/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/HazelSettings4DayOneLog.png)
 
-Or, for sparser and more aggregated logging events, some variant of:
+Or, for sparser and more aggregated logging events, combine a delaying rule with one or more fixed time events:
+
+![Two rules](https://raw.github.com/RobTrew/tree-tools/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/ComplementaryRules.png)
 
 ![Hazel gaps between logging events](https://raw.github.com/RobTrew/tree-tools/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/HazelLoggingIntervals.png)
+
+![Timed rules to flush the logging buffer](https://raw.github.com/RobTrew/tree-tools/master/OmniFocus%20scripts/Shell%20scripts%20for%20Geektool%20or%20logging/TimedRules.png)
 
 - The default output format is broadly that of TaskPaper or FoldingText, but with times only. 
 - Works best with Day One Preferences > Appearances:  **+ Markdown** **- Link Twitter @names**
