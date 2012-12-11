@@ -1,8 +1,16 @@
 #!/bin/sh
+# 
+# Rob Trew www.complexpoint.net
+# https://github.com/RobTrew/tree-tools
+#
 # Ver 0.02
 # Logs today's OmniFocus DONE items in DAYONE, 
 # Avoiding duplication if called several times in one day
 # ( Maintains a text file list of which items have already been logged today )
+
+# Requires installation of the [DayOne Command Line Interface](http://dayoneapp.com/tools/)
+# For more details of the dayone command line tool, try:
+# man -t 'dayone' | pstopdf -i -o ~/Desktop/dayone.pdf
 
 # Can be used with [HAZEL](http://www.noodlesoft.com/hazel.php) rules like:
 ## Watch:   ~/Library/Caches/com.omnigroup.OmniFocus
@@ -76,5 +84,3 @@ cat $LOG_NOW_FILE >> $LOGGED_TODAY_FILE  # Append the list of logged tasks to av
 afplay /System/Library/Sounds/Pop.aiff
 fi
 
-# For more details of the dayone command line tool, try:
-# man -t 'dayone' | pstopdf -i -o ~/Desktop/dayone.pdf
