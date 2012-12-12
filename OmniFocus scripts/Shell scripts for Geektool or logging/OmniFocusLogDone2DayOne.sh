@@ -58,7 +58,7 @@ FROM $JOIN WHERE $MATCHES ORDER BY t.datecompleted
 if [ -f $LOGGED_TODAY_FILE ]; then
     if grep -q $TODAY $LOGGED_TODAY_FILE; then # Find items in the full DONE list which have NOT yet been logged
        awk 'FNR==NR{old[$0];next};!($0 in old)' $LOGGED_TODAY_FILE $DONE_TODAY_FILE > $LOG_NOW_FILE
-    else # nothing yet logged from today -- log the whole list
+    else # nothing yet logged from today
         cp -f $DONE_TODAY_FILE $LOG_NOW_FILE
     fi
 else # Log the whole file, then copy done file to logged file
