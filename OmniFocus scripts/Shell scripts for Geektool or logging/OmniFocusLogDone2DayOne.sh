@@ -15,7 +15,7 @@
 # Can be used with [HAZEL](http://www.noodlesoft.com/hazel.php) rules like:
 ## Watch:   ~/Library/Caches/com.omnigroup.OmniFocus
 ## or:      ~/Library/Caches/com.omnigroup.OmniFocus.MacAppStore
-##  Date Last Modifed is after Date last Matched
+##  Date Last Modified is after Date last Matched
 ##  <AND> Date last Modified is not in the last 5 mins
 
 # (The delay reduces the number of log events, 
