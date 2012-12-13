@@ -1,0 +1,1 @@
+property pTitle : "Clear any narrowed Focus – Focus right out"tell application "FoldingText"	set lstDocs to documents	if lstDocs ≠ {} then tell item 1 of lstDocs to update node path with text "/*///*"end tell
