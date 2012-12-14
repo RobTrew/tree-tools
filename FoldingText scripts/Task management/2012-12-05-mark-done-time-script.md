@@ -14,7 +14,9 @@ Marks the selected line as done, including a date-time stamp (in FoldingText's d
 
 (Works with FoldingText's .todo mode)
 
-The script also appends a copy of the done item (with any parent node, and with the file name, to a log file).
+The script also appends a copy of the done item (with any project node, and with the file name, to a log file).
+
+(The **project** node will be the enclosing *.todo* node, or failing that the enclosing hash header, or failing that the immediate parent, and if there is no immediate parent, then the file name).
 
 The log files (one per day – FTDoneYYYY-mm-dd.txt and a working copy called FTDoneToday.txt – are kept by default at ~/FTLog
 
