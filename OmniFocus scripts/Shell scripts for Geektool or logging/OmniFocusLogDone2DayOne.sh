@@ -3,7 +3,7 @@
 # Rob Trew www.complexpoint.net
 # https://github.com/RobTrew/tree-tools
 #
-# Ver 0.02
+# Ver 0.03
 # Logs today's OmniFocus DONE items in DAYONE, 
 # Avoiding duplication if called several times in one day
 # ( Maintains a text file list of which items have already been logged today )
@@ -22,6 +22,8 @@
 # allowing time for a small set of actions within one project to be marked as done, 
 # without undue fragmentation into separate DayOne Log events)
 
+# Ver 3 Improves handling of done items from Inbox, 
+# and makes trailling project colon a live link back to the project in the OmniFocus database
 
 DONE_LOG_FOLDER="$HOME"
 DONE_TODAY_FILE="$DONE_LOG_FOLDER/DoneToday.txt"
@@ -51,7 +53,7 @@ MATCHES="$DONE > $START_OF_DAY"
 # printf "DONE TODAY (%s)\n\n" "$doneTOTAL"
 
 $OFQUERY "
-SELECT t.persistentIdentifier, strftime('%Y-%m-%d|%H:%M',$DONE, 'unixepoch'), p.name, t.name
+SELECT t.persistentIdentifier, p.persistentIdentifier, strftime('%Y-%m-%d|%H:%M',$DONE, 'unixepoch'), p.name, t.name
 FROM $JOIN WHERE $MATCHES ORDER BY t.datecompleted 
 " > $DONE_TODAY_FILE
 # Determine what, if anything needs to be logged
@@ -70,12 +72,14 @@ echo "" > "tmp_pretty.txt"
 cat $LOG_NOW_FILE | awk '
 BEGIN {FS="\|"; prj=0; str=""}
 {
-  if (prj!=$4) {prj=$4;
-      if (prj!="") {print ("\n## " prj ":") >> "tmp_pretty.txt" } 
+    if (prj!=$5) {prj=$5;
+        if (prj!="") {print ("\n## " prj "[:](omnifocus:///task/" $2 ")") >> "tmp_pretty.txt" }
+        else {print ("\nInbox[:](omnifocus:///task/" $1 ")") >> "tmp_pretty.txt"} 
   }
-  if ($5!=prj) {print ("- " $5 " @done(" $3 ")") >> "tmp_pretty.txt"  }
-  else {{print "- *Project completed* @done(" $3 ")"  >> "tmp_pretty.txt" }}
+  if ($6!=prj) {print ("- " $6 " @done(" $4 ")") >> "tmp_pretty.txt"  }
+  else {{print "- *Project completed* @done(" $4 ")"  >> "tmp_pretty.txt" }}
 }'
+# cat tmp_pretty.txt
 cat tmp_pretty.txt | /usr/local/bin/dayone new
 rm tmp_pretty.txt
 cat $LOG_NOW_FILE >> $LOGGED_TODAY_FILE  # Append the list of logged tasks to avoid duplication
