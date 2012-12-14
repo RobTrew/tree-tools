@@ -20,6 +20,8 @@ The log files (one per day – FTDoneYYYY-mm-dd.txt and a working copy called FT
 
 A companion shell script [FTDoneLog.sh](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Task%20management/FTLogDone.sh) can be used (for example with [Hazel](www.noodlesoft.com/hazel.php)) to further log the done items to [Day One](https://itunes.apple.com/us/app/day-one/id422304217?mt=12) whenever the DoneToday.txt file changes.
 
+![Hazel settings](https://raw.github.com/RobTrew/tree-tools/master/FoldingText%20scripts/Task%20management/Hazel-LogFTTasks2DayOne.png)
+
 In the Day One entries the @done tags are simplified from @done(2012-12-05 21:15) to @done(21:15), as the journal page provides the date.
 
 ***
