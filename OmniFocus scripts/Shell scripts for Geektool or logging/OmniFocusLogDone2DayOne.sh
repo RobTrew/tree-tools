@@ -3,7 +3,7 @@
 # Rob Trew www.complexpoint.net
 # https://github.com/RobTrew/tree-tools
 #
-# Ver 0.03
+# Ver 0.04
 # Logs today's OmniFocus DONE items in DAYONE, 
 # Avoiding duplication if called several times in one day
 # ( Maintains a text file list of which items have already been logged today )
@@ -24,6 +24,10 @@
 
 # Ver 3 Improves handling of done items from Inbox, 
 # and makes trailling project colon a live link back to the project in the OmniFocus database
+# Ver 4 facilitates choice between plain and bold Project title lines ($PROJECT_PREFIX below)
+
+PROJECT_PREFIX="## " # Edit this to an empty string (see next line) for unbolded Day-One project lines.
+#PROJECT_PREFIX=""
 
 DONE_LOG_FOLDER="$HOME"
 DONE_TODAY_FILE="$DONE_LOG_FOLDER/DoneToday.txt"
@@ -69,11 +73,11 @@ fi
 # then if the log_now file contains entries, log them, and append the newly logged list to the existing logged list
 if [ -s $LOG_NOW_FILE ] ; then
 echo "" > "tmp_pretty.txt"
-cat $LOG_NOW_FILE | awk '
+cat $LOG_NOW_FILE | awk -v prj_prfx="$PROJECT_PREFIX" '
 BEGIN {FS="\|"; prj=0; str=""}
 {
     if (prj!=$5) {prj=$5;
-        if (prj!="") {print ("\n## " prj "[:](omnifocus:///task/" $2 ")") >> "tmp_pretty.txt" }
+        if (prj!="") {print ("\n" prj_prfx prj "[:](omnifocus:///task/" $2 ")") >> "tmp_pretty.txt" }
         else {print ("\nInbox[:](omnifocus:///task/" $1 ")") >> "tmp_pretty.txt"} 
   }
   if ($6!=prj) {print ("- " $6 " @done(" $4 ")") >> "tmp_pretty.txt"  }
