@@ -17,7 +17,7 @@ Marks the selected line as done, including a date-time stamp (in FoldingText's d
 The script also appends a copy of the done item (with any parent node, and with the file name, to a log file).
 The log files (one per day, FTDone-yyyy-mm-dd.txt) are kept by default at ~/FTLog
 
-A companion shell script (FTDoneLog.sh) can be used (for example with [Hazel](www.noodlesoft.com/hazel.php)) to further log the done items to [Day One](https://itunes.apple.com/us/app/day-one/id422304217?mt=12)
+A companion shell script [FTDoneLog.sh](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Task%20management/FTLogDone.sh) can be used (for example with [Hazel](www.noodlesoft.com/hazel.php)) to further log the done items to [Day One](https://itunes.apple.com/us/app/day-one/id422304217?mt=12)
 
 ***
 
