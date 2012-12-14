@@ -53,6 +53,7 @@ Or, for sparser and more aggregated logging events, combine a delaying rule with
 Viewing the results in DayOne:
 - When DayOne first opens it defaults to displaying a fresh editing session, and displays a **Done** button at upper right.
 - To view the text created by automatic logging events, you will need to click the **Done** button, to exit the current editing session.
+- Note that (Ver 3+ of this script) the final colon of the project line is a live link back to the project in OmniFocus.
 
 Logging sound:
 - By default the script makes a system 'pop' sound when the **done** log has taken place.
