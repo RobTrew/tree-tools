@@ -3,7 +3,7 @@
 # Rob Trew www.complexpoint.net
 # https://github.com/RobTrew/tree-tools
 #
-# Ver 0.04
+# Ver 0.05
 # Logs today's OmniFocus DONE items in DAYONE, 
 # Avoiding duplication if called several times in one day
 # ( Maintains a text file list of which items have already been logged today )
@@ -66,6 +66,7 @@ if [ -f $LOGGED_TODAY_FILE ]; then
        awk 'FNR==NR{old[$0];next};!($0 in old)' $LOGGED_TODAY_FILE $DONE_TODAY_FILE > $LOG_NOW_FILE
     else # nothing yet logged from today
         cp -f $DONE_TODAY_FILE $LOG_NOW_FILE
+        rm $LOGGED_TODAY_FILE  # start a fresh 'LoggedToday.txt'
     fi
 else # Log the whole file, then copy done file to logged file
    cp -f $DONE_TODAY_FILE $LOG_NOW_FILE
