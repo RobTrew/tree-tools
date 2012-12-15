@@ -3,7 +3,7 @@
 # Rob Trew www.complexpoint.net
 # https://github.com/RobTrew/tree-tools
 #
-# Ver 0.02
+# Ver 0.03
 # Logs today's FoldingText DONE items 
 # (From "$DONE_LOG_FOLDER/FTDoneToday.txt" see MarkDoneTime.scpt)
 # in DAYONE, 
@@ -45,6 +45,7 @@ if [ -f $LOGGED_TODAY_FILE ]; then
        awk 'FNR==NR{old[$0];next};!($0 in old)' $LOGGED_TODAY_FILE $DONE_TODAY_FILE > $LOG_NOW_FILE
     else # nothing yet logged from today
         cp -f $DONE_TODAY_FILE $LOG_NOW_FILE
+        rm $LOGGED_TODAY_FILE # No longer needed
     fi
 else # NOTHING YET LOGGED, SO PREPARE TO LOG IT ALL
    cp -f $DONE_TODAY_FILE $LOG_NOW_FILE
