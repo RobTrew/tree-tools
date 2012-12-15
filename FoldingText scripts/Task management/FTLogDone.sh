@@ -23,8 +23,8 @@
 # allowing time for a small set of actions within one project to be marked as done, 
 # without undue fragmentation into separate DayOne Log events)
 
-# PROJECT_PREFIX="## " # Edit this to an empty string (see next line) for unbolded Day-One project lines.
-PROJECT_PREFIX="" # Edit this to "## " (see previous line) for **bolded** Day-One project lines.
+PROJECT_PREFIX="## " # Edit this to an empty string (see next line) for unbolded Day-One project lines.
+# PROJECT_PREFIX="" # Edit this to "## " (see previous line) for **bolded** Day-One project lines.
 
 DONE_LOG_FOLDER="$HOME/FTLog"
 if [ ! -d "$DONE_LOG_FOLDER" ]; then mkdir $DONE_LOG_FOLDER; fi
