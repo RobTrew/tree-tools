@@ -20,7 +20,7 @@ In addition to context and @done tags, it is also intended to output tags of the
 @flag - Flagged
 
 
-- [**View Script**]()
-- [**Download Script**]()
+- [**View Scripts**](https://github.com/RobTrew/tree-tools/tree/master/OmniFocus%20scripts/TaskPaper%20scripts)
+- [**Download Script**](https://github.com/RobTrew/tree-tools/tree/master/OmniFocus%20scripts/TaskPaper%20scripts)
 
 

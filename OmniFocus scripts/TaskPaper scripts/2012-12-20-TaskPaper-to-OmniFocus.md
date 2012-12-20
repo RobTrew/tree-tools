@@ -28,7 +28,7 @@ Note that it runs fairly slowly - when it is finished it will display simple imp
 (I find it works well in a Keyboard Maestro macro which precedes it with a Copy action, to pick up currently selected text or text files)
 
 
-- [**View Script**]()
-- [**Download Script**]()
+- [**View Script**](https://github.com/RobTrew/tree-tools/tree/master/OmniFocus%20scripts/TaskPaper%20scripts)
+- [**Download Script**](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/TaskPaper%20scripts/TaskPaper2OmniFocus.app.zip?raw=true)
 
 
