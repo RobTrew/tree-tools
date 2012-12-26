@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>5A0573B1-11E0-4027-9A7A-59B7C3C599C9-1674-000017C601482CA3</key>
+			<key>59C4AE3B-90F5-4771-9947-49A1392816FB-1674-00001AF14041C5A2</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -48,8 +48,8 @@
 							<key>3</key>
 							<array>
 								<integer>257</integer>
-								<integer>329</integer>
-								<integer>134</integer>
+								<integer>328</integer>
+								<integer>135</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -184,7 +184,7 @@
 					</dict>
 				</dict>
 				<key>mainSplitPosition</key>
-				<real>440</real>
+				<real>271</real>
 				<key>modeIdentifier</key>
 				<string>tab.debug</string>
 				<key>resourcesViewState</key>
@@ -219,7 +219,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>16291</integer>
+								<integer>7078</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -231,7 +231,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 2495}, {721, 728}}</string>
+						<string>{{0, 2735}, {796, 688}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -256,9 +256,9 @@
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>5A0573B1-11E0-4027-9A7A-59B7C3C599C9-1674-000017C601482CA3</string>
+				<string>59C4AE3B-90F5-4771-9947-49A1392816FB-1674-00001AF14041C5A2</string>
 				<key>windowFrame</key>
-				<string>8 57 1189 821 0 0 1440 878 </string>
+				<string>0 57 1095 821 0 0 1440 878 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -267,13 +267,13 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>5A0573B1-11E0-4027-9A7A-59B7C3C599C9-1674-000017C601482CA3</string>
+				<string>59C4AE3B-90F5-4771-9947-49A1392816FB-1674-00001AF14041C5A2</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>8 57 1189 821 0 0 1440 878 </string>
+					<string>0 57 1095 821 0 0 1440 878 </string>
 				</dict>
 			</dict>
 		</array>
