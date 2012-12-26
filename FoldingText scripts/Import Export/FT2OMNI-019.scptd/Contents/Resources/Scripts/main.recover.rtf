@@ -86,7 +86,7 @@
 \i0 \cf3 \
 \
 \cf4 property\cf3  \cf5 pTitle\cf3  : "Export from FoldingText"\
-\cf4 property\cf3  \cf5 pVer\cf3  : "0.18"\
+\cf4 property\cf3  \cf5 pVer\cf3  : "0.19"\
 \cf4 property\cf3  \cf5 pAuthor\cf3  : "Robin Trew"\
 \cf4 property\cf3  \cf5 pSite\cf3  : "Originally published on http://forums.omnigroup.com"\
 \
@@ -338,14 +338,33 @@
 \b0 \cf3 \
 \
 \cf4 on\cf3  \cf5 IsDev\cf3 ()\
+	\cf4 set\cf3  \cf5 strLocalSeparator\cf3  \cf4 to\cf3  (
+\i \cf4 text
+\i0 \cf3  2 \cf4 of\cf3  (\cf9 pi\cf3  \cf4 as\cf3  
+\i \cf4 string
+\i0 \cf3 ))\
+	\
 	\cf4 tell\cf3  
 \i \cf4 application
 \i0 \cf3  "FoldingText"\
-		\cf4 return\cf3  ((
+		\cf4 set\cf3  \cf5 strVersion\cf3  \cf4 to\cf3  
 \i \cf4 version
-\i0 \cf3  \cf4 as\cf3  
+\i0 \cf3 \
+		\cf4 set\cf3  \{\cf5 dlm\cf3 , \cf4 my\cf3  \cf9 text item delimiters\cf3 \} \cf4 to\cf3  \{\cf4 my\cf3  \cf9 text item delimiters\cf3 , "."\}\
+		\cf4 set\cf3  \cf5 lstParts\cf3  \cf4 to\cf3  
+\i \cf4 text items
+\i0 \cf3  \cf4 of\cf3  \cf5 strVersion\cf3 \
+		\cf4 set\cf3  \cf4 my\cf3  \cf9 text item delimiters\cf3  \cf4 to\cf3  \cf5 strLocalSeparator\cf3  
+\i \cf2 -- local number separator
+\i0 \cf3 \
+		\cf4 set\cf3  \cf5 strVersion\cf3  \cf4 to\cf3  \cf5 lstParts\cf3  \cf4 as\cf3  
+\i \cf4 string
+\i0 \cf3 \
+		\cf4 set\cf3  \cf4 my\cf3  \cf9 text item delimiters\cf3  \cf4 to\cf3  \cf5 dlm\cf3 \
+		\
+		\cf4 return\cf3  (\cf5 strVersion\cf3  \cf4 as\cf3  
 \i \cf4 number
-\i0 \cf3 ) > 1)\
+\i0 \cf3 ) > 1\
 	\cf4 end\cf3  \cf4 tell\cf3 \
 \cf4 end\cf3  \cf5 IsDev\cf3 \
 \

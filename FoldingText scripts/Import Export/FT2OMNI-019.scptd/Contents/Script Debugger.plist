@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>56B843FE-6012-4B5C-A236-ED39A72DD03E-29597-000126B67CA1D5E2</key>
+			<key>5A0573B1-11E0-4027-9A7A-59B7C3C599C9-1674-000017C601482CA3</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -47,16 +47,16 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>265</integer>
-								<integer>337</integer>
-								<integer>137</integer>
+								<integer>257</integer>
+								<integer>329</integer>
+								<integer>134</integer>
 							</array>
 							<key>5</key>
 							<array>
-								<integer>199</integer>
+								<integer>200</integer>
 								<integer>83</integer>
-								<integer>253</integer>
-								<integer>66</integer>
+								<integer>255</integer>
+								<integer>65</integer>
 								<integer>101</integer>
 							</array>
 						</dict>
@@ -101,7 +101,7 @@
 										<key>length</key>
 										<integer>0</integer>
 										<key>location</key>
-										<integer>3</integer>
+										<integer>1</integer>
 									</dict>
 								</array>
 								<key>LNSTextViewShowInvisibles</key>
@@ -113,7 +113,7 @@
 								<key>LNSTextViewWrapLines</key>
 								<true/>
 								<key>LNSVisibleRect</key>
-								<string>{{0, 0}, {424, 168}}</string>
+								<string>{{0, 0}, {424, 175}}</string>
 							</dict>
 						</dict>
 					</dict>
@@ -219,7 +219,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>1445</integer>
+								<integer>16291</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -231,7 +231,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{3, 0}, {721, 747}}</string>
+						<string>{{0, 2495}, {721, 728}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -249,16 +249,16 @@
 					<key>tab.bps</key>
 					<real>433</real>
 					<key>tab.debug</key>
-					<real>439</real>
+					<real>433</real>
 					<key>tab.rsrcs</key>
 					<real>433</real>
 				</dict>
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>56B843FE-6012-4B5C-A236-ED39A72DD03E-29597-000126B67CA1D5E2</string>
+				<string>5A0573B1-11E0-4027-9A7A-59B7C3C599C9-1674-000017C601482CA3</string>
 				<key>windowFrame</key>
-				<string>8 59 1189 819 0 0 1440 878 </string>
+				<string>8 57 1189 821 0 0 1440 878 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -267,13 +267,13 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>56B843FE-6012-4B5C-A236-ED39A72DD03E-29597-000126B67CA1D5E2</string>
+				<string>5A0573B1-11E0-4027-9A7A-59B7C3C599C9-1674-000017C601482CA3</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>8 59 1189 819 0 0 1440 878 </string>
+					<string>8 57 1189 821 0 0 1440 878 </string>
 				</dict>
 			</dict>
 		</array>
