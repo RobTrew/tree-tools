@@ -19,4 +19,4 @@ The list of export choices offered by the script will depend on which, if any, O
 
 - [**View Script**](https://github.com/RobTrew/tree-tools/tree/master/FoldingText%20scripts/Import%20Export)
  
-- [**Download Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Import%20Export/FT2OMNI-018.scptd.zip?raw=true)
+- [**Download Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Import%20Export/FT2OMNI.scptd.zip?raw=true)
