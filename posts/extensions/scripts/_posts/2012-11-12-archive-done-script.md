@@ -19,5 +19,5 @@ When you are ready to archive a `@done` item place your text cursor on the items
 
 You can archive multiple items by selecting them all before running the script.
 
-- [**View Script**](https://gist.github.com/gists/4061766/)
-- [**Download Script**](https://gist.github.com/gists/4061766/download)
+- [**View Script**](https://gist.github.com/4061766/)
+- [**Download Script**](https://gist.github.com/4061766/download)

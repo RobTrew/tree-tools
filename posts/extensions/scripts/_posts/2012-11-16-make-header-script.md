@@ -10,5 +10,5 @@ This script makes it easy to quickly mark a line as a heading. It automates movi
 
 This script is most useful if you [assign a keyboard shortcut](./using_scripts/) to it, then you can make a header in a single keystroke.
 
-- [**View Script**](https://gist.github.com/gists/4087248)
-- [**Download Script**](https://gist.github.com/gists/4087248/download)
+- [**View Script**](https://gist.github.com/4087248)
+- [**Download Script**](https://gist.github.com/4087248/download)
