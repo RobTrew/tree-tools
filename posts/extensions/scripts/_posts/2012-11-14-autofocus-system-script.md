@@ -25,5 +25,5 @@ In this implementation an `Autofocus.todo` heading is created for each page. Use
 
 3. Instead of manually re-entering items that you are not finished with, place your text cursor on the items line, and run the linked to "Re-Enter" script. That will move a copy of the item to the end of your list. And it will automatically create "Autofocus.todo" headings as needed.
 
-- [**View Script**](https://gist.github.com/gists/4075021/)
-- [**Download Script**](https://gist.github.com/gists/4075021/download)
+- [**View Script**](https://gist.github.com/4075021/)
+- [**Download Script**](https://gist.github.com/4075021/download)
