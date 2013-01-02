@@ -4,7 +4,7 @@ layout: nil
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>{{ site.title }}</title>
+ <title>FoldingText Posts</title>
  <link href="http://{{ site.domain }}/atom.xml" rel="self"/>
  <link href="http://{{ site.domain }}/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
