@@ -2,6 +2,7 @@
 layout: default
 title: Copy OmniOutliner Selection as FoldingText – Script
 description: A Copy As script for OmniOutliner – allows pasting into FoldingText
+published: false
 ---
 
 {{page.description}}

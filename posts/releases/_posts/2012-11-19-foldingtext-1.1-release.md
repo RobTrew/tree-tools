@@ -1,7 +1,6 @@
 ---
 layout: default
 title: FoldingText 1.1 Release
-published: false
 description: Highlights include improved AppleScript support and lots of bug fixes.
 ---
 
@@ -24,5 +23,3 @@ description: Highlights include improved AppleScript support and lots of bug fix
 - Fixed Cases where link URLs could inadvertently be deleted.
 
 This release also makes lots of changes to expand the AppleScript support. It adds support for more precise selection control, read/write access to the view node path, and the ability to expand and collapse nodes. It also adds an HTTP style interface that's easy to use from other languages and might make more sense to web programmers. See User's Guide > AppleScript Support for more information.
-
-- [**Download FoldingText 1.1**]()

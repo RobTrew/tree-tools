@@ -2,6 +2,7 @@
 layout: default
 title: Copy OmniFocus Selection as FoldingText – Script
 description: A Copy As script for OmniFocus – allows pasting into FoldingText
+published: false
 ---
 
 {{page.description}}

@@ -2,6 +2,7 @@
 layout: default
 title: Expand Less Script
 description: Collapses the current document one more level 
+published: false
 ---
 
 {{page.description}}

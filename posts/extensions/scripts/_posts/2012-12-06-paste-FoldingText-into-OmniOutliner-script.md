@@ -2,6 +2,7 @@
 layout: default
 title: Paste FoldingText Outline in OmniOutliner – Script
 description: A script which pastes FoldingText material in OmniOutliner outlines and columns.
+published: false
 ---
 
 {{page.description}}

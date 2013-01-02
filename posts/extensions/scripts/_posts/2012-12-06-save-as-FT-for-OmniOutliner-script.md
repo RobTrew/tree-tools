@@ -2,6 +2,7 @@
 layout: default
 title: Save OmniOutliner Selection as FoldingText – Script
 description: A Save As script for OmniOutliner – creates a text file in FoldingText format.
+published: false
 ---
 
 {{page.description}}
