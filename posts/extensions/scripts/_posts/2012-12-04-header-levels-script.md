@@ -34,5 +34,5 @@ Choose "No Headers" and your outline will be transformed back to:
     	- Two
     		- Three
 
-- [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Decorating%20outlines%20with%20Markdown/FTHeaderLevels-008.applescript) 
-- [**Download Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Decorating%20outlines%20with%20Markdown/FTHeaderLevels-008.scpt?raw=true)
+- [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Decorating%20outlines%20with%20Markdown/FTHeaderLevels.applescript) 
+- [**Download Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Decorating%20outlines%20with%20Markdown/FTHeaderLevels.scpt?raw=true)
