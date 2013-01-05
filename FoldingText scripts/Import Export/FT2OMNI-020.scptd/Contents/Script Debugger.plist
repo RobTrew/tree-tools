@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>SD4Version</key>
-	<string>5.0.4</string>
+	<string>5.0.5</string>
 	<key>SDBreakOnExceptions</key>
 	<false/>
 	<key>SDBreakpointsEnabled</key>
@@ -47,9 +47,9 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>257</integer>
-								<integer>328</integer>
-								<integer>135</integer>
+								<integer>235</integer>
+								<integer>300</integer>
+								<integer>124</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -219,7 +219,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>7078</integer>
+								<integer>6875</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -231,7 +231,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 2735}, {796, 688}}</string>
+						<string>{{0, 2}, {796, 627}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -249,7 +249,7 @@
 					<key>tab.bps</key>
 					<real>433</real>
 					<key>tab.debug</key>
-					<real>433</real>
+					<real>439</real>
 					<key>tab.rsrcs</key>
 					<real>433</real>
 				</dict>
@@ -258,7 +258,7 @@
 				<key>windowControllerID</key>
 				<string>59C4AE3B-90F5-4771-9947-49A1392816FB-1674-00001AF14041C5A2</string>
 				<key>windowFrame</key>
-				<string>0 57 1095 821 0 0 1440 878 </string>
+				<string>0 118 1095 760 0 0 1440 878 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -273,7 +273,7 @@
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>0 57 1095 821 0 0 1440 878 </string>
+					<string>0 118 1095 760 0 0 1440 878 </string>
 				</dict>
 			</dict>
 		</array>
