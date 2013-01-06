@@ -1,0 +1,422 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fnil\fcharset0 Verdana;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red37\green17\blue79;\red0\green0\blue255;
+\red61\green124\blue2;\red0\green22\blue176;\red38\green18\blue82;\red74\green30\blue127;\red108\green5\blue211;
+}
+\deftab480
+\pard\pardeftab480\slleading20\pardirnatural
+
+\f0\fs24 \cf2 \
+
+\i \cf3 -- Copyright (C) 2012 Robin Trew
+\i0 \cf2 \
+
+\i \cf3 --
+\i0 \cf2 \
+
+\i \cf3 -- Permission is hereby granted, free of charge, 
+\i0 \cf2 \
+
+\i \cf3 -- to any person obtaining a copy of this software 
+\i0 \cf2 \
+
+\i \cf3 -- and associated documentation files (the "Software"), 
+\i0 \cf2 \
+
+\i \cf3 -- to deal in the Software without restriction, 
+\i0 \cf2 \
+
+\i \cf3 -- including without limitation the rights to use, copy, 
+\i0 \cf2 \
+
+\i \cf3 -- modify, merge, publish, distribute, sublicense, 
+\i0 \cf2 \
+
+\i \cf3 -- and/or sell copies of the Software, and to permit persons 
+\i0 \cf2 \
+
+\i \cf3 -- to whom the Software is furnished to do so, 
+\i0 \cf2 \
+
+\i \cf3 -- subject to the following conditions:
+\i0 \cf2 \
+\
+
+\i \cf3 -- *******
+\i0 \cf2 \
+
+\i \cf3 -- The above copyright notice and this permission notice 
+\i0 \cf2 \
+
+\i \cf3 -- shall be included in ALL copies 
+\i0 \cf2 \
+
+\i \cf3 -- or substantial portions of the Software.
+\i0 \cf2 \
+
+\i \cf3 -- *******
+\i0 \cf2 \
+\
+
+\i \cf3 -- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+\i0 \cf2 \
+
+\i \cf3 -- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+\i0 \cf2 \
+
+\i \cf3 -- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+\i0 \cf2 \
+
+\i \cf3 -- IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
+\i0 \cf2 \
+
+\i \cf3 -- DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+\i0 \cf2 \
+
+\i \cf3 -- TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+\i0 \cf2 \
+
+\i \cf3 -- OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+\i0 \cf2 \
+\
+\cf4 property\cf2  \cf5 pTitle\cf2  : "Export OmniFocus data"\
+\cf4 property\cf2  \cf5 pVer\cf2  : "0.022"\
+\cf4 property\cf2  \cf5 pAuthor\cf2  : "Robin Trew"\
+\cf4 property\cf2  \cf5 pSite\cf2  : "Orginally published on http://forums.omnigroup.com"\
+\
+\
+\cf4 property\cf2  \cf5 plstFormats\cf2  : \{"OPML", "ITM", "ITMZ", "TXT", "MD", "FT"\}\
+\
+
+\i \cf3 -- OPTION STRINGS, including SQL filter strings
+\i0 \cf2 \
+\cf4 property\cf2  \cf5 pstrCollapseLevels\cf2  : "4"\
+\cf4 property\cf2  \cf5 pstrTemplate\cf2  : "" 
+\i \cf3 -- Filename of small .itm or .itmz template to look for in same folder as script (for colors etc)
+\i0 \cf2 \
+\cf4 property\cf2  \cf5 pstrOutFolder\cf2  : (
+\b \cf6 path to
+\b0 \cf2  \cf7 desktop\cf2 )\
+\
+
+\i \cf3 -- SQL filter notes
+\i0 \cf2 \
+
+\i \cf3 -- 1. Comma will be translated to AND
+\i0 \cf2 \
+
+\i \cf3 -- 2. Neither OR nor bracketing is supported
+\i0 \cf2 \
+
+\i \cf3 -- 3. Status strings should not be quoted - ie status = [active|done|inactive|dropped]
+\i0 \cf2 \
+
+\i \cf3 -- 4. As usual, the [ = | != ] operators  can not be used with null. Use [is null | is not null]
+\i0 \cf2 \
+
+\i \cf3 -- 5. For ALL use the simple filter 1, and for none, use 0
+\i0 \cf2 \
+
+\i \cf3 --		No Inbox tasks would be: property psqlInboxFilter : 0
+\i0 \cf2 \
+\
+\cf4 property\cf2  \cf5 psqlFolderFilter\cf2  : "effectiveActive = 1"\
+\cf4 property\cf2  \cf5 psqlSinglesHoldersFilter\cf2  : "folderEffectiveActive = 1, status = active, dateCompleted is null"\
+\cf4 property\cf2  \cf5 psqlProjectFilter\cf2  : "folderEffectiveActive = 1, status = active, dateCompleted is null"\
+\cf4 property\cf2  \cf5 psqlTaskFilter\cf2  : "effectiveContainingProjectInfoActive = 1, dateCompleted is null, context = nLp6oBvyws7"\
+\cf4 property\cf2  \cf5 psqlInboxFilter\cf2  : "dateCompleted is null" 
+\i \cf3 -- or edit this to "1" for ALL inbox entries or "0" for none.
+\i0 \cf2 \
+\
+
+\i \cf3 -- SOME ALTERNATIVES
+\i0 \cf2 \
+
+\i \cf3 -- Don't show Inbox:
+\i0 \cf2 \
+
+\i \cf3 --property psqlInboxFilter : 0
+\i0 \cf2 \
+\
+
+\i \cf3 -- Exclude taskless projects
+\i0 \cf2 \
+
+\i \cf3 -- property psqlProjectFilter : "numberOfRemainingTasks > 0, folderEffectiveActive = 1, status = active, dateCompleted is null"
+\i0 \cf2 \
+\
+
+\i \cf3 -- Exclude Projects and tasks with future start dates
+\i0 \cf2 \
+
+\i \cf3 -- property psqlProjectFilter : "taskBlockedByFutureStartDate=0, folderEffectiveActive = 1, status = active, dateCompleted is null"
+\i0 \cf2 \
+
+\i \cf3 -- property psqlTaskFilter : "BlockedByFutureStartDate=0, effectiveContainingProjectInfoActive = 1, dateCompleted is null"
+\i0 \cf2 \
+\
+
+\i \cf3 -- OPTION FLAGS
+\i0 \cf2 \
+\cf4 property\cf2  \cf5 pblnIncludeOFLinks\cf2  : \cf8 false\cf2 \
+\cf4 property\cf2  \cf5 pblnIncludeNotes\cf2  : \cf8 true\cf2 \
+\cf4 property\cf2  \cf5 pblnRecurInfo\cf2  : \cf8 false\cf2  
+\i \cf3 -- prepend any Task Recurrence info to note
+\i0 \cf2 \
+\
+\cf4 on\cf2  
+\b \cf4 run
+\b0 \cf2 \
+	
+\i \cf3 -- GET ANY CURRENT SELECTION
+\i0 \cf2 \
+	\
+	\cf4 tell\cf2  
+\i \cf4 application
+\i0 \cf2  \cf8 id\cf2  "OFOC"\
+		\cf4 tell\cf2  \cf4 front\cf2  
+\i \cf4 document window
+\i0 \cf2  \cf4 of\cf2  \cf9 default document\cf2 \
+			\cf4 repeat\cf2  \cf4 with\cf2  \cf5 oPanel\cf2  \cf4 in\cf2  \{\cf9 content\cf2 , \cf9 sidebar\cf2 \}\
+				\cf4 tell\cf2  \cf5 oPanel\cf2  \cf4 to\cf2  \cf4 set\cf2  \cf5 lstNodes\cf2  \cf4 to\cf2  \cf9 value\cf2  \cf4 of\cf2  (
+\i \cf4 selected trees
+\i0 \cf2  \cf4 where\cf2  
+\i \cf4 class
+\i0 \cf2  \cf4 of\cf2  \cf4 its\cf2  \cf9 value\cf2  \uc0\u8800  
+\i \cf4 item
+\i0 \cf2 )\
+				\cf4 set\cf2  \cf5 lngNodes\cf2  \cf4 to\cf2  \cf9 length\cf2  \cf4 of\cf2  \cf5 lstNodes\cf2 \
+				\cf4 if\cf2  \cf5 lngNodes\cf2  > 0 \cf4 then\cf2  \cf4 exit\cf2  \cf4 repeat\cf2 \
+			\cf4 end\cf2  \cf4 repeat\cf2 \
+			\cf4 set\cf2  \cf5 blnSeln\cf2  \cf4 to\cf2  (\cf5 lngNodes\cf2  > 0)\
+			\cf4 if\cf2  \cf5 blnSeln\cf2  \cf4 then\cf2 \
+				\cf4 set\cf2  \{\cf5 strID\cf2 , \cf5 strName\cf2 \} \cf4 to\cf2  \{\cf9 id\cf2 , \cf9 name\cf2 \} \cf4 of\cf2  
+\i \cf4 item
+\i0 \cf2  1 \cf4 of\cf2  \cf5 lstNodes\cf2 \
+			\cf4 else\cf2 \
+				\cf4 set\cf2  \{\cf5 strID\cf2 , \cf5 strName\cf2 \} \cf4 to\cf2  \{"", ""\}\
+			\cf4 end\cf2  \cf4 if\cf2 \
+		\cf4 end\cf2  \cf4 tell\cf2 \
+	\cf4 end\cf2  \cf4 tell\cf2 \
+	\
+	
+\i \cf3 -- IF ANYTHING SELECTED, OFFER CHOICE BETWEEN EXPORTING THE WHOLE (FILTERED) DATA TREE
+\i0 \cf2 \
+	
+\i \cf3 -- OR EXPORTING ONLY THE FIRST SELECTED ITEM AND ITS CHILDREN
+\i0 \cf2 \
+	\cf4 tell\cf2  
+\i \cf4 application
+\i0 \cf2  \cf8 id\cf2  "syui"\
+		
+\b \cf4 activate
+\b0 \cf2 \
+		\cf4 if\cf2  \cf5 blnSeln\cf2  \cf4 then\cf2 \
+			\cf4 set\cf2  \cf5 strAll\cf2  \cf4 to\cf2  "01	<ALL filtered data>"\
+			\cf4 set\cf2  \cf5 strSeln\cf2  \cf4 to\cf2  "00	" & \cf5 strName\cf2 \
+			\cf4 set\cf2  \cf5 varScope\cf2  \cf4 to\cf2  
+\b \cf6 choose from list
+\b0 \cf2  \{\cf5 strSeln\cf2 , \cf5 strAll\cf2 \} \cf6 with title\cf2  \cf5 pTitle\cf2  & \cf9 tab\cf2  & \cf5 pVer\cf2  \cf6 with prompt\cf2  \'ac\
+				"ALL filtered data, or one selected item and its descendants ?" \cf6 default items\cf2  \{\cf5 strSeln\cf2 \} \'ac\
+				\cf6 OK button name\cf2  "OK" \cf6 cancel button name\cf2  "Cancel" \cf4 without\cf2  \cf6 empty selection allowed\cf2  \cf4 and\cf2  \cf6 multiple selections allowed\cf2 \
+			\cf4 if\cf2  \cf5 varScope\cf2  = \cf8 false\cf2  \cf4 then\cf2  \cf4 return\cf2 \
+			\cf4 set\cf2  \{\cf5 dlm\cf2 , \cf4 my\cf2  \cf9 text item delimiters\cf2 \} \cf4 to\cf2  \{\cf4 my\cf2  \cf9 text item delimiters\cf2 , \cf9 tab\cf2 \}\
+			\cf4 set\cf2  \cf5 varScope\cf2  \cf4 to\cf2  (\cf4 first\cf2  
+\i \cf4 text item
+\i0 \cf2  \cf4 of\cf2  (
+\i \cf4 item
+\i0 \cf2  1 \cf4 of\cf2  \cf5 varScope\cf2 )) \cf4 as\cf2  
+\i \cf4 integer
+\i0 \cf2 \
+			\cf4 if\cf2  \cf5 varScope\cf2  > 0 \cf4 then\cf2  \cf4 set\cf2  \{\cf5 strID\cf2 , \cf5 strName\cf2 \} \cf4 to\cf2  \{"", ""\}\
+			\cf4 set\cf2  \cf4 my\cf2  \cf9 text item delimiters\cf2  \cf4 to\cf2  \cf5 dlm\cf2 \
+		\cf4 else\cf2 \
+			\cf4 set\cf2  \{\cf5 strID\cf2 , \cf5 strName\cf2 \} \cf4 to\cf2  \{"", ""\}\
+		\cf4 end\cf2  \cf4 if\cf2 \
+		\
+		\cf4 set\cf2  \cf5 varFormat\cf2  \cf4 to\cf2  
+\b \cf6 choose from list
+\b0 \cf2  \cf5 plstFormats\cf2  & \{"_____", "Help"\} \cf6 with title\cf2  \cf5 pTitle\cf2  & \cf9 tab\cf2  & \cf5 pVer\cf2  \cf6 with prompt\cf2  \'ac\
+			"OPML,  iThoughtsHD, or TXT, MD, FT" \cf6 default items\cf2  \{"ITMZ"\} \'ac\
+			\cf6 OK button name\cf2  "OK" \cf6 cancel button name\cf2  "Cancel" \cf4 with\cf2  \cf6 empty selection allowed\cf2  \cf4 without\cf2  \cf6 multiple selections allowed\cf2 \
+		\cf4 if\cf2  \cf5 varFormat\cf2  = \cf8 false\cf2  \cf4 then\cf2  \cf4 return\cf2  
+\i \cf4 missing value
+\i0 \cf2 \
+		\cf4 set\cf2  \cf5 varFormat\cf2  \cf4 to\cf2  \cf4 my\cf2  \cf5 lcase\cf2 (
+\i \cf4 item
+\i0 \cf2  1 \cf4 of\cf2  \cf5 varFormat\cf2 )\
+		\cf4 set\cf2  \cf5 strScript\cf2  \cf4 to\cf2  \cf4 my\cf2  \cf5 GetScript\cf2 ("ofoc_to_mindmap_023.py")\
+		\
+		\cf4 if\cf2  \cf5 varFormat\cf2  \cf4 is\cf2  \cf4 in\cf2  \cf5 plstFormats\cf2  \cf4 then\cf2 \
+			\cf4 if\cf2  \cf5 strName\cf2  \uc0\u8800  "" \cf4 then\cf2 \
+				\cf4 set\cf2  \cf5 strDefault\cf2  \cf4 to\cf2  \cf5 strName\cf2 \
+			\cf4 else\cf2 \
+				\cf4 set\cf2  \cf5 strDefault\cf2  \cf4 to\cf2  ("Tasks" & \cf4 my\cf2  \cf5 TimeString\cf2 ())\
+			\cf4 end\cf2  \cf4 if\cf2 \
+			\
+			\cf4 set\cf2  \cf5 strOutPath\cf2  \cf4 to\cf2  \cf9 quoted form\cf2  \cf4 of\cf2  (\cf9 POSIX path\cf2  \cf4 of\cf2  \'ac\
+				(
+\b \cf6 choose file name
+\b0 \cf2  \cf6 with prompt\cf2  \cf5 pTitle\cf2  & " as ." & \cf4 my\cf2  \cf5 ucase\cf2 (\cf5 varFormat\cf2 ) \cf6 default name\cf2  \cf5 strDefault\cf2  \cf6 default location\cf2  \cf5 pstrOutFolder\cf2 ))\
+			
+\i \cf3 -- Store output folder as default for next time
+\i0 \cf2 \
+			
+\i \cf3 --set \{dlm, my text item delimiters\} to \{my text item delimiters, "/"\}
+\i0 \cf2 \
+			
+\i \cf3 --set pstrOutFolder to ((text items 1 thru -2 of strOutPath) as string) & "/"
+\i0 \cf2 \
+			
+\i \cf3 --set my text item delimiters to dlm
+\i0 \cf2 \
+			\
+			\cf4 set\cf2  \cf5 strOptions\cf2  \cf4 to\cf2  \cf4 my\cf2  \cf5 GetOptions\cf2 (\cf5 strID\cf2 )\
+			\cf4 if\cf2  \cf5 strOptions\cf2  \cf4 is\cf2  \cf4 not\cf2  
+\i \cf4 missing value
+\i0 \cf2  \cf4 then\cf2 \
+				\cf4 set\cf2  \cf5 strCmd\cf2  \cf4 to\cf2  "python " & \cf5 strScript\cf2  & \cf9 space\cf2  & "--format=" & \cf5 varFormat\cf2  & \cf9 space\cf2  & "--output=" & \cf5 strOutPath\cf2  & \cf9 space\cf2  & \cf5 strOptions\cf2 \
+				
+\i \cf3 --set the clipboard to strCmd
+\i0 \cf2 \
+				
+\b \cf6 do shell script
+\b0 \cf2  \cf5 strCmd\cf2 \
+			\cf4 else\cf2 \
+				\cf4 return\cf2 \
+			\cf4 end\cf2  \cf4 if\cf2 \
+		\cf4 else\cf2 \
+			\cf4 set\cf2  \cf5 strCmd\cf2  \cf4 to\cf2  "python " & \cf5 strScript\cf2  & \cf9 space\cf2  & "--help"\
+			\cf4 set\cf2  \cf5 strHelp\cf2  \cf4 to\cf2  
+\b \cf6 do shell script
+\b0 \cf2  \cf5 strCmd\cf2 \
+			
+\b \cf6 set the clipboard to
+\b0 \cf2  \cf5 strHelp\cf2 \
+			
+\b \cf6 display dialog
+\b0 \cf2  "Detail of script options copied to clipboard." & \cf9 return\cf2  & \cf9 return\cf2  & \'ac\
+				"Paste into a text editor." \cf6 buttons\cf2  \{"OK"\} \cf6 default button\cf2  "OK" \cf6 with title\cf2  \cf5 pTitle\cf2  & "  ver. " & \cf5 pVer\cf2 \
+		\cf4 end\cf2  \cf4 if\cf2 \
+	\cf4 end\cf2  \cf4 tell\cf2 \
+\cf4 end\cf2  
+\b \cf4 run
+\b0 \cf2 \
+\
+\cf4 on\cf2  \cf5 GetScript\cf2 (\cf5 strFileName\cf2 )\
+	\cf4 return\cf2  \cf9 quoted form\cf2  \cf4 of\cf2  (\cf9 POSIX path\cf2  \cf4 of\cf2  (
+\b \cf6 path to resource
+\b0 \cf2  \cf5 strFileName\cf2 ))\
+\cf4 end\cf2  \cf5 GetScript\cf2 \
+\
+\cf4 on\cf2  \cf5 GetOptions\cf2 (\cf5 strID\cf2 )\
+	\cf4 set\cf2  \cf5 lstOptions\cf2  \cf4 to\cf2  \{\}\
+	\cf4 set\cf2  \cf5 lstFlags\cf2  \cf4 to\cf2  \{\{"l", \cf5 pblnIncludeOFLinks\cf2 \}, \{"n", \cf5 pblnIncludeNotes\cf2 \}, \{"r", \cf5 pblnRecurInfo\cf2 \}\}\
+	\cf4 set\cf2  \cf5 lstString\cf2  \cf4 to\cf2  \{\{"c", \cf5 pstrCollapseLevels\cf2 \}, \{"f", \cf5 psqlFolderFilter\cf2 \}, \{"s", \cf5 psqlSinglesHoldersFilter\cf2 \}, \'ac\
+		\{"p", \cf5 psqlProjectFilter\cf2 \}, \{"t", \cf5 psqlTaskFilter\cf2 \}, \{"i", \cf5 psqlInboxFilter\cf2 \}\}\
+	\
+	
+\i \cf3 -- Specify a particular root, if we are not choosing the whole tree
+\i0 \cf2 \
+	\cf4 if\cf2  \cf5 strID\cf2  \uc0\u8800  "" \cf4 then\cf2  \cf4 set\cf2  \cf4 end\cf2  \cf4 of\cf2  \cf5 lstOptions\cf2  \cf4 to\cf2  \{"-a" & \cf9 space\cf2  & \cf9 quoted form\cf2  \cf4 of\cf2  \cf5 strID\cf2 \}\
+	\
+	
+\i \cf3 -- Boolean options
+\i0 \cf2 \
+	\cf4 repeat\cf2  \cf4 with\cf2  \cf5 oPair\cf2  \cf4 in\cf2  \cf5 lstFlags\cf2 \
+		\cf4 set\cf2  \{\cf5 strFlag\cf2 , \cf5 blnValue\cf2 \} \cf4 to\cf2  \cf5 oPair\cf2 \
+		\cf4 if\cf2  \cf5 blnValue\cf2  \cf4 then\cf2  \cf4 set\cf2  \cf4 end\cf2  \cf4 of\cf2  \cf5 lstOptions\cf2  \cf4 to\cf2  "-" & \cf5 strFlag\cf2 \
+	\cf4 end\cf2  \cf4 repeat\cf2 \
+	\
+	
+\i \cf3 -- String options
+\i0 \cf2 \
+	\cf4 repeat\cf2  \cf4 with\cf2  \cf5 oPair\cf2  \cf4 in\cf2  \cf5 lstString\cf2 \
+		\cf4 set\cf2  \{\cf5 strOption\cf2 , \cf5 strValue\cf2 \} \cf4 to\cf2  \cf5 oPair\cf2 \
+		\cf4 if\cf2  \cf5 strValue\cf2  \uc0\u8800  "" \cf4 then\cf2  \cf4 set\cf2  \cf4 end\cf2  \cf4 of\cf2  \cf5 lstOptions\cf2  \cf4 to\cf2  "-" & \cf5 strOption\cf2  & \cf9 space\cf2  & \cf9 quoted form\cf2  \cf4 of\cf2  (\cf5 strValue\cf2  \cf4 as\cf2  
+\i \cf4 string
+\i0 \cf2 )\
+	\cf4 end\cf2  \cf4 repeat\cf2 \
+	\
+	
+\i \cf3 -- Template option
+\i0 \cf2 \
+	\cf4 set\cf2  \cf5 strTemplate\cf2  \cf4 to\cf2  \cf5 pstrTemplate\cf2 \
+	\cf4 if\cf2  \cf5 strTemplate\cf2  \uc0\u8800  "" \cf4 then\cf2 \
+		\cf4 if\cf2  \cf5 strTemplate\cf2  \cf4 does not\cf2  \cf4 contain\cf2  "/" \cf4 then\cf2  \cf4 set\cf2  \cf5 strTemplate\cf2  \cf4 to\cf2  \cf4 my\cf2  \cf5 DirName\cf2 () & "/" & \cf5 strTemplate\cf2 \
+		\cf4 if\cf2  \cf5 FileExists\cf2 (\cf5 strTemplate\cf2 ) \cf4 then\cf2 \
+			\cf4 set\cf2  \cf4 end\cf2  \cf4 of\cf2  \cf5 lstOptions\cf2  \cf4 to\cf2  "-m" & \cf9 space\cf2  & \cf9 quoted form\cf2  \cf4 of\cf2  \cf5 strTemplate\cf2 \
+		\cf4 else\cf2 \
+			
+\b \cf6 display dialog
+\b0 \cf2  "Template file not found:" & \cf9 return\cf2  & \cf9 return\cf2  & \cf5 strTemplate\cf2  \'ac\
+				\cf6 buttons\cf2  \{"OK"\} \cf6 default button\cf2  "OK" \cf6 with title\cf2  \cf5 pTitle\cf2  & "  ver. " & \cf5 pVer\cf2 \
+			\cf4 return\cf2  
+\i \cf4 missing value
+\i0 \cf2 \
+		\cf4 end\cf2  \cf4 if\cf2 \
+	\cf4 end\cf2  \cf4 if\cf2 \
+	\
+	\cf4 set\cf2  \{\cf5 dlm\cf2 , \cf4 my\cf2  \cf9 text item delimiters\cf2 \} \cf4 to\cf2  \{\cf4 my\cf2  \cf9 text item delimiters\cf2 , \cf9 space\cf2 \}\
+	\cf4 set\cf2  \cf5 strOptions\cf2  \cf4 to\cf2  \cf5 lstOptions\cf2  \cf4 as\cf2  
+\i \cf4 string
+\i0 \cf2 \
+	\cf4 set\cf2  \cf4 my\cf2  \cf9 text item delimiters\cf2  \cf4 to\cf2  \cf5 dlm\cf2 \
+	\cf4 return\cf2  \cf5 strOptions\cf2 \
+\cf4 end\cf2  \cf5 GetOptions\cf2 \
+\
+\cf4 on\cf2  \cf5 lcase\cf2 (\cf5 str\cf2 )\
+	
+\b \cf6 do shell script
+\b0 \cf2  "echo " & \cf9 quoted form\cf2  \cf4 of\cf2  \cf5 str\cf2  & " | tr \\"[:upper:]\\" \\"[:lower:]\\""\
+\cf4 end\cf2  \cf5 lcase\cf2 \
+\
+\cf4 on\cf2  \cf5 ucase\cf2 (\cf5 str\cf2 )\
+	
+\b \cf6 do shell script
+\b0 \cf2  "echo " & \cf9 quoted form\cf2  \cf4 of\cf2  \cf5 str\cf2  & " | tr \\"[:lower:]\\" \\"[:upper:]\\""\
+\cf4 end\cf2  \cf5 ucase\cf2 \
+\
+\cf4 on\cf2  \cf5 TimeString\cf2 ()\
+	\cf4 set\cf2  \cf5 dte\cf2  \cf4 to\cf2  (
+\b \cf6 current date
+\b0 \cf2 )\
+	\cf4 set\cf2  \{\cf5 dlm\cf2 , \cf4 my\cf2  \cf9 text item delimiters\cf2 \} \cf4 to\cf2  \{\cf4 my\cf2  \cf9 text item delimiters\cf2 , "-"\}\
+	\cf4 tell\cf2  \cf5 dte\cf2 \
+		\cf4 set\cf2  \cf5 lstDate\cf2  \cf4 to\cf2  \{\cf4 its\cf2  \cf9 year\cf2 , (\cf4 its\cf2  
+\i \cf4 month
+\i0 \cf2 ) \cf4 as\cf2  
+\i \cf4 integer
+\i0 \cf2 , \cf4 its\cf2  \cf9 day\cf2 \}\
+		\cf4 set\cf2  \cf5 strDate\cf2  \cf4 to\cf2  (\cf5 lstDate\cf2  \cf4 as\cf2  
+\i \cf4 text
+\i0 \cf2 ) & "-" & \cf4 its\cf2  \cf9 hours\cf2  & "h" & \cf4 its\cf2  \cf9 minutes\cf2  & "m" & \cf4 its\cf2  
+\i \cf4 seconds
+\i0 \cf2  & "s"\
+	\cf4 end\cf2  \cf4 tell\cf2 \
+	\
+	\cf4 set\cf2  \cf4 my\cf2  \cf9 text item delimiters\cf2  \cf4 to\cf2  \cf5 dlm\cf2 \
+	\cf4 return\cf2  \cf5 strDate\cf2 \
+\cf4 end\cf2  \cf5 TimeString\cf2 \
+\
+\cf4 on\cf2  \cf5 DirName\cf2 ()\
+	\cf4 set\cf2  \{\cf5 dlm\cf2 , \cf4 my\cf2  \cf9 text item delimiters\cf2 \} \cf4 to\cf2  \{\cf4 my\cf2  \cf9 text item delimiters\cf2 , "/"\}\
+	\cf4 set\cf2  \cf5 strDir\cf2  \cf4 to\cf2  (
+\i \cf4 text items
+\i0 \cf2  1 \cf4 thru\cf2  -3 \cf4 of\cf2  (\cf9 POSIX path\cf2  \cf4 of\cf2  (
+\b \cf6 path to
+\b0 \cf2  \cf4 me\cf2 ))) \cf4 as\cf2  
+\i \cf4 string
+\i0 \cf2 \
+	\cf4 set\cf2  \cf4 my\cf2  \cf9 text item delimiters\cf2  \cf4 to\cf2  \cf5 dlm\cf2 \
+	\cf4 return\cf2  \cf5 strDir\cf2 \
+\cf4 end\cf2  \cf5 DirName\cf2 \
+\
+\cf4 on\cf2  \cf5 FileExists\cf2 (\cf5 strPath\cf2 )\
+	(
+\b \cf6 do shell script
+\b0 \cf2  ("test -e " & \cf9 quoted form\cf2  \cf4 of\cf2  \cf5 strPath\cf2  & "; echo $?")) = "0"\
+\cf4 end\cf2  \cf5 FileExists\cf2 \
+\
+\
+}
