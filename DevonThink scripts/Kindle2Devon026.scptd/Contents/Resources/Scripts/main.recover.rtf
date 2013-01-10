@@ -1,0 +1,1482 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\fonttbl\f0\fnil\fcharset0 Verdana;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue255;\red0\green0\blue0;\red64\green128\blue0;
+\red128\green0\blue128;\red76\green76\blue76;\red74\green30\blue127;\red108\green5\blue211;\red0\green22\blue176;
+\red38\green18\blue82;\red68\green21\blue176;}
+\deftab480
+\pard\pardeftab480\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf2 property\cf3  \cf4 pTitle\cf3  : \cf5 "Kindle notes to DevonThink"\cf3 \
+\cf2 property\cf3  \cf4 pVer\cf3  : \cf5 "0.26"\cf3 \
+\
+
+\i \cf6 -- Robin Trew  houthakker72@gmail.com
+\i0 \cf3 \
+
+\i \cf6 -- Export Kindle clippings and Annotations to DEVONthink, either from:
+\i0 \cf3 \
+
+\i \cf6 --	--	 https://kindle.amazon.com/your_highlights
+\i0 \cf3 \
+
+\i \cf6 -- or from a
+\i0 \cf3 \
+
+\i \cf6 --	--	My Clippings.txt file on a kindle  (or any text file in the same format)
+\i0 \cf3 \
+\
+
+\i \cf6 -- The fields offered in each case are different (the web version is generally richer, 
+\i0 \cf3 \
+
+\i \cf6 -- and allow for useful some hyperlinks in the DT notes.
+\i0 \cf3 \
+
+\i \cf6 -- Also, the web data uses Kindle location references, whereas the My Clippings.txt data uses page numbers
+\i0 \cf3 \
+\
+
+\i \cf6 -- 	Copyright \'a9 2010, Robin Trew
+\i0 \cf3 \
+
+\i \cf6 --  All rights reserved.
+\i0 \cf3 \
+
+\i \cf6 -- 	
+\i0 \cf3 \
+
+\i \cf6 -- 	Redistribution and use in source and binary forms, with or without modification, 
+\i0 \cf3 \
+
+\i \cf6 -- 	are permitted provided that the following conditions are met:
+\i0 \cf3 \
+
+\i \cf6 -- 	
+\i0 \cf3 \
+
+\i \cf6 -- 		- Redistributions of source code must retain the above copyright notice, 
+\i0 \cf3 \
+
+\i \cf6 -- 		  this list of conditions and the following disclaimer.
+\i0 \cf3 \
+
+\i \cf6 -- 		- Redistributions in binary form must reproduce the above copyright notice, 
+\i0 \cf3 \
+
+\i \cf6 -- 		  this list of conditions and the following disclaimer in the documentation 
+\i0 \cf3 \
+
+\i \cf6 -- 		  and/or other materials provided with the distribution.
+\i0 \cf3 \
+
+\i \cf6 -- 		
+\i0 \cf3 \
+
+\i \cf6 -- 	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+\i0 \cf3 \
+
+\i \cf6 -- 	"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+\i0 \cf3 \
+
+\i \cf6 -- 	THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+\i0 \cf3 \
+
+\i \cf6 -- 	IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR 
+\i0 \cf3 \
+
+\i \cf6 -- 	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+\i0 \cf3 \
+
+\i \cf6 -- 	 (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+\i0 \cf3 \
+
+\i \cf6 -- 	 LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+\i0 \cf3 \
+
+\i \cf6 -- 	 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+\i0 \cf3 \
+
+\i \cf6 -- 	 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+\i0 \cf3 \
+\
+
+\i \cf6 --  RECENT CHANGE LOG
+\i0 \cf3 \
+
+\i \cf6 -- ver 0.02 July 16 2011
+\i0 \cf3 \
+
+\i \cf6 -- ver 0.02 Adjusts references to page numbers in notes imported from My Clippings.txt
+\i0 \cf3 \
+
+\i \cf6 -- ver 0.06 Adjusts the handling of temporary files
+\i0 \cf3 \
+
+\i \cf6 -- ver 0.007 allows for My Clippings.txt records which use Location rather than page references
+\i0 \cf3 \
+
+\i \cf6 -- ver 0.012 Corrects various issues in the My Clippings.txt reader, 
+\i0 \cf3 \
+
+\i \cf6 --		-- and allows for manual supply of an ASIN (on which hyperlinks to passages in the OS Kindle app can be based)
+\i0 \cf3 \
+
+\i \cf6 -- ver 0.18 July 22 2011
+\i0 \cf3 \
+
+\i \cf6 -- ver 0.22 July 24 2011 -- Allows for Clippings files with 0D0A line endings, filters out bookmarks, allows for non-standard title lines
+\i0 \cf3 \
+\
+
+\i \cf6 -- CREDIT
+\i0 \cf3 \
+
+\i \cf6 -- The Kindle Icon by Patrick Forringer (patrick.forringer.com) is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+\i0 \cf3 \
+\
+
+\i \cf6 -- SCRIPT BEHAVIOUR
+\i0 \cf3 \
+\cf2 property\cf3  \cf4 pblnLaunchOSXKindle\cf3  : \cf7 true\cf3  
+\i \cf6 -- Try to ensure thatOS X Kindle is open after imports from the web (for jumping to linked locations)
+\i0 \cf3 \
+\cf2 property\cf3  \cf4 pblnOfferTextFileImport\cf3  : \cf7 true\cf3  
+\i \cf6 -- If true, then an initial menu offers to find and import a My Clippings.txt file from a Kindle
+\i0 \cf3 \
+\cf2 property\cf3  \cf4 pblnRequestAsin\cf3  : \cf7 true\cf3 \
+\
+\cf2 property\cf3  \cf4 pstrDelim\cf3  : \cf5 "~|~"\cf3 \
+\cf2 property\cf3  \cf4 pstrTempPath\cf3  : \cf8 POSIX path\cf3  \cf2 of\cf3  (
+\b \cf9 path to
+\b0 \cf3  \cf10 desktop\cf3  \cf9 from\cf3  \cf10 user domain\cf3 ) & \cf5 "mytmpKN2html.html"\cf3 \
+\cf2 property\cf3  \cf4 pstrAmazonRoot\cf3  : \cf5 "https://kindle.amazon.com"\cf3 \
+\cf2 property\cf3  \cf4 pstrClipPath\cf3  : \cf5 "/Volumes/Kindle/documents/My Clippings.txt"\cf3 \
+\cf2 property\cf3  \cf4 pstrStartPage\cf3  : \cf4 pstrAmazonRoot\cf3  & \cf5 "/your_highlights"\cf3 \
+\cf2 property\cf3  \cf4 pstrAK\cf3  : \cf5 "Amazon Kindle"\cf3 \
+\cf2 property\cf3  \cf4 pstrKlink\cf3  : \cf5 "kindle://book?action=open&asin="\cf3 \
+\cf2 property\cf3  \cf4 pstrKInfix\cf3  : \cf5 "&location="\cf3 \
+\cf2 property\cf3  \cf4 pWeb\cf3  : \cf5 "kindle.amazon.com"\cf3 \
+\cf2 property\cf3  \cf4 pClippings\cf3  : \cf5 "My Clippings.txt"\cf3 \
+\cf2 property\cf3  \cf4 pstrTmpKlips\cf3  : \cf8 POSIX path\cf3  \cf2 of\cf3  (
+\b \cf9 path to
+\b0 \cf3  \cf10 desktop\cf3 ) & \cf5 "mytmpKlips.txt"\cf3 \
+\cf2 property\cf3  \cf4 plstClearBuffer\cf3  : \{\cf5 ""\cf3 , \cf5 ""\cf3 , \cf5 ""\cf3 , \cf5 ""\cf3 , \cf5 ""\cf3 , \cf5 ""\cf3 , \cf5 ""\cf3 , \cf5 ""\cf3 \} 
+\i \cf6 -- length: piNote -1 : 12 (Field 1:Type dropped in combined)
+\i0 \cf3 \
+\cf2 property\cf3  \cf4 pstrLookupAsin\cf3  : \cf5 "Search Amazon"\cf3 \
+\cf2 property\cf3  \cf4 pdteUnixBase\cf3  : 
+\i \cf2 missing value
+\i0 \cf3 \
+\
+
+\i \cf6 -- FIELD INDICES
+\i0 \cf3 \
+\
+\cf2 property\cf3  \cf4 piLocnFrom\cf3  : 3\
+\cf2 property\cf3  \cf4 piLocnTo\cf3  : 4\
+\cf2 property\cf3  \cf4 piTime\cf3  : 6\
+\cf2 property\cf3  \cf4 piNote\cf3  : 7\
+\
+
+\i \cf6 -- SCRIPT BEHAVIOUR
+\i0 \cf3 \
+\cf2 property\cf3  \cf4 pblnLocnFirst\cf3  : \cf7 true\cf3 \
+\cf2 property\cf3  \cf4 pblnAvoidDuplication\cf3  : \cf7 true\cf3 \
+\
+\
+
+\i \cf6 -- CSS FOR NOTE FORMATTTING
+\i0 \cf3 \
+\cf2 property\cf3  \cf4 pstrDefaultCSS\cf3  : \cf5 "\
+ .header \{color:#888888;\}\
+ .quote \{color:#333366; margin-left: 30px; margin-right: 30px; line-height: 140%;\}\
+ .comment \{color:#222222; margin-left: 30px; line-height: 140%;\}\
+ .wptag \{color:#888888;\}\
+ .detail \{color:#888888; margin-left: 30px; font-family: \\"lucida grande\\", \\"sans-serif\\"; font-size:8px;\}\
+ struck \{text-decoration:line-through\}\
+ highlit \{background-color:#FEFC97\}\
+ underscored \{text-decoration:underline\}\
+  p \{font-family: monospace; font-size:12px\}\
+  i \{font-family: monospace; font-style:italic;\}\
+  b \{font-family: monospace; font-weight:bold;\}\
+  u \{font-family: monospace\}\
+  a:link \{ color: #333366;\}\
+  a:visited \{ color: #222222;\}\
+  a:hover \{ color: #CCCCCC; background-color: #333333; text-decoration: none;\}\
+  a:active \{ color: #333333;\}\
+ "\cf3 \
+\cf2 property\cf3  \cf4 pstrActiveCSS\cf3  : \cf5 ""\cf3  
+\i \cf6 -- will be defined at run-time either by pstrDefaultCSS (above),
+\i0 \cf3 \
+
+\i \cf6 --									or by the contents of any external pCSSfile (see below).
+\i0 \cf3 \
+\
+
+\i \cf6 --  An optional customized css file can be placed in the same folder as this script, 
+\i0 \cf3 \
+
+\i \cf6 -- to retain customized formatting if a later version of this script is downloaded.
+\i0 \cf3 \
+
+\i \cf6 -- The contents of this file (if its exists) will be used as an alternative to pstrDefaultCSS above,
+\i0 \cf3 \
+
+\i \cf6 -- and should define the same set of styles. 
+\i0 \cf3 \
+
+\i \cf6 -- If such a file is desired, it should have the name specified in the following property (pCSSFile):
+\i0 \cf3 \
+\cf2 property\cf3  \cf4 pCSSFile\cf3  : \cf5 "DevnNote.css"\cf3  
+\i \cf6 -- changed the name to facilitate style sharing with other scripts (Skim exports etc).
+\i0 \cf3 \
+\
+\
+\cf2 on\cf3  
+\b \cf2 run
+\b0 \cf3 \
+	
+\i \cf6 --OFFER CHOICE OF READING WEB PAGE OR CLIPPINGS TXT (if option flag set at top of script)
+\i0 \cf3 \
+	\cf2 if\cf3  \cf4 pblnOfferTextFileImport\cf3  \cf2 then\cf3 \
+		\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "sevs"\cf3 \
+			
+\b \cf2 activate
+\b0 \cf3 \
+			\cf2 tell\cf3  (
+\b \cf9 choose from list
+\b0 \cf3  \{\cf4 pWeb\cf3 , \cf4 pClippings\cf3 \} \cf9 with prompt\cf3  \cf5 "Import your Kindle notes from:"\cf3  \cf9 with title\cf3  \cf4 pTitle\cf3  \cf9 default items\cf3  \{\cf4 pWeb\cf3 \})\
+				\cf2 if\cf3  \cf2 it\cf3  = \cf7 false\cf3  \cf2 then\cf3  \cf2 return\cf3 \
+				\cf2 set\cf3  \cf4 blnFromWeb\cf3  \cf2 to\cf3  (\cf2 first\cf3  
+\i \cf2 item
+\i0 \cf3  = \cf4 pWeb\cf3 )\
+			\cf2 end\cf3  \cf2 tell\cf3 \
+		\cf2 end\cf3  \cf2 tell\cf3 \
+	\cf2 else\cf3 \
+		\cf2 set\cf3  \cf4 blnFromWeb\cf3  \cf2 to\cf3  \cf7 true\cf3 \
+	\cf2 end\cf3  \cf2 if\cf3 \
+	\
+	
+\i \cf6 -- TRY TO GET NOTE DATA FROM THE CHOSEN SOURCE
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 strBookID\cf3  \cf2 to\cf3  \cf5 ""\cf3 \
+	\cf2 if\cf3  \cf4 blnFromWeb\cf3  \cf2 then\cf3 \
+		\cf2 set\cf3  \{\cf4 strURL\cf3 , \cf4 strPath\cf3 \} \cf2 to\cf3  \cf4 GetKNPageHTML\cf3 ()\
+		\cf2 set\cf3  \cf4 lstNotes\cf3  \cf2 to\cf3  \cf4 ParseHTMLNotes\cf3 (\cf4 strPath\cf3 ) 
+\i \cf6 -- 7 $id, $title, $author, $location, $quote, $comment, $editlink
+\i0 \cf3 \
+		
+\i \cf6 --\{\}
+\i0 \cf3 \
+	\cf2 else\cf3 \
+		\cf2 set\cf3  \cf4 strPath\cf3  \cf2 to\cf3  \cf4 GetClippingsPath\cf3 ()\
+		\cf2 set\cf3  \cf4 strWork\cf3  \cf2 to\cf3  \cf4 ChooseWork\cf3 (\cf4 strPath\cf3 )\
+		\
+		
+\i \cf6 -- GIVE USER A CHANCE TO FIND THE ASIN ON THE AMAZON SITE
+\i0 \cf3 \
+		\cf2 set\cf3  \{\cf4 strBookID\cf3 , \cf4 strURL\cf3 \} \cf2 to\cf3  \cf4 GetAsinandURL\cf3 (\cf4 strWork\cf3 )\
+		\cf2 if\cf3  \cf4 strBookID\cf3  = \cf4 pstrLookupAsin\cf3  \cf2 then\cf3  \cf2 return\cf3 \
+		\cf2 set\cf3  \cf4 lstNotes\cf3  \cf2 to\cf3  \cf4 ReadClippings\cf3 (\cf4 strPath\cf3 , \cf4 strWork\cf3 ) 
+\i \cf6 -- 12 Title/Author/Page  LocnF/LocnT Y/M/D/H:Min Quote/Comment
+\i0 \cf3 \
+	\cf2 end\cf3  \cf2 if\cf3 \
+	\
+	
+\i \cf6 -- SEND ANY DATA TO DEVONTHINK AS FORMATTED NOTES
+\i0 \cf3 \
+	\cf2 if\cf3  (
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  \cf4 lstNotes\cf3 ) > 0 \cf2 then\cf3  \cf4 Send2Devon\cf3 (\cf4 strURL\cf3 , \cf4 strBookID\cf3 , \cf4 lstNotes\cf3 , \cf4 blnFromWeb\cf3 )\
+\cf2 end\cf3  
+\b \cf2 run
+\b0 \cf3 \
+\
+\cf2 on\cf3  \cf4 GetAsinandURL\cf3 (\cf4 strWork\cf3 )\
+	\cf2 set\cf3  \cf4 strURL\cf3  \cf2 to\cf3  \cf5 ""\cf3 \
+	\cf2 if\cf3  \cf4 pblnRequestAsin\cf3  \cf2 then\cf3 \
+		\cf2 set\cf3  \cf4 strBookID\cf3  \cf2 to\cf3  \cf4 GetBookid\cf3 (\cf4 strWork\cf3 )\
+		\cf2 if\cf3  \cf4 strBookID\cf3  = \cf4 pstrLookupAsin\cf3  \cf2 then\cf3  \cf2 return\cf3  \{\cf4 pstrLookupAsin\cf3 , \cf5 ""\cf3 \}\
+		\cf2 if\cf3  \cf4 strBookID\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3  \cf2 set\cf3  \cf4 strURL\cf3  \cf2 to\cf3  \cf5 "http://www.amazon.com/dp/"\cf3  & \cf4 strBookID\cf3 \
+		\cf2 return\cf3  \{\cf4 strBookID\cf3 , \cf4 strURL\cf3 \}\
+	\cf2 else\cf3 \
+		\cf2 return\cf3  \{\cf5 ""\cf3 , \cf5 ""\cf3 \}\
+	\cf2 end\cf3  \cf2 if\cf3 \
+\cf2 end\cf3  \cf4 GetAsinandURL\cf3 \
+\
+\cf2 on\cf3  \cf4 GetBookid\cf3 (\cf4 strWork\cf3 )\
+	\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "MACS"\cf3 \
+		\cf2 tell\cf3  (
+\b \cf9 display dialog
+\b0 \cf3  \'ac\
+			\cf5 "If you supply the Amazon ASIN code for this Kindle edition, some useful links can be included in the DEVONthink notes.\
+			 \
+(The ASIN code is the string of letters and numbers immediately after /dp/ in the url of the relevant Amazon Kindle page\
+e.g.  B000JMLLEI for the Kindle edition of Middlemarch)\
+		\
+"\cf3  & \cf4 strWork\cf3  & \cf5 "\
+Asin:"\cf3  \cf9 default answer\cf3  \'ac\
+			\cf5 ""\cf3  \cf9 buttons\cf3  \{\cf5 "Cancel"\cf3 , \cf4 pstrLookupAsin\cf3 , \cf5 "OK"\cf3 \} \cf9 default button\cf3  3 \cf9 with title\cf3  \cf4 pTitle\cf3 )\
+			\cf2 set\cf3  \cf4 strBtn\cf3  \cf2 to\cf3  \cf11 button returned\cf3 \
+			\cf2 set\cf3  \cf4 strAsin\cf3  \cf2 to\cf3  \cf11 text returned\cf3 \
+		\cf2 end\cf3  \cf2 tell\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+	\
+	\cf2 if\cf3  \cf4 strBtn\cf3  = \cf4 pstrLookupAsin\cf3  \cf2 then\cf3 \
+		\cf2 set\cf3  \{\cf4 dlm\cf3 , \cf2 my\cf3  \cf8 text item delimiters\cf3 \} \cf2 to\cf3  \{\cf2 my\cf3  \cf8 text item delimiters\cf3 , \cf8 space\cf3 \}\
+		\cf2 set\cf3  \cf4 lstParts\cf3  \cf2 to\cf3  
+\i \cf2 text items
+\i0 \cf3  \cf2 of\cf3  \cf4 strWork\cf3 \
+		\cf2 set\cf3  \cf2 my\cf3  \cf8 text item delimiters\cf3  \cf2 to\cf3  \cf5 "+"\cf3 \
+		\cf2 set\cf3  \cf4 strKeyWords\cf3  \cf2 to\cf3  \cf4 lstParts\cf3  \cf2 as\cf3  
+\i \cf2 text
+\i0 \cf3 \
+		\cf2 set\cf3  \cf2 my\cf3  \cf8 text item delimiters\cf3  \cf2 to\cf3  \cf4 dlm\cf3 \
+		\
+		\cf2 set\cf3  \cf4 strAMSearch\cf3  \cf2 to\cf3  \cf5 "http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Ddigital-text&field-keywords="\cf3 \
+		\cf2 set\cf3  \cf4 strCmd\cf3  \cf2 to\cf3  \cf5 "open "\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  (\cf4 strAMSearch\cf3  & \cf4 strKeyWords\cf3  & \cf5 "&sort=price"\cf3 )\
+		
+\b \cf9 do shell script
+\b0 \cf3  \cf4 strCmd\cf3 \
+		\cf2 return\cf3  \cf4 pstrLookupAsin\cf3 \
+	\cf2 else\cf3 \
+		\cf2 return\cf3  \cf4 strAsin\cf3 \
+	\cf2 end\cf3  \cf2 if\cf3 \
+\cf2 end\cf3  \cf4 GetBookid\cf3 \
+\
+\cf2 on\cf3  \cf4 ChooseWork\cf3 (\cf4 strPath\cf3 )\
+	
+\i \cf6 --set strCmd to "cp " & quoted form of strPath & space & quoted form of pstrTmpKlips
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 strCleanClipPath\cf3  \cf2 to\cf3  \cf8 quoted form\cf3  \cf2 of\cf3  \cf4 pstrTmpKlips\cf3 \
+	\cf2 set\cf3  \cf4 strCmd\cf3  \cf2 to\cf3  \cf5 "cat "\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  \cf4 strPath\cf3  & \cf5 " | tr -d '\\\\r' > "\cf3  & \cf4 strCleanClipPath\cf3 \
+	
+\b \cf9 do shell script
+\b0 \cf3  \cf4 strCmd\cf3 \
+	\
+	\cf2 set\cf3  \cf4 strCmd\cf3  \cf2 to\cf3  \cf5 "perl "\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  (\cf8 POSIX path\cf3  \cf2 of\cf3  (
+\b \cf9 path to
+\b0 \cf3  \cf2 me\cf3 ) & \cf5 "ListClipTitles.pl"\cf3 ) & \cf8 space\cf3  & \cf4 strCleanClipPath\cf3  & \cf5 " | sort"\cf3 \
+	\cf2 set\cf3  \cf4 lstWorks\cf3  \cf2 to\cf3  
+\i \cf2 paragraphs
+\i0 \cf3  \cf2 of\cf3  (
+\b \cf9 do shell script
+\b0 \cf3  \cf4 strCmd\cf3 )\
+	\cf2 set\cf3  \cf4 lngWorks\cf3  \cf2 to\cf3  
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  \cf4 lstWorks\cf3 \
+	\cf2 if\cf3  \cf4 lngWorks\cf3  > 1 \cf2 then\cf3 \
+		\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "MACS"\cf3 \
+			
+\b \cf2 activate
+\b0 \cf3 \
+			\cf2 tell\cf3  (
+\b \cf9 choose from list
+\b0 \cf3  \cf4 lstWorks\cf3  \cf9 with title\cf3  \cf4 pTitle\cf3  \cf9 default items\cf3  \{\cf2 first\cf3  
+\i \cf2 item
+\i0 \cf3  \cf2 of\cf3  \cf4 lstWorks\cf3 \})\
+				\cf2 if\cf3  \cf2 it\cf3  \cf2 is\cf3  \cf7 false\cf3  \cf2 then\cf3  \cf2 return\cf3  \cf5 ""\cf3 \
+				\cf2 return\cf3  \cf2 first\cf3  
+\i \cf2 item
+\i0 \cf3  \cf2 of\cf3  \cf2 it\cf3 \
+			\cf2 end\cf3  \cf2 tell\cf3 \
+		\cf2 end\cf3  \cf2 tell\cf3 \
+	\cf2 else\cf3  \cf2 if\cf3  \cf4 lngWorks\cf3  > 0 \cf2 then\cf3 \
+		\cf2 return\cf3  \cf2 first\cf3  
+\i \cf2 item
+\i0 \cf3  \cf2 of\cf3  \cf4 lstWorks\cf3 \
+	\cf2 else\cf3 \
+		\cf2 return\cf3  \cf5 ""\cf3 \
+	\cf2 end\cf3  \cf2 if\cf3 \
+\cf2 end\cf3  \cf4 ChooseWork\cf3 \
+\
+\cf2 on\cf3  \cf4 GetKNPageHTML\cf3 ()\
+	
+\i \cf6 -- REMIND THE USER TO MAKE SELECTIONS IN DEVONTHINK AND SAFARI
+\i0 \cf3 \
+	\cf2 if\cf3  \cf2 not\cf3  \cf4 AppsRunning\cf3 () \cf2 then\cf3  \cf2 return\cf3  \{\cf5 ""\cf3 , \cf5 ""\cf3 \}\
+	\
+	
+\i \cf6 -- TRY TO READ THE NOTES FROM A SAFARI PAGE
+\i0 \cf3 \
+	\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "com.apple.Safari"\cf3 \
+		
+\b \cf2 activate
+\b0 \cf3 \
+		\cf2 set\cf3  \cf4 blnJumpHome\cf3  \cf2 to\cf3  \cf7 false\cf3 \
+		\cf2 if\cf3  (
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  
+\i \cf2 documents
+\i0 \cf3 ) > 0 \cf2 then\cf3 \
+			
+\i \cf6 -- A KINDLE PAGE ?
+\i0 \cf3 \
+			\cf2 set\cf3  \cf4 oDoc\cf3  \cf2 to\cf3  \cf2 front\cf3  
+\i \cf2 document
+\i0 \cf3 \
+			\cf2 set\cf3  \cf4 strName\cf3  \cf2 to\cf3  \cf8 name\cf3  \cf2 of\cf3  \cf4 oDoc\cf3 \
+			\cf2 if\cf3  \cf4 strName\cf3  \cf2 begins with\cf3  \cf4 pstrAK\cf3  \cf2 then\cf3 \
+				
+\i \cf6 -- THE PAGE OF A SPECIFIC BOOK ?
+\i0 \cf3 \
+				\cf2 try\cf3 \
+					\cf2 set\cf3  \cf4 strHTML\cf3  \cf2 to\cf3  \cf8 source\cf3  \cf2 of\cf3  \cf4 oDoc\cf3 \
+					\cf2 set\cf3  \cf4 blnSpecific\cf3  \cf2 to\cf3  (\cf4 strHTML\cf3  \cf2 contains\cf3  \cf5 "this book"\cf3 ) \cf2 and\cf3  (\cf4 strName\cf3  \cf2 does not\cf3  \cf2 contain\cf3  \cf5 "Daily Refresh"\cf3 )\
+				\cf2 on\cf3  \cf2 error\cf3 \
+					\cf2 set\cf3  \cf4 blnSpecific\cf3  \cf2 to\cf3  \cf7 false\cf3 \
+				\cf2 end\cf3  \cf2 try\cf3 \
+				
+\i \cf6 -- IS THIS THE FRONT HIGHLIGHTS PAGE ?
+\i0 \cf3 \
+				\cf2 if\cf3  \cf2 not\cf3  \cf4 blnSpecific\cf3  \cf2 then\cf3  \cf2 set\cf3  \cf4 blnJumpHome\cf3  \cf2 to\cf3  (\cf8 URL\cf3  \cf2 of\cf3  \cf4 oDoc\cf3 ) \uc0\u8800  \cf4 pstrStartPage\cf3 \
+			\cf2 else\cf3 \
+				\cf2 set\cf3  \cf4 blnJumpHome\cf3  \cf2 to\cf3  \cf7 true\cf3 \
+			\cf2 end\cf3  \cf2 if\cf3 \
+		\cf2 else\cf3 \
+			\cf2 set\cf3  \cf4 blnJumpHome\cf3  \cf2 to\cf3  \cf7 true\cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+		\
+		\cf2 if\cf3  \cf4 blnJumpHome\cf3  \cf2 then\cf3 \
+			\cf2 set\cf3  \cf4 strHTML\cf3  \cf2 to\cf3  \cf5 ""\cf3 \
+			\cf2 set\cf3  \cf4 oDoc\cf3  \cf2 to\cf3  
+\b \cf2 make
+\b0 \cf3  \cf2 new\cf3  
+\i \cf2 document
+\i0 \cf3  \cf2 with properties\cf3  \{\cf8 URL\cf3 :\cf4 pstrStartPage\cf3 \}\
+			
+\b \cf2 activate
+\b0 \cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+		\
+		\cf2 try\cf3 \
+			\cf4 blnSpecific\cf3 \
+		\cf2 on\cf3  \cf2 error\cf3 \
+			\cf2 set\cf3  \cf4 blnSpecific\cf3  \cf2 to\cf3  \cf7 false\cf3 \
+		\cf2 end\cf3  \cf2 try\cf3 \
+		\cf2 if\cf3  \cf2 not\cf3  \cf4 blnSpecific\cf3  \cf2 then\cf3 \
+			
+\i \cf6 -- INVITE USER TO CHOOSE A SPECIFIC BOOK AND TRY AGAIN
+\i0 \cf3 \
+			
+\b \cf9 display dialog
+\b0 \cf3  \cf5 "In Safari,"\cf3  & \cf8 return\cf3  & \cf8 return\cf3  & \cf5 "choose the Highlights page of a specific book,"\cf3  & \'ac\
+				\cf8 return\cf3  & \cf5 "and run the script again."\cf3  \cf9 buttons\cf3  \{\cf5 "OK"\cf3 \} \cf9 default button\cf3  1 \cf9 with title\cf3  \cf4 pTitle\cf3  & \cf5 "  "\cf3  & \cf4 pVer\cf3 \
+			\cf2 return\cf3  \{\cf5 ""\cf3 , \cf5 ""\cf3 \}\
+		\cf2 end\cf3  \cf2 if\cf3 \
+		\
+		\cf2 tell\cf3  \cf2 front\cf3  
+\i \cf2 document
+\i0 \cf3 \
+			\cf2 set\cf3  \cf4 strPageTitle\cf3  \cf2 to\cf3  \cf8 name\cf3 \
+			\cf2 if\cf3  \cf4 strPageTitle\cf3  \cf2 starts with\cf3  \cf5 "Amazon Kindle:"\cf3  & \cf4 strPageTitle\cf3  \cf2 does not\cf3  \cf2 contain\cf3  \cf5 "Daily Refresh"\cf3  \cf2 then\cf3 \
+				\cf2 try\cf3 \
+					\cf2 set\cf3  \cf4 strHTML\cf3  \cf2 to\cf3  \cf8 source\cf3 \
+				\cf2 on\cf3  \cf2 error\cf3 \
+					
+\b \cf9 display dialog
+\b0 \cf3  \cf5 "Page not ready,"\cf3  & \'ac\
+						\cf8 return\cf3  & \cf5 "try again in a moment."\cf3  \cf9 buttons\cf3  \{\cf5 "OK"\cf3 \} \cf9 default button\cf3  1 \cf9 with title\cf3  \cf4 pTitle\cf3  & \cf5 "  "\cf3  & \cf4 pVer\cf3 \
+					\cf2 return\cf3  \{\cf5 ""\cf3 , \cf5 ""\cf3 \}\
+				\cf2 end\cf3  \cf2 try\cf3 \
+			\cf2 else\cf3 \
+				
+\b \cf9 display dialog
+\b0 \cf3  \'ac\
+					\cf5 "Navigate to kindle notes page for selected book and try again"\cf3  \cf9 buttons\cf3  \{\cf5 "OK"\cf3 \} \cf9 default button\cf3  1 \cf9 with title\cf3  \cf4 pTitle\cf3  & \cf5 "  "\cf3  & \cf4 pVer\cf3 \
+				\cf2 return\cf3  \{\cf5 ""\cf3 , \cf5 ""\cf3 \}\
+			\cf2 end\cf3  \cf2 if\cf3 \
+			\cf2 set\cf3  \cf4 strURL\cf3  \cf2 to\cf3  \cf8 URL\cf3 \
+			\
+			
+\i \cf6 -- replace any existing switches like "?=all=1" from the URL
+\i0 \cf3 \
+			\cf2 set\cf3  \{\cf4 dlm\cf3 , \cf2 my\cf3  \cf8 text item delimiters\cf3 \} \cf2 to\cf3  \{\cf2 my\cf3  \cf8 text item delimiters\cf3 , \cf5 "?"\cf3 \}\
+			\cf2 set\cf3  \cf4 strURL\cf3  \cf2 to\cf3  \cf2 first\cf3  
+\i \cf2 text item
+\i0 \cf3  \cf2 of\cf3  \cf4 strURL\cf3  & \cf5 "?=0"\cf3 \
+			\cf2 set\cf3  \cf2 my\cf3  \cf8 text item delimiters\cf3  \cf2 to\cf3  \cf4 dlm\cf3 \
+			\
+			\
+			\cf2 if\cf3  \cf4 strHTML\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3 \
+				\cf2 my\cf3  \cf4 WriteText2Path\cf3 (\cf4 strHTML\cf3 , \cf4 pstrTempPath\cf3 )\
+				\cf2 return\cf3  \{\cf4 strURL\cf3 , \cf4 pstrTempPath\cf3 \}\
+			\cf2 else\cf3 \
+				\cf2 return\cf3  \{\cf5 ""\cf3 , \cf5 ""\cf3 \}\
+			\cf2 end\cf3  \cf2 if\cf3 \
+			\
+		\cf2 end\cf3  \cf2 tell\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+\cf2 end\cf3  \cf4 GetKNPageHTML\cf3 \
+\
+\cf2 on\cf3  \cf4 WriteText2Path\cf3 (\cf4 strText\cf3 , \cf4 strPosixPath\cf3 )\
+	\cf2 set\cf3  \cf4 f\cf3  \cf2 to\cf3  (
+\i \cf9 POSIX file
+\i0 \cf3  \cf4 strPosixPath\cf3 )\
+	
+\b \cf9 open for access
+\b0 \cf3  \cf4 f\cf3  \cf2 with\cf3  \cf9 write permission\cf3 \
+	
+\b \cf9 write
+\b0 \cf3  \cf4 strText\cf3  \cf9 as\cf3  \'ab
+\i \cf2 class
+\i0 \cf3  utf8\'bb \cf9 to\cf3  \cf4 f\cf3 \
+	
+\b \cf9 close access
+\b0 \cf3  \cf4 f\cf3 \
+\cf2 end\cf3  \cf4 WriteText2Path\cf3 \
+\
+\cf2 on\cf3  \cf4 AnnotateQuotes\cf3 (\cf4 lstNotes\cf3 )\
+	\cf2 set\cf3  \cf4 lstRecs\cf3  \cf2 to\cf3  \{\}\
+	
+\i \cf6 -- START OFF WITH AN EMPTY QUOTE
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 lstBuffer\cf3  \cf2 to\cf3  \cf4 plstClearBuffer\cf3  
+\i \cf6 -- 8 fields Title to Quote and Comment
+\i0 \cf3 \
+	
+\i \cf6 -- IN-NOTE flag is false
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 blnInNote\cf3  \cf2 to\cf3  \cf7 false\cf3 \
+	\
+	\cf2 repeat\cf3  \cf2 with\cf3  \cf4 oNote\cf3  \cf2 in\cf3  \cf4 lstNotes\cf3 \
+		\cf2 set\cf3  \{\cf4 strType\cf3 , \cf4 strWork\cf3 , \cf4 strPage\cf3 , \cf4 strFrLocn\cf3 , \cf4 strToLocn\cf3 , \cf4 strUnixTime\cf3 , \cf4 strText\cf3 \} \cf2 to\cf3  \cf4 oNote\cf3 \
+		\cf2 if\cf3  \cf4 strType\cf3  = \cf5 "q"\cf3  \cf2 then\cf3 \
+			\
+			
+\i \cf6 -- If the buffer already contains any data then write it out and clear the buffer
+\i0 \cf3 \
+			\cf2 if\cf3  \cf4 lstBuffer\cf3  \uc0\u8800  \cf4 plstClearBuffer\cf3  \cf2 then\cf3  \cf2 set\cf3  \cf2 end\cf3  \cf2 of\cf3  \cf4 lstRecs\cf3  \cf2 to\cf3  \cf4 lstBuffer\cf3 \
+			\
+			
+\i \cf6 -- before starting again
+\i0 \cf3 \
+			\cf2 set\cf3  \cf4 lstBuffer\cf3  \cf2 to\cf3  (
+\i \cf2 items
+\i0 \cf3  2 \cf2 thru\cf3  -1 \cf2 of\cf3  \cf4 oNote\cf3 ) & \cf5 ""\cf3 \
+			\cf2 set\cf3  \cf4 blnInNote\cf3  \cf2 to\cf3  \cf7 false\cf3 \
+		\cf2 else\cf3 \
+			
+\i \cf6 -- is the location of this note within the range of the current quote buffer ?
+\i0 \cf3 \
+			\cf2 set\cf3  \cf4 lngLocn\cf3  \cf2 to\cf3  (\cf4 strFrLocn\cf3  \cf2 as\cf3  
+\i \cf2 integer
+\i0 \cf3 )\
+			\cf2 set\cf3  \{\cf4 lngFrom\cf3 , \cf4 lngTo\cf3 \} \cf2 to\cf3  \{(
+\i \cf2 item
+\i0 \cf3  (\cf4 piLocnFrom\cf3 ) \cf2 of\cf3  \cf4 lstBuffer\cf3 ) \cf2 as\cf3  
+\i \cf2 integer
+\i0 \cf3 , (
+\i \cf2 item
+\i0 \cf3  (\cf4 piLocnTo\cf3 ) \cf2 of\cf3  \cf4 lstBuffer\cf3 ) \cf2 as\cf3  
+\i \cf2 integer
+\i0 \cf3 \}\
+			\cf2 if\cf3  (\cf4 lngLocn\cf3  \uc0\u8805  \cf4 lngFrom\cf3 ) \cf2 and\cf3  (\cf4 lngLocn\cf3  \uc0\u8804  \cf4 lngTo\cf3 ) \cf2 then\cf3 \
+				
+\i \cf6 -- Append note text to the note text of this quote buffer
+\i0 \cf3 \
+				\cf2 if\cf3  \cf4 blnInNote\cf3  \cf2 then\cf3 \
+					\cf2 set\cf3  (
+\i \cf2 item
+\i0 \cf3  \cf4 piNote\cf3  \cf2 of\cf3  \cf4 lstBuffer\cf3 ) \cf2 to\cf3  (
+\i \cf2 item
+\i0 \cf3  \cf4 piNote\cf3  \cf2 of\cf3  \cf4 lstBuffer\cf3 ) & \cf5 "<br>"\cf3  & \cf4 strText\cf3 \
+					
+\i \cf6 -- and use the time of the annotation rather than the highlighting
+\i0 \cf3 \
+					\cf2 set\cf3  
+\i \cf2 item
+\i0 \cf3  -3 \cf2 of\cf3  \cf4 lstBuffer\cf3  \cf2 to\cf3  \cf4 strUnixTime\cf3 \
+				\cf2 else\cf3 \
+					\cf2 set\cf3  (
+\i \cf2 item
+\i0 \cf3  \cf4 piNote\cf3  \cf2 of\cf3  \cf4 lstBuffer\cf3 ) \cf2 to\cf3  \cf4 strText\cf3 \
+				\cf2 end\cf3  \cf2 if\cf3 \
+			\cf2 else\cf3 \
+				
+\i \cf6 -- Flush the buffer and start a new one with this note data
+\i0 \cf3 \
+				\cf2 set\cf3  \cf2 end\cf3  \cf2 of\cf3  \cf4 lstRecs\cf3  \cf2 to\cf3  \cf4 lstBuffer\cf3 \
+				
+\i \cf6 -- Drop initial record type code (q/c)
+\i0 \cf3 \
+				\cf2 set\cf3  \cf4 lstBuffer\cf3  \cf2 to\cf3  (
+\i \cf2 items
+\i0 \cf3  2 \cf2 thru\cf3  \cf4 piTime\cf3  \cf2 of\cf3  \cf4 oNote\cf3 ) & \cf5 ""\cf3  & 
+\i \cf2 item
+\i0 \cf3  \cf4 piNote\cf3  \cf2 of\cf3  \cf4 oNote\cf3 \
+			\cf2 end\cf3  \cf2 if\cf3 \
+			\cf2 set\cf3  \cf4 blnInNote\cf3  \cf2 to\cf3  \cf7 true\cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+	\cf2 end\cf3  \cf2 repeat\cf3 \
+	\cf2 set\cf3  \cf2 end\cf3  \cf2 of\cf3  \cf4 lstRecs\cf3  \cf2 to\cf3  \cf4 lstBuffer\cf3 \
+	\
+	\cf2 return\cf3  \cf4 lstRecs\cf3 \
+\cf2 end\cf3  \cf4 AnnotateQuotes\cf3 \
+\
+\cf2 on\cf3  \cf4 GetClippingsPath\cf3 ()\
+	\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf5 "Finder"\cf3 \
+		
+\b \cf2 activate
+\b0 \cf3 \
+		\cf2 set\cf3  \cf4 fClip\cf3  \cf2 to\cf3  (\cf4 pstrClipPath\cf3  \cf2 as\cf3  
+\i \cf9 POSIX file
+\i0 \cf3 )\
+		\cf2 if\cf3  \cf2 not\cf3  (
+\b \cf2 exists
+\b0 \cf3  (\cf4 fClip\cf3 )) \cf2 then\cf3 \
+			\cf2 set\cf3  \cf4 fClip\cf3  \cf2 to\cf3  \cf8 POSIX path\cf3  \cf2 of\cf3  (
+\b \cf9 path to
+\b0 \cf3  \cf8 desktop\cf3  \cf9 from\cf3  \cf10 user domain\cf3 ) & \cf4 pClippings\cf3 \
+			\cf2 set\cf3  \cf4 fClip\cf3  \cf2 to\cf3  
+\b \cf9 choose file
+\b0 \cf3  \cf9 with prompt\cf3  \cf5 "Choose a My Clippings text file"\cf3  
+\i \cf6 -- default location fClip of type \{"txt"\}
+\i0 \cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+		\cf2 try\cf3 \
+			\cf2 set\cf3  \cf4 strPath\cf3  \cf2 to\cf3  \cf8 POSIX path\cf3  \cf2 of\cf3  \cf4 fClip\cf3 \
+		\cf2 on\cf3  \cf2 error\cf3 \
+			\cf2 set\cf3  \cf4 strPath\cf3  \cf2 to\cf3  \cf5 ""\cf3 \
+		\cf2 end\cf3  \cf2 try\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+	\cf2 return\cf3  \cf4 strPath\cf3 \
+\cf2 end\cf3  \cf4 GetClippingsPath\cf3 \
+\
+\cf2 on\cf3  \cf4 ReadClippings\cf3 (\cf4 strPath\cf3 , \cf4 strWork\cf3 )\
+	
+\i \cf6 -- 	set strCmd to "cp " & quoted form of strPath & space & quoted form of pstrTmpKlips
+\i0 \cf3 \
+	
+\i \cf6 -- 	do shell script strCmd
+\i0 \cf3 \
+	\
+	\cf2 set\cf3  \cf4 strCmd\cf3  \cf2 to\cf3  \cf5 "perl "\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  (\cf8 POSIX path\cf3  \cf2 of\cf3  (
+\b \cf9 path to
+\b0 \cf3  \cf2 me\cf3 ) & \cf5 "ReadKClipText.pl"\cf3 ) & \cf8 space\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  \cf4 pstrTmpKlips\cf3  & \cf8 space\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  \cf4 strWork\cf3  & \cf8 space\cf3  & \cf2 my\cf3  \cf4 GetLang\cf3 ()\
+	
+\i \cf6 --set the clipboard to strCmd
+\i0 \cf3 \
+	\
+	
+\i \cf6 -- TRY TO READ THE FILE
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 lstLines\cf3  \cf2 to\cf3  
+\i \cf2 paragraphs
+\i0 \cf3  \cf2 of\cf3  (
+\b \cf9 do shell script
+\b0 \cf3  \cf4 strCmd\cf3 )\
+	\
+	
+\i \cf6 -- 	-- delete the temporary file
+\i0 \cf3 \
+	
+\i \cf6 -- 	set strCmd to "rm " & quoted form of pstrTmpKlips
+\i0 \cf3 \
+	
+\i \cf6 -- 	do shell script strCmd
+\i0 \cf3 \
+	\
+	\cf2 set\cf3  \{\cf4 dlm\cf3 , \cf2 my\cf3  \cf8 text item delimiters\cf3 \} \cf2 to\cf3  \{\cf2 my\cf3  \cf8 text item delimiters\cf3 , \cf8 tab\cf3 \}\
+	\cf2 repeat\cf3  \cf2 with\cf3  \cf4 i\cf3  \cf2 from\cf3  1 \cf2 to\cf3  
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  \cf4 lstLines\cf3 \
+		\cf2 set\cf3  
+\i \cf2 item
+\i0 \cf3  \cf4 i\cf3  \cf2 of\cf3  \cf4 lstLines\cf3  \cf2 to\cf3  
+\i \cf2 text items
+\i0 \cf3  \cf2 of\cf3  
+\i \cf2 item
+\i0 \cf3  \cf4 i\cf3  \cf2 of\cf3  \cf4 lstLines\cf3 \
+	\cf2 end\cf3  \cf2 repeat\cf3 \
+	\cf2 set\cf3  \cf2 my\cf3  \cf8 text item delimiters\cf3  \cf2 to\cf3  \cf4 dlm\cf3 \
+	\
+	
+\i \cf6 -- COMBINE THE LINES INTO QUOTE/COMMENT RECORDS
+\i0 \cf3 \
+	\cf4 lstLines\cf3 \
+	\cf2 set\cf3  \cf4 lstRecords\cf3  \cf2 to\cf3  \cf4 AnnotateQuotes\cf3 (\cf4 lstLines\cf3 )\
+	\cf2 return\cf3  \cf4 lstRecords\cf3 \
+\cf2 end\cf3  \cf4 ReadClippings\cf3 \
+\
+
+\i \cf6 -- Quote by quote append any notes that fall within the quote location
+\i0 \cf3 \
+
+\i \cf6 -- other notes are appended to an empty quote
+\i0 \cf3 \
+\
+\cf2 on\cf3  \cf4 GetLang\cf3 ()\
+	
+\i \cf6 -- [English|French|German|Italian]
+\i0 \cf3 \
+	\cf2 try\cf3 \
+		\cf2 set\cf3  \cf4 strLang\cf3  \cf2 to\cf3  
+\b \cf9 do shell script
+\b0 \cf3  \cf5 "defaults read .GlobalPreferences AppleCollationOrder"\cf3 \
+	\cf2 on\cf3  \cf2 error\cf3 \
+		\cf2 return\cf3  \cf5 "English"\cf3 \
+	\cf2 end\cf3  \cf2 try\cf3 \
+	\
+	\cf2 if\cf3  \cf4 strLang\cf3  = \cf5 "en"\cf3  \cf2 then\cf3 \
+		\cf5 "English"\cf3 \
+	\cf2 else\cf3  \cf2 if\cf3  \cf4 strLang\cf3  = \cf5 "fr"\cf3  \cf2 then\cf3 \
+		\cf5 "French"\cf3 \
+	\cf2 else\cf3  \cf2 if\cf3  \cf4 strLang\cf3  = \cf5 "de"\cf3  \cf2 then\cf3 \
+		\cf5 "German"\cf3 \
+	\cf2 else\cf3  \cf2 if\cf3  \cf4 strLang\cf3  = \cf5 "it"\cf3  \cf2 then\cf3 \
+		\cf5 "Italian"\cf3 \
+	\cf2 else\cf3 \
+		\cf5 ""\cf3 \
+	\cf2 end\cf3  \cf2 if\cf3 \
+\cf2 end\cf3  \cf4 GetLang\cf3 \
+\
+\cf2 on\cf3  \cf4 GetNotesFromWeb\cf3 ()\
+	
+\i \cf6 -- READ ANY NOTES
+\i0 \cf3 \
+	\cf2 set\cf3  \{\cf4 strURL\cf3 , \cf4 lstNotes\cf3 \} \cf2 to\cf3  \cf4 ReadSafari\cf3 ()\
+	\cf2 return\cf3  \{\cf4 strURL\cf3 , \cf4 lstNotes\cf3 \}\
+\cf2 end\cf3  \cf4 GetNotesFromWeb\cf3 \
+\
+\cf2 on\cf3  \cf4 Send2Devon\cf3 (\cf4 strURL\cf3 , \cf4 strBookID\cf3 , \cf4 lstNotes\cf3 , \cf4 blnFromWeb\cf3 )\
+	\
+	\cf2 set\cf3  \cf4 lngNotes\cf3  \cf2 to\cf3  \cf8 length\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3 \
+	\cf2 if\cf3  \cf4 lngNotes\cf3  < 1 \cf2 then\cf3  \cf2 return\cf3 \
+	
+\i \cf6 -- lstNotes
+\i0 \cf3 \
+	\
+	
+\i \cf6 -- NORMALIZE THE FIELD STRUCTURE (CLIPPINGS RECORDS AND WEB RECORDS HAVE A DIFFERENT SET OF FIELDS)
+\i0 \cf3 \
+	
+\i \cf6 -- $id, $title, $author, $page, $locnF, $locnT, $year, $month, $day, $hour, $min, $quote, $comment, $editlink 
+\i0 \cf3 \
+	
+\i \cf6 -- \{strID, strPlainTitle, strAuthor, strPage, strWhere, strWhereTo, strWhen, strQuote, strComment, strEditLink\}
+\i0 \cf3 \
+	\cf2 if\cf3  \cf4 blnFromWeb\cf3  \cf2 then\cf3 \
+		\cf2 repeat\cf3  \cf2 with\cf3  \cf4 i\cf3  \cf2 from\cf3  1 \cf2 to\cf3  \cf8 length\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3 \
+			\cf2 set\cf3  \{\cf4 strID\cf3 , \cf4 strWork\cf3 , \cf4 strLocn\cf3 , \cf4 strQuote\cf3 , \cf4 strComment\cf3 , \cf4 strEditLink\cf3 \} \cf2 to\cf3  
+\i \cf2 item
+\i0 \cf3  \cf4 i\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3 \
+			
+\i \cf6 --	strID, strPlainTitle, strAuthor, strPage, strWhere, strWhereTo, strWhen, strQuote, strComment, strEditLink
+\i0 \cf3 \
+			\cf2 set\cf3  
+\i \cf2 item
+\i0 \cf3  \cf4 i\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3  \cf2 to\cf3  \{\cf4 strID\cf3 , \cf4 strWork\cf3 , \cf5 ""\cf3 , \cf4 strLocn\cf3 , \cf5 ""\cf3 , \cf5 ""\cf3 , \cf4 strQuote\cf3 , \cf4 strComment\cf3 , \cf4 strEditLink\cf3 \}\
+		\cf2 end\cf3  \cf2 repeat\cf3 \
+	\cf2 else\cf3 \
+		\cf2 repeat\cf3  \cf2 with\cf3  \cf4 i\cf3  \cf2 from\cf3  1 \cf2 to\cf3  \cf8 length\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3 \
+			
+\i \cf2 item
+\i0 \cf3  \cf4 i\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3 \
+			\cf2 set\cf3  
+\i \cf2 item
+\i0 \cf3  \cf4 i\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3  \cf2 to\cf3  \{\cf5 ""\cf3 \} & 
+\i \cf2 item
+\i0 \cf3  \cf4 i\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3  & \{\cf5 ""\cf3 \}\
+		\cf2 end\cf3  \cf2 repeat\cf3 \
+	\cf2 end\cf3  \cf2 if\cf3 \
+	\
+	
+\i \cf6 -- SEND ANY NOTES TO DEVONTHINK
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 strRefNAme\cf3  \cf2 to\cf3  
+\i \cf2 item
+\i0 \cf3  2 \cf2 of\cf3  \cf2 first\cf3  
+\i \cf2 item
+\i0 \cf3  \cf2 of\cf3  \cf4 lstNotes\cf3 \
+	\
+	
+\i \cf6 -- Get the target group in DEVONthink
+\i0 \cf3 \
+	\cf2 set\cf3  \{\cf4 oGroup\cf3 , \cf4 oWin\cf3 \} \cf2 to\cf3  \cf2 my\cf3  \cf4 GetGroupWin\cf3 ()\
+	\
+	
+\i \cf6 -- Create a group in the target group ( unless the selected group appears to be the target itself )
+\i0 \cf3 \
+	\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "DNtp"\cf3 \
+		\cf2 tell\cf3  \cf4 oGroup\cf3 \
+			\cf2 if\cf3  \cf8 name\cf3  = \cf4 strRefNAme\cf3  \cf2 then\cf3 \
+				\cf2 set\cf3  \cf4 oLocn\cf3  \cf2 to\cf3  \cf2 it\cf3 \
+			\cf2 else\cf3 \
+				\cf2 if\cf3  (
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  \cf2 every\cf3  
+\i \cf2 parent
+\i0 \cf3 ) \cf2 is\cf3  0 \cf2 then\cf3 \
+					\cf2 set\cf3  \cf4 oLocn\cf3  \cf2 to\cf3  (
+\b \cf2 create location
+\b0 \cf3  \cf4 strRefNAme\cf3  \cf2 in\cf3  
+\i \cf2 database
+\i0 \cf3 )\
+				\cf2 else\cf3 \
+					\cf2 set\cf3  \cf4 oLocn\cf3  \cf2 to\cf3  (
+\b \cf2 create location
+\b0 \cf3  (\cf8 location\cf3  & \cf5 "/"\cf3  & \cf8 name\cf3  & \cf5 "/"\cf3  & \cf4 strRefNAme\cf3 ) \cf2 in\cf3  
+\i \cf2 database
+\i0 \cf3 )\
+				\cf2 end\cf3  \cf2 if\cf3 \
+			\cf2 end\cf3  \cf2 if\cf3 \
+		\cf2 end\cf3  \cf2 tell\cf3 \
+		\
+		
+\b \cf2 open window for
+\b0 \cf3  
+\i \cf2 record
+\i0 \cf3  \cf4 oLocn\cf3 \
+		\
+		\cf2 set\cf3  \cf8 tags\cf3  \cf2 of\cf3  \cf4 oLocn\cf3  \cf2 to\cf3  (\cf8 tags\cf3  \cf2 of\cf3  \cf4 oLocn\cf3  & \{\cf4 strRefNAme\cf3 \})\
+		\
+		\cf2 set\cf3  \{\cf4 dlm\cf3 , \cf2 my\cf3  \cf8 text item delimiters\cf3 \} \cf2 to\cf3  \{\cf2 my\cf3  \cf8 text item delimiters\cf3 , \cf5 "/"\cf3 \}\
+		\
+		\cf2 if\cf3  \cf4 blnFromWeb\cf3  \cf2 then\cf3 \
+			\cf2 set\cf3  \cf8 URL\cf3  \cf2 of\cf3  \cf4 oLocn\cf3  \cf2 to\cf3  \cf4 strURL\cf3 \
+			\cf2 set\cf3  \cf4 strAsin\cf3  \cf2 to\cf3  \cf2 last\cf3  
+\i \cf2 item
+\i0 \cf3  \cf2 of\cf3  (
+\i \cf2 text items
+\i0 \cf3  \cf2 of\cf3  \cf4 strURL\cf3 )\
+			\cf2 if\cf3  \cf4 strAsin\cf3  \cf2 contains\cf3  \cf5 "?"\cf3  \cf2 then\cf3 \
+				\cf2 set\cf3  \cf2 my\cf3  \cf8 text item delimiters\cf3  \cf2 to\cf3  \cf5 "?"\cf3 \
+				\cf2 set\cf3  \cf4 strAsin\cf3  \cf2 to\cf3  \cf2 first\cf3  
+\i \cf2 text item
+\i0 \cf3  \cf2 of\cf3  \cf4 strAsin\cf3 \
+			\cf2 end\cf3  \cf2 if\cf3 \
+			\cf2 set\cf3  \cf2 my\cf3  \cf8 text item delimiters\cf3  \cf2 to\cf3  \cf4 dlm\cf3 \
+		\cf2 else\cf3 \
+			\cf2 set\cf3  \cf4 strAsin\cf3  \cf2 to\cf3  \cf4 strBookID\cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+	\
+	
+\i \cf6 -- GET THE CSS STYLE TO BE USED
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 pstrActiveCSS\cf3  \cf2 to\cf3  \cf2 my\cf3  \cf4 GetCSS\cf3 ()\
+	\cf2 if\cf3  (\cf8 length\cf3  \cf2 of\cf3  \cf4 pstrActiveCSS\cf3 ) = 0 \cf2 then\cf3  \cf2 set\cf3  \cf4 pstrActiveCSS\cf3  \cf2 to\cf3  \cf4 pstrDefaultCSS\cf3 \
+	\
+	
+\i \cf6 -- loop through the notes
+\i0 \cf3 \
+	\cf4 Notes2Devn\cf3 (\cf4 oLocn\cf3 , \cf4 lstNotes\cf3 , \cf4 strRefNAme\cf3 , \cf4 strURL\cf3 , \cf4 strAsin\cf3 , \cf4 blnFromWeb\cf3 )\
+	\
+	\cf4 Growl\cf3 (\cf4 oGroup\cf3 , \cf4 lngNotes\cf3 )\
+	\
+	
+\i \cf6 -- OPEN OS X KIND APP IF APPROPRIATE
+\i0 \cf3 \
+	\cf2 if\cf3  \cf4 blnFromWeb\cf3  \cf2 and\cf3  \cf4 pblnLaunchOSXKindle\cf3  \cf2 then\cf3  \cf4 CheckOSXKindle\cf3 ()\
+\cf2 end\cf3  \cf4 Send2Devon\cf3 \
+\
+\cf2 on\cf3  \cf4 CheckOSXKindle\cf3 ()\
+	\cf2 set\cf3  \cf4 strKindlePath\cf3  \cf2 to\cf3  \cf5 ""\cf3 \
+	\cf2 try\cf3 \
+		\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf5 "Finder"\cf3  \cf2 to\cf3  \cf2 tell\cf3  (
+\i \cf2 application file
+\i0 \cf3  \cf7 id\cf3  \cf5 "com.Amazon.Kindle"\cf3 ) \cf2 to\cf3  \cf2 set\cf3  \cf4 strKindlePath\cf3  \cf2 to\cf3  \cf8 POSIX path\cf3  \cf2 of\cf3  (\cf2 its\cf3  
+\i \cf2 container
+\i0 \cf3  \cf2 as\cf3  
+\i \cf2 alias
+\i0 \cf3 ) & \cf8 name\cf3 \
+	\cf2 end\cf3  \cf2 try\cf3 \
+	\cf2 set\cf3  \cf4 blnInstalled\cf3  \cf2 to\cf3  (\cf4 strKindlePath\cf3  \uc0\u8800  \cf5 ""\cf3 )\
+	\
+	\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "sevs"\cf3 \
+		\cf2 if\cf3  \cf2 not\cf3  \cf4 blnInstalled\cf3  \cf2 then\cf3 \
+			
+\b \cf2 activate
+\b0 \cf3 \
+			
+\b \cf9 display dialog
+\b0 \cf3  \cf5 "This DEVONthink notes created by this script are more useful if the OS X Kindle app is installed."\cf3  \cf9 buttons\cf3  \{\cf5 "OK"\cf3 \} \cf9 default button\cf3  1 \cf9 with title\cf3  \cf4 pTitle\cf3 \
+		\cf2 else\cf3 \
+			\cf2 if\cf3  (
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  (
+\i \cf2 application processes
+\i0 \cf3  \cf2 where\cf3  \cf8 bundle identifier\cf3  = \cf5 "com.Amazon.Kindle"\cf3 )) < 1 \cf2 then\cf3  
+\b \cf9 do shell script
+\b0 \cf3  \cf5 "open "\cf3  & \cf4 strKindlePath\cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+	\
+\cf2 end\cf3  \cf4 CheckOSXKindle\cf3 \
+\
+\cf2 on\cf3  \cf4 AppsRunning\cf3 ()\
+	\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "sevs"\cf3 \
+		\cf2 if\cf3  (
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  (
+\i \cf2 processes
+\i0 \cf3  \cf2 where\cf3  \cf8 creator type\cf3  = \cf5 "DNtp"\cf3 )) < 1 \cf2 then\cf3 \
+			
+\b \cf2 activate
+\b0 \cf3 \
+			
+\b \cf9 display alert
+\b0 \cf3  \cf5 "First select a target folder in DEVONthink"\cf3  \cf9 as\cf3  \cf10 informational\cf3 \
+			\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "DNtp"\cf3  \cf2 to\cf3  
+\b \cf2 activate
+\b0 \cf3 \
+			\cf2 return\cf3  \cf7 false\cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+		\cf2 if\cf3  (
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  (
+\i \cf2 processes
+\i0 \cf3  \cf2 where\cf3  \cf8 creator type\cf3  = \cf5 "sfri"\cf3 )) < 1 \cf2 then\cf3 \
+			
+\b \cf2 activate
+\b0 \cf3 \
+			
+\b \cf9 display alert
+\b0 \cf3  \cf5 "First select the Kindle highlights of a book in Safari"\cf3  \cf9 as\cf3  \cf10 informational\cf3 \
+			\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "sfri"\cf3  \cf2 to\cf3  
+\b \cf2 activate
+\b0 \cf3 \
+			\cf2 return\cf3  \cf7 false\cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+	\cf7 true\cf3 \
+\cf2 end\cf3  \cf4 AppsRunning\cf3 \
+\
+\cf2 on\cf3  \cf4 ParseHTMLNotes\cf3 (\cf4 strHTMLPath\cf3 )\
+	\cf2 if\cf3  \cf4 strHTMLPath\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3 \
+		\cf2 set\cf3  \cf4 strCmd\cf3  \cf2 to\cf3  \cf5 "perl "\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  (\cf8 POSIX path\cf3  \cf2 of\cf3  (
+\b \cf9 path to
+\b0 \cf3  \cf2 me\cf3 ) & \cf5 "getknotes.pl"\cf3 ) & \cf8 space\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  \cf4 strHTMLPath\cf3 \
+		\cf2 set\cf3  \cf4 lstNotes\cf3  \cf2 to\cf3  
+\i \cf2 paragraphs
+\i0 \cf3  \cf2 of\cf3  (
+\b \cf9 do shell script
+\b0 \cf3  \cf4 strCmd\cf3 )\
+		\
+		\cf2 set\cf3  \{\cf4 dlm\cf3 , \cf2 my\cf3  \cf8 text item delimiters\cf3 \} \cf2 to\cf3  \{\cf2 my\cf3  \cf8 text item delimiters\cf3 , \cf4 pstrDelim\cf3 \}\
+		\cf2 repeat\cf3  \cf2 with\cf3  \cf4 i\cf3  \cf2 from\cf3  1 \cf2 to\cf3  \cf8 length\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3 \
+			\cf2 set\cf3  
+\i \cf2 item
+\i0 \cf3  \cf4 i\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3  \cf2 to\cf3  
+\i \cf2 text items
+\i0 \cf3  \cf2 of\cf3  
+\i \cf2 item
+\i0 \cf3  \cf4 i\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3 \
+		\cf2 end\cf3  \cf2 repeat\cf3 \
+		\cf2 set\cf3  \cf2 my\cf3  \cf8 text item delimiters\cf3  \cf2 to\cf3  \cf4 dlm\cf3 \
+		\cf2 return\cf3  \cf4 lstNotes\cf3 \
+	\cf2 else\cf3 \
+		\cf2 return\cf3  \{\}\
+	\cf2 end\cf3  \cf2 if\cf3 \
+\cf2 end\cf3  \cf4 ParseHTMLNotes\cf3 \
+\
+
+\i \cf6 -- Place a set of notes in a suitably named DEVONthink folder in the currently selected group or database
+\i0 \cf3 \
+
+\i \cf6 -- If no group or database is selected, the folder will be created in the global Inbox
+\i0 \cf3 \
+\cf2 on\cf3  \cf4 Notes2Devn\cf3 (\cf4 oLocn\cf3 , \cf4 lstNotes\cf3 , \cf4 strRefNAme\cf3 , \cf4 strURL\cf3 , \cf4 strAsin\cf3 , \cf4 blnFromWeb\cf3 )\
+	\
+	
+\i \cf6 -- kindle://book?action=open&asin=B000JMLLEI&location=9146
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 strImportDate\cf3  \cf2 to\cf3  (
+\b \cf9 current date
+\b0 \cf3 ) \cf2 as\cf3  
+\i \cf2 string
+\i0 \cf3 \
+	\cf2 if\cf3  \cf4 pdteUnixBase\cf3  \cf2 is\cf3  
+\i \cf2 missing value
+\i0 \cf3  \cf2 then\cf3  \cf2 set\cf3  \cf4 pdteUnixBase\cf3  \cf2 to\cf3  \cf4 GetUnixBaseDate\cf3 ()\
+	\
+	\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "com.devon-technologies.thinkpro2"\cf3 \
+		\cf2 if\cf3  \cf8 length\cf3  \cf2 of\cf3  \cf4 lstNotes\cf3  > 0 \cf2 then\cf3 \
+			\cf2 if\cf3  \cf4 pblnLocnFirst\cf3  \cf2 then\cf3  
+\i \cf6 -- Find the highest page number and count its digits
+\i0 \cf3 \
+				\cf2 set\cf3  \cf4 lngMaxLocn\cf3  \cf2 to\cf3  0\
+				\cf2 repeat\cf3  \cf2 with\cf3  \cf4 oNote\cf3  \cf2 in\cf3  \cf4 lstNotes\cf3 \
+					\cf2 set\cf3  \cf4 lngLocn\cf3  \cf2 to\cf3  (
+\i \cf2 item
+\i0 \cf3  5 \cf2 of\cf3  \cf4 oNote\cf3 ) \cf2 as\cf3  
+\i \cf2 integer
+\i0 \cf3 \
+					\cf2 if\cf3  \cf4 lngLocn\cf3  > \cf4 lngMaxLocn\cf3  \cf2 then\cf3  \cf2 set\cf3  \cf4 lngMaxLocn\cf3  \cf2 to\cf3  \cf4 lngLocn\cf3 \
+				\cf2 end\cf3  \cf2 repeat\cf3 \
+				\cf2 set\cf3  \cf4 lngDigits\cf3  \cf2 to\cf3  (\cf8 length\cf3  \cf2 of\cf3  (\cf4 lngMaxLocn\cf3  \cf2 as\cf3  
+\i \cf2 string
+\i0 \cf3 )) + 2\
+			\cf2 end\cf3  \cf2 if\cf3 \
+			\
+			\cf2 repeat\cf3  \cf2 with\cf3  \cf4 oNote\cf3  \cf2 in\cf3  \cf4 lstNotes\cf3 \
+				
+\i \cf6 -- GET THE FIELDS
+\i0 \cf3 \
+				
+\i \cf6 -- $id, $title, $author, $page, $locnF, $locnT, $year, $month, $day, $hour, $min, $quote, $comment, $editlink 
+\i0 \cf3 \
+				
+\i \cf6 -- 				set \{strID, strPlainTitle, strAuthor, strPage, strWhere, strWhereTo, strYear, strMonth, strDay, strHour, strMin, strQuote, strComment, strEditLink\} to oNote
+\i0 \cf3 \
+				\
+				\cf2 set\cf3  \{\cf4 strID\cf3 , \cf4 strWPMarker\cf3 , \cf4 strPage\cf3 , \cf4 strWhere\cf3 , \cf4 strWhereTo\cf3 , \cf4 strWhen\cf3 , \cf4 strQuote\cf3 , \cf4 strComment\cf3 , \cf4 strEditLink\cf3 \} \cf2 to\cf3  \cf4 oNote\cf3 \
+				\cf2 set\cf3  \{\cf4 dlm\cf3 , \cf2 my\cf3  \cf8 text item delimiters\cf3 \} \cf2 to\cf3  \{\cf2 my\cf3  \cf8 text item delimiters\cf3 , \cf5 ","\cf3 \}\
+				\
+				\cf2 if\cf3  \cf4 strQuote\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3 \
+					\cf2 set\cf3  \cf4 lstParts\cf3  \cf2 to\cf3  
+\i \cf2 text items
+\i0 \cf3  \cf2 of\cf3  \cf4 strQuote\cf3 \
+				\cf2 else\cf3  \cf2 if\cf3  \cf4 strComment\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3 \
+					\cf2 set\cf3  \cf4 lstParts\cf3  \cf2 to\cf3  
+\i \cf2 text items
+\i0 \cf3  \cf2 of\cf3  \cf4 strComment\cf3 \
+				\cf2 end\cf3  \cf2 if\cf3 \
+				\
+				\cf2 if\cf3  (
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  \cf4 lstParts\cf3 ) > 1 \cf2 then\cf3 \
+					\cf2 set\cf3  \cf4 strOpening\cf3  \cf2 to\cf3  ((
+\i \cf2 items
+\i0 \cf3  1 \cf2 thru\cf3  2 \cf2 of\cf3  \cf4 lstParts\cf3 ) \cf2 as\cf3  
+\i \cf2 string
+\i0 \cf3 ) & \cf5 ","\cf3 \
+				\cf2 else\cf3 \
+					\cf2 set\cf3  \cf4 strOpening\cf3  \cf2 to\cf3  \cf2 first\cf3  
+\i \cf2 item
+\i0 \cf3  \cf2 of\cf3  \cf4 lstParts\cf3 \
+				\cf2 end\cf3  \cf2 if\cf3 \
+				\cf2 if\cf3  \cf4 strOpening\cf3  = \cf5 ""\cf3  \cf2 then\cf3  \cf2 set\cf3  \cf4 strOpening\cf3  \cf2 to\cf3  \cf2 first\cf3  
+\i \cf2 text item
+\i0 \cf3  \cf2 of\cf3  \cf4 strComment\cf3 \
+				\cf2 set\cf3  \cf2 my\cf3  \cf8 text item delimiters\cf3  \cf2 to\cf3  \cf4 dlm\cf3 \
+				\
+				\cf2 if\cf3  \cf4 strOpening\cf3  = \cf5 ""\cf3  \cf2 then\cf3  \cf2 set\cf3  \cf4 strOpening\cf3  \cf2 to\cf3  \cf4 strPlainTitle\cf3 \
+				\
+				\cf2 if\cf3  \cf4 strOpening\cf3  \cf2 contains\cf3  \cf5 "<br>"\cf3  \cf2 then\cf3  \cf2 set\cf3  \cf4 strOpening\cf3  \cf2 to\cf3  \'ac\
+					
+\b \cf9 do shell script
+\b0 \cf3  \cf5 "echo "\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  \cf4 strOpening\cf3  & \cf5 " | sed 's/<br>/ /'"\cf3 \
+				\
+				
+\i \cf6 -- DETERMINE THE NOTE NAME (INCLUDING LOCATION)
+\i0 \cf3 \
+				\cf2 if\cf3  \cf4 pblnLocnFirst\cf3  \cf2 then\cf3 \
+					\cf2 set\cf3  \cf4 lngLocn\cf3  \cf2 to\cf3  \cf4 strWhere\cf3  \cf2 as\cf3  
+\i \cf2 integer
+\i0 \cf3 \
+					\cf2 set\cf3  \cf4 strPadded\cf3  \cf2 to\cf3  \cf2 my\cf3  \cf4 PadNum\cf3 (\cf4 lngLocn\cf3 , \cf4 lngDigits\cf3 )\
+					\cf2 set\cf3  \cf4 strRecName\cf3  \cf2 to\cf3  \cf5 "(@L"\cf3  & \cf4 strPadded\cf3  & \cf5 ")  "\cf3  & \cf4 strOpening\cf3 \
+				\cf2 else\cf3 \
+					\cf2 set\cf3  \cf4 strRecName\cf3  \cf2 to\cf3  \cf4 strOpening\cf3  & \cf5 "  (@L"\cf3  & \cf4 strWhere\cf3  & \cf5 ")"\cf3 \
+				\cf2 end\cf3  \cf2 if\cf3 \
+				\
+				
+\i \cf6 -- PREPARE THE LINK TO THE POINT IN THE KINDLE TEXT
+\i0 \cf3 \
+				\cf2 if\cf3  \cf4 strAsin\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3  \cf2 set\cf3  \cf4 strKlink\cf3  \cf2 to\cf3  \cf5 "kindle://book?action=open&asin="\cf3  & \cf4 strAsin\cf3  & \cf5 "&location="\cf3  & \cf4 strWhere\cf3 \
+				\cf2 if\cf3  \cf4 blnFromWeb\cf3  \cf2 then\cf3 \
+					\
+					\cf2 set\cf3  \cf4 strText\cf3  \cf2 to\cf3  \cf5 "<p class=\\"header\\">Quotation:"\cf3  & \cf5 "<p class=\\"quote\\">"\cf3  & \cf4 strQuote\cf3  & \cf5 "<p class=\\"header\\">"\cf3  & \'ac\
+						\cf5 "Comment:"\cf3  & \cf5 "<p class=\\"comment\\">"\cf3  & \cf4 strComment\cf3  & \cf5 "<p class=\\"comment\\"><p class=\\"comment\\">"\cf3  & \'ac\
+						\cf5 "<p class=\\"wptag\\">\{"\cf3  & \cf4 strWPMarker\cf3  & \cf5 "@Kindle:<a class=\\"detail\\" href=\\""\cf3  & \cf4 strURL\cf3  & \cf5 "\\">"\cf3  & \cf4 strAsin\cf3  & \cf5 "</a>:<a class=\\"detail\\" href=\\""\cf3  & \cf4 strKlink\cf3  & \cf5 "\\">L"\cf3  & \cf4 strWhere\cf3  & \cf5 "</a>\}<p>\
+					<a class=\\"detail\\" href=\\""\cf3  & \cf4 strEditLink\cf3  & \cf5 "\\">Edit on-line copy</a><p class=\\"detail\\">Imported from Kindle: "\cf3  & \cf4 strImportDate\cf3  & \cf5 "</p>"\cf3 \
+				\cf2 else\cf3 \
+					\cf2 if\cf3  \cf4 strPage\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3 \
+						\cf2 set\cf3  \cf4 strPageRef\cf3  \cf2 to\cf3  \cf5 "<p class=\\"wptag\\">\{"\cf3  & \cf4 strWPMarker\cf3  & \cf5 "@"\cf3  & \cf4 strPage\cf3  & \cf5 "\}"\cf3 \
+					\cf2 else\cf3 \
+						\cf2 set\cf3  \cf4 strPageRef\cf3  \cf2 to\cf3  \cf5 ""\cf3 \
+					\cf2 end\cf3  \cf2 if\cf3 \
+					\
+					
+\i \cf6 -- PREPARE THE LINK TO THE POINT IN THE KINDLE TEXT
+\i0 \cf3 \
+					\cf2 if\cf3  \cf4 strAsin\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3 \
+						\cf2 set\cf3  \cf4 strLocRef\cf3  \cf2 to\cf3  \cf5 "<p class=\\"wptag\\">\{"\cf3  & \cf4 strWPMarker\cf3  & \cf5 "@Kindle:<a class=\\"detail\\" href=\\""\cf3  & \cf4 strURL\cf3  & \cf5 "\\">"\cf3  & \cf4 strAsin\cf3  & \cf5 "</a>:<a class=\\"detail\\" href=\\""\cf3  & \cf4 strKlink\cf3  & \cf5 "\\">L"\cf3  & \cf4 strWhere\cf3  & \cf5 "</a>\}"\cf3 \
+					\cf2 else\cf3 \
+						\cf2 set\cf3  \cf4 strLocRef\cf3  \cf2 to\cf3  \cf5 "<p class=\\"wptag\\">\{"\cf3  & \cf4 strWPMarker\cf3  & \cf5 "@L"\cf3  & \cf4 strWhere\cf3  & \cf5 "\}"\cf3 \
+					\cf2 end\cf3  \cf2 if\cf3 \
+					\
+					\cf2 set\cf3  \cf4 strText\cf3  \cf2 to\cf3  \cf5 "<p class=\\"header\\">Quotation:"\cf3  & \cf5 "<p class=\\"quote\\">"\cf3  & \cf4 strQuote\cf3  & \cf5 "<p class=\\"header\\">"\cf3  & \'ac\
+						\cf5 "Comment:"\cf3  & \cf5 "<p class=\\"comment\\">"\cf3  & \cf4 strComment\cf3  & \cf5 "<p class=\\"comment\\"><p class=\\"comment\\">"\cf3  & \'ac\
+						\cf4 strPageRef\cf3  & \cf4 strLocRef\cf3 \
+					\cf2 if\cf3  \cf4 strWhen\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3 \
+						\cf2 try\cf3 \
+							\cf2 set\cf3  \cf4 dteWhen\cf3  \cf2 to\cf3  (\cf4 pdteUnixBase\cf3  + (\cf4 strWhen\cf3  \cf2 as\cf3  
+\i \cf2 integer
+\i0 \cf3 ))\
+						\cf2 on\cf3  \cf2 error\cf3 \
+							\cf2 set\cf3  \cf4 dteWhen\cf3  \cf2 to\cf3  
+\i \cf2 missing value
+\i0 \cf3 \
+						\cf2 end\cf3  \cf2 try\cf3 \
+						\cf2 if\cf3  \cf4 dteWhen\cf3  \cf2 is\cf3  \cf2 not\cf3  
+\i \cf2 missing value
+\i0 \cf3  \cf2 then\cf3  \cf2 set\cf3  \cf4 strText\cf3  \cf2 to\cf3  (\cf4 strText\cf3  & \cf5 "<p class=\\"detail\\">Kindle annotation: "\cf3  & \cf4 dteWhen\cf3  \cf2 as\cf3  
+\i \cf2 string
+\i0 \cf3 ) & \cf5 "</p>"\cf3 \
+					\cf2 end\cf3  \cf2 if\cf3 \
+				\cf2 end\cf3  \cf2 if\cf3 \
+				\
+				\cf2 set\cf3  \cf4 strHTML\cf3  \cf2 to\cf3  \cf5 "\
+<!DOCTYPE html PUBLIC \\"-//W3C//DTD HTML 4.01//EN\\" \\"http://www.w3.org/TR/html4/strict.dtd\\">\
+<html>\
+<head>\
+  <meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">\
+  <meta http-equiv=\\"Content-Style-Type\\" content=\\"text/css\\">\
+  <title></title>\
+  <style type=\\"text/css\\">\
+"\cf3  & \cf4 pstrActiveCSS\cf3  & \cf5 "\
+  </style>\
+</head>\
+<body>"\cf3  & \cf4 strText\cf3  & \cf5 "</body>"\cf3 \
+				\
+				
+\i \cf6 -- CREATE THE FORMATTED RTF RECORD
+\i0 \cf3 \
+				\
+				\cf2 set\cf3  \cf4 oHTML\cf3  \cf2 to\cf3  
+\b \cf2 create record with
+\b0 \cf3  \{\cf8 type\cf3 :\cf7 html\cf3 , \cf8 source\cf3 :\cf4 strHTML\cf3 , \cf8 URL\cf3 :\cf4 strURL\cf3 \} \cf2 in\cf3  \cf4 oLocn\cf3 \
+				\cf2 set\cf3  \cf4 oNewRec\cf3  \cf2 to\cf3  
+\b \cf2 convert
+\b0 \cf3  
+\i \cf2 record
+\i0 \cf3  \cf4 oHTML\cf3  \cf2 to\cf3  \cf7 rich\cf3 \
+				
+\b \cf2 delete
+\b0 \cf3  
+\i \cf2 record
+\i0 \cf3  \cf4 oHTML\cf3 \
+				\
+				\cf2 set\cf3  \cf8 name\cf3  \cf2 of\cf3  \cf4 oNewRec\cf3  \cf2 to\cf3  \cf4 strRecName\cf3 \
+				\
+				\cf2 if\cf3  \cf4 pblnAvoidDuplication\cf3  \cf2 then\cf3 \
+					
+\i \cf6 -- DISCARD NEW RECORD IF IT DUPLICATES ANOTHER IN THIS GROUP
+\i0 \cf3 \
+					\cf2 set\cf3  \cf4 lstDuplics\cf3  \cf2 to\cf3  \cf8 duplicates\cf3  \cf2 of\cf3  \cf4 oNewRec\cf3 \
+					\cf2 if\cf3  \cf4 lstDuplics\cf3  \uc0\u8800  \{\} \cf2 then\cf3 \
+						\cf2 set\cf3  \cf4 strLocn\cf3  \cf2 to\cf3  \cf8 location\cf3  \cf2 of\cf3  \cf4 oNewRec\cf3 \
+						\cf2 repeat\cf3  \cf2 with\cf3  \cf4 oDuplic\cf3  \cf2 in\cf3  \cf4 lstDuplics\cf3 \
+							\cf2 if\cf3  \cf8 location\cf3  \cf2 of\cf3  \cf4 oDuplic\cf3  = \cf4 strLocn\cf3  \cf2 then\cf3 \
+								
+\b \cf2 delete
+\b0 \cf3  
+\i \cf2 record
+\i0 \cf3  \cf4 oNewRec\cf3 \
+								\cf2 exit\cf3  \cf2 repeat\cf3 \
+							\cf2 end\cf3  \cf2 if\cf3 \
+						\cf2 end\cf3  \cf2 repeat\cf3 \
+					\cf2 end\cf3  \cf2 if\cf3 \
+				\cf2 end\cf3  \cf2 if\cf3 \
+			\cf2 end\cf3  \cf2 repeat\cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+\cf2 end\cf3  \cf4 Notes2Devn\cf3 \
+\
+\cf2 on\cf3  \cf4 FormatPage\cf3 (\cf4 strPage\cf3 )\
+	\cf2 if\cf3  \cf4 strPage\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3 \
+		\cf2 return\cf3  \cf5 " p"\cf3  & \cf4 strPage\cf3 \
+	\cf2 else\cf3 \
+		\cf2 return\cf3  \cf5 ""\cf3 \
+	\cf2 end\cf3  \cf2 if\cf3 \
+\cf2 end\cf3  \cf4 FormatPage\cf3 \
+\
+\cf2 on\cf3  \cf4 GetGroupWin\cf3 ()\
+	\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "com.devon-technologies.thinkpro2"\cf3 \
+		
+\i \cf6 -- CURRENT GROUP, IF THERE IS ONE
+\i0 \cf3 \
+		\cf2 set\cf3  \cf4 oGroup\cf3  \cf2 to\cf3  
+\i \cf2 missing value
+\i0 \cf3 \
+		\cf2 with\cf3  \cf2 timeout\cf3  \cf2 of\cf3  1 \cf2 second\cf3 \
+			\cf2 try\cf3 \
+				\cf2 set\cf3  \cf4 oGroup\cf3  \cf2 to\cf3  \cf8 current group\cf3 \
+			\cf2 end\cf3  \cf2 try\cf3 \
+		\cf2 end\cf3  \cf2 timeout\cf3 \
+		\
+		
+\i \cf6 -- ELSE CURRENT DATABASE, IF THERE IS ONE
+\i0 \cf3 \
+		\cf2 try\cf3 \
+			\cf4 oGroup\cf3 \
+		\cf2 on\cf3  \cf2 error\cf3 \
+			\cf2 set\cf3  \cf4 oGroup\cf3  \cf2 to\cf3  (\cf8 root\cf3  \cf2 of\cf3  
+\i \cf2 database
+\i0 \cf3  \cf7 id\cf3  1)\
+			\cf2 set\cf3  \cf4 oWin\cf3  \cf2 to\cf3  
+\b \cf2 open window for
+\b0 \cf3  
+\i \cf2 record
+\i0 \cf3  \cf4 oGroup\cf3 \
+			\cf2 return\cf3  \{\cf4 oGroup\cf3 , \cf4 oWin\cf3 \}\
+		\cf2 end\cf3  \cf2 try\cf3 \
+		\
+		\cf2 if\cf3  \cf4 oGroup\cf3  \cf2 is\cf3  
+\i \cf2 missing value
+\i0 \cf3  \cf2 then\cf3 \
+			\cf2 set\cf3  \cf4 oGroup\cf3  \cf2 to\cf3  (\cf8 root\cf3  \cf2 of\cf3  
+\i \cf2 database
+\i0 \cf3  \cf7 id\cf3  1)\
+			\cf2 set\cf3  \cf4 oWin\cf3  \cf2 to\cf3  
+\b \cf2 open window for
+\b0 \cf3  
+\i \cf2 record
+\i0 \cf3  \cf4 oGroup\cf3 \
+			\cf2 return\cf3  \{\cf4 oGroup\cf3 , \cf4 oWin\cf3 \}\
+		\cf2 end\cf3  \cf2 if\cf3 \
+		\
+		
+\i \cf6 -- ENSURE THAT A WINDOW IS OPEN FOR THIS GROUP
+\i0 \cf3 \
+		\cf2 tell\cf3  \cf4 oGroup\cf3 \
+			\cf2 set\cf3  \{\cf4 oDb\cf3 , \cf4 strID\cf3 \} \cf2 to\cf3  \{\cf2 its\cf3  
+\i \cf2 database
+\i0 \cf3 , \cf2 its\cf3  \cf8 id\cf3 \} \cf2 of\cf3  \cf4 oGroup\cf3 \
+		\cf2 end\cf3  \cf2 tell\cf3 \
+		\
+		\cf2 set\cf3  \cf4 lstWins\cf3  \cf2 to\cf3  \cf2 every\cf3  
+\i \cf2 viewer window
+\i0 \cf3  \cf2 where\cf3  \cf8 id\cf3  \cf2 of\cf3  \cf2 its\cf3  \cf8 root\cf3  \cf2 is\cf3  \cf4 strID\cf3  \cf2 and\cf3  \cf8 name\cf3  \cf2 of\cf3  \cf2 its\cf3  \cf8 root\cf3  \cf2 is\cf3  \cf8 name\cf3  \cf2 of\cf3  \cf4 oDb\cf3 \
+		\cf2 if\cf3  \cf8 length\cf3  \cf2 of\cf3  \cf4 lstWins\cf3  < 1 \cf2 then\cf3 \
+			\cf2 set\cf3  \cf4 oWin\cf3  \cf2 to\cf3  
+\b \cf2 open window for
+\b0 \cf3  
+\i \cf2 record
+\i0 \cf3  \cf4 oGroup\cf3 \
+		\cf2 else\cf3 \
+			\cf2 set\cf3  \cf4 oWin\cf3  \cf2 to\cf3  \cf2 first\cf3  
+\i \cf2 item
+\i0 \cf3  \cf2 of\cf3  \cf4 lstWins\cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+		\{\cf4 oGroup\cf3 , \cf4 oWin\cf3 \}\
+	\cf2 end\cf3  \cf2 tell\cf3 \
+\cf2 end\cf3  \cf4 GetGroupWin\cf3 \
+\
+\cf2 on\cf3  \cf4 PadNum\cf3 (\cf4 lngNum\cf3 , \cf4 lngDigits\cf3 )\
+	\cf2 set\cf3  \cf4 strNum\cf3  \cf2 to\cf3  \cf4 lngNum\cf3  \cf2 as\cf3  
+\i \cf2 string
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 lngGap\cf3  \cf2 to\cf3  (\cf4 lngDigits\cf3  - (\cf8 length\cf3  \cf2 of\cf3  \cf4 strNum\cf3 ))\
+	\cf2 repeat\cf3  \cf2 while\cf3  \cf4 lngGap\cf3  > 0\
+		\cf2 set\cf3  \cf4 strNum\cf3  \cf2 to\cf3  \cf5 "0"\cf3  & \cf4 strNum\cf3 \
+		\cf2 set\cf3  \cf4 lngGap\cf3  \cf2 to\cf3  \cf4 lngGap\cf3  - 1\
+	\cf2 end\cf3  \cf2 repeat\cf3 \
+	\cf4 strNum\cf3 \
+\cf2 end\cf3  \cf4 PadNum\cf3 \
+\
+\cf2 on\cf3  \cf4 GetCSS\cf3 () 
+\i \cf6 -- Try to get the CSS file from the same folder as the script. If not there, return empty string
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 strcssPath\cf3  \cf2 to\cf3  \cf2 my\cf3  \cf4 GetCSSPath\cf3 (\cf2 my\cf3  \cf4 pCSSFile\cf3 )\
+	\cf2 set\cf3  \cf4 strCSS\cf3  \cf2 to\cf3  \cf5 ""\cf3 \
+	\cf2 if\cf3  \cf4 strcssPath\cf3  \cf2 is\cf3  \cf2 not\cf3  \cf5 ""\cf3  \cf2 then\cf3 \
+		\cf2 try\cf3 \
+			\cf2 set\cf3  \cf4 strCSS\cf3  \cf2 to\cf3  
+\b \cf9 do shell script
+\b0 \cf3  \cf5 "cat "\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  \cf4 strcssPath\cf3 \
+		\cf2 end\cf3  \cf2 try\cf3 \
+	\cf2 end\cf3  \cf2 if\cf3 \
+	\cf4 strCSS\cf3 \
+\cf2 end\cf3  \cf4 GetCSS\cf3 \
+\
+\cf2 on\cf3  \cf4 GetCSSPath\cf3 (\cf4 strcssFile\cf3 )\
+	\cf2 set\cf3  \cf4 strFolder\cf3  \cf2 to\cf3  \cf4 ScriptFolder\cf3 () \cf2 as\cf3  
+\i \cf2 string
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 strcssPath\cf3  \cf2 to\cf3  \cf8 POSIX path\cf3  \cf2 of\cf3  (\cf4 strFolder\cf3  & \cf4 strcssFile\cf3 )\
+	\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf5 "Finder"\cf3 \
+		\cf2 if\cf3  \cf2 not\cf3  (
+\b \cf2 exists
+\b0 \cf3  (\cf4 strcssPath\cf3  \cf2 as\cf3  
+\i \cf9 POSIX file
+\i0 \cf3 )) \cf2 then\cf3  \cf2 return\cf3  \cf5 ""\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+	\cf4 strcssPath\cf3 \
+\cf2 end\cf3  \cf4 GetCSSPath\cf3 \
+\
+\cf2 on\cf3  \cf4 ScriptFolder\cf3 ()\
+	\cf2 set\cf3  \cf4 strPath\cf3  \cf2 to\cf3  (
+\b \cf9 path to
+\b0 \cf3  \cf2 me\cf3 ) \cf2 as\cf3  
+\i \cf2 string
+\i0 \cf3 \
+	\cf2 set\cf3  \cf4 strDelim\cf3  \cf2 to\cf3  \cf8 text item delimiters\cf3 \
+	\cf2 set\cf3  \cf8 text item delimiters\cf3  \cf2 to\cf3  \cf5 ":"\cf3 \
+	\cf2 set\cf3  \cf4 lstParts\cf3  \cf2 to\cf3  
+\i \cf2 text items
+\i0 \cf3  \cf2 of\cf3  \cf4 strPath\cf3 \
+	\cf2 set\cf3  \cf4 lngLast\cf3  \cf2 to\cf3  (\cf8 length\cf3  \cf2 of\cf3  \cf4 lstParts\cf3 ) - 1\
+	\cf2 set\cf3  \cf4 strFolderPath\cf3  \cf2 to\cf3  (
+\i \cf2 items
+\i0 \cf3  1 \cf2 thru\cf3  \cf4 lngLast\cf3  \cf2 of\cf3  \cf4 lstParts\cf3 ) \cf2 as\cf3  
+\i \cf2 string
+\i0 \cf3 \
+	\cf2 set\cf3  \cf8 text item delimiters\cf3  \cf2 to\cf3  \cf4 strDelim\cf3 \
+	\cf4 strFolderPath\cf3  \cf2 as\cf3  
+\i \cf2 alias
+\i0 \cf3 \
+\cf2 end\cf3  \cf4 ScriptFolder\cf3 \
+\
+\cf2 on\cf3  \cf4 Growl\cf3 (\cf4 oGroup\cf3 , \cf4 lngNotes\cf3 )\
+	
+\i \cf6 -- If Growl is running, report the references sent
+\i0 \cf3 \
+	\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "com.devon-technologies.thinkpro2"\cf3 \
+		\cf2 set\cf3  \{\cf4 strFolder\cf3 , \cf4 strDb\cf3 \} \cf2 to\cf3  \{\cf8 name\cf3 , \cf8 name\cf3  \cf2 of\cf3  
+\i \cf2 database
+\i0 \cf3 \} \cf2 of\cf3  \cf4 oGroup\cf3 \
+		\cf2 set\cf3  \cf4 strTarget\cf3  \cf2 to\cf3  \cf5 "current folder "\cf3  & \cf4 strFolder\cf3  & \cf8 return\cf3  & \cf8 return\cf3  & \cf5 "of DEVONthink database \\""\cf3  & \cf4 strDb\cf3  & \cf5 "\\""\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+	\
+	\cf2 if\cf3  \cf4 lngNotes\cf3  > 0 \cf2 then\cf3 \
+		
+\i \cf6 -- PREPARE REPORT FOR GROWL OR DIALOG DELIVERY
+\i0 \cf3 \
+		\cf2 if\cf3  \cf4 lngNotes\cf3  = 1 \cf2 then\cf3 \
+			\cf2 set\cf3  \cf4 strRefInflection\cf3  \cf2 to\cf3  \cf5 " reference"\cf3 \
+		\cf2 else\cf3 \
+			\cf2 set\cf3  \cf4 strRefInflection\cf3  \cf2 to\cf3  \cf5 " references"\cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+		\cf2 set\cf3  \cf4 strReport\cf3  \cf2 to\cf3  \cf5 "Exported Kindle notes for "\cf3  & (\cf4 lngNotes\cf3  \cf2 as\cf3  
+\i \cf2 string
+\i0 \cf3 ) & \cf4 strRefInflection\cf3  & \cf5 " to "\cf3  & \cf4 strTarget\cf3 \
+		\cf2 set\cf3  \cf4 blnReported\cf3  \cf2 to\cf3  \cf7 false\cf3 \
+		\
+		
+\i \cf6 -- ESTABLISH WHETHER GROWL IS INSTALLED (AND IF SO WHERE)
+\i0 \cf3 \
+		\cf2 set\cf3  \cf4 strGrowlPath\cf3  \cf2 to\cf3  \cf5 ""\cf3 \
+		\cf2 try\cf3 \
+			\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf5 "Finder"\cf3  \cf2 to\cf3  \cf2 tell\cf3  (
+\i \cf2 application file
+\i0 \cf3  \cf7 id\cf3  \cf5 "GRRR"\cf3 ) \cf2 to\cf3  \cf2 set\cf3  \cf4 strGrowlPath\cf3  \cf2 to\cf3  \cf8 POSIX path\cf3  \cf2 of\cf3  (\cf2 its\cf3  
+\i \cf2 container
+\i0 \cf3  \cf2 as\cf3  
+\i \cf2 alias
+\i0 \cf3 ) & \cf8 name\cf3 \
+		\cf2 end\cf3  \cf2 try\cf3 \
+		\cf2 set\cf3  \cf4 blnInstalled\cf3  \cf2 to\cf3  (\cf4 strGrowlPath\cf3  \uc0\u8800  \cf5 ""\cf3 )\
+		\
+		
+\i \cf6 -- IF INSTALLED, THEN IS IT RUNNING ?
+\i0 \cf3 \
+		\cf2 if\cf3  \cf4 blnInstalled\cf3  \cf2 then\cf3 \
+			\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf5 "System Events"\cf3 \
+				\cf2 set\cf3  \cf4 blnGrowlRunning\cf3  \cf2 to\cf3  (
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  (\cf2 every\cf3  
+\i \cf2 process
+\i0 \cf3  \cf2 where\cf3  \cf8 creator type\cf3  \cf2 is\cf3  \cf5 "GRRR"\cf3 )) > 0\
+				\
+				
+\i \cf6 -- IF NOT RUNNING THEN TRY TO WAKE IT UP ...
+\i0 \cf3 \
+				\cf2 if\cf3  \cf2 not\cf3  \cf4 blnGrowlRunning\cf3  \cf2 then\cf3 \
+					
+\b \cf9 do shell script
+\b0 \cf3  \cf5 "open "\cf3  & \cf4 strGrowlPath\cf3  & \cf5 " > /dev/null 2>&1 &"\cf3 \
+					
+\b \cf9 do shell script
+\b0 \cf3  \cf5 "sleep .5"\cf3 \
+					\cf2 set\cf3  \cf4 blnGrowlRunning\cf3  \cf2 to\cf3  (
+\b \cf2 count
+\b0 \cf3  \cf2 of\cf3  (\cf2 every\cf3  
+\i \cf2 process
+\i0 \cf3  \cf2 where\cf3  \cf8 creator type\cf3  \cf2 is\cf3  \cf5 "GRRR"\cf3 )) > 0\
+				\cf2 end\cf3  \cf2 if\cf3 \
+				\
+				\cf2 if\cf3  \cf4 blnGrowlRunning\cf3  \cf2 then\cf3 \
+					\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf5 "GrowlHelperApp"\cf3 \
+						
+\b \cf2 register
+\b0 \cf3  \cf2 as application\cf3  \cf5 "houthakker scripts"\cf3  \cf2 all notifications\cf3  \{\cf5 "Notes handled"\cf3 \} \cf2 default notifications\cf3  \{\cf5 "Notes handled"\cf3 \} \cf2 icon of application\cf3  \cf5 "DEVONthink Pro"\cf3 \
+						
+\b \cf2 notify
+\b0 \cf3  \cf2 with name\cf3  \cf5 "Notes handled"\cf3  \cf2 title\cf3  \cf5 "Notes processed"\cf3  \cf2 application name\cf3  \cf5 "houthakker scripts"\cf3  \cf2 description\cf3  \cf4 strReport\cf3 \
+					\cf2 end\cf3  \cf2 tell\cf3 \
+				\cf2 else\cf3 \
+					
+\i \cf6 -- IF NO REPORT HAS BEEN MADE THROUGH GROWL, REPORT THRU DIALOG
+\i0 \cf3 \
+					\cf2 set\cf3  \cf4 strReport\cf3  \cf2 to\cf3  \cf5 "(Growl not running)"\cf3  & \cf8 return\cf3  & \cf8 return\cf3  & \cf4 strReport\cf3 \
+					\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "sevs"\cf3 \
+						
+\b \cf2 activate
+\b0 \cf3 \
+						
+\b \cf9 display dialog
+\b0 \cf3  \cf4 strReport\cf3  \cf9 buttons\cf3  \{\cf5 "OK"\cf3 \} \cf9 default button\cf3  1 \cf9 with title\cf3  \cf4 pTitle\cf3 \
+					\cf2 end\cf3  \cf2 tell\cf3 \
+				\cf2 end\cf3  \cf2 if\cf3 \
+			\cf2 end\cf3  \cf2 tell\cf3 \
+		\cf2 else\cf3 \
+			
+\i \cf6 -- IF GROWL IS NOT INSTALLED , REPORT THROUGH DIALOG
+\i0 \cf3 \
+			\cf2 set\cf3  \cf4 strReport\cf3  \cf2 to\cf3  \cf5 "(Growl not installed)"\cf3  & \cf8 return\cf3  & \cf8 return\cf3  & \cf4 strReport\cf3 \
+			\cf2 tell\cf3  
+\i \cf2 application
+\i0 \cf3  \cf7 id\cf3  \cf5 "sevs"\cf3 \
+				
+\b \cf2 activate
+\b0 \cf3 \
+				
+\b \cf9 display dialog
+\b0 \cf3  \cf4 strReport\cf3  \cf9 buttons\cf3  \{\cf5 "OK"\cf3 \} \cf9 default button\cf3  1 \cf9 with title\cf3  \cf4 pTitle\cf3 \
+			\cf2 end\cf3  \cf2 tell\cf3 \
+		\cf2 end\cf3  \cf2 if\cf3 \
+	\cf2 end\cf3  \cf2 if\cf3 \
+\cf2 end\cf3  \cf4 Growl\cf3 \
+\
+\cf2 on\cf3  \cf4 GetUnixBaseDate\cf3 ()\
+	\cf2 set\cf3  \cf4 dte\cf3  \cf2 to\cf3  
+\b \cf9 current date
+\b0 \cf3 \
+	\cf2 tell\cf3  \cf4 dte\cf3  \cf2 to\cf3  \cf2 set\cf3  \{\cf2 its\cf3  \cf8 year\cf3 , \cf2 its\cf3  
+\i \cf2 month
+\i0 \cf3 , \cf2 its\cf3  \cf8 day\cf3 , \cf2 its\cf3  \cf8 time\cf3 \} \cf2 to\cf3  \{1970, 1, 1, 0\}\
+	\cf4 dte\cf3 \
+\cf2 end\cf3  \cf4 GetUnixBaseDate\cf3 \
+}
