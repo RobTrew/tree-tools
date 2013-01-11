@@ -20,16 +20,16 @@ my ( $id, $title, $author, $location, $quote, $comment, $klink, $editlink );
 $p = HTML::TokeParser->new( shift || $html );
 
 # Extract the fields common to each record:
-# TITLE
-while ( $tag = $p->get_tag('div') ) {
+# TITLE - changed tag from div to span 
+while ( $tag = $p->get_tag('span') ) {
     if ( $tag->[1]{class} eq 'title' ) {
         $title = $p->get_trimmed_text;
         last;
     }
 }
 
-# AUTHOR
-while ( $tag = $p->get_tag('div') ) {
+# AUTHOR - changed tag from div to span
+while ( $tag = $p->get_tag('span') ) {
     if ( $tag->[1]{class} eq 'author' ) {
         $author = $p->get_trimmed_text;
         $author =~ s/^by //;
@@ -37,9 +37,9 @@ while ( $tag = $p->get_tag('div') ) {
     }
 }
 
-# LOOK FOR HIGHLIGHTS FLAGGED AS PERSONAL (RATHER THAN POPULAR)
+# LOOK FOR HIGHLIGHTS FLAGGED AS PERSONAL (RATHER THAN POPULAR) - changed class personalHighlight to yourHighlight
 while ( $tag = $p->get_tag('div') ) {
-    if ( $tag->[1]{class} eq 'highlightRow personalHighlight' ) {
+    if ( $tag->[1]{class} eq 'highlightRow yourHighlight' ) {
 
         # COLLECT THE NOTES
         while ( $tag = $p->get_tag('span') ) {
@@ -97,4 +97,3 @@ while ( $tag = $p->get_tag('div') ) {
 
     }
 }
-
