@@ -1,3 +1,1 @@
--- Simple conversion of Taskpaper projects to FoldingText headers-- Open a copy of a Taskpaper file in FoldingText and run this script
-
-tell application "FoldingText"	tell front document		update nodes at path "//matches ':\\s*$'" with changes {|type|:"heading"}	end tellend tell
+-- Simple conversion of Taskpaper projects to FoldingText headers-- Open a copy of a Taskpaper file in FoldingText and run this script-- Works with any @tags following the ":" (FoldingText distinguishes between [pruned] text and [full] @line)-- Taskpaper projects with one or more preceding tabs acquire additional leading hashes (@level is preserved)tell application "FoldingText"	tell front document		update nodes at path "//matches ':\\s*$'" with changes {|type|:"heading"}	end tellend tell
