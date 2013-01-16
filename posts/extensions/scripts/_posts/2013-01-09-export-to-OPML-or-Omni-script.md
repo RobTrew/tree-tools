@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Export to OPTML or Omni Script
+title: Export to OPML or Omni – Script
 description: Use this script to export to OPML or Omni app formats.
 ---
 
