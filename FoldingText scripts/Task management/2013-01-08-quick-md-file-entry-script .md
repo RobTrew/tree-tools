@@ -52,7 +52,7 @@ Buy oranges  `> *`
 :*simple asterisk to choose from menu of headings in the default file.*
 
 Discard "art of war" and run !!
-:*no `>` – simple append to default heading in default file.*
+:*no `>` – simply append to default heading in default file.*
 
 Collect argument diagrams `>`tasks`>`graph
 :*send text to Tasks header in file Graphics.txt*
@@ -134,6 +134,5 @@ Save as a .scpt on a path indexed by LaunchBar, and reindex that path.
 
 - [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Task%20management/QuickMDEntry.applescript)
 
- 
 
 - [**Download Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/Task%20management/QuickMDEntry.scpt?raw=true)
