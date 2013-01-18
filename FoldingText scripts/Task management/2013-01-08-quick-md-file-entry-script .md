@@ -42,43 +42,43 @@ A script which takes a line from LaunchBar / Alfred (text parameters or 'Instant
 
 ### EXAMPLES
 
-Write report @tag1 @tag2 `>` part of heading text
+	Write report @tag1 @tag2 `>` part of heading text
 
 *heading text pattern is case insensitive - menu pops up if not unique*
 
-Read New York Times @tag3 `>` pattern
+	Read New York Times @tag3 `>` pattern
 
 *the pattern is appended to `grep -i '^#\\+ .*` (string in MarkDown header)*
 
-Buy oranges  `> *`
+	Buy oranges  `> *`
 
 *simple asterisk to choose from menu of headings in the default file.*
 
-Discard "art of war" and run !!
+	Discard "art of war" and run !!
 
 *no `>` – simply append to default heading in default file.*
 
-Collect argument diagrams `>`tasks`>`graph
+	Collect argument diagrams `>`tasks`>`graph
 
 *send text to Tasks header in file Graphics.txt*
 
-Collect argument diagrams `>>`graph
+	Collect argument diagrams `>>`graph
 
 *send text to default header title in file Graphics.txt*
 
-Collect argument diagrams `>>*`
+	Collect argument diagrams `>>*`
 
 *choose a target file from the text files in default folder, use standard header*
 
-Collect argument diagrams `>*>*`
+	Collect argument diagrams `>*>*`
 
 *choose a target file, then choose a header from within it*
 
-Collect argument diagrams `>*`
+	Collect argument diagrams `>*`
 
 *choose a target header from the default file*
 
-Collect argument diagrams
+	Collect argument diagrams
 
 *send text to default file under default collection header*
 
