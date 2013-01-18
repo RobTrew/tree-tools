@@ -46,7 +46,7 @@ Write report @tag1 @tag2 `>` part of heading text
 :*heading text pattern is case insensitive - menu pops up if not unique*
 
 Read New York Times @tag3 `>` pattern
-:*the pattern is appended to `grep -ni '^#\\+ .*` (string in MarkDown header)*
+:*the pattern is appended to `grep -i '^#\\+ .*` (string in MarkDown header)*
 
 Buy oranges  `> *`
 :*simple asterisk to choose from menu of headings in the default file.*
