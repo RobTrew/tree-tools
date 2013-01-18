@@ -37,7 +37,7 @@ A script which takes a line from LaunchBar / Alfred (text parameters or 'Instant
 
 ### SYNTAX
 
- 	line of text [@tag ...] [ `>` header_sub_string ] [ `>` file_sub_string ]
+ 	line of text [@tag ...] [ > header_sub_string ] [ > file_sub_string ]
 
 
 ### EXAMPLES
@@ -121,7 +121,11 @@ Save as a .scpt on a path indexed by LaunchBar, and reindex that path.
 
 ### Use with Alfred
 
-- Paste into an Alfred Applescript extension dialog - NB uncheck 'Background'
+- Paste into an Alfred Applescript extension dialog 
+
+- Uncheck `Background`
+
+- Fill other fields and exit dialog
 
 - Follow the action shortcut with a space, and continue typing.
 
