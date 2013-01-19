@@ -121,8 +121,6 @@ A script which takes a line from LaunchBar / Alfred (text parameters or 'Instant
 
 	Install `https://github.com/bear/parsedatetime`
 
-
-
 	1. Download and expand `https://github.com/bear/parsedatetime/archive/master.zip`
 
 	2. In Terminal.app cd to the unzipped folder (e.g. type cd + space and drag/drop the folder to the Terminal.app command line, then tap return)
