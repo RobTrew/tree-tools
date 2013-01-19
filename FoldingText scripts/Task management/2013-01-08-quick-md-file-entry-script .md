@@ -39,6 +39,14 @@ A script which takes a line from LaunchBar / Alfred (text parameters or 'Instant
 
  	line of text [@tag ...] [ > header_sub_string ] [ > file_sub_string ]
 
+ 	line of text [@tag ...] >*		(choose from menu of headers in default file)
+ 	line of text [@tag ...] >		(abbreviation for above)
+
+ 	line of text [@tag ...] >*>*	(choose from menus of files and headers)
+ 	line of text [@tag ...] >>		(abbreviation for above)
+
+ 	line of text [@tag ...] >>*		(use default header, choose file from menu)
+ 	
 
 ### EXAMPLES
 
@@ -56,7 +64,7 @@ A script which takes a line from LaunchBar / Alfred (text parameters or 'Instant
 
 	Discard "art of war" and run !!
 
-*no `>` – simply append to default heading in default file.*
+*no* `>` *– simply append to default heading in default file.*
 
 	Collect argument diagrams >tasks>graph
 
