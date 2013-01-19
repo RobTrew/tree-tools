@@ -58,9 +58,9 @@ A script which takes a line from LaunchBar / Alfred (text parameters or 'Instant
 
 *the pattern is appended to `grep -i '^#\\+ .*` (string in MarkDown header)*
 
-	Buy oranges  > *
+	Buy oranges  >
 
-*simple asterisk to choose from menu of headings in the default file.*
+*choose from menu of headings in the default file.*
 
 	Discard "art of war" and run !!
 
@@ -78,11 +78,11 @@ A script which takes a line from LaunchBar / Alfred (text parameters or 'Instant
 
 *choose a target file from the text files in default folder, use standard header*
 
-	Collect argument diagrams >*>*
+	Collect argument diagrams >>
 
 *choose a target file, then choose a header from within it*
 
-	Collect argument diagrams >*
+	Collect argument diagrams >
 
 *choose a target header from the default file*
 
