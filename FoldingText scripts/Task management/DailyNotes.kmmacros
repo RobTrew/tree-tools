@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>DisplayKind</key>
+						<string>Briefly</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteShellScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>#!/bin/bash
+wkg="$HOME/Library/Application Support/Notational Velocity/"
+noteprefix="notes-" # specify your own noteprefix
+ystday="$wkg/$noteprefix$(date -v-1d "+%Y-%m-%d").txt"
+touch "$ystday"
+open -a "FoldingText" "$ystday"</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>Variable</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>Name</key>
+				<string>1. Yesterday's file</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>2</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>6400</integer>
+						<key>TriggerRepeat</key>
+						<false/>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>71E7F8C8-B627-4C47-A66E-16F9ECB83858</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>Global Macro Group</string>
+		<key>UID</key>
+		<string>B8D29C96-172A-44B1-A9DD-75E509D56722</string>
+	</dict>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>DisplayKind</key>
+						<string>Briefly</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteShellScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>#!/bin/bash
+wkg="$HOME/Library/Application Support/Notational Velocity/"
+noteprefix="notes-" # specify your own noteprefix
+dayfile="$wkg/$noteprefix$(date "+%Y-%m-%d").txt"
+touch "$dayfile"
+open -a "FoldingText" "$dayfile"</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>Variable</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>Name</key>
+				<string>2. Today's file</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>2</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>6400</integer>
+						<key>TriggerRepeat</key>
+						<false/>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>5AC306A0-D791-43C5-B93C-EECDBCB6E70E</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>Global Macro Group</string>
+		<key>UID</key>
+		<string>B8D29C96-172A-44B1-A9DD-75E509D56722</string>
+	</dict>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>DisplayKind</key>
+						<string>Briefly</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteShellScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>#!/bin/bash
+wkg="$HOME/Library/Application Support/Notational Velocity/"
+noteprefix="notes-" # specify your own noteprefix
+tmrow="$wkg/$noteprefix$(date -v+1d "+%Y-%m-%d").txt"
+touch "$tmrow"
+open -a "FoldingText" "$tmrow"</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>Variable</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>Name</key>
+				<string>3. Tomorrow's file</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>2</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>6400</integer>
+						<key>TriggerRepeat</key>
+						<false/>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>228D1F86-2A3A-46DD-AEC6-2611EB7EBE85</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>Global Macro Group</string>
+		<key>UID</key>
+		<string>B8D29C96-172A-44B1-A9DD-75E509D56722</string>
+	</dict>
+</array>
+</plist>
