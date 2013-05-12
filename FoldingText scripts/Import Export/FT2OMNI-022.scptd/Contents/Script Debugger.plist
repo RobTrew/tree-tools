@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>EACC52C6-A9B7-4C9F-8114-B5D41C331770-16102-0000D588ECACFE1C</key>
+			<key>F381E4CC-EAE1-4391-8B14-BA40891D08DE-16102-0000DB8C547C51B1</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -48,8 +48,8 @@
 							<key>3</key>
 							<array>
 								<integer>256</integer>
-								<integer>326</integer>
-								<integer>136</integer>
+								<integer>325</integer>
+								<integer>137</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -122,7 +122,7 @@
 					<key>variablesState</key>
 					<dict>
 						<key>dividerPos</key>
-						<real>143</real>
+						<real>128</real>
 						<key>scope2.changedItems</key>
 						<true/>
 						<key>scope2.emptyElements</key>
@@ -219,7 +219,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>1540</integer>
+								<integer>17274</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -231,7 +231,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 0}, {890, 686}}</string>
+						<string>{{0, 7400}, {890, 726}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -249,14 +249,14 @@
 					<key>tab.bps</key>
 					<real>433</real>
 					<key>tab.debug</key>
-					<real>439</real>
+					<real>433</real>
 					<key>tab.rsrcs</key>
 					<real>433</real>
 				</dict>
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>EACC52C6-A9B7-4C9F-8114-B5D41C331770-16102-0000D588ECACFE1C</string>
+				<string>F381E4CC-EAE1-4391-8B14-BA40891D08DE-16102-0000DB8C547C51B1</string>
 				<key>windowFrame</key>
 				<string>8 59 1189 819 0 0 1440 878 </string>
 			</dict>
@@ -267,7 +267,7 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>EACC52C6-A9B7-4C9F-8114-B5D41C331770-16102-0000D588ECACFE1C</string>
+				<string>F381E4CC-EAE1-4391-8B14-BA40891D08DE-16102-0000DB8C547C51B1</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
