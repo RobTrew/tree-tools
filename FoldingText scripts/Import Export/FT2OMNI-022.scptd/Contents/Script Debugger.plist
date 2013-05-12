@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>C51FBE4E-83AD-4B85-9F4A-680B6BE47298-10101-000084EC2EBCE35F</key>
+			<key>EACC52C6-A9B7-4C9F-8114-B5D41C331770-16102-0000D588ECACFE1C</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -47,9 +47,9 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>235</integer>
-								<integer>300</integer>
-								<integer>124</integer>
+								<integer>256</integer>
+								<integer>326</integer>
+								<integer>136</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -217,9 +217,9 @@
 						<array>
 							<dict>
 								<key>length</key>
-								<integer>174</integer>
+								<integer>0</integer>
 								<key>location</key>
-								<integer>7481</integer>
+								<integer>1540</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -231,7 +231,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 3345}, {1141, 667}}</string>
+						<string>{{0, 0}, {890, 686}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -256,9 +256,9 @@
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>C51FBE4E-83AD-4B85-9F4A-680B6BE47298-10101-000084EC2EBCE35F</string>
+				<string>EACC52C6-A9B7-4C9F-8114-B5D41C331770-16102-0000D588ECACFE1C</string>
 				<key>windowFrame</key>
-				<string>162 118 1440 760 0 0 1440 878 </string>
+				<string>8 59 1189 819 0 0 1440 878 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -267,13 +267,13 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>C51FBE4E-83AD-4B85-9F4A-680B6BE47298-10101-000084EC2EBCE35F</string>
+				<string>EACC52C6-A9B7-4C9F-8114-B5D41C331770-16102-0000D588ECACFE1C</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>162 118 1440 760 0 0 1440 878 </string>
+					<string>8 59 1189 819 0 0 1440 878 </string>
 				</dict>
 			</dict>
 		</array>

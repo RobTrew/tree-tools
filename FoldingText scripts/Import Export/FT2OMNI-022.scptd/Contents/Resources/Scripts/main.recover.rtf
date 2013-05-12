@@ -8,7 +8,6 @@
 
 \f0\i\fs24 \cf2 -- Copyright (C) 2012 Robin Trew
 \i0 \cf3 \
-\pard\pardeftab480\slleading20\pardirnatural
 
 \i \cf2 --
 \i0 \cf3 \
@@ -89,7 +88,7 @@
 \i0 \cf3 \
 \
 \cf4 property\cf3  \cf5 pTitle\cf3  : "Export from FoldingText"\
-\cf4 property\cf3  \cf5 pVer\cf3  : "0.21"\
+\cf4 property\cf3  \cf5 pVer\cf3  : "0.22"\
 \cf4 property\cf3  \cf5 pAuthor\cf3  : "Robin Trew"\
 \cf4 property\cf3  \cf5 pSite\cf3  : "Originally published on http://forums.omnigroup.com"\
 \
@@ -246,11 +245,19 @@
 	
 \i \cf2 -- AS A NESTED LIST, WITH A FLAG REPORTING ANY .todo FOUND IN THE TREE
 \i0 \cf3 \
-	\cf4 if\cf3  \cf5 IsDev\cf3 () \cf4 then\cf3 \
-		\cf4 set\cf3  \cf5 lstTree\cf3  \cf4 to\cf3  \cf5 GetFTSelnDev\cf3 ()\
-	\cf4 else\cf3 \
-		\cf4 set\cf3  \cf5 lstTree\cf3  \cf4 to\cf3  \cf5 GetFTSeln\cf3 ()\
-	\cf4 end\cf3  \cf4 if\cf3 \
+	
+\i \cf2 --if IsDev() then
+\i0 \cf3 \
+	\cf4 set\cf3  \cf5 lstTree\cf3  \cf4 to\cf3  \cf5 GetFTSelnDev\cf3 ()\
+	
+\i \cf2 --else
+\i0 \cf3 \
+	
+\i \cf2 --	set lstTree to GetFTSeln()
+\i0 \cf3 \
+	
+\i \cf2 --end if
+\i0 \cf3 \
 	\
 	
 \i \cf2 -- PLACE THE TREE IN OMNIFOCUS
@@ -348,36 +355,6 @@
 \b \cf4 run
 \b0 \cf3 \
 \
-\cf4 on\cf3  \cf5 IsDev\cf3 ()\
-	\cf4 set\cf3  \cf5 strLocalSeparator\cf3  \cf4 to\cf3  (
-\i \cf4 text
-\i0 \cf3  2 \cf4 of\cf3  (\cf9 pi\cf3  \cf4 as\cf3  
-\i \cf4 string
-\i0 \cf3 ))\
-	\
-	\cf4 tell\cf3  
-\i \cf4 application
-\i0 \cf3  "FoldingText"\
-		\cf4 set\cf3  \cf5 strVersion\cf3  \cf4 to\cf3  
-\i \cf4 version
-\i0 \cf3 \
-		\cf4 set\cf3  \{\cf5 dlm\cf3 , \cf4 my\cf3  \cf9 text item delimiters\cf3 \} \cf4 to\cf3  \{\cf4 my\cf3  \cf9 text item delimiters\cf3 , "."\}\
-		\cf4 set\cf3  \cf5 lstParts\cf3  \cf4 to\cf3  
-\i \cf4 text items
-\i0 \cf3  \cf4 of\cf3  \cf5 strVersion\cf3 \
-		\cf4 set\cf3  \cf4 my\cf3  \cf9 text item delimiters\cf3  \cf4 to\cf3  \cf5 strLocalSeparator\cf3  
-\i \cf2 -- local number separator
-\i0 \cf3 \
-		\cf4 set\cf3  \cf5 strVersion\cf3  \cf4 to\cf3  \cf5 lstParts\cf3  \cf4 as\cf3  
-\i \cf4 string
-\i0 \cf3 \
-		\cf4 set\cf3  \cf4 my\cf3  \cf9 text item delimiters\cf3  \cf4 to\cf3  \cf5 dlm\cf3 \
-		\
-		\cf4 return\cf3  (\cf5 strVersion\cf3  \cf4 as\cf3  
-\i \cf4 number
-\i0 \cf3 ) > 1\
-	\cf4 end\cf3  \cf4 tell\cf3 \
-\cf4 end\cf3  \cf5 IsDev\cf3 \
 \
 \cf4 on\cf3  \cf5 IsInstalled\cf3 (\cf5 strAppCode\cf3 )\
 	\cf4 try\cf3 \
