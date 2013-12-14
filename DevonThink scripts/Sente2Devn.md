@@ -33,5 +33,5 @@
 
 DOWNLOAD   Ver 0.70    (Should now work with quite large batches of selected records - c. 500+)    
 
-[Sente6ToDevn70](https://github.com/RobTrew/tree-tools/blob/master/DevonThink%20scripts/Sente6ToDevn71.applescript)
+[Sente6ToDevn71](https://github.com/RobTrew/tree-tools/blob/master/DevonThink%20scripts/Sente6ToDevn71.applescript)
 
