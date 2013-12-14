@@ -31,7 +31,7 @@
 
 3. Run the script.  
 
-DOWNLOAD   Ver 0.70    (Should now work with quite large batches of selected records - c. 500+)    
+DOWNLOAD   Ver 0.71    (Growl notification now off by default)    
 
 [Sente6ToDevn71](https://github.com/RobTrew/tree-tools/blob/master/DevonThink%20scripts/Sente6ToDevn71.applescript)
 
