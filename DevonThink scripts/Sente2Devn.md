@@ -31,7 +31,7 @@
 
 3. Run the script.  
 
-DOWNLOAD   Ver 0.71    (Growl notification now off by default)    
+DOWNLOAD   Ver 0.72    (Growl notification now off by default)    
 
-[Sente6ToDevn71](https://github.com/RobTrew/tree-tools/blob/master/DevonThink%20scripts/Sente6ToDevn71.applescript)
+[Sente6ToDevn72](https://github.com/RobTrew/tree-tools/blob/master/DevonThink%20scripts/Sente6ToDevn72.applescript)
 
