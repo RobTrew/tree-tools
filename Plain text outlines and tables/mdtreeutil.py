@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 """
     Pretty-prints MMD tables (included nested/spanning tables),
@@ -15,7 +15,7 @@ DESCRIPTION = 'Prettyprints or converts between MMD tables, \
                             plain text outlines (Markdown / tabbed), and CSV.'
 AUTHOR = 'Rob Trew'
 VER = '.095'
-LICENSE = '''Copyright (c) 2013 Robin Trew
+LICENSE = """Copyright (c) 2013 Robin Trew
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.'''
+THE SOFTWARE."""
 
 SCRIPT_OPTIONS = """
 usage: mdtreeutil [-h] [-v] [-stdin] [-stdout] [-tgt {mmdtable,outline,csv}]
