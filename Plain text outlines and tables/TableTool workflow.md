@@ -16,7 +16,7 @@ To try it select a table in MultiMarkDown Composer, and run the Automator Workfl
 
 →
 
-![Simplest](https://github.com/RobTrew/tree-tools/blob/master/Plain%20text%20outlines%20and%20tables/Spanning.png?raw=true)
+![Simplest](https://github.com/RobTrew/tree-tools/blob/master/Plain%20text%20outlines%20and%20tables/Simple.png?raw=true)
 
     Spanning title
     First stage|||second stage|||third stage
@@ -24,5 +24,5 @@ To try it select a table in MultiMarkDown Composer, and run the Automator Workfl
 
 →
 
-![Spanning]()
+![Spanning](https://github.com/RobTrew/tree-tools/blob/master/Plain%20text%20outlines%20and%20tables/Span.png?raw=true)
 
