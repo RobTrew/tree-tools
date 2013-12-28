@@ -1,4 +1,4 @@
-Script for working with nested and tabular plain text
+Draft script for working with nested and tabular plain text
 
 #### NAME
 
