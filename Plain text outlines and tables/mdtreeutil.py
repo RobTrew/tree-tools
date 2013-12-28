@@ -10,11 +10,11 @@
     (various sub-options for each format)
 """
 
-SCRIPT_NAME = 'mdtreeutil'
+SCRIPT_NAME = 'mdtreeutil.py'
 DESCRIPTION = 'Prettyprints or converts between MMD tables, \
                             plain text outlines (Markdown / tabbed), and CSV.'
 AUTHOR = 'Rob Trew'
-VER = '.096'
+VER = '.097'
 LICENSE = """Copyright (c) 2013 Robin Trew
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,7 +36,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE."""
 
 SCRIPT_OPTIONS = """
-usage: mdtreeutil [-h] [-v] [-stdin] [-stdout] [-tgt {mmdtable,outline,csv}]
+usage: mdtreeutil.py [-h] [-v] [-stdin] [-stdout] [-tgt {mmdtable,outline,csv}]
                   [-src {mmdtable,outline,csv}] [-pp {mono,mmc_tabs}]
                   [-hl {0,1,2,3,4,5,6}] [-b {-,*,+,none}] [-dlm DELIMITER]
                   [-q {all,nonnumeric,none,excel_tab}]
