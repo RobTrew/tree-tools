@@ -16,8 +16,7 @@ To try it select a table in MultiMarkDown Composer, and run the Automator Workfl
 
 →
 
-|:-:	|:-:	|:-:	|  
-| 1	| 2	| 3	|  
+![Simplest](https://github.com/RobTrew/tree-tools/blob/master/Plain%20text%20outlines%20and%20tables/Spanning.png?raw=true)
 
     Spanning title
     First stage|||second stage|||third stage
@@ -25,7 +24,5 @@ To try it select a table in MultiMarkDown Composer, and run the Automator Workfl
 
 →
 
-| Spanning title									|||||||||  
-|:-----:	|:----:	|:-----:	|:-----:	|:-------:	|:----:	|:---:	|:-----:	|:----:	|  
-| First stage			||| second stage			||| third stage			|||  
-| alpha	| beta	| gamma	| delta	| epsilon	| zeta	| eta	| theta	| iota	|  
+![Spanning]()
+
