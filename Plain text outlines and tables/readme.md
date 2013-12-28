@@ -1,19 +1,19 @@
-# Script for working with nested and tabular plain text
+Script for working with nested and tabular plain text
 
-## NAME
+#### NAME
 
 **mdtreeutil** – Markdown tree utility
 
-## SYNOPSIS
+#### SYNOPSIS
 
 **mdtreeutil** [options]
 
-## DESCRIPTION
+#### DESCRIPTION
 
-**mdtreeutil** can be used to convert or reformat text outlines and MultiMarkDown tables (flat or nested). It can convert in either direction, and with various options, between MMD tables, CSV data, and (tab-indented or MD/FT) text outlines.
+**mdtreeutil** can be used to convert or reformat text outlines and MultiMarkdown tables (flat or nested). It can convert in either direction, and with various options, between MMD tables, CSV data, and (tab-indented or MD/FT) text outlines.
 
 
-## USAGE 
+#### USAGE 
     mdtreeutil [-h] [-v] [-stdin] [-stdout] [-tgt {mmdtable,outline,csv}]
                   [-src {mmdtable,outline,csv}] [-pp {mono,mmc_tabs}]
                   [-hl {0,1,2,3,4,5,6}] [-b {-,*,+,none}] [-dlm DELIMITER]
@@ -22,7 +22,7 @@
 Prettyprints or converts between MMD tables, plain text outlines (Markdown /
 tabbed), and CSV.
 
-### Optional arguments:
+##### Optional arguments:
     -h,--help            show this help message and exit
     -v,--version         show program's version number and exit
     -stdin                specify that input should be read from stdin rather
@@ -55,11 +55,11 @@ tabbed), and CSV.
                             quoting pattern for CSV output. CSV output defaults
                             are csv.excel_tab
 
-## CAUTIONS
+#### CAUTIONS
 
 1. Early draft
 2. The clipboard access only work on iOS and Unix/Linux platforms
 
-## HISTORY
+#### HISTORY
 
 *Robin Trew Dec 2013*
