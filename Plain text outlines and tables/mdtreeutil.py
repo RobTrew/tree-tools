@@ -14,7 +14,7 @@ SCRIPT_NAME = 'mdtreeutil'
 DESCRIPTION = 'Prettyprints or converts between MMD tables, \
                             plain text outlines (Markdown / tabbed), and CSV.'
 AUTHOR = 'Rob Trew'
-VER = '.095'
+VER = '.096'
 LICENSE = """Copyright (c) 2013 Robin Trew
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
