@@ -5,7 +5,10 @@ An experimental [workflow](https://github.com/RobTrew/tree-tools/blob/master/Pla
 
 MMC 2.6's built-in **Format > Clean up Selected Table(s)** currently works best with non-spanning tables. It removes any spans, normalising a table back to a non-spanning (non-nested) grid.
 
-I happen to use MMD spanning tables quite a lot, so this workflow tidies the selected table, preserving any spanning and, in the interests of laziness and quick typing, also attempting to to correct or complete under-specified tables.
+I happen to use MMD spanning tables quite a lot, so this workflow tidies the selected table:
+
+1. preserving any spanning, and, 
+2. in the interests of laziness and quick typing, also attempting to to correct or complete under-specified tables.
 
 To try it select a table in MultiMarkDown Composer, and run the Automator Workflow.
 
