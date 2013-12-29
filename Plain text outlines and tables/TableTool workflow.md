@@ -7,10 +7,10 @@ MMC 2.6's built-in **Format > Clean up Selected Table(s)** currently works best 
 
 I happen to use MMD spanning tables quite a lot, so this workflow tidies the selected table:
 
-1. preserving any spanning, and, 
+1. Preserving any spanning, and, 
 2. in the interests of laziness and quick typing, also attempting to to correct or complete under-specified tables.
 
-To try it select a table in MultiMarkDown Composer, and run the Automator Workflow.
+To try it, select a dummy table in MultiMarkDown Composer, and run the Automator Workflow.
 
 #### Examples ####
 
