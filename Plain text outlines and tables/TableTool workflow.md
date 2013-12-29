@@ -48,4 +48,4 @@ To try it, select a dummy table in MultiMarkDown Composer, and run the Automator
     | 0.8M	| 1.2M	| 1.0M	| 1.5M	|  
 
 
-
+![Outline to table conversion](https://raw.github.com/RobTrew/tree-tools/master/Plain%20text%20outlines%20and%20tables/Outline2Table.png)
