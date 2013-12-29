@@ -29,3 +29,23 @@ To try it, select a dummy table in MultiMarkDown Composer, and run the Automator
 
 ![Spanning](https://github.com/RobTrew/tree-tools/blob/master/Plain%20text%20outlines%20and%20tables/Span.png?raw=true)
 
+    # Totals
+
+    - Q1
+	    - 0.8M
+    - Q2
+	    - 1.2M
+    - Q3
+	    - 1.0M
+    - Q4
+	    - 1.5M
+
+→
+
+    | Totals				||||  
+    |:----:	|:----:	|:----:	|:----:	|  
+    | Q1	| Q2	| Q3	| Q4	|  
+    | 0.8M	| 1.2M	| 1.0M	| 1.5M	|  
+
+
+

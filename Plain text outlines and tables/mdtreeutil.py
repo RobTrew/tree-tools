@@ -14,7 +14,7 @@ SCRIPT_NAME = 'mdtreeutil.py'
 DESCRIPTION = 'Prettyprints or converts between MMD tables, \
                             plain text outlines (Markdown / tabbed), and CSV.'
 AUTHOR = 'Rob Trew'
-VER = '.097'
+VER = '.098'
 LICENSE = """Copyright (c) 2013 Robin Trew
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -293,7 +293,7 @@ def _get_parse(str_src, ns_args):
 
     # dct_tree keys are {'tree':, 'rulerrow':, 'alignments':}
     if e_fmt == FMT_CSV:
-        if re.match(r'\w', o_dialect.delimiter) != None:
+        if re.match(r'[\w\d\-\%]', o_dialect.delimiter) != None:
             dct_parse = read_mmd_table(str_src)
         else:
             dct_parse = read_csv(str_src, o_dialect)
