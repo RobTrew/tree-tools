@@ -64,3 +64,7 @@ tabbed), and CSV.
 #### HISTORY
 
 *Robin Trew Dec 2013*
+
+#### EXAMPLE OF USE ####
+
+See the [Automator Workflow](https://github.com/RobTrew/tree-tools/blob/master/Plain%20text%20outlines%20and%20tables/readme.md) for tidying and completing spanning/simple tables in Fletcher Penney's excellent MultiMarkdown Composer.
