@@ -19,6 +19,9 @@ To try it, select a dummy table in MultiMarkDown Composer, and run the Automator
 
 →
 
+    |:-:|:-:|:-:|  
+    | 1 | 2 | 3 | 
+
 ![Simplest](https://github.com/RobTrew/tree-tools/blob/master/Plain%20text%20outlines%20and%20tables/Simple.png?raw=true)
 
     Spanning title
@@ -26,6 +29,11 @@ To try it, select a dummy table in MultiMarkDown Composer, and run the Automator
     alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota
 
 →
+
+    |                       Spanning title                       |||||||||  
+    |:-----:|:----:|:-----:|:-----:|:-------:|:----:|:---:|:-----:|:----:|  
+    |    First stage     |||     second stage     |||   third stage    |||  
+    | alpha | beta | gamma | delta | epsilon | zeta | eta | theta | iota |
 
 ![Spanning](https://github.com/RobTrew/tree-tools/blob/master/Plain%20text%20outlines%20and%20tables/Span.png?raw=true)
 
