@@ -26,6 +26,8 @@ This version excludes any subtrees hidden by folding. To make a copy which alway
 
 ***
 
-- [**View Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/MMD%20Tables/Tree2MMDTable.applescript)
+- [Pair of Keyboard Maestro macros](https://github.com/RobTrew/tree-tools/tree/master/FoldingText%20scripts/MMD%20Tables) for conversion MD Outline ⇄ Nested MMD table. 
+
+- [**View Applescript**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/MMD%20Tables/Tree2MMDTable.applescript)
  
-- [**Download Script**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/MMD%20Tables/Tree2MMDTable.scpt?raw=true)
+- [**Download Applescript**](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%20scripts/MMD%20Tables/Tree2MMDTable.scpt?raw=true)
