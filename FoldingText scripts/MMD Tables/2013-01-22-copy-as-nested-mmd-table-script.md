@@ -1,6 +1,7 @@
 ---
 layout: default
-title: Copy Outline as Nested MMD Table Script
+
+title: Applescript: Copies Outline as Nested MMD Table Script
 description: Copies the selected outlines as a nested MMD table which you can paste elsewhere.
 ---
 
