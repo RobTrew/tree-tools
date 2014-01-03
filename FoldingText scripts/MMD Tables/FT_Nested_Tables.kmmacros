@@ -1449,6 +1449,18 @@ if __name__ == '__main__':
 								<true/>
 								<key>IsDisclosed</key>
 								<true/>
+								<key>MacroActionType</key>
+								<string>Pause</string>
+								<key>Time</key>
+								<string>.25</string>
+								<key>TimeOutAbortsMacro</key>
+								<true/>
+							</dict>
+							<dict>
+								<key>IsActive</key>
+								<true/>
+								<key>IsDisclosed</key>
+								<true/>
 								<key>KeyCode</key>
 								<integer>9</integer>
 								<key>MacroActionType</key>
@@ -1474,7 +1486,7 @@ if __name__ == '__main__':
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>410465042.81501001</real>
+				<real>410468518.57959402</real>
 				<key>Name</key>
 				<string>→ Outline</string>
 				<key>Triggers</key>
@@ -1544,7 +1556,7 @@ if __name__ == '__main__':
 						<key>IsActive</key>
 						<true/>
 						<key>IsDisclosed</key>
-						<true/>
+						<false/>
 						<key>MacroActionType</key>
 						<string>ExecuteAppleScript</string>
 						<key>Path</key>
@@ -2958,6 +2970,18 @@ if __name__ == '__main__':
 								<true/>
 								<key>IsDisclosed</key>
 								<true/>
+								<key>MacroActionType</key>
+								<string>Pause</string>
+								<key>Time</key>
+								<string>.25</string>
+								<key>TimeOutAbortsMacro</key>
+								<true/>
+							</dict>
+							<dict>
+								<key>IsActive</key>
+								<true/>
+								<key>IsDisclosed</key>
+								<true/>
 								<key>KeyCode</key>
 								<integer>9</integer>
 								<key>MacroActionType</key>
@@ -2983,7 +3007,7 @@ if __name__ == '__main__':
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>410465107.08588099</real>
+				<real>410468526.46476001</real>
 				<key>Name</key>
 				<string>→ Table</string>
 				<key>Triggers</key>
