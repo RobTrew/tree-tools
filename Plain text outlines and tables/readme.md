@@ -15,7 +15,8 @@ Draft script for working with nested and tabular plain text
 
 
 #### USAGE 
-    mdtreeutil.py [-h] [-v] [-stdin] [-stdout] [-tgt {mmdtable,outline,csv}]
+    mdtreeutil.py [-h] [-v] [-stdin] [-stdout] [-g]
+                  [-tgt {mmdtable,outline,csv}]
                   [-src {mmdtable,outline,csv}] [-pp {mono,mmc_tabs}]
                   [-hl {0,1,2,3,4,5,6}] [-b {-,*,+,none}] [-dlm DELIMITER]
                   [-q {excel_tab,all,nonnumeric,none}]
