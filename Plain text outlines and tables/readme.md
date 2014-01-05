@@ -1,4 +1,4 @@
-Draft script for working with nested and tabular plain text
+Conversion & prettyprinting [script](https://github.com/RobTrew/tree-tools/blob/master/Plain%20text%20outlines%20and%20tables/mdtreeutil.py) for working with nested and tabular plain text
 
 #### NAME
 
@@ -10,7 +10,7 @@ Draft script for working with nested and tabular plain text
 
 #### DESCRIPTION
 
-**mdtreeutil** can be used to convert or reformat text outlines and MultiMarkdown tables (flat or nested). It can convert in either direction, and with various options, between MMD tables, CSV data, and (tab-indented or MD/FT) text outlines. 
+**[mdtreeutil](https://github.com/RobTrew/tree-tools/blob/master/Plain%20text%20outlines%20and%20tables/mdtreeutil.py)** can be used to convert or reformat text outlines and MultiMarkdown tables (flat or nested). It can convert in either direction, and with various options, between MMD tables, CSV data, and (tab-indented or MD/FT) text outlines. 
 **Note:** By default the script reads from and writes to the (OS X or iOS **clipboard**). Use the -stdin and/or -stdout options to override this.
 
 
