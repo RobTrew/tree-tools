@@ -12,9 +12,9 @@
 
 SCRIPT_NAME = 'mdtreeutil.py'
 DESCRIPTION = 'Prettyprints or converts between MMD tables, \
-                            plain text outlines (Markdown / tabbed), and CSV.'
+                plain text outlines (Markdown / tabbed), and CSV.'
 AUTHOR = 'Rob Trew'
-VER = '.098'
+VER = '.104'
 LICENSE = """Copyright (c) 2013 Robin Trew
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,10 +36,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE."""
 
 SCRIPT_OPTIONS = """
-usage: mdtreeutil.py [-h] [-v] [-stdin] [-stdout] [-tgt {mmdtable,outline,csv}]
-                  [-src {mmdtable,outline,csv}] [-pp {mono,mmc_tabs}]
-                  [-hl {0,1,2,3,4,5,6}] [-b {-,*,+,none}] [-dlm DELIMITER]
-                  [-q {all,nonnumeric,none,excel_tab}]
+usage: mdtreeutil.py [-h] [-v] [-stdin] [-stdout] [-g]
+                     [-tgt {mmdtable,outline,csv}]
+                     [-src {mmdtable,outline,csv}] [-pp {mono,mmc_tabs}]
+                     [-hl {0,1,2,3,4,5,6}] [-b {-,*,+,none}] [-dlm DELIMITER]
+                     [-q {excel_tab,all,nonnumeric,none}]
 
 Prettyprints or converts between MMD tables, plain text outlines (Markdown /
 tabbed), and CSV.
@@ -51,6 +52,8 @@ optional arguments:
                         than from the clipboard.
   -stdout               specify that output should go to stdout rather than
                         the clipboard
+  -g, --globaltidy      tidy all well-formed MMD tables in the input, leaving
+                        other material unchanged
   -tgt {mmdtable,outline,csv}, --targetformat {mmdtable,outline,csv}
                         convert the text to the indicated format and write
                         back to the clipboard or to stdout. Default is
@@ -73,9 +76,7 @@ optional arguments:
   -dlm DELIMITER, --delimiter DELIMITER
                         delimiter string to use for CSV. CSV output defaults
                         are csv.excel_tab
-  -q {all,nonnumeric,none,excel_tab}, --csvquote {all,nonnumeric,none,excel_tab}
-                        quoting pattern for CSV output. CSV output defaults
-                        are csv.excel_tab
+  -q {excel_tab,all,nonnumeric,none}, --cs
 """
 
 # FUNCTION
@@ -159,11 +160,13 @@ OUTLN_SPACED_HEADINGS = True
 
 ESC_PIPE = '&#124;'
 
+
 def main():
     """ 1. GET OPTIONS & ANY TEXT,
-        2. PARSE THE TEXT TO A TREE,
-        3. TRANSLATE THE PARSE TREE TO THE CHOSEN STRING FORMAT,
-        4. and WRITE THE TRANSLATION TO CLIPBOARD OR STDOUT.
+        2. Looping thru tables if (tgt == src == FMT_MMD_TBL) else once,
+            - PARSE THE MATCHING/WHOLE TEXT TO A TREE,
+            - TRANSLATE THE PARSE TREE TO THE CHOSEN STRING FORMAT,
+        3. and WRITE THE TRANSLATION TO CLIPBOARD OR STDOUT.
     """
 
     # 1. GET OPTIONS & ANY TEXT,
@@ -172,7 +175,9 @@ def main():
     # in case we are using the clipboard,
     # record any identification of the platform
     if ns_args.stdin:
-        str_src = '\n'.join(sys.stdin.readlines())
+        str_src = ''.join(sys.stdin.readlines())
+        lst_lines = str_src.splitlines(False)
+        str_src = '\n'.join(lst_lines)
         var_ios = None
     else:
         dct_clip = _get_clip()
@@ -182,28 +187,34 @@ def main():
     if str_src == '':
         return
 
-    # 2. PARSE THE TEXT TO A TREE,
-
-    dct_parse = _get_parse(str_src, ns_args)
-    if dct_parse == None:
-        print 'could not be parsed as ' + ns_args.sourceformat
-        return
-
-    # 3.  TRANSLATE THE PARSE TREE TO THE CHOSEN STRING FORMAT,
-
-    str_tgt_format = ns_args.targetformat
-    bln_mono = (ns_args.prettyprint != TBL_MMD_TABBED)
-    if str_tgt_format == FMT_OUTLN:
-        str_new = write_outline(dct_parse, ns_args.hashlevels,
-                                ns_args.bullet, OUTLN_SPACED_HEADINGS)
-    elif str_tgt_format != FMT_CSV:
-        str_new = write_table(dct_parse, True, TBL_MARGIN_CHARS,
-                              bln_mono)
+    # 2. Translate matches or whole text
+    if ns_args.globaltidy:
+        # Tidy each well-formed table, ignoring captions & other text
+        str_new = _tidy_all_tables(str_src, ns_args)
     else:
-        str_new = write_table(dct_parse, False, TBL_MARGIN_CHARS,
-                              bln_mono)
 
-    # 4. and WRITE TRANSLATION TO CLIPBOARD OR STDOUT.
+        # - PARSE THE WHOLE TEXT TO A TREE,
+
+        dct_parse = _get_parse(str_src, ns_args)
+        if dct_parse == None:
+            print 'could not be parsed as ' + ns_args.sourceformat
+            return
+
+        # -  AND TRANSLATE THE PARSE TREE TO THE CHOSEN STRING FORMAT,
+
+        str_tgt_format = ns_args.targetformat
+        bln_mono = (ns_args.prettyprint != TBL_MMD_TABBED)
+        if str_tgt_format == FMT_OUTLN:
+            str_new = write_outline(dct_parse, ns_args.hashlevels,
+                                    ns_args.bullet, OUTLN_SPACED_HEADINGS)
+        elif str_tgt_format != FMT_CSV:
+            str_new = write_table(dct_parse, True, TBL_MARGIN_CHARS,
+                                  bln_mono)
+        else:
+            str_new = write_table(dct_parse, False, TBL_MARGIN_CHARS,
+                                  bln_mono)
+
+    # 3. WRITE TRANSLATION TO CLIPBOARD OR STDOUT.
 
     if ns_args.stdout:
         print str_new
@@ -229,8 +240,14 @@ def _get_args():
          help='specify that output should go to stdout '
             'rather than the clipboard')
 
-    # Source and target FORMATS (TABLE/CSV/OUTLINE)
+    # Global tidy of all well-formed MMD tables,
+    # ignoring non-material in the input
+    o_parser.add_argument('-g', '--globaltidy', action='store_true',
+         help='tidy all well-formed MMD tables in the input, '
+         'leaving other material unchanged',
+        default = False)
 
+    # Source and target FORMATS (TABLE/CSV/OUTLINE)
     tpl_formats = (FMT_MMD_TBL, FMT_OUTLN, FMT_CSV)
     str_default = tpl_formats[0]
     o_parser.add_argument('-tgt', '--targetformat', choices=tpl_formats,
@@ -277,10 +294,63 @@ def _get_args():
 
     return o_parser.parse_args()
 
+def _tidy_all_tables(str_src, ns_args):
+    """ Loop through the input string,
+        applying a tidy function to all sections
+        which match an MMD table regex.
+    """
+
+    # Based on Fletcher Penney's regexes
+    # https://github.com/fletcher/MultiMarkdown/blob/master/Utilities/
+    # table_cleanup.pl
+    str_line_start = r'[ ]{0,3}'
+    str_table_row = r'[^\n]*?\|[^\n]*?\n'
+    str_first_row = str_line_start + r'^\S+.*?\|.*?\n'
+    str_table_rows = r'(?:\n?' + str_table_row + r')'
+    str_ruler = str_line_start + r'[\|\-\+\:\.]' +\
+        r'[ \t\-\+\|\:\.]*?\|*' + r'[ \t\-\+\|\:\.]*$'
+    str_end = r'\n?[^\n]*?\|[^\n]*$'
+
+    str_rgx_table = ''.join([
+        r'(', str_first_row,           # row 1 starts full left
+        r'(', str_table_row, r')*?)?', # label row(s)
+        str_ruler,                     # ruler
+        str_table_rows, r'+',          # data row(s)
+        str_end])                      # perhaps no final linefeed
+
+    rgx_table = re.compile(str_rgx_table, re.MULTILINE)
+
+    i_posn = 0
+    str_out = ''
+    bln_mono = (ns_args.prettyprint != TBL_MMD_TABBED)
+    for m in rgx_table.finditer(str_src):
+        lng_from, lng_to = m.start(), m.end()
+
+        # Surrounding noise can pass straight through
+        str_out += str_src[i_posn:lng_from]
+
+        # and tables can be translated,
+        str_table = str_src[lng_from:lng_to]
+
+        dct_parse = read_mmd_table(str_table)
+        if dct_parse != None:
+            str_tidy = write_table(dct_parse, True, 1, bln_mono)
+        else:
+            str_tidy = str_table
+
+        str_out += str_tidy
+        i_posn = lng_to
+
+    # appending any trailing residue.
+    str_out += str_src[i_posn:]
+
+    return str_out
+
 def _get_parse(str_src, ns_args):
     """Return {'tree':, 'rulerrow':, 'alignments':} parse
         from text and ArgParse options
     """
+
     if ns_args.sourceformat != None:
         e_fmt = ns_args.sourceformat
         if e_fmt == FMT_CSV:

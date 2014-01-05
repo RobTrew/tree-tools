@@ -26,10 +26,12 @@ tabbed), and CSV.
 ##### Optional arguments:
     -h,--help            show this help message and exit
     -v,--version         show program's version number and exit
-    -stdin                specify that input should be read from stdin rather
+    -stdin                  specify that input should be read from stdin rather
                             than from the clipboard.
-    -stdout               specify that output should go to stdout rather than
+    -stdout                 specify that output should go to stdout rather than
                             the clipboard
+    -g, --globaltidy        tidy all well-formed MMD tables in the input,
+                            leaving other material unchanged
     - tgt {mmdtable,outline,csv},--targetformat {mmdtable,outline,csv}
                             convert the text to the indicated format and write
                             back to the clipboard or to stdout. Default is
@@ -60,6 +62,7 @@ tabbed), and CSV.
 
 1. Early draft
 2. The clipboard access only work on iOS and Unix/Linux platforms
+3. Handles 'top-down' spans (1 parent cell spans many child cells), but does not handle 'bottom up' spans (1 lower cell spans many cells above).
 
 #### HISTORY
 
