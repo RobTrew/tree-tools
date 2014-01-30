@@ -1,18 +1,27 @@
+<<<<<<< HEAD
+
+## OmniFocus to TaskPaper exporter
+## Creates TaskPaper formatted text from the current OmniFocus content panel selection.
 ---
-layout: default
-title: OmniFocus to TaskPaper exporter
-description: Creates TaskPaper formatted text from the current OmniFocus content panel selection.
+=======
+## OmniFocus to TaskPaper exporter
+### Creates TaskPaper formatted text from the current OmniFocus content panel selection.
 ---
 
-{{page.description}}
+>>>>>>> 0493c650859d8466651f7b2a7fabb03ac6a625c7
 
 Two applescripts which export whatever is selected in the right-hand content panel of OmniFocus to a plain Taskpaper format. (Any child nodes descending from the selection are also exported).
 
 One script exports to a text file, the other exports straight to a fresh OS X Mail email.
 
-(Drafted as a stopgap while the Omnifocus Taskpaper exporter remains buggy).
+<<<<<<< HEAD
+*There is a Taskpaper export option in OmniFocus itself, but its output is non-standard. Top level project actions, for example, are not given a leading tab.*
+=======
+(Originally drafted at a time when Omnifocus's own Taskpaper exporter contained bugs.
+haven't checked that recently)
+>>>>>>> 0493c650859d8466651f7b2a7fabb03ac6a625c7
 
-In addition to context and @done tags, it is also intended to output tags of the following form:
+In addition to context and @done tags, this script also outputs tags of the following form:
 
 @start(yyyy-mm-dd) or @start(yyyy-mm-dd hh:mm) - Start date 
 @due(yyyy-mm-dd) or @due(yyyy-mm-dd hh:mm) - Due date

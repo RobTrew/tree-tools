@@ -2,7 +2,7 @@
 -- Ver 0.3  2007 Dec 22
 -- Now exports whatever is displayed and selected in right-hand content panel
 
-property pblnToMail : true
+property pblnToMail : false
 
 on run
 	tell application "OmniFocus"
