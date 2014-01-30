@@ -24,8 +24,8 @@ OmniFocus contexts become Taskpaper tags.
 OmniFocus does have a Taskpaper export option, but it's output is non-standard. Top level project tasks, for example, lack a leading tab.
 
 ##  View Scripts
-[OmniFocus to .taskpaper file](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/TaskPaper%20scripts/OF2TaskPaper-004.applescript)
-[OmniFocus to Taskpaper email](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/TaskPaper%20scripts/OF2TaskPaperMail-004.applescript)
+[OmniFocus to .taskpaper file](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/TaskPaper%20scripts/OF2TaskPaper-005.applescript)
+[OmniFocus to Taskpaper email](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/TaskPaper%20scripts/OF2TaskPaperMail-005.applescript)
 
 
 
