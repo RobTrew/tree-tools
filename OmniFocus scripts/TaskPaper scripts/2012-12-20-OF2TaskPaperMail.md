@@ -1,13 +1,19 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ## OmniFocus to TaskPaper exporter
 ## Creates TaskPaper formatted text from the current OmniFocus content panel selection.
 ---
 =======
+=======
+>>>>>>> 0493c650859d8466651f7b2a7fabb03ac6a625c7
 ## OmniFocus to TaskPaper exporter
 ### Creates TaskPaper formatted text from the current OmniFocus content panel selection.
 ---
 
+<<<<<<< HEAD
+>>>>>>> 0493c650859d8466651f7b2a7fabb03ac6a625c7
+=======
 >>>>>>> 0493c650859d8466651f7b2a7fabb03ac6a625c7
 
 Two applescripts which export whatever is selected in the right-hand content panel of OmniFocus to a plain Taskpaper format. (Any child nodes descending from the selection are also exported).
@@ -15,7 +21,12 @@ Two applescripts which export whatever is selected in the right-hand content pan
 One script exports to a text file, the other exports straight to a fresh OS X Mail email.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 *There is a Taskpaper export option in OmniFocus itself, but its output is non-standard. Top level project actions, for example, are not given a leading tab.*
+=======
+(Originally drafted at a time when Omnifocus's own Taskpaper exporter contained bugs.
+haven't checked that recently)
+>>>>>>> 0493c650859d8466651f7b2a7fabb03ac6a625c7
 =======
 (Originally drafted at a time when Omnifocus's own Taskpaper exporter contained bugs.
 haven't checked that recently)
