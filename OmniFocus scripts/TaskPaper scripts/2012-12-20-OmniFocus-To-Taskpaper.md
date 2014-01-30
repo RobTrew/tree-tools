@@ -4,7 +4,7 @@
 - OmniFocus to .taskpaper file
 - OmniFocus to Taskpaper-formatted email (Apple Mail)
 
-## Usage
+### Usage
 
 Select parent items in the right hand content panel of OmniFocus, and run either of the scripts.
 
@@ -21,9 +21,9 @@ OmniFocus contexts become Taskpaper tags.
 
 ### Note
  
-OmniFocus does have a Taskpaper export option, but it's output is non-standard. Top level tasks, for example, lack a leading tab.
+OmniFocus does have a Taskpaper export option, but its output is non-standard. Top level tasks, for example, lack a leading tab.
 
-##  View Scripts
+###  View Scripts
 [OmniFocus to .taskpaper file](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/TaskPaper%20scripts/OF2TaskPaper-005.applescript)
 
 [OmniFocus to Taskpaper formatted email](https://github.com/RobTrew/tree-tools/blob/master/OmniFocus%20scripts/TaskPaper%20scripts/OF2TaskPaperMail-005.applescript)
