@@ -1,16 +1,14 @@
----
-layout: default
-title: OmniFocus to TaskPaper exporter
-description: Creates TaskPaper formatted text from the current OmniFocus content panel selection.
+## OmniFocus to TaskPaper exporter
+### Creates TaskPaper formatted text from the current OmniFocus content panel selection.
 ---
 
-{{page.description}}
 
 Two applescripts which export whatever is selected in the right-hand content panel of OmniFocus to a plain Taskpaper format. (Any child nodes descending from the selection are also exported).
 
 One script exports to a text file, the other exports straight to a fresh OS X Mail email.
 
-(Drafted as a stopgap while the Omnifocus Taskpaper exporter remains buggy).
+(Originally drafted at a time when Omnifocus's own Taskpaper exporter contained bugs.
+haven't checked that recently)
 
 In addition to context and @done tags, it is also intended to output tags of the following form:
 
