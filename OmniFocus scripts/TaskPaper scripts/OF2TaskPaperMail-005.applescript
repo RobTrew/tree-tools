@@ -1,8 +1,9 @@
-﻿-- Ver 0.4 Adapts to the new requirement that all child bullets are preceded by space
+-- Ver 0.5 Spaces in context names mapped to underscore
+-- Ver 0.4 Adapts to the new requirement that all child bullets are preceded by space
 -- Ver 0.3  2007 Dec 22
 -- Now exports whatever is displayed and selected in right-hand content panel
 
-property pblnToMail : false
+property pblnToMail : true
 
 on run
 	tell application "OmniFocus"
@@ -109,8 +110,16 @@ on ExportTrees(lstTrees, lngIndent, blnContextView)
 				
 				-- Add any tags
 				set oContext to context of oValue
-				if oContext is not equal to missing value then ¬
-					set strTP to strTP & " @" & name of oContext
+				if oContext is not equal to missing value then
+					set strContext to name of oContext
+					set {dlm, my text item delimiters} to {my text item delimiters, space}
+					set lstContext to text items of strContext
+					set my text item delimiters to "_"
+					set strContext to lstContext as string
+					set my text item delimiters to dlm
+					
+					set strTP to strTP & " @" & strContext
+				end if
 				
 				set dteStart to start date of oValue
 				if dteStart is not equal to missing value then ¬
