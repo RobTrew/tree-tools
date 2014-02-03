@@ -4,7 +4,7 @@
 
 ### DESCRIPTION 
 
-A script which displays an editable menu of saved views for the [Taskpaper](http://www.hogbaysoftware.com/products/taskpaper)  application (OS X) by [Hog Bay Software](http://www.hogbaysoftware.com).
+A [script](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/TaskPaperViews-001.applescript) which displays an editable menu of saved views for the [Taskpaper](http://www.hogbaysoftware.com/products/taskpaper)  application (OS X) by [Hog Bay Software](http://www.hogbaysoftware.com).
 
 - Each view can appear on the menu either in the form of a descriptive name, or in raw TaskPaper syntax.
 
@@ -70,7 +70,7 @@ To display both label and query terms in the menu, edit the value of boolean var
         property pblnLabelOnly : false
 
 
-### EXAMPLES 
+### EXAMPLES AND SCREEN SHOTS
 
 Sample file and default display below.
 
@@ -79,3 +79,10 @@ Sample file and default display below.
         Due this week | @due < {now +7d}
         In Progress | not @done and (@start < {today} or @draft or @waiting or @today)
         Overdue | @due < {now}
+
+![Menu of Taskpaper views](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ViewMenu.png)
+
+![Edit mode](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/EditMode.png)
+
+![Cheat sheet](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/CheatSheet.png)
+
