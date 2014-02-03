@@ -80,9 +80,9 @@ Sample file and default display below.
         In Progress | not @done and (@start < {today} or @draft or @waiting or @today)
         Overdue | @due < {now}
 
-![Menu of Taskpaper views](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ViewMenu.png)
+![Menu of Taskpaper views](https://raw.github.com/RobTrew/tree-tools/master/TaskPaper%20scripts/ViewMenu.png)
 
-![Edit mode](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/EditMode.png)
+![Edit mode](https://raw.github.com/RobTrew/tree-tools/master/TaskPaper%20scripts/EditMode.png)
 
-![Cheat sheet](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/CheatSheet.png)
+![Cheat sheet](https://raw.github.com/RobTrew/tree-tools/master/TaskPaper%20scripts/CheatSheet.png)
 
