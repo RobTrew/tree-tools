@@ -1,6 +1,6 @@
 ### NAME
 
-**TaskPaper Views** – Displays a menu of saved queries which can use relative dates
+**TaskPaper Views** – Offers a choice of saved queries which can use relative dates
 
 ### DESCRIPTION 
 
