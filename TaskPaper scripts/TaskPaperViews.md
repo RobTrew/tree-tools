@@ -4,7 +4,7 @@
 
 ### DESCRIPTION 
 
-A [script](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/TaskPaperViews-001.applescript) which displays an editable menu of saved views for the [Taskpaper](http://www.hogbaysoftware.com/products/taskpaper)  application (OS X) by [Hog Bay Software](http://www.hogbaysoftware.com).
+A [script](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/TaskPaperViews-002.applescript) which displays an editable menu of saved views for the [Taskpaper](http://www.hogbaysoftware.com/products/taskpaper)  application (OS X) by [Hog Bay Software](http://www.hogbaysoftware.com).
 
 - Each view can appear on the menu either in the form of a descriptive name, or in raw TaskPaper syntax.
 
