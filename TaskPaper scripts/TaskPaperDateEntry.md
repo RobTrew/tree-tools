@@ -1,16 +1,17 @@
 ### NAME
 
-**TaskPaper Date Entry** – Translates relative and natural language date/time expressions into stand TaskPaper formats
+**TaskPaper Date Entry** – Translates relative and natural language date/time expressions into standard TaskPaper formats
 
 ### DESCRIPTION 
 
-A [script](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/TaskPaperDateEntry-001.applescript) which facilitates entering date/times in the [Taskpaper](http://www.hogbaysoftware.com/products/taskpaper)  application (OS X) by [Hog Bay Software](http://www.hogbaysoftware.com).
+A [script](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/TaskPaperDateEntry-004.applescript) which facilitates entering date/times in the [Taskpaper](http://www.hogbaysoftware.com/products/taskpaper)  application (OS X) by [Hog Bay Software](http://www.hogbaysoftware.com).
 
 Displays a dialog which:
-	1. allows you to enter a relative date/time expression in natural language, and 
-	2. either
-		1. pastes a TaskPaper version of the corresponding date (and, optionally, time), at the current cursor position in TaskPaper, or
-		2. simply places the date/time in the clipboard
+
+1. allows you to enter a relative date/time expression in natural language, and 
+2. either
+	- pastes a TaskPaper version of the corresponding date (and, optionally, time), at the current cursor position in TaskPaper, or
+	- simply places the date/time in the clipboard
 
 
 **Note** This script requires installation of Mike Taylor and Darshana Chhajed's Python [parsedatetime](https://github.com/bear/parsedatetime) module:
@@ -36,7 +37,7 @@ Edit the value of boolean variable *pblnPaste* near the top of the script.
         property pblnPaste : false
 
 
-### SCREEN SHOT
+#### Screen shot
 
-![Cheat sheet](https://raw.github.com/RobTrew/tree-tools/master/TaskPaper%20scripts/TPDates.png)
+![Translating relative to absolute dates](https://raw.github.com/RobTrew/tree-tools/master/TaskPaper%20scripts/TPDates.png)
 
