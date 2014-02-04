@@ -25,9 +25,7 @@ Displays a dialog which:
 	
             sudo python setup.py install
     
-        Due this week | @due < {now +7d} |
-
-
+    
 #### To disable direct pasting into TaskPaper 
 
 You can adapt the script to only place the date in the clipboard, rather than pasting it into TaskPaper.
