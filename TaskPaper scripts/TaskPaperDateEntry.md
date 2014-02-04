@@ -16,12 +16,12 @@ Displays a dialog which:
 
 **Note** This script requires installation of Mike Taylor and Darshana Chhajed's Python [parsedatetime](https://github.com/bear/parsedatetime) module:
 	
-	1. Visit [https://github.com/bear/parsedatetime](https://github.com/bear/parsedatetime)
-	2. Download and expand [https://github.com/bear/parsedatetime/archive/master.zip](https://github.com/bear/parsedatetime/archive/master.zip)
-	3. in Terminal.app, cd to the unzipped folder 
+1. Visit [https://github.com/bear/parsedatetime](https://github.com/bear/parsedatetime)
+2. Download and expand [https://github.com/bear/parsedatetime/archive/master.zip](https://github.com/bear/parsedatetime/archive/master.zip)
+3. in Terminal.app, cd to the unzipped folder 
    
-		(e.g. type cd followed by a space, and drag/drop the folder to the Terminal.app command line, then tap return)
-	4. Enter:
+	(e.g. type cd followed by a space, and drag/drop the folder to the Terminal.app command line, then tap return)
+4. Enter:
 	
             sudo python setup.py install
     
