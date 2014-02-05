@@ -29,7 +29,7 @@ A [script](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts
     
 #### The menu of custom Taskpaper views is stored in a simple text file
 
-- Each custom View is stored as a lines of plain text in a menu file.
+- Each custom View is stored as a line of plain text in a menu file.
 - The default file name is:
 
         TPCustomViews.txt 
