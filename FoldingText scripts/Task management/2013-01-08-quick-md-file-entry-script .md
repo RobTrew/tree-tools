@@ -27,7 +27,7 @@ A script which takes a line from LaunchBar / Alfred (text parameters or 'Instant
 
 ### USE
 
-- Invoke the script with **Launchbar**, and tap the space-bar to open a text field (or in **Alfre**, type a space after the shortcut, and continue typing),
+- Invoke the script with **Launchbar**, and tap the space-bar to open a text field (or in **Alfred**, type a space after the shortcut, and continue typing),
 
 - enter a string using `>` to separate the text and tags from any header string,
 
