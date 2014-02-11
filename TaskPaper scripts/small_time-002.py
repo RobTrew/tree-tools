@@ -1,7 +1,7 @@
 
 SCRIPT_NAME = 'SmallTime - Very Small Relative Datetime Language'
-DESCRIPTION = 'Translates relative and informal date/time expressions into \
-                standard TaskPaper format'
+DESCRIPTION = 'Translates relative and informal date/time expressions
+                into standard TaskPaper format'
 AUTHOR = 'Rob Trew'
 VER = '.02'
 LICENSE = """Copyright (c) 2014 Robin Trew

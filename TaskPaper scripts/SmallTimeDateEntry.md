@@ -13,7 +13,7 @@ The translation function, which takes an informal or relative time expression (e
 
 ### EXAMPLES AND SCREEN SHOTS
 
-Running the examples() function will give the following of input phrases and output date/time expressions:
+Running the examples() function will show the following samples of input phrases and output date/time expressions:
 
     ('today +7d', '2014-02-18')
     ('11:20 +4d', '2014-02-15 11:20')
