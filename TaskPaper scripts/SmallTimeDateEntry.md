@@ -42,5 +42,5 @@ Running the examples() function will give the following of input phrases and out
 
 ### SOURCE
 
-
+The [Python source](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/small_time.py) is on Github at at [https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/small_time.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/small_time.py)
 
