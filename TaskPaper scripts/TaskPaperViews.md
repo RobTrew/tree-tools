@@ -88,4 +88,4 @@ Sample file and default display below.
 
 ### SOURCE
 
-[TaskPaperViews-005.applescript](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/TaskPaperViews-003.applescript)
+[TaskPaperViews.applescript](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/TaskPaperViews-005.applescript)
