@@ -10,10 +10,10 @@ The translation function, which takes an informal or relative time expression (e
 
     phrase_to_datetime(str_expression)
 
-#### Also contains functions for
-1. Batch updating/translating all the relative @key(relative date) tags in a piece of text, and: 
+#### Also contains functions for:
+1. Batch updating or translating all the relative @key(relative date) tags in a piece of text, and: 
 	1. Reporting how many tags of each kind were updated
-	2. Listing the keys of any unchanged @key(absolute date) were found
+	2. Listing the keys of any unchanged @key(absolute date) which were found
 2. Batch deferring (or bringing ahead) all @key(date) tags  (relative or absolute) of specified kinds e.g. ['start', 'due'] by specified amounts of time, e.g. '+4d', '-1w' etc
 
 
