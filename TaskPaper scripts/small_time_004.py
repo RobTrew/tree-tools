@@ -60,10 +60,11 @@ def main():
 #    print tag_updates(TXT_SAMPLE2)
 
     print "Text with translations and date deferrals automatically applied:\n"
-    print "FROM (start & due +4d):", TXT_SAMPLE
-    print "TO: ", defer_dates(['start', 'due'], '+4d', TXT_SAMPLE), '\n'
-    print "FROM (start only -1w):", TXT_SAMPLE2
-    print "TO: ", defer_dates(['start'], '-1w', TXT_SAMPLE2)
+    print "FROM :", TXT_SAMPLE
+    print "TO (start & due +4d):", defer_dates(['start', 'due'], \
+        '+4d', TXT_SAMPLE), '\n'
+    print "FROM :", TXT_SAMPLE2
+    print "TO (start only -1w): ", defer_dates(['start'], '-1w', TXT_SAMPLE2)
     print '\n', examples()
 
 def examples():
