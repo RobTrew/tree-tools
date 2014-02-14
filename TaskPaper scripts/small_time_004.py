@@ -59,8 +59,19 @@ def main():
 #    workflow.set_output(update_tag(str_tag))
 #    print tag_updates(TXT_SAMPLE2)
 
-    print defer_dates(['start', 'due'], '+1d', TXT_SAMPLE)
-    # print defer_dates(['start', 'due'], '+1d', TXT_SAMPLE2)
+    print "Text with translations and date deferrals automatically applied:\n"
+    print defer_dates(['start', 'due'], '+4d', TXT_SAMPLE), '\n'
+    print defer_dates(['start'], '-1w', TXT_SAMPLE2)
+    print '\n', examples()
+
+def examples():
+    """Sample of expressions which can be translated"""
+    lst = ['today +7d', '11:20 +4d', '2014-02-15 +1w', 'jan 10', \
+    'jan 10 2pm', '10 jan at 10am', 'now-3d', '+7d', '7', '11:15',\
+     '11:15p', '11p', 'aug', 'jan 5', 'aug 2019', 'now', "tomorrow 2pm",\
+      "now +4h", 'today + 1w', '1w', '+3y', 'w', '1w']
+    for tpl in zip(lst, [phrase_to_datetime(str_e) for str_e in lst]):
+        print tpl
 
 
 def defer_dates(lst_tag_types, str_delta, str_txt):
@@ -217,14 +228,7 @@ def phrase_to_datetime(str_phrase):
     """Informal phrase to TaskPaper format"""
     return _tp_fmt(rel_date(str_phrase))
 
-def examples():
-    """Sample of expressions which can be translated"""
-    lst = ['today +7d', '11:20 +4d', '2014-02-15 +1w', 'jan 10', \
-    'jan 10 2pm', '10 jan at 10am', 'now-3d', '+7d', '7', '11:15',\
-     '11:15p', '11p', 'aug', 'jan 5', 'aug 2019', 'now', "tomorrow 2pm",\
-      "now +4h", 'today + 1w', '1w', '+3y', 'w', '-w']
-    for tpl in zip(lst, [phrase_to_datetime(str_e) for str_e in lst]):
-        print tpl
+
 
 def up_date(dte, r_quant, str_unit, bln_post_colon):
     """    Adjust a date in the light of a (quantity, unit) tuple,
