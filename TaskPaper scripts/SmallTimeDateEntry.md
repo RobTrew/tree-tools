@@ -1,6 +1,7 @@
 ### NAME
 
 **SmallTime date entry** – Python script for translating simple informal and relative date-time expressions into standard TaskPaper format YYYY-MM-DD [HH:MM]
+and for applying deferrals and forward time shifts  (+4d  -1w  etc)
 
 ### DESCRIPTION 
 
@@ -48,5 +49,5 @@ Running the examples() function will show the following samples of input phrases
 
 ### SOURCE
 
-The [Python source](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/small_time_004.py) is on Github at at [https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/small_time.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/small_time_004.py)
+The [Python source](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/small_time_006.py) is on Github at at [https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/small_time.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/small_time_006.py)
 
