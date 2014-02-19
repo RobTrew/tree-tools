@@ -60,11 +60,11 @@ def main():
 
 def tag_range(str_text, i_from, i_to, lst_tag_types):
     """ - IN
-					- text line
-					- selection from
-					- selection to
-				- OUT
-					- spans of tag(s) under cursor or in selection
+    		- text line
+    		- selection from
+    		- selection to
+    	- OUT
+    		- spans of tag(s) under cursor or in selection
     """
     rgx_tag = re.compile(target_pattern(lst_tag_types))
     return  [o_match.span() for o_match in rgx_tag.finditer(str_text) if
