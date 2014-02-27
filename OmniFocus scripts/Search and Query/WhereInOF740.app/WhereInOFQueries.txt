@@ -1,0 +1,39 @@
+SHORTCUTS:
+projects where <txt> is in name --sh cl st=incomplete
+folders where <txt> is in name --sh cl st=incomplete
+projects where <txt> is in name AND <txt2> is in name --sh cl st=incomplete gr=folder
+projects where [STALLED] and <txt> is in name --sh cl st=incomplete
+projects where (status is not done) and (next review date < today + <num> * days) --sh si=all gr=folder
+tasks where completion date > today - 6d --sh cl st=complete gr=folder
+
+PROJECTS:
+projects where number of available tasks is 0
+projects where number of tasks is 0
+projects where ((unit of review interval) ­ week) or ((steps of review interval) ­ 1)
+projects where its repetition is not missing value
+projects where (creation date ³ <dte1>) and (creation date ² <dte2>)
+projects where ((singleton action holder is false) and (number of available tasks < 3) and (number of completed tasks > 10))
+projects where modification date > (today - <num> * weeks)
+projects where modification date > <dte>
+projects where <txt> is in name
+projects where (<txt> is in name) AND (<txt2> is in name)
+projects where (<txt> is in name) OR (<txt2> is in name)
+projects where (<txt> is in name) or (<txt> is in note)
+
+TASKS:
+tasks where (flagged is true) or (due date ² today)
+tasks where (due date ³ today) and (due date ² today + <num> * weeks)
+tasks where its repetition is not missing value
+tasks where estimated minutes is not missing value
+tasks where estimated minutes > <num>
+tasks where estimated minutes ² <num>
+tasks where modification date > (today - <num> * days)
+tasks where modification date > <dte>
+tasks where <txt> is in name
+tasks where (<txt> is in name) or (<txt> is in note)
+
+CONTEXTS:
+contexts where (available task count > 0)
+contexts where (available task count is 0)
+contexts where remaining task count > 0
+contexts where [STALLED]

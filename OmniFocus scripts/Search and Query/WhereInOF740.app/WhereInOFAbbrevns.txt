@@ -1,0 +1,65 @@
+SYNTAX: 
+1. One abbreviation per line.
+2. Abbreviations are class-specific. Abbreviations for TASKS searches require no suffix, but others must terminate in -projects|-contexts|-folders
+3. Synonyms of the same abbreviation must be separated by a pipe character |
+4. The abbreviation(s) and the expansion text must be separated by ->
+
+[B]PlanningMode:Sidebar[/B]
+
+[Remaining-projects]->((status is active) or (status is on hold) and ((effectively hidden of its folder is false) or (its folder is missing value)))
+[Active-projects]->((status is active) and ((effectively hidden of its folder is false) or (its folder is missing value)))
+[Stalled-projects]->((number of tasks is number of completed tasks) and (status is active) and (singleton action holder is false) and ((effectively hidden of its folder is false) or (its folder is missing value)))
+[Pending-projects]->((status is active) and (start date > now) and ((effectively hidden of its folder is false) or (its folder is missing value)))
+[OnHold-projects]|[on-hold-projects]->((status is on hold) and ((effectively hidden of its folder is false) or (its folder is missing value)))
+[Dropped-projects]->((status is dropped) or (effectively hidden of its folder is true))
+[Completed-projects]->(status is done)
+
+[B]PlanningMode|ContextMode:Status[/B]
+
+[Remaining]|[incomplete]->(completed is false)
+[NextAction]|[next]->(next is true)
+[I]Available: tasks which are neither waiting their turn in a sequential project, nor already completed, nor deferred by a future start date (either of their own or inherited from a project or Single Action list), nor out of action because their project or context is on hold or dropped.[/I]
+[Available]->(blocked is false) and (completed is false) and ((start date is missing value) or (start date < now)) and ((its containing project is missing value) or (status of its containing project is active) and ((start date of its containing project < now) or (start date of its containing project is missing value))) and ((its context is missing value) or ((allows next action of its context is true) and (hidden of its context is false))) 
+[Completed]|[complete]->(completed is true)
+
+[B]PlanningMode|ContextMode:Flagged[/B]
+
+[Flagged]->(flagged is true)
+[Unflagged]->(flagged is false)
+
+[B]PlanningMode|ContextMode:Duration[/B]
+
+[5min]|[5m]->(estimated minutes <= 5)
+[15min]|[15m]->(estimated minutes <= 15)
+[30min]|[30m]->(estimated minutes <= 30)
+[1hour]|[60m]->(estimated minutes <= 60)
+[>1hour]|[long]->(estimated minutes > 60)
+[Unestimated]->(estimated minutes is missing value)
+
+[B]ContextMode:Sidebar[/B]
+
+[Remaining-Contexts]|[available-contexts]->(effectively hidden is false)
+[Active-Contexts]->(remaining task count > 0)
+[Stalled-Contexts]|[inactive-contexts]->(remaining task count is 0)
+[OnHold-Contexts]|[on-hold-contexts]->(status is on hold)
+[Dropped-Contexts]|[unavailable-contexts]->(effectively hidden is true)
+
+
+[B]ContextMode:Due (within Flagged menu)[/B]
+[I]The value of 'soon' below depends on the setting in OF Preferences > Data > "Due Soon" is in the next N days. Code defining 'soon' is given in the next post in this thread.[/I]
+
+[DueSoon]|[due]->[DueSoon]|[due]->(due date ² soon)
+[DueOrFlagged]|[due-or-flagged]->[DueOrFlagged]|[due-or-flagged]->((due date ² soon) or (flagged is true))
+[DueAndFlagged]|[due-and-flagged]->[DueAndFlagged]|[due-and-flagged]->((due date ² soon) and (flagged is true))
+
+[Badges]->(completed is false) and (due date < soon) and (((status of its containing project is active) and (effectively hidden of folder of its containing project is false or folder of its containing project is missing value)) or (in inbox is true))
+[Orange]->(completed is false) and (due date > now) and (due date < soon) and (((status of its containing project is active) and (effectively hidden of folder of its containing project is false or folder of its containing project is missing value)) or (in inbox is true))
+[Red]->(completed is false) and (due date < now) and (((status of its containing project is active) and (effectively hidden of folder of its containing project is false or folder of its containing project is missing value)) or (in inbox is true))
+
+
+
+
+
+
+
+
