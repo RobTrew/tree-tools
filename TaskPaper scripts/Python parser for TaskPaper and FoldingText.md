@@ -1,6 +1,6 @@
 ### Python parser for TaskPaper and FoldingText formats
 
-Parses [TaskPaper](www.hogbaysoftware.com) or [FoldingText](www.FoldingText.com) plain text documents to a list of dictionaries using the same node attributes as Jesse Grosjean's reference parser at [https://www.npmjs.org/package/foldingtext](https://www.npmjs.org/package/foldingtext).
+Parses [TaskPaper](www.hogbaysoftware.com) or [FoldingText](www.FoldingText.com) plain text documents to a list of dictionaries using the same node attributes as Jesse Grosjean's reference parser at [https://www.npmjs.org/package/foldingtext]().
 
 Source: [ft_tp_parse_020.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_020.py)
 
