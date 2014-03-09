@@ -21,6 +21,18 @@ This python parser has the following limitations:
 
 This is intended simply as a stop-gap for contexts in which the use of Javascript is inconvenient, or where there is a need for a simple light-weight parse which is compatible with the output of the reference parser produced by Jesse Grosjean, [www.HogBaySoftware.com](www.HogBaySoftware.com) and [www.foldingtext.com](www.HogBaySoftware.com)
 
+#### Example of use:
+
+Simple [Editorial for iPad](http://omz-software.com/editorial/) workflow which:
+1. Shows a menu of the tags in the current TaskPaper-formatted document, and
+2. lists tasks by the chosen tag(s), prefixed by their enclosing projects.
+
+Source and installation at: [Get Project::task by tag](http://www.editorial-workflows.com/workflow/5867337911631872/NhS8zgfMg9E) 
+
+[http://www.editorial-workflows.com/workflow/5867337911631872/NhS8zgfMg9E](http://www.editorial-workflows.com/workflow/5867337911631872/NhS8zgfMg9E)
+
+[www.editorial-workflows.com](http://www.editorial-workflows.com)
+
 #### Output
 
 The parse translates the lines of the utf8 input text to a list of dictionaries, each of which has the following keys, (shown below with their correspondence to elements in the official www.foldingtext.com Javascript reference parser)
