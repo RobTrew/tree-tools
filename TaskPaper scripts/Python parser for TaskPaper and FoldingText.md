@@ -50,31 +50,32 @@ Python dictionary key | Matching element in the official reference parser
 - outline nesting levels,
 - parent-child relationships, and
 - node types:
-	- **FoldingText**:
+	
+**FoldingText**:
 
-		Module Constant | Python dictionary and reference parser node type strings
-		-- | --
-		TYP_ROOT | 'root'
-		TYP_HEAD | 'heading'
-		TYP_UNORD | 'unordered'
-		TYP_ORD | 'ordered'
-		TYP_BODY | 'item'
-		TYP_QUOTE | 'blockquote'
-		TYP_CODE | 'codeblock'
-		TYP_LINK | 'linkdef'
-		TYP_PROP | 'property'
-		TYP_TERM | 'term'
-		TYP_DEFN | 'definition'
-		TYP_RULE | 'horizontalrule'
-		TYP_EMPTY | 'empty'
+Module Constant | Python dictionary and reference parser node type strings
+--- | ---
+TYP_ROOT | 'root'
+TYP_HEAD | 'heading'
+TYP_UNORD | 'unordered'
+TYP_ORD | 'ordered'
+TYP_BODY | 'item'
+TYP_QUOTE | 'blockquote'
+TYP_CODE | 'codeblock'
+TYP_LINK | 'linkdef'
+TYP_PROP | 'property'
+TYP_TERM | 'term'
+TYP_DEFN | 'definition'
+TYP_RULE | 'horizontalrule'
+TYP_EMPTY | 'empty'
 
-	- **TaskPaper**:
+**TaskPaper**:
 
-		Module Constant | Python dictionary and reference parser node type strings
-		-- | --	
-		TYP_PROJ | 'project'
-		TYP_TASK | 'task'
-		TYP_NOTE | 'note'	(temporarily '_comment_' in current build of TaskPaper 3.0)
+Module Constant | Python dictionary and reference parser node type strings
+--- | ---	
+TYP_PROJ | 'project'
+TYP_TASK | 'task'
+TYP_NOTE | 'note' (temporarily '_comment_' in current build of TaskPaper 3.0)
 
 
 NB the parser leaves in-line Markdown formatting unparsed.
