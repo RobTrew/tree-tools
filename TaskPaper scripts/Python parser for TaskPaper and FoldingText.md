@@ -24,6 +24,7 @@ This is intended simply as a stop-gap for contexts in which the use of Javascrip
 #### Example of use:
 
 Simple [Editorial for iPad](http://omz-software.com/editorial/) workflow which:
+
 1. Shows a menu of the tags in the current TaskPaper-formatted document, and
 2. lists tasks by the chosen tag(s), prefixed by their enclosing projects.
 
