@@ -2,7 +2,7 @@
 
 Parses [TaskPaper](www.hogbaysoftware.com) or [FoldingText](www.FoldingText.com) plain text documents to a list of dictionaries using the same node attributes as Jesse Grosjean's reference parser at [https://www.npmjs.org/package/foldingtext](https://www.npmjs.org/package/foldingtext).
 
-Source: 
+Source: [ft_tp_parse_019.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_019.py)
 
 #### Goal
 
@@ -23,7 +23,7 @@ This is intended simply as a stop-gap for contexts in which the use of Javascrip
 
 #### Output
 
-The parse translates the lines of the text to a list of dictionaries, each of which has the following keys, (shown with their correspondence to elements in the www.foldingtext.com Javascript reference parser)
+The parse translates the lines of the utf8 input text to a list of dictionaries, each of which has the following keys, (shown below with their correspondence to elements in the official www.foldingtext.com Javascript reference parser)
 
 Python dictionary key | Matching element in the official reference parser
 ---|---
@@ -82,4 +82,7 @@ NB the parser leaves in-line Markdown formatting unparsed.
 2. `get_ft_tp_parse(str_text, bln_is_tp)`
 
 	Depending on the boolean value of `bln_is_tp`, parses the text either as [TaskPaper 3.0](http://support.foldingtext.com/discussions/development-versions) format or as [FoldingText 2.0](http://support.foldingtext.com/discussions/development-versions) format, generating a list of Python dictionaries, one for each line of the text, with the key/value pairs indicated above.
+#### Source
+
+Source: [ft_tp_parse_019.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_019.py)
 
