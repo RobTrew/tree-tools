@@ -72,7 +72,7 @@ TYP_ROOT | 'root'
 TYP_HEAD | 'heading'
 TYP_UNORD | 'unordered'
 TYP_ORD | 'ordered'
-TYP_BODY | 'item'
+TYP_BODY | 'body' (since FoldingText 2.0 Dev 722, previously 'item')
 TYP_QUOTE | 'blockquote'
 TYP_CODE | 'codeblock'
 TYP_LINK | 'linkdef'
@@ -88,7 +88,7 @@ Module Constant | Python dictionary and reference parser node type strings
 --- | ---	
 TYP_PROJ | 'project'
 TYP_TASK | 'task'
-TYP_NOTE | 'note' (temporarily '_comment_' in current build of TaskPaper 3.0)
+TYP_NOTE | 'note' (since TaskPaper 3.0 Dev 124, previously 'comment')
 
 
 NB the parser leaves in-line Markdown formatting unparsed.
