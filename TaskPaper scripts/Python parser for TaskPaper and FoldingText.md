@@ -2,7 +2,7 @@
 
 Parses [TaskPaper](www.hogbaysoftware.com) or [FoldingText](www.FoldingText.com) plain text documents to a list of dictionaries using the same node attributes as Jesse Grosjean's reference parser at [https://www.npmjs.org/package/foldingtext]().
 
-Source: [ft_tp_parse_020.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_020.py)
+Source: [ft_tp_parse_021.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_021.py)
 
 #### Goal
 
@@ -105,5 +105,5 @@ NB the parser leaves in-line Markdown formatting unparsed.
 	Depending on the boolean value of `bln_is_tp`, parses the text either as [TaskPaper 3.0](http://support.foldingtext.com/discussions/development-versions) format or as [FoldingText 2.0](http://support.foldingtext.com/discussions/development-versions) format, generating a list of Python dictionaries, one for each line of the text, with the key/value pairs indicated above.
 #### Source
 
-Source: [ft_tp_parse_020.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_020.py)
+Source: [ft_tp_parse_021.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_021.py)
 
