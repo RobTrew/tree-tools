@@ -4,6 +4,9 @@ Parses [TaskPaper](www.hogbaysoftware.com) or [FoldingText](www.FoldingText.com)
 
 Source: [ft_tp_parse_022.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_022.py)
 
+Shorter TaskPaper-only version (drops mode and context keys):
+[tp_light_parse_022.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/tp_light_parse_022.py)
+
 #### Goal
 
 This parser aims to produce the same output as the www.foldingtext.com reference parser, and later versions will be adjusted to match any further changes in that parser.
@@ -106,4 +109,7 @@ NB the parser leaves in-line Markdown formatting unparsed.
 #### Source
 
 Source: [ft_tp_parse_022.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_022.py)
+
+Shorter TaskPaper-only version (drops mode and context keys):
+[tp_light_parse_022.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/tp_light_parse_022.py)
 
