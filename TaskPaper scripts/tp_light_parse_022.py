@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Parse TaskPaper text to a list of dictionaries
+"""	Parse TaskPaper text to a list of dictionaries
 	using the same property names as Jesse Grosjean's reference parser at
 	https://www.npmjs.org/package/foldingtext.
 
@@ -12,7 +12,7 @@
 	Defines one main function:
 
 
-	get_ft_tp_parse(str_text)
+	get_tp_parse(str_text)
 
 
 	(parses the text as TaskPaper 3.0 format)
@@ -217,8 +217,6 @@ def get_tp_parse(str_text):
 	""" Parse as TaskPaper
 		Return a list of dictionaries with key:values compatible
 		with Jesse Grosjean's reference parser
-
-		[ use is_tp(str_text) to detect the format of unknown source ]
 	"""
 
 	def _set_levels(lst_all, lst_chiln, lng_level):
@@ -368,8 +366,6 @@ def outline_nodes(str_in):
 		if lng_chars < 1:
 			dct_node[ATT_TYPE] = TYP_EMPTY
 		else:
-			# TaskPaper project ?
-			# if bln_tp:
 			_read_tags(dct_node)
 			str_point = dct_node[ATT_TEXT]
 			o_match = rgx_tp_prj.match(str_point)
