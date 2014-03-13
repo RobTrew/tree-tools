@@ -40,8 +40,6 @@
 	the use of Javascript is not an option, or where there is a need for
 	a simple light-weight parse which is compatible with the output
 	of Jesse Grosjean, Hog Bay and www.foldingtext.com's reference parser.
-
-
 """
 
 # Copyright Robin Trew 2014
@@ -142,13 +140,12 @@ def main():
 	if str_text == '':
 		return 0
 
-	# TEST WHETHER THE INPUT STRING IS TASKPAPER,
-	# ASSUME FOLDINGTEXT OTHERWISE, AND ATTEMPT A STANDARD PARSE
-	# TO A LIST OF DICTIONARIES USING JESSE GROSJEANS ATTRIBUTE NAMES
-
-	# NB THE CURRENT TASKPAPER 3.0 FLAGS NOTES AS TYPE 'comment'
-	# BUT THIS IS CHANGING TO TYPE 'note' IN THE NEXT BUILD
-
+	# PARSE AS TASKPAPER OUTPUT (compatible with TP3.0 Dev (124))
+	# A list starting with a virtual root node (id=0) followed by
+	# one dictionary for each line of the text (Line 1 id=1, etc)
+	# For keys of the dictionaries, and their mapping onto
+	# attributes in Jesse Grosjean's Javascript parser,
+	# see the ATT_ GLOBAL variables above
 	lst = get_tp_parse(str_text)
 
 	if bln_json:
@@ -356,13 +353,7 @@ def outline_nodes(str_in):
 		lng_txt += (lng_chars + 1) # splitlines is dropping \n
 
 		# IDENTIFY THE INDENT COUNT & NESTING LEVEL
-		# AS WELL AS THE NODE TYPE (hash or bullet start, colon end)
-		# EXTRACTING THE PLAIN TEXT
-
-		# REGEXES ARE EXPENSIVE, SO WE'LL START WITH SOME SIMPLE TRIAGE
-		# BASED ON THE FIRST CHARACTERS OF THE STRING
-
-		# Assume Body text until there is counter-evidence
+		# Assume Note text until there is counter-evidence
 		if lng_chars < 1:
 			dct_node[ATT_TYPE] = TYP_EMPTY
 		else:
@@ -385,13 +376,8 @@ def outline_nodes(str_in):
 
 
 		# Now that we know the provisional type of each node,
-		# digest any terminal mode, and tags in any position
-		# skipping codeblocks, finalising empties
-		# and recording modes and modeContexts if type is relevant
-		# [heading, empty, body, ordered, unordered]
-
+		# digest any infixed or postfixed tags
 		# DETECT ANY REMAINING EMPTIES BEFORE WE TAKE OUT MODES & TAGS
-		# if dct_node[ATT_TYPE] not in SET_BLANK_TYPES:
 		if dct_node[ATT_TYPE] != TYP_EMPTY:
 			str_line = dct_node[ATT_LINE]
 			str_rs_line = str_line.rstrip()
@@ -456,7 +442,7 @@ def add_parent_child(lst_lines):
 
 
 		else: # (blank line)
-			# set TEMPORARY parent (previous hash or virtual root)
+			# set TEMPORARY parent
 			# and then push onto stack to wait for next non-empty node,
 			# from which it will take its final level
 			dct_line[ATT_PARENT] = lst_tab_parents[0]
