@@ -4,7 +4,8 @@ Parses [TaskPaper](www.hogbaysoftware.com) or [FoldingText](www.FoldingText.com)
 
 Source: [ft_tp_parse_022.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_022.py)
 
-Shorter TaskPaper-only version (drops mode and context keys):
+Compact TaskPaper-only version (drops mode and context keys) and removes all FoldingText-specific code:
+(for applications like TaskPaper-based scheduling in Editorial Workflows)
 [tp_light_parse_022.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/tp_light_parse_022.py)
 
 #### Goal
