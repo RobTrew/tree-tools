@@ -1,6 +1,8 @@
 ### Python parser for TaskPaper and FoldingText formats
 
-Parses [TaskPaper](www.hogbaysoftware.com) or [FoldingText](www.FoldingText.com) plain text documents to a list of dictionaries using the same node attributes as Jesse Grosjean's reference parser at [https://www.npmjs.org/package/foldingtext]().
+Parses [TaskPaper](http://www.hogbaysoftware.com) or [FoldingText](http://www.FoldingText.com) plain text documents to a list of dictionaries, using the same node attributes as the reference parsers in Jesse Grosjean's applications.
+
+There is an experimental command line version of the reference parser, currently configured for the TaskPaper format only, at [https://www.npmjs.org/package/foldingtext]().
 
 Source: [ft_tp_parse_022.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_022.py)
 
@@ -12,7 +14,7 @@ Compact TaskPaper-only version (drops mode and context keys) and removes all Fol
 
 This parser aims to produce the same output as the www.foldingtext.com reference parser, and later versions will be adjusted to match any further changes in that parser.
 
-Best practice is to use the [www.foldingtext.com](www.foldingtext.com) reference parser directly. This is available in a draft command line form for TaskPaper 3.0 at [https://www.npmjs.org/package/foldingtext)](https://www.npmjs.org/package/foldingtext).
+Best practice is to use the [www.foldingtext.com](http://www.foldingtext.com) reference parser directly. This is available in a draft command line form for TaskPaper 3.0 at [https://www.npmjs.org/package/foldingtext)](https://www.npmjs.org/package/foldingtext).
 
 The reference parser (implemented in Javascript by Hog Bay Software and www.foldingtext.com, and copyright Jesse Grosjean) additionally provides a powerful hierarchical query language, documented at [http://www.foldingtext.com/sdk/nodepaths/](http://www.foldingtext.com/sdk/nodepaths/)
 
@@ -23,7 +25,7 @@ This python parser has the following limitations:
 3. and it only parses node types, tags, nesting, and ft mode flags.
 	(it attempts no parsing of inline Markdown formatting)
 
-This is intended simply as a stop-gap for contexts in which the use of Javascript is inconvenient, or where there is a need for a simple light-weight parse which is compatible with the output of the reference parser produced by Jesse Grosjean, [www.HogBaySoftware.com](www.HogBaySoftware.com) and [www.foldingtext.com](www.HogBaySoftware.com)
+This is intended simply as a stop-gap for contexts in which the use of Javascript is inconvenient, or where there is a need for a simple light-weight parse which is compatible with the output of the reference parser produced by Jesse Grosjean, [www.HogBaySoftware.com](http://www.HogBaySoftware.com) and [http://www.foldingtext.com](http://www.foldingtext.com)
 
 #### Example of use:
 
@@ -97,7 +99,7 @@ TYP_NOTE | 'note' (since TaskPaper 3.0 Dev 124, previously 'comment')
 
 NB the parser leaves in-line Markdown formatting unparsed.
 
-#### The parser provides two module level Python functions:
+#### The full parser provides two module level Python functions:
 
 1. `is_tp(str_text)`
 
@@ -107,6 +109,15 @@ NB the parser leaves in-line Markdown formatting unparsed.
 2. `get_ft_tp_parse(str_text, bln_is_tp)`
 
 	Depending on the boolean value of `bln_is_tp`, parses the text either as [TaskPaper 3.0](http://support.foldingtext.com/discussions/development-versions) format or as [FoldingText 2.0](http://support.foldingtext.com/discussions/development-versions) format, generating a list of Python dictionaries, one for each line of the text, with the key/value pairs indicated above.
+	
+#### The TaskPaper-only version provides a single module level function:
+
+	`get_tp_parse(str_text)`
+
+Which, like the full parser, returns a list of dictionaries, one for each line of the text, prefixed a dictionary (id=0) for the virtual root of the TaskPaper outlines.
+The id of each line is also its index into the parse array, as is the value of ParentID,
+and the list of ids provided by the 'chiln' key.
+
 #### Source
 
 Source: [ft_tp_parse_022.py](https://github.com/RobTrew/tree-tools/blob/master/TaskPaper%20scripts/ft_tp_parse_022.py)
