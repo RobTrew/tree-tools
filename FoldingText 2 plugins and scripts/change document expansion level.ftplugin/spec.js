@@ -24,8 +24,8 @@ define(function (require) {
 		it('level of folding should increase in steps', function () {
 			var lstFolds = [], i=0;
 			editor.setTextContent('# a\n- b\n\t- c\n\t\t- d\n# e\n- f\n\t- g\n\t\t- h');
-			editor.performCommand('expand less');
-			editor.performCommand('expand less');
+			editor.performCommand('collapse more');
+			editor.performCommand('collapse more');
 			for (i = 0; i < 2; i++) {
 				lstFolds.push(editor.folds()[i].range().startLine());
 			}
@@ -37,9 +37,9 @@ define(function (require) {
 		it('level of folding should decrease in steps', function () {
 			var lstFolds = [], i=0;
 			editor.setTextContent('# a\n- b\n\t- c\n\t\t- d\n# e\n- f\n\t- g\n\t\t- h');
-			editor.performCommand('expand less');
-			editor.performCommand('expand less');
-			editor.performCommand('expand less');
+			editor.performCommand('collapse more');
+			editor.performCommand('collapse more');
+			editor.performCommand('collapse more');
 			editor.performCommand('expand more');
 			editor.performCommand('expand more');
 			for (i = 0; i < 2; i++) {

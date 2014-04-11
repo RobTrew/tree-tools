@@ -72,7 +72,7 @@ define(function(require, exports, module) {
 
 
 	Extensions.add('com.foldingtext.editor.commands', {
-		name: 'expand less',
+		name: 'collapse more',
 		description: 'Collapse outline one more level',
 		performCommand: function (editor) {
 			var lngLevel = getFoldLevel(editor);
@@ -89,7 +89,7 @@ define(function(require, exports, module) {
 	Extensions.add('com.foldingtext.editor.init', function (editor) {
 		editor.addKeyMap({
 			'Cmd-Alt-=' : 'expand more',
-			'Cmd-Alt--' : 'expand less',
+			'Cmd-Alt--' : 'collapse more',
 		});
 	});
 
