@@ -1,0 +1,155 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf470
+{\fonttbl\f0\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue255;\red0\green0\blue0;\red64\green128\blue0;
+\red128\green0\blue128;\red76\green76\blue76;\red0\green22\blue176;\red108\green5\blue211;\red74\green30\blue127;
+\red68\green21\blue176;}
+\deftab480
+\pard\pardeftab480\pardirnatural
+
+\f0\fs24 \cf2 property\cf3  \cf4 pTitle\cf3  : \cf5 "OmniFocus: Quick Stats"\cf3 \
+\cf2 property\cf3  \cf4 pVersion\cf3  : \cf5 "2.07"\cf3 \
+\
+\cf2 property\cf3  \cf4 pstrDBPath\cf3  : \cf5 "$HOME/Library/Caches/com.omnigroup.OmniFocus/OmniFocusDatabase2"\cf3 \
+\cf2 property\cf3  \cf4 pstrMinOSX\cf3  : \cf5 "10.6"\cf3 \
+\
+\cf2 property\cf3  \cf4 pTimeOut\cf3  : 20\
+\
+\pard\pardeftab480\pardirnatural
+\cf6 -- Ver 0.8 adds clipboard option to dialogue\cf3 \
+\cf6 -- Ver 0.9 gives an error message if the cache schema has changed, leading to an SQL error in the script\cf3 \
+\cf6 -- Ver 1.0 slight simplification of the code\cf3 \
+\cf6 -- Ver 1.1 added count of Pending projects\cf3 \
+\cf6 -- Ver 1.2 added a count of available actions\cf3 \
+\cf6 -- Ver 1.3 added a break-down of unavailable actions\cf3 \
+\cf6 -- Ver 1.4 added count of Current projects to complement Pending projects\cf3 \
+\cf6 -- ver 1.5 replaced Applescript time function with SQL time expression\cf3 \
+\cf6 -- Ver 1.7 Reorganizes menu, and attempts to enable access for .macappstore installations of OF\cf3 \
+\cf6 --Ver 1.8 Adjusts handling of variant bundle identifiers generally\cf3 \
+\cf6 -- Ver 2.00 Redraft of task breakdown, with progressive narrowing of criteria ...\cf3 \
+\
+\pard\pardeftab480\pardirnatural
+\cf2 property\cf3  \cf4 pToClipboard\cf3  : \cf5 "Copy list to clipboard"\cf3 \
+\
+\cf2 if\cf3  \cf2 not\cf3  \cf4 FileExists\cf3 (\cf4 pstrDBPath\cf3 ) \cf2 then\cf3  \cf2 set\cf3  \cf4 pstrDBPath\cf3  \cf2 to\cf3  \cf4 GetCachePath\cf3 ()\
+\
+\cf2 tell\cf3  \cf2 application\cf3  \cf5 "Finder"\cf3 \
+	\cf2 if\cf3  (\cf2 version\cf3  < \cf4 pstrMinOSX\cf3 ) \cf2 then\cf3 \
+		\cf7 display dialog\cf3  \cf5 "This script requires OSX "\cf3  & \cf4 pstrMinOSX\cf3  & \cf5 " or higher"\cf3  \cf7 buttons\cf3  \{\cf5 "OK"\cf3 \} \cf7 default button\cf3  1 \cf7 with title\cf3  \cf4 pTitle\cf3  & \cf5 "Ver. "\cf3  & \cf4 pVersion\cf3 \
+		\cf2 return\cf3 \
+	\cf2 end\cf3  \cf2 if\cf3 \
+\cf2 end\cf3  \cf2 tell\cf3 \
+\
+\cf2 if\cf3  \cf4 pstrDBPath\cf3  \uc0\u8800  \cf5 ""\cf3  \cf2 then\cf3 \
+	\cf2 set\cf3  \cf4 strCmd\cf3  \cf2 to\cf3  \cf5 "sqlite3 -separator ': ' \\""\cf3  & \cf4 pstrDBPath\cf3  & \cf5 "\\" "\cf3  & \cf8 quoted form\cf3  \cf2 of\cf3  (\cf5 "\
+	select \\"INBOX GROUPS & ACTIONS\\", count(*) from task where (inInbox=1);\
+	select \\"    Inbox action groups\\", count(*) from task where (inInbox=1) and (childrenCount>0);\
+	select \\"    Inbox actions\\", count(*) from task where (inInbox=1) and (childrenCount=0);\
+	select null;\
+	select \\"FOLDERS\\"	, count(*) from folder;\
+	select \\"    Active folders\\", count(*) from folder where effectiveActive=1;\
+	select \\"    Dropped folders\\", count(*) from folder where effectiveActive=0;\
+	select null;\
+	select \\"PROJECTS\\", count(*) from projectInfo where containsSingletonActions=0;\
+	select \\"    Active projects\\", count(*) from projectInfo where (containsSingletonActions=0) and (status=\\"active\\");\
+	select \\"            Current projects\\", count(*) from projectInfo p join task t on t.projectinfo=p.pk where (p.containsSingletonActions=0) and (p.folderEffectiveActive=1) and (p.status=\\"active\\") and (t.dateToStart is null or t.dateToStart < (strftime('%s','now') - strftime('%s','2001-01-01')));\
+	select \\"            Pending projects\\", count(*) from projectInfo p join task t on t.projectinfo=p.pk where (p.containsSingletonActions=0) and (p.folderEffectiveActive=1) and (p.status=\\"active\\") and (t.dateToStart > (strftime('%s','now') - strftime('%s','2001-01-01')));\
+	select \\"    On-hold projects\\", count(*) from projectInfo where (containsSingletonActions=0) and (status=\\"inactive\\");\
+	select \\"    Completed projects\\", count(*) from projectInfo where (containsSingletonActions=0) and (status=\\"done\\");\
+	select \\"    Dropped projects\\", count(*) from projectInfo where (containsSingletonActions=0) and (( status=\\"dropped\\") or (folderEffectiveActive=0));\
+	select null;	\
+	select \\"SINGLE ACTION LISTS\\", count(*) from projectInfo where containsSingletonActions=1;\
+	select \\"    Active single action lists\\", count(*) from projectInfo where (containsSingletonActions=1) and (status=\\"active\\");\
+	select \\"    On-hold single action lists\\", count(*) from projectInfo where (containsSingletonActions=1) and (status=\\"inactive\\");\
+	select \\"    Completed single action lists\\", count(*) from projectInfo where (containsSingletonActions=1) and (status=\\"done\\");\
+	select \\"    Dropped single action lists\\", count(*) from projectInfo where (containsSingletonActions=1) and (( status=\\"dropped\\") or (folderEffectiveActive=0));\
+	select null;\
+	select \\"CONTEXTS\\", count(*) from context;\
+	select \\"    Active contexts\\", count(*) from context where (effectiveActive=1) and (allowsNextAction=1);\
+	select \\"    On-hold contexts\\", count(*) from context where (effectiveActive=1) and allowsNextAction=0;\
+	select \\"    Dropped contexts\\", count(*) from context where effectiveActive=0;\
+	select null;\
+	select \\"ACTION GROUPS\\", count(*) from task where (projectinfo is null) and (childrenCount>0);\
+	select \\"    Remaining action groups\\", count(*) from task where (projectinfo is null) and (dateCompleted is null) and (childrenCount>0);\
+	select \\"    Completed action groups\\", count(dateCompleted) from task where (projectinfo is null) and (childrenCount>0);\
+	select null;\
+	select \\"ACTIONS\\", count(*) from task where (projectinfo is null) and (childrenCount=0);\
+	select \\"    Completed actions\\", count(dateCompleted) from task where (projectinfo is null) and (childrenCount=0);\
+	select \\"    Dropped project actions\\", count(*) from (task t left join projectinfo p on t.containingProjectinfo=p.pk) tp where (projectinfo is null) and (childrenCount=0)  and (dateCompleted is null) \
+				and (tp.containingProjectinfo is not null and (tp.status=\\"dropped\\" or tp.folderEffectiveActive=0));\
+	select \\"    Dropped context actions\\", count(*) from (task t left join projectinfo p on t.containingProjectinfo=p.pk) tp left join context c on tp.context=c.persistentIdentifier where (projectinfo is null) and (tp.childrenCount=0)  and (dateCompleted is null) \
+				and (tp.containingProjectinfo is null or (tp.status !=\\"dropped\\" and tp.folderEffectiveActive=1))\
+				and c.effectiveActive= 0;\
+	select \\"    Remaining actions\\", count(*) from (task t left join projectinfo p on t.containingProjectinfo=p.pk) tp left join context c on tp.context=c.persistentIdentifier where (projectinfo is null) and (tp.childrenCount=0)  and (dateCompleted is null) \
+				and (tp.containingProjectinfo is null or (tp.status !=\\"dropped\\" and tp.folderEffectiveActive=1))\
+				and (tp.context is null or c.effectiveActive= 1);\
+	select \\"        Actions in Projects on hold\\", count(*) from (task t left join projectinfo p on t.containingProjectinfo=p.pk) tp left join context c on tp.context=c.persistentIdentifier where (projectinfo is null) and (tp.childrenCount=0)  and (dateCompleted is null) \
+				and (tp.containingProjectinfo is null or (tp.status !=\\"dropped\\" and tp.folderEffectiveActive=1))\
+				and (tp.context is null or c.effectiveActive= 1)\
+				and (tp.containingProjectInfo is not null and tp.status=\\"inactive\\");\
+	select \\"        Actions in Contexts on hold\\", count(*) from (task t left join projectinfo p on t.containingProjectinfo=p.pk) tp left join context c on tp.context=c.persistentIdentifier where (projectinfo is null) and (tp.childrenCount=0)  and (dateCompleted is null) \
+				and (tp.containingProjectinfo is null or (tp.status !=\\"dropped\\" and tp.folderEffectiveActive=1))\
+				and (tp.context is null or c.effectiveActive= 1)\
+				and (tp.containingProjectInfo is null or tp.status!=\\"inactive\\")\
+				and (tp.context is not null and c.allowsNextAction=0);\
+	select \\"        Blocked actions\\", count(*) from (task t left join projectinfo p on t.containingProjectinfo=p.pk) tp left join context c on tp.context=c.persistentIdentifier where (projectinfo is null) and (tp.childrenCount=0)  and (dateCompleted is null) \
+				and (tp.containingProjectinfo is null or (tp.status !=\\"dropped\\" and tp.folderEffectiveActive=1))\
+				and (tp.context is null or c.effectiveActive= 1)\
+				and (tp.containingProjectInfo is null or tp.status!=\\"inactive\\")\
+				and (tp.context is null or c.allowsNextAction=1)\
+				and tp.blocked=1;\
+	select \\"        	Blocked by future start date\\", count(*) from (task t left join projectinfo p on t.containingProjectinfo=p.pk) tp left join context c on tp.context=c.persistentIdentifier where (projectinfo is null) and (tp.childrenCount=0)  and (dateCompleted is null) \
+				and (tp.containingProjectinfo is null or (tp.status !=\\"dropped\\" and tp.folderEffectiveActive=1))\
+				and (tp.context is null or c.effectiveActive= 1)\
+				and (tp.containingProjectInfo is null or tp.status!=\\"inactive\\")\
+				and (tp.context is null or c.allowsNextAction=1)\
+				and tp.blocked=1\
+				and tp.blockedByFutureStartDate=1;\
+	select \\"        	Sequentially blocked\\", count(*) from (task t left join projectinfo p on t.containingProjectinfo=p.pk) tp left join context c on tp.context=c.persistentIdentifier where (projectinfo is null) and (tp.childrenCount=0)  and (dateCompleted is null) \
+				and (tp.containingProjectinfo is null or (tp.status !=\\"dropped\\" and tp.folderEffectiveActive=1))\
+				and (tp.context is null or c.effectiveActive= 1)\
+				and (tp.containingProjectInfo is null or tp.status!=\\"inactive\\")\
+				and (tp.context is null or c.allowsNextAction=1)\
+				and tp.blocked=1\
+				and tp.blockedByFutureStartDate=0;\
+	select \\"        Available actions\\", count(*) from (task t left join projectinfo p on t.containingProjectinfo=p.pk) tp left join context c on tp.context=c.persistentIdentifier where (projectinfo is null) and (tp.childrenCount=0)  and (dateCompleted is null) \
+				and (tp.containingProjectinfo is null or (tp.status !=\\"dropped\\" and tp.folderEffectiveActive=1))\
+				and (tp.context is null or c.effectiveActive= 1)\
+				and (tp.containingProjectInfo is null or tp.status!=\\"inactive\\")\
+				and (tp.context is null or c.allowsNextAction=1)\
+				and tp.blocked=0;\
+				\
+	"\cf3 )\
+	\
+	\cf6 -- 		try\cf3 \
+	\cf2 set\cf3  \cf4 strList\cf3  \cf2 to\cf3  \cf7 do shell script\cf3  \cf4 strCmd\cf3 \
+	\cf6 -- 		on error\cf3 \
+	\cf6 -- 			display dialog "The SQL schema for the OmniFocus cache may have changed in a recent update of OF." & return & return & \'ac\cf3 \
+	\cf6 -- 				"Look on the OmniFocus user forums for an updated version of this script." buttons \{"OK"\} with title pTitle & "Ver. " & pVersion\cf3 \
+	\cf6 -- 			return\cf3 \
+	\cf6 -- 		end try\cf3 \
+	\cf2 tell\cf3  \cf2 application\cf3  \cf9 id\cf3  \cf5 "sevs"\cf3 \
+		\cf2 activate\cf3 \
+		\cf2 if\cf3  \cf10 button returned\cf3  \cf2 of\cf3  (\cf7 display dialog\cf3  \cf4 strList\cf3  \cf7 buttons\cf3  \{\cf4 pToClipboard\cf3 , \cf5 "OK"\cf3 \} \cf7 default button\cf3  \cf5 "OK"\cf3  \cf7 giving up after\cf3  \cf4 pTimeOut\cf3  \cf7 with title\cf3  \cf4 pTitle\cf3  & \cf5 " Ver. "\cf3  & \cf4 pVersion\cf3 ) \'ac\
+			\cf2 is\cf3  \cf4 pToClipboard\cf3  \cf2 then\cf3  \cf2 tell\cf3  \cf2 application\cf3  \cf9 id\cf3  \cf5 "com.apple.finder"\cf3  \cf2 to\cf3  \cf7 set the clipboard to\cf3  \cf4 strList\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+\cf2 else\cf3 \
+	\cf2 tell\cf3  \cf2 application\cf3  \cf9 id\cf3  \cf5 "sevs"\cf3 \
+		\cf2 activate\cf3 \
+		\cf7 display dialog\cf3  \cf5 "OmniFocus cache not found ..."\cf3  \cf7 buttons\cf3  \{\cf5 "OK"\cf3 \} \cf7 default button\cf3  1 \cf7 with title\cf3  \cf4 pTitle\cf3  & \cf5 " Ver. "\cf3  & \cf4 pVersion\cf3 \
+	\cf2 end\cf3  \cf2 tell\cf3 \
+\cf2 end\cf3  \cf2 if\cf3 \
+\
+\
+\cf2 on\cf3  \cf4 FileExists\cf3 (\cf4 strPath\cf3 )\
+	(\cf7 do shell script\cf3  \cf5 "test -e "\cf3  & \cf4 strPath\cf3  & \cf5 " ; echo $?"\cf3 ) = \cf5 "0"\cf3 \
+\cf2 end\cf3  \cf4 FileExists\cf3 \
+\
+\cf2 on\cf3  \cf4 GetCachePath\cf3 ()\
+	\cf2 try\cf3 \
+		\cf2 tell\cf3  \cf2 application\cf3  \cf5 "Finder"\cf3  \cf2 to\cf3  \cf2 tell\cf3  (\cf2 application file\cf3  \cf9 id\cf3  \cf5 "OFOC"\cf3 ) \cf2 to\cf3  \cf5 "$HOME/Library/Caches/"\cf3  & \cf2 its\cf3  \cf8 id\cf3  & \cf5 "/OmniFocusDatabase2"\cf3 \
+	\cf2 on\cf3  \cf2 error\cf3 \
+		\cf2 error\cf3  \cf5 "OmniFocus not installed ..."\cf3 \
+	\cf2 end\cf3  \cf2 try\cf3 \
+\cf2 end\cf3  \cf4 GetCachePath\cf3 \
+\
+}
