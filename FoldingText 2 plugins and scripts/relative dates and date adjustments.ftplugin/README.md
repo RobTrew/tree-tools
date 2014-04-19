@@ -12,16 +12,27 @@ This plugin presents a small popup in which you can type or edit informal relati
 
 You can enter date/times anywhere in your text.
 If your cursor is in or next to a tag (with or without a value), 
+
 ![cursor in or next to tag](./A%20PlaceCursorInOrNextToTag.png)
+
 this plugin (keyboard shortcut defaults to `⌘⌥ '`) will automatically select any existing tag value, and create value brackets if none exist. As you type an informal phrase into the popup below your cursor, the phrased is translated as you type into an absolute date (and optionally time) in the default yyyy-mm-dd [HH:MM] format
+
 ![B InformalPhraseTranslatedLive.png](./B%20InformalPhraseTranslatedLive.png)
+
 When you finish date entry, the selection moves to the right of the translated date.
+
 ![C AfterEntry.png](./C%20AfterEntry.png)
+
 If you later return your cursor to the tag (or immediately to the side of it), and use the plugin again, it will automatically select the date/time, 
+
 ![D AutoSelectDateTime.png](./D%20AutoSelectDateTime.png)
+
 and you can enter an adjustment like -2d to bring the date ahead a couple of days, or 2w to push it back for two weeks. Again the translations and adjustments take place live, as you type,
+
 ![E Adjust.png](./E%20Adjust.png)
+
 and the cursor moves to right of the date when you finish editing with return or ESC.
+
 ![F AfterAdjust.png](./F%20AfterAdjust.png)
  
 
