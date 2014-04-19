@@ -1,0 +1,28 @@
+// Jamie Kowalki's LESS code re-used for a date panel
+
+@panel-width: 300px;
+@panel-height: 1.9rem;
+
+.JKDatePanel {
+    position: fixed;
+    z-index: 10;
+    left: 25px;
+    top: 8px;
+    width: @panel-width;
+    height: @panel-height;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 1px 3px 10px #999;
+}
+.JKDatePanel input {
+    margin: 5px 10px;
+    width: @panel-width - 20px;
+    height: @panel-height - 10px;
+    background: inherit;
+    border: none;
+    font-size: 1em;
+    font-family: inherit;
+}
+.JKDatePanel input:focus {
+    outline-width: 0;
+}
