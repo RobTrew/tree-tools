@@ -15,7 +15,7 @@ If your cursor is in or next to a tag (with or without a value),
 
 ![cursor in or next to tag](./A%20PlaceCursorInOrNextToTag.png)
 
-this plugin (keyboard shortcut defaults to `⌘⌥ '`) will automatically select any existing tag value, and create value brackets if none exist. As you type an informal phrase into the popup below your cursor, the phrased is translated as you type into an absolute date (and optionally time) in the default yyyy-mm-dd [HH:MM] format
+this plugin (keyboard shortcut defaults to `⌘⌥ '`) will automatically select any existing tag value, and create value brackets if none exist. As you type an informal phrase into the popup below your cursor, the phrased is translated into an absolute date (and optionally time) in the default yyyy-mm-dd [HH:MM] format
 
 ![B InformalPhraseTranslatedLive.png](./B%20InformalPhraseTranslatedLive.png)
 
