@@ -50,15 +50,15 @@ Symbol | Format | Examples
 _dayname_ | `sun, mon, tue, wed, thu, fri, sat` [or full forms] | `thu 2pm, next sat,  next saturday`
 _current time_ | `now` | `now +2h`
 _months_ | `jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec` [or full forms] | `jul 14`, `1 may`
-_relative_ | next, last, `+[number][unit]`,  `-[number][unit]` | `last month,  today +2w`
+_relative_ | next, last, `+[number][unit]`,  `-[number][unit]` | `last month,  next wednesday`
 _intervals_ | `m[in], h[our], d[ay], w[eek], [m]o[nth], y[ear]` | `today +1y,  july -1w`
 _time settings_ | `H, M, a(m), p(m)` | `2H 3pm 8am 8.30am 16:00` 
 
 Dates | Description | Examples
 ------|-------------|---------
-_ISO_	| yyyy-mm-dd [HH:MM] | `2014-07-14 +6w` `(six weeks after that day)`
+_ISO_	| yyyy-mm-dd [HH:MM] | `2014-07-14 +6w` (six weeks after that day)
 _Informal months_ | Defaults to midnight at the start of the first future month of this name | `aug` _(the first future august – next year's aug if we are already in this year's)_
 _Informal days_ | Preceding or following the name of the month, and assumed to be in the future | `feb 12, 12 feb  `  _(next year if the current date is after feb 12)_
 _Informal years_ | Before or after the month and day. Assumed to be the first future instance of the date) if omitted |  `12 June, 2015 june 12, june 12 2015`
 _Last_ | most recent past instance | `last wednesday, last jan 12, last month` _(midnight at the start of the month before this)_
-_Next_ | soonest future instance after the current week | next friday (not the friday at the end of this week, if one remains, but the following friday)
+_Next_ | soonest future instance after the current week | `next friday` _(not the friday at the end of this week, if one remains, but the following friday)_
