@@ -63,3 +63,8 @@ _Informal days_ | Preceding or following the name of the month, and assumed to b
 _Informal years_ | Before or after the month and day. Assumed to be the first future instance of the date) if omitted |  `12 June, 2015 june 12, june 12 2015`
 _Last_ | most recent past instance | `last wednesday, last jan 12, last month` _(midnight at the start of the month before this)_
 _Next_ | soonest future instance after the current week | `next friday` _(not the friday at the end of this week, if one remains, but the following friday)_
+
+#### Installation in FoldingText Dev 2, or TaskPaper Dev 3
+- From the application's main menu, choose `File > Open Application Folder`
+- Copy the `.ftplugin` folder and its contents into the `Plug-Ins` sub-folder of the application folder
+- Close and restart the application
