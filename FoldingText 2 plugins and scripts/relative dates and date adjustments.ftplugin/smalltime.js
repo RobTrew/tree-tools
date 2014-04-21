@@ -47,7 +47,6 @@ define(function(require, exports, module) {
 		var DAY_MSECS = 86400000, WEEK_MSECS = 604800000,
 			lstAnchors = ['now', 'toda','tomo', 'yest',
 				'yesterday', 'today', 'tomorrow'],
-
 			lstDate = ['y', 'w', 'd', 'year', 'yr', 'week',
 				'wk','day', 'month', 'o'],
 			lstTime = ['h', 'hr', 'hour', 'm', 'min', 'minute'],
@@ -55,6 +54,13 @@ define(function(require, exports, module) {
 			lstMonths = ['jan', 'feb', 'mar', 'apr', 'may', 'jun',
 				'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
 			lstShift = ['next', 'last'],
+			dctNum = {'zero':0, 'one':1, 'two':2, 'three':3, 'four':4,
+				'five':5, 'six':6, 'seven':7, 'eight':8, 'nine':9, 'ten':10,
+				'eleven':11, 'twelve':12, 'thirteen':13, 'fourteen':14,
+				'fifteen':15, 'sixteen':16, 'seventeen':17, 'eighteen':18,
+				'nineteen':19, 'twenty':20, 'thirty':30, 'forty':40,
+				'fifty':50, 'sixty':60, 'seventy':70, 'eighty': 80,
+				'ninety':90},
 			dctAnchor = extractISODate(strPhrase),
 			dteAnchor = dctAnchor['date'],
 			rDelta = 0, dteResult = null,
@@ -154,15 +160,17 @@ define(function(require, exports, module) {
 		}
 		for (i=0; i<lngTokens; i++) { // tokens adjust the Anchor date or Delta
 			strTkn = lstTokens[i];
-			//debugger;
 			if (strTkn) {
 				strLower = strTkn.toLowerCase();
+				if (strLower in dctNum) {
+					strLower = dctNum[strLower].toString();
+				}
 				if (strLower.slice(-1) === 's') {
 					strLower = strLower.slice(0,-1);
 				}
 				strAbbrev = strLower.slice(0,4);
-				if (!isNaN(strTkn)) {
-					rQuant = parseFloat(strTkn);
+				if (!isNaN(strLower)) {
+					rQuant = parseFloat(strLower);
 					blnNewQuant = true;
 					if (rQuant > 2000 && rQuant < 2500) {
 						if (blnNewUnit) {

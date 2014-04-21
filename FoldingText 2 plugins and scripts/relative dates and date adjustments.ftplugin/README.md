@@ -8,7 +8,8 @@ description: Use this plugin to enter or adjust dates using informal relative ph
 
 This plugin presents a small popup in which you can type or edit informal relative dates and date adjustments like `today +7d`, `jul 14`, `tomorrow 2pm`, or `next month`.
 
-- Default keyboard assignment `⌘⌥ '`
+- Default keyboard assignment `⌘⇧9` (⌘ + open bracket)
+	- or `⌘⌥ '`
 
 You can enter date/times anywhere in your text.
 If your cursor is in or next to a tag (with or without a value), 

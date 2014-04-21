@@ -134,6 +134,10 @@ define(function(require, exports, module) {
 			"Cmd-Alt-'" : show_date_panel
 			//Shift-, Cmd-, Ctrl-, and Alt- (in that order!) to
 		});
+		Editor.addKeyMap({
+			//open bracket with Cmd held down
+			"Shift-Cmd-9" : show_date_panel
+		});
 	});
 
 });
