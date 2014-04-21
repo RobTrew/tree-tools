@@ -34,11 +34,12 @@ define(function(require, exports, module) {
 			cm = Editor.cm(),
 			charWidth = cm.defaultCharWidth(),
 			coords = cm.cursorCoords(true);
+		//debugger;
 
 		panel.element.style.left = (coords.left - charWidth) + 'px';
 		panel.element.style.top = coords.bottom + 'px';
 
-		panel.show(strText);
+		panel.show(strText, 'end');
 	}
 
 	// to test whether a tag is in the range of cursor/selection
@@ -118,6 +119,7 @@ define(function(require, exports, module) {
 			placeholder: 'enter date phrase ...',
 			onReturn: function() {
 				panel.clear();
+				Editor.performCommand('moveRight');
 				Editor.performCommand('moveRight');
 			},
 			onBlur: function() {

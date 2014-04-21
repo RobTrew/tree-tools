@@ -35,24 +35,25 @@ define(function(require, exports, module) {
 	'use strict';
 
 	var Extensions = require('ft/core/extensions'),
-		editor;          // this variable is assigned in the 'init' function below
+		editor; // assigned in the 'init' function below
+
 
 	// Panel constructor; assigned to exports.Panel below
 	var p = function (opts) {
 
-		var commonClassName = 'JKPanel',
-			COMMAND_LEFT = 91,
+		var COMMAND_LEFT = 91,
 			COMMAND_RIGHT = 93,
 			RETURN = 13,
 			ESC = 27,
 			KEY_A = 65,
 			KEY_Z = 90,
 			debug = false,
-			no_op = function () {};    // no-op function to use as default
+			no_op = function () {}, // no-op function to use as default
+			performDefault;
 
 		// define default options
 		this.options = {
-			className: '',
+			className: 'JKPanel',
 			placeholder: 'enter text...',
 			onTextChange: no_op,
 			onBlur: no_op,
@@ -93,7 +94,6 @@ define(function(require, exports, module) {
 
 		// set panel attributes
 		this.element.style.display = 'none';       // don't show panel at first
-		this.element.className = commonClassName;
 
 		this.input.setAttribute('type', 'text');
 		this.input.setAttribute('value', '');
@@ -104,9 +104,11 @@ define(function(require, exports, module) {
 
 		this.element.insertBefore(this.input); // add the input to the panel
 
+
+		// EVENTS
+
 		// when editor is clicked, etc.
 		this.input.addEventListener('blur', (function(event) {
-			var performDefault;
 			if (this.options.onBlur && this.options.onBlur !== no_op) {
 				performDefault = this.options.onBlur(event, this);
 			}
@@ -154,7 +156,6 @@ define(function(require, exports, module) {
 
 		// capture keydowns (for command keys, etc.)
 		this.input.addEventListener('keydown', (function(event) {
-			var performDefault;
 			if (debug) console.log('keydown: ' + event.which);
 
 			if (event.which === RETURN) {                  // return key pressed
@@ -199,6 +200,8 @@ define(function(require, exports, module) {
 			}
 		}).bind(this));
 
+		// Add panel to DOM
+
 		if ( this.options.addToDOM ) {
 			document.body.insertBefore( this.element );
 		}
@@ -209,12 +212,29 @@ define(function(require, exports, module) {
 	p.prototype.addToDOM = function () {
 		document.body.insertBefore( this.element );
 	};
-	p.prototype.show = function ( text ) {
-		if ( text ) {
+	p.prototype.show = function ( text, selection, selectionEnd ) {
+		if ( text || text === '' ) {
 			this.input.value = text;
 		}
 		this.element.style.display = 'block';
-		this.input.select();          // select contents, and focus input
+		this.input.focus();
+
+		if (! selection || selection === 'around' ) {
+			this.input.select();          // select contents
+		} else if ( selection === 'start' ) {
+			this.input.setSelectionRange(0, 0);
+		} else if ( selection === 'end' ) {
+			var length = this.input.value.length;
+			this.input.setSelectionRange(length, length);
+		} else if (typeof selection === 'number' ) {
+			var end = selectionEnd || selection;
+			this.input.setSelectionRange(selection, end);
+		} else if ( selection === 'preserve' ) {
+			// do nothing
+		} else {
+			this.input.select();          // select for other values
+		}
+
 		if ( this.options.ignoreWhiteSpace ) {
 			this.currentValue = this.input.value.trim();
 		}
