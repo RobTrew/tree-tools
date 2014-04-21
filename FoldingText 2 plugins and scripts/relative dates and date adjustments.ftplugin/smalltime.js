@@ -14,7 +14,11 @@ define(function(require, exports, module) {
 		var iWeekStart = 1, //Monday (or Sunday=0)
 			dte = phraseToDate(strPhrase, iWeekStart);
 		if (dte) {
-			return fmtTP(dte);
+			if (isNaN(dte)) {
+				return strPhrase;
+			} else {
+				return fmtTP(dte);
+			}
 		} else {
 			return strPhrase;
 		}
