@@ -44,6 +44,11 @@ define(function(require, exports, module) {
 		}
 	}
 
+	// preprocess a nodePath to translate curly-bracketed date phrases to ISO
+	function translatePathDates(strPath) {
+		return strPath.replace(/{[^}]+}/g, datePhraseToISO(strPath));
+	}
+
 	// if a time specified for today has already passed, assume tomorrow
 	function adjustDay(dteAnchor) {
 		if (dteAnchor < new Date()) {
@@ -364,6 +369,8 @@ define(function(require, exports, module) {
 	exports.datePhraseToISO = datePhraseToISO; //Phrase to ISO string
 	exports.phraseToDate = phraseToDate; // Phrase to JS Date()
 	exports.fmtTP = fmtTP; // JS Date() to ISO string
+	// search and replace for date phrases enclosed in curly brackets
+	exports.translatePathDates = translatePathDates;
 
 
 });
