@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>groupInfo</key>
+	<dict>
+		<key>expandAfterMode</key>
+		<integer>1</integer>
+		<key>groupName</key>
+		<string>TaskPaper</string>
+	</dict>
+	<key>snippetsTE2</key>
+	<array>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-04-24T21:25:07Z</date>
+			<key>flags</key>
+			<integer>0</integer>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2014-04-24T21:40:57Z</date>
+			<key>plainText</key>
+			<string>INSTALLATION
+These snippets require installation of the plugin at:
+https://github.com/RobTrew/tree-tools/tree/master/FoldingText%202%20plugins%20and%20scripts
+
+In TaskPaper:
+1. File &gt; Open Application Folder
+2. Copy the relative dates.ftplugin folder into the Plugins folder
+3. Restart TaskPaper</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>useCount</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>6CCCC4BB-0F28-4953-92CA-B9C872699CA8</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>@st</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2012-11-24T23:03:24Z</date>
+			<key>flags</key>
+			<integer>0</integer>
+			<key>label</key>
+			<string></string>
+			<key>lastUsed</key>
+			<date>2014-04-24T21:52:21Z</date>
+			<key>modificationDate</key>
+			<date>2014-04-24T21:50:42Z</date>
+			<key>plainText</key>
+			<string>@start(%snippet:tpsmt%%|)</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>useCount</key>
+			<integer>45</integer>
+			<key>uuidString</key>
+			<string>8ED78F8D-2065-49F4-A9A4-5775486B9E8C</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>@du</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2012-11-24T23:03:24Z</date>
+			<key>flags</key>
+			<integer>0</integer>
+			<key>label</key>
+			<string></string>
+			<key>lastUsed</key>
+			<date>2014-04-24T21:51:14Z</date>
+			<key>modificationDate</key>
+			<date>2014-04-24T21:50:47Z</date>
+			<key>plainText</key>
+			<string>@due(%snippet:tpsmt%%|)</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>useCount</key>
+			<integer>45</integer>
+			<key>uuidString</key>
+			<string>8825976A-C013-447A-A498-36B2C6237F8B</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>tpsmt</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2012-11-24T21:52:58Z</date>
+			<key>flags</key>
+			<integer>1</integer>
+			<key>label</key>
+			<string>Convert date time or adjustment to ISO</string>
+			<key>lastUsed</key>
+			<date>2012-11-25T12:26:42Z</date>
+			<key>modificationDate</key>
+			<date>2014-04-24T21:49:57Z</date>
+			<key>plainText</key>
+			<string>property pName : "smalltime"property pDescription : "'open date phrase panel'"property pVer : "0.1"property pPluginLink : "https://github.com/RobTrew/tree-tools/tree/master/FoldingText%202%20plugins%20and%20scripts"tell application "TaskPaper"	set lstDocs to documents	if lstDocs ≠ {} then		activate		tell item 1 of lstDocs			set varResult to (evaluate script "function(editor, options) {
+				return editor.performCommand(options.command);
+			}" with options {command:pName})		end tell		if varResult = false then			set strBtnLink to "Go to Plugin page"			tell (display dialog "Plugin not installed:" &amp; linefeed &amp; linefeed &amp; pName &amp; " – " &amp; pDescription &amp; linefeed &amp; linefeed &amp; pPluginLink buttons {strBtnLink, "OK"} default button "OK" with title pName &amp; "  ver. " &amp; pVer)				if button returned = strBtnLink then ¬					tell me to do shell script "open " &amp; quoted form of pPluginLink			end tell		end if	end ifend tell</string>
+			<key>snippetType</key>
+			<integer>2</integer>
+			<key>useCount</key>
+			<integer>11</integer>
+			<key>uuidString</key>
+			<string>1B2445AD-8BF5-47A6-BCA5-4B123720D937</string>
+		</dict>
+	</array>
+</dict>
+</plist>

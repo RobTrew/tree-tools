@@ -21,8 +21,16 @@ define(function(require, exports, module) {
 
 	function translatePhrase(strPhrase) {
 		if (strPhrase && ! strPhrase.match(/^ +$/)) {
-			Editor.replaceSelection(
-				dateLogic.datePhraseToISO(strPhrase), 'around');
+			var oMatch = /(\@\w+\()([^\)]*)\)/.exec(strPhrase),
+				strKey='', strVal='', strDate='';
+				if (oMatch) {
+					strKey = oMatch[1]; strVal = oMatch[2];
+					strDate = strKey +
+						dateLogic.datePhraseToISO(strVal) + ')';
+				} else {
+					strDate = dateLogic.datePhraseToISO(strPhrase);
+				}
+			Editor.replaceSelection(strDate, 'around');
 		} else {
 			Editor.performCommand('focusOut');
 		}
@@ -108,6 +116,7 @@ define(function(require, exports, module) {
 
 	Extensions.add('com.foldingtext.editor.commands', {
 		name: 'smalltime',
+		description: 'open date phrase panel',
 		performCommand: show_date_panel
 	});
 
