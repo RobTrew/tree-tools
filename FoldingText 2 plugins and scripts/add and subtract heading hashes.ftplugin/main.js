@@ -45,7 +45,7 @@ define(function(require, exports, module) {
 	Extensions.add('com.foldingtext.editor.init', function (editor) {
 		editor.addKeyMap({
 			'Cmd-H' : 'deeper heading',
-			'Shift-Cmd-H' : 'shallower heading',
+			'Shift-Cmd-H' : 'shallower heading'
 		});
 	});
 
