@@ -5,7 +5,7 @@ Various scripts for working on OS X with nested text outlines.
 
 License for the code in this repository:
 
-Copyright © 2012, 2013 Robin Trew
+Copyright © 2012, 2013, 2014 Robin Trew
 --
 
 Permission is hereby granted, free of charge, 
