@@ -14,8 +14,8 @@ define(function(require, exports, module) {
 	'use strict';
 
 	var Extensions = require('ft/core/extensions'),
-		dateLogic = require('./smalltime.js'),
-		Panel = require('./jmk_panel.js').Panel,
+		dateLogic = require('../smalltime.ftplugin/main.js'),
+		Panel = require('../jmk_panel.ftplugin/jmk_panel.js').Panel,
 		panel,
 		Editor;
 
@@ -115,7 +115,7 @@ define(function(require, exports, module) {
 	}
 
 	Extensions.add('com.foldingtext.editor.commands', {
-		name: 'smalltime',
+		name: 'informal dates and adjustments',
 		description: 'open date phrase panel',
 		performCommand: show_date_panel
 	});
@@ -140,12 +140,12 @@ define(function(require, exports, module) {
 		});
 
 		Editor.addKeyMap({
-			"Cmd-Alt-'" : show_date_panel
+			"Cmd-Alt-'" : 'informal dates and adjustments'
 			//Shift-, Cmd-, Ctrl-, and Alt- (in that order!) to
 		});
 		Editor.addKeyMap({
 			//open bracket with Cmd held down
-			"Shift-Cmd-9" : show_date_panel
+			"Shift-Cmd-9" : 'informal dates and adjustments'
 		});
 	});
 

@@ -114,8 +114,8 @@ define(function(require, exports, module) {
 
 
 	//translate date tag(s) to ISO and return UUID, date(s), priorty, text
+	exports.version = 0.2;
 	exports.updateAndReadForLink = updateAndReadForLink;
-	exports.version = 2.0;
 
 	Extensions.add('com.foldingtext.editor.commands', {
 		name: 'translate date tags',

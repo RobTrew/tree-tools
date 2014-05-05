@@ -367,7 +367,8 @@ define(function(require, exports, module) {
 		return lstTokens;
 	}
 
-	// FUNCTION(S) TO EXPORT
+	// PROPERTIES AND FUNCTION(S) TO EXPORT
+	exports.version = 0.2;
 	exports.datePhraseToISO = datePhraseToISO; //Phrase to ISO string
 	exports.phraseToDate = phraseToDate; // Phrase to JS Date()
 	exports.fmtTP = fmtTP; // JS Date() to ISO string

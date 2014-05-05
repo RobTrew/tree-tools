@@ -54,9 +54,9 @@ In FoldingText:
 			<key>lastUsed</key>
 			<date>2014-04-24T21:24:18Z</date>
 			<key>modificationDate</key>
-			<date>2014-04-24T21:50:26Z</date>
+			<date>2014-04-24T21:20:46Z</date>
 			<key>plainText</key>
-			<string>@start(%snippet:ftsmt%%|)</string>
+			<string>@start(%snippet:smt%%|)</string>
 			<key>snippetType</key>
 			<integer>0</integer>
 			<key>useCount</key>
@@ -76,11 +76,11 @@ In FoldingText:
 			<key>label</key>
 			<string></string>
 			<key>lastUsed</key>
-			<date>2014-04-24T21:45:52Z</date>
+			<date>2014-04-24T21:22:54Z</date>
 			<key>modificationDate</key>
-			<date>2014-04-24T21:50:37Z</date>
+			<date>2014-04-24T20:53:11Z</date>
 			<key>plainText</key>
-			<string>@due(%snippet:ftsmt%%|)</string>
+			<string>@due(%snippet:smt%%|)</string>
 			<key>snippetType</key>
 			<integer>0</integer>
 			<key>useCount</key>
@@ -90,7 +90,7 @@ In FoldingText:
 		</dict>
 		<dict>
 			<key>abbreviation</key>
-			<string>ftsmt</string>
+			<string>smt</string>
 			<key>abbreviationMode</key>
 			<integer>0</integer>
 			<key>creationDate</key>
@@ -102,7 +102,7 @@ In FoldingText:
 			<key>lastUsed</key>
 			<date>2012-11-25T12:26:42Z</date>
 			<key>modificationDate</key>
-			<date>2014-04-24T21:49:53Z</date>
+			<date>2014-04-24T20:49:26Z</date>
 			<key>plainText</key>
 			<string>property pName : "smalltime"property pDescription : "'open date phrase panel'"property pVer : "0.1"property pPluginLink : "https://github.com/RobTrew/tree-tools/tree/master/FoldingText%202%20plugins%20and%20scripts"tell application "FoldingText"	set lstDocs to documents	if lstDocs ≠ {} then		activate		tell item 1 of lstDocs			set varResult to (evaluate script "function(editor, options) {
 				return editor.performCommand(options.command);

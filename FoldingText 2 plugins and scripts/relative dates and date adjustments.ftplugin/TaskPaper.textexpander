@@ -23,16 +23,16 @@
 			<key>label</key>
 			<string></string>
 			<key>modificationDate</key>
-			<date>2014-04-24T21:40:57Z</date>
+			<date>2014-04-24T21:30:40Z</date>
 			<key>plainText</key>
 			<string>INSTALLATION
 These snippets require installation of the plugin at:
 https://github.com/RobTrew/tree-tools/tree/master/FoldingText%202%20plugins%20and%20scripts
 
-In TaskPaper:
+In FoldingText:
 1. File &gt; Open Application Folder
 2. Copy the relative dates.ftplugin folder into the Plugins folder
-3. Restart TaskPaper</string>
+3. Restart FoldingText</string>
 			<key>snippetType</key>
 			<integer>0</integer>
 			<key>useCount</key>
@@ -52,11 +52,11 @@ In TaskPaper:
 			<key>label</key>
 			<string></string>
 			<key>lastUsed</key>
-			<date>2014-04-24T21:52:21Z</date>
+			<date>2014-04-24T21:24:18Z</date>
 			<key>modificationDate</key>
-			<date>2014-04-24T21:50:42Z</date>
+			<date>2014-04-24T21:20:46Z</date>
 			<key>plainText</key>
-			<string>@start(%snippet:tpsmt%%|)</string>
+			<string>@start(%snippet:smt%%|)</string>
 			<key>snippetType</key>
 			<integer>0</integer>
 			<key>useCount</key>
@@ -76,11 +76,11 @@ In TaskPaper:
 			<key>label</key>
 			<string></string>
 			<key>lastUsed</key>
-			<date>2014-04-24T21:51:14Z</date>
+			<date>2014-04-24T21:22:54Z</date>
 			<key>modificationDate</key>
-			<date>2014-04-24T21:50:47Z</date>
+			<date>2014-04-24T20:53:11Z</date>
 			<key>plainText</key>
-			<string>@due(%snippet:tpsmt%%|)</string>
+			<string>@due(%snippet:smt%%|)</string>
 			<key>snippetType</key>
 			<integer>0</integer>
 			<key>useCount</key>
@@ -90,7 +90,7 @@ In TaskPaper:
 		</dict>
 		<dict>
 			<key>abbreviation</key>
-			<string>tpsmt</string>
+			<string>smt</string>
 			<key>abbreviationMode</key>
 			<integer>0</integer>
 			<key>creationDate</key>
@@ -102,7 +102,7 @@ In TaskPaper:
 			<key>lastUsed</key>
 			<date>2012-11-25T12:26:42Z</date>
 			<key>modificationDate</key>
-			<date>2014-04-24T21:49:57Z</date>
+			<date>2014-04-24T21:32:44Z</date>
 			<key>plainText</key>
 			<string>property pName : "smalltime"property pDescription : "'open date phrase panel'"property pVer : "0.1"property pPluginLink : "https://github.com/RobTrew/tree-tools/tree/master/FoldingText%202%20plugins%20and%20scripts"tell application "TaskPaper"	set lstDocs to documents	if lstDocs ≠ {} then		activate		tell item 1 of lstDocs			set varResult to (evaluate script "function(editor, options) {
 				return editor.performCommand(options.command);
