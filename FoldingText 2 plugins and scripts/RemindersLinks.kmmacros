@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>SelectMenuItem</string>
+						<key>Menu</key>
+						<array>
+							<string>Edit</string>
+							<string>Copy</string>
+						</array>
+						<key>TargetApplication</key>
+						<dict>
+							<key>BundleIdentifier</key>
+							<string>com.apple.reminders</string>
+							<key>Name</key>
+							<string>Reminders</string>
+							<key>NewFile</key>
+							<string>/Applications/Reminders.app</string>
+						</dict>
+						<key>TargetingType</key>
+						<string>Specific</string>
+					</dict>
+					<dict>
+						<key>DisplayKind</key>
+						<string>Variable</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteAppleScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>property pTitle : "Search nvAlt for UUID of first Reminder.app Reminder in the clipboard"
+property pContext : "e.g. x-apple-reminder://UUIDs placed in text files by FT/TP 'make Reminder from current line' macro"
+property pVer : "0.1"
+property pAuthor : "Rob Trew"
+
+property pSQL : "sqlite3 $HOME/Library/Calendars/Calendar\\ Cache \"select zlocaluid from zcalendaritem inner join znode on zcalendaritem.zcalendar = znode.z_pk where zcalendaritem.z_ent is 9 and zcalendaritem.ztitle = "
+property pdteCocoaEpoch : missing value
+property pMaxInt : (2 ^ 29) - 1
+
+-- property pURLScheme : "x-apple-reminder://"
+property pURLScheme : "nvalt://"
+
+on run
+	set strUUID to ""
+	set lstUUID to paragraphs of UUIDofCopiedReminder()
+	if lstUUID ≠ {} then
+		set strUUID to item 1 of lstUUID
+		set strCmd to "open " &amp; pURLScheme &amp; strUUID
+		do shell script strCmd
+		tell application "nvALT" to activate
+	end if
+	return strUUID
+end run
+
+
+on UUIDofCopiedReminder()
+	-- ASSUMES REMINDER(S) HAVE BEEN SELECTED AND COPIED IN THE GUI (E.G. THRU KEYBOARD MAESTRO)
+	set strRaw to (the clipboard) as Unicode text
+	if (strRaw does not start with "[ ]	") and (strRaw does not start with "[x]	") then return ""
+	set lstSeen to {}
+	set dlm to my text item delimiters
+	
+	-- GROUP TEXT LINES WITH ANY DATE LINES
+	set lstLines to paragraphs of strRaw
+	set lngLines to (length of lstLines)
+	set lstUUID to {}
+	set lstRecord to {}
+	repeat with oLine in lstLines
+		set strLine to contents of oLine
+		if strLine begins with "[" then
+			if lstRecord ≠ {} then
+				if length of lstRecord &lt; 3 then set end of lstRecord to missing value -- no date
+				set end of lstUUID to lstRecord
+			end if
+			set blnActive to (character 2 of strLine) ≠ "x"
+			set lstRecord to {blnActive, text 5 thru -1 of strLine}
+		else
+			if strLine ≠ "" then
+				set end of lstRecord to date (text -9 thru -1 of strLine)
+			end if
+		end if
+	end repeat
+	-- Collect the last line
+	if length of lstRecord &lt; 3 then set end of lstRecord to missing value
+	set end of lstUUID to lstRecord
+	set lngUUID to length of lstUUID
+	lstUUID
+	-- RETURN UUID FOR JUST THE FIRST (isCompleted, text, date) TRIPLET
+	-- THAT WE HAVE FOUND IN THE CLIPBOARD
+	set strHarvest to ""
+	
+	--repeat with i from 1 to lngUUID
+	set i to 1
+	set {blnActive, strText, dte} to item i of lstUUID
+	
+	-- BUILD AN SQL QUERY ON THE TEXT AND DATE, AND HARVEST ANY RESULTS
+	if blnActive then
+		set strDoneClause to " and zcompleteddate is null"
+	else
+		set strDoneClause to " and zcompleteddate is not null"
+	end if
+	
+	if dte is not missing value then
+		set lngSecs to AS2CocoaTime(dte)
+		set strDayClause to " and zduedate &gt;= " &amp; ¬
+			Int2Str(lngSecs) &amp; " and zduedate &lt; " &amp; Int2Str(lngSecs + (days * 1))
+	else
+		set strDayClause to " and zduedate is null"
+	end if
+	
+	set strCmd to pSQL &amp; quoted form of strText &amp; strDoneClause &amp; strDayClause &amp; "\""
+	set lstResults to paragraphs of (do shell script strCmd)
+	
+	-- DETECTING DUPLICATES (SAME DONE STATUS AND REMINDER TEXT ON SAME DAY)
+	set lngResults to length of lstResults
+	if lngResults &gt; 1 then
+		set lngDuplicates to lngResults
+	else
+		set lngDuplicates to 0
+	end if
+	
+	-- EXTRACT THE UUID FROM EACH MATCH
+	repeat with i from 1 to lngResults
+		set strFields to contents of (item i of lstResults)
+		set {dlm, my text item delimiters} to {my text item delimiters, "|"}
+		set strUUID to text item 1 of strFields
+		
+		-- AND IF WE HAVEN'T SEEN THIS UUID BEFORE
+		if not (lstSeen contains strUUID) then
+			set end of lstSeen to strUUID
+			
+			-- ACCUMULATE A HARVEST (IDEALLY OF A SINGLE UUID)
+			set strHarvest to strHarvest &amp; strUUID &amp; linefeed
+		end if
+	end repeat
+	--end repeat
+	set my text item delimiters to dlm
+	return strHarvest
+end UUIDofCopiedReminder
+
+
+
+-- Convert an Applescript date to a number of seconds since the Cocoa Epoch
+-- (Format used in the Calendar Cache)
+on AS2CocoaTime(dteAS)
+	if pdteCocoaEpoch is missing value then set pdteCocoaEpoch to CocoaEpoch()
+	return (dteAS - pdteCocoaEpoch) - (time to GMT)
+end AS2CocoaTime
+
+-- Get an Applescript date version of the Cocoa epoch moment
+on CocoaEpoch()
+	-- year of the release of Mac OS X 10.0
+	tell (current date)
+		set its day to 1 -- (Feb 29 precaution)
+		set {its year, its month, its day, its time} to {2001, 1, 1, 0}
+		return it
+	end tell
+end CocoaEpoch
+
+-- Stringify large date integers for the SQL clauses
+on Int2Str(n)
+	if n &gt; pMaxInt then
+		set {lngRest, str} to {n, ""}
+		repeat while lngRest &gt; 10
+			set str to ((lngRest mod 10) as integer as string) &amp; str
+			set lngRest to lngRest div 10
+		end repeat
+		(lngRest as string) &amp; str
+	else
+		n as integer as string
+	end if
+end Int2Str
+
+</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>TrimResultsNew</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>strRemindersUUIDs</string>
+					</dict>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>Notification</string>
+						<key>SoundName</key>
+						<string></string>
+						<key>Subtitle</key>
+						<string>Searching nvAlt for:</string>
+						<key>Text</key>
+						<string>%Variable%strRemindersUUIDs%</string>
+						<key>Title</key>
+						<string>First selected Reminder</string>
+					</dict>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>JustDisplay</key>
+						<false/>
+						<key>MacroActionType</key>
+						<string>SetClipboardToText</string>
+						<key>TargetNamedClipboardRedundantDisplayName</key>
+						<string>Default Clipboard</string>
+						<key>TargetNamedClipboardUID</key>
+						<string>564469A9-9D9C-48A3-A51F-D6C56502C001</string>
+						<key>TargetUseNamedClipboard</key>
+						<false/>
+						<key>Text</key>
+						<string>%Variable%strRemindersUUIDs%</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>ModificationDate</key>
+				<real>417984463.73424602</real>
+				<key>Name</key>
+				<string>Find nvAlt file(s) linked to first selected Reminder</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>3</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>2304</integer>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>A4229B02-FFFB-4542-A33F-D7845DC51D25</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>Reminders</string>
+		<key>Targeting</key>
+		<dict>
+			<key>Targeting</key>
+			<string>Included</string>
+			<key>TargetingApps</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.apple.reminders</string>
+					<key>Name</key>
+					<string>Reminders</string>
+					<key>NewFile</key>
+					<string>/Applications/Reminders.app</string>
+				</dict>
+			</array>
+		</dict>
+		<key>UID</key>
+		<string>5FBF0FB4-E00D-415F-81F3-1F26476CAD92</string>
+	</dict>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>SelectMenuItem</string>
+						<key>Menu</key>
+						<array>
+							<string>Edit</string>
+							<string>Copy</string>
+						</array>
+						<key>TargetApplication</key>
+						<dict>
+							<key>BundleIdentifier</key>
+							<string>com.apple.reminders</string>
+							<key>Name</key>
+							<string>Reminders</string>
+							<key>NewFile</key>
+							<string>/Applications/Reminders.app</string>
+						</dict>
+						<key>TargetingType</key>
+						<string>Specific</string>
+					</dict>
+					<dict>
+						<key>DisplayKind</key>
+						<string>Variable</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteAppleScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>property pTitle : "Reminders - Copy as Link (converts items copied from Reminders to x-apple-reminder://UUID link, for pasting as MD)"
+property pVer : "0.6"
+property pAuthor : "Rob Trew"
+
+-- PASTE FORMAT OPTIONS
+property pblnMDLink : true -- Always wraps reminders UUID in [MD](link) ? (Any duplicates will always labelled this way)
+property pstrMDLinkLabel : "Alert" -- Prefix to be used in any MD label link ?
+property pblnTextPart : false -- Include part of the text in any MD label link ?
+property plngTextPartWords : 4 -- If so, how many words ?
+
+
+property pSQL : "sqlite3 $HOME/Library/Calendars/Calendar\\ Cache \"select zlocaluid from zcalendaritem inner join znode on zcalendaritem.zcalendar = znode.z_pk where zcalendaritem.z_ent is 9 and zcalendaritem.ztitle = "
+property pdteCocoaEpoch : missing value
+property pMaxInt : (2 ^ 29) - 1
+
+property pURLScheme : "x-apple-reminder://"
+
+
+-- History
+-- 0.4 adds copying of dateless reminders
+-- 0.6 adds filtering by done status, and corrects a bug
+
+on run
+	-- ASSUMES REMINDER(S) HAVE BEEN SELECTED AND COPIED IN THE GUI (E.G. THRU KEYBOARD MAESTRO)
+	set strRaw to (the clipboard) as Unicode text
+	if (strRaw does not start with "[ ]	") and (strRaw does not start with "[x]	") then return 0
+	set lstSeen to {}
+	set dlm to my text item delimiters
+	
+	-- GROUP TEXT LINES WITH ANY DATE LINES
+	set lstLines to paragraphs of strRaw
+	set lngLines to (length of lstLines)
+	set lstUUID to {}
+	set lstRecord to {}
+	repeat with oLine in lstLines
+		set strLine to contents of oLine
+		if strLine begins with "[" then
+			if lstRecord ≠ {} then
+				if length of lstRecord &lt; 2 then set end of lstRecord to missing value -- no date
+				set end of lstUUID to lstRecord
+			end if
+			set blnActive to (character 2 of strLine) ≠ "x"
+			set lstRecord to {blnActive, text 5 thru -1 of strLine}
+		else
+			if strLine ≠ "" then
+				set end of lstRecord to date (text -9 thru -1 of strLine)
+			end if
+		end if
+	end repeat
+	-- Collect the last line
+	if length of lstRecord &lt; 3 then set end of lstRecord to missing value
+	set end of lstUUID to lstRecord
+	set lngUUID to length of lstUUID
+	
+	-- LOOP THROUGH THE TEXT+DATE PAIRS
+	set strPaste to ""
+	
+	repeat with i from 1 to lngUUID
+		set {blnActive, strText, dte} to item i of lstUUID
+		
+		-- BUILD AN SQL QUERY ON THE TEXT AND DATE, AND HARVEST ANY RESULTS
+		if blnActive then
+			set strDoneClause to " and zcompleteddate is null"
+		else
+			set strDoneClause to " and zcompleteddate is not null"
+		end if
+		
+		if dte is not missing value then
+			set lngSecs to AS2CocoaTime(dte)
+			set strDayClause to " and zduedate &gt;= " &amp; ¬
+				Int2Str(lngSecs) &amp; " and zduedate &lt; " &amp; Int2Str(lngSecs + (days * 1))
+		else
+			set strDayClause to " and zduedate is null"
+		end if
+		
+		set strCmd to pSQL &amp; quoted form of strText &amp; strDoneClause &amp; strDayClause &amp; "\""
+		set lstResults to paragraphs of (do shell script strCmd)
+		
+		-- DETECTING DUPLICATES (SAME REMINDER TEXT ON SAME DAY)
+		set lngResults to length of lstResults
+		if lngResults &gt; 1 then
+			set lngDuplicates to lngResults
+		else
+			set lngDuplicates to 0
+		end if
+		
+		-- EXTRACT THE UUID FROM EACH MATCH
+		repeat with i from 1 to lngResults
+			set strFields to contents of (item i of lstResults)
+			set {dlm, my text item delimiters} to {my text item delimiters, "|"}
+			set strUUID to text item 1 of strFields
+			
+			-- AND IF WE HAVEN'T SEEN THIS UUID BEFORE
+			if not (lstSeen contains strUUID) then
+				set end of lstSeen to strUUID
+				
+				-- APPEND A PASTE-READY COPY TO THE PASTE STRING
+				set strPaste to strPaste &amp; FormatResult(strUUID, strText, lngDuplicates, i)
+			end if
+		end repeat
+	end repeat
+	set my text item delimiters to dlm
+	set the clipboard to strPaste
+	return length of lstSeen
+end run
+
+-- Prepare formatted version of Reminders UUID (see options in properties at top of script)
+on FormatResult(strUUID, strText, lngDuplicates, iDuplicate)
+	set {dlm, my text item delimiters} to {my text item delimiters, space}
+	set strURL to pURLScheme &amp; strUUID
+	if lngDuplicates &gt; 0 then
+		set strLabel to (("duplicate " &amp; iDuplicate as string) &amp; " of " &amp; lngDuplicates as string) &amp; ":"
+		try
+			set strLabel to strLabel &amp; words 1 thru plngTextPartWords of strText &amp; " …"
+		on error
+			set strLabel to strLabel &amp; strText
+		end try
+		set strPaste to "[" &amp; strLabel &amp; "](" &amp; strURL &amp; ")" &amp; linefeed
+	else
+		if pblnMDLink then
+			set strLabel to pstrMDLinkLabel
+			if pblnTextPart then
+				set strLabel to strLabel &amp; ":"
+				try
+					set strLabel to strLabel &amp; words 1 thru plngTextPartWords of strText &amp; " …"
+				on error
+					set strLabel to strLabel &amp; strText
+				end try
+			end if
+			set strPaste to "[" &amp; strLabel &amp; "](" &amp; strURL &amp; ")" &amp; linefeed
+		else
+			set strPaste to strURL &amp; linefeed
+		end if
+		
+	end if
+	set my text item delimiters to dlm
+	return strPaste
+end FormatResult
+
+-- Convert an Applescript date to a number of seconds since the Cocoa Epoch
+-- (Format used in the Calendar Cache)
+on AS2CocoaTime(dteAS)
+	if pdteCocoaEpoch is missing value then set pdteCocoaEpoch to CocoaEpoch()
+	return (dteAS - pdteCocoaEpoch) - (time to GMT)
+end AS2CocoaTime
+
+-- Get an Applescript date version of the Cocoa epoch moment
+on CocoaEpoch()
+	-- year of the release of Mac OS X 10.0
+	tell (current date)
+		set its day to 1 -- (Feb 29 precaution)
+		set {its year, its month, its day, its time} to {2001, 1, 1, 0}
+		return it
+	end tell
+end CocoaEpoch
+
+-- Stringify large date integers for the SQL clauses
+on Int2Str(n)
+	if n &gt; pMaxInt then
+		set {lngRest, str} to {n, ""}
+		repeat while lngRest &gt; 10
+			set str to ((lngRest mod 10) as integer as string) &amp; str
+			set lngRest to lngRest div 10
+		end repeat
+		(lngRest as string) &amp; str
+	else
+		n as integer as string
+	end if
+end Int2Str
+
+</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>TrimResultsNew</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>lngUUID</string>
+					</dict>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>Notification</string>
+						<key>SoundName</key>
+						<string>Pop</string>
+						<key>Subtitle</key>
+						<string>Reminders</string>
+						<key>Text</key>
+						<string>%Variable%lngUUID% copied
+
+in x-apple-reminder://UUID format </string>
+						<key>Title</key>
+						<string>Copy As Link</string>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>ModificationDate</key>
+				<real>418034063.70569098</real>
+				<key>Name</key>
+				<string>Copy Reminder(s) as Links</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>32</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>256</integer>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>7740F04B-FFBD-4259-8646-DCD25C62EEE5</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>Reminders</string>
+		<key>Targeting</key>
+		<dict>
+			<key>Targeting</key>
+			<string>Included</string>
+			<key>TargetingApps</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.apple.reminders</string>
+					<key>Name</key>
+					<string>Reminders</string>
+					<key>NewFile</key>
+					<string>/Applications/Reminders.app</string>
+				</dict>
+			</array>
+		</dict>
+		<key>UID</key>
+		<string>5FBF0FB4-E00D-415F-81F3-1F26476CAD92</string>
+	</dict>
+</array>
+</plist>
