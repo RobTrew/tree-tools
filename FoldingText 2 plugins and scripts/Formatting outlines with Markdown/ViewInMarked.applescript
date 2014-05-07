@@ -29,12 +29,20 @@ on run
 	if pblnPositionWindows then
 		set lngWidth to word 3 of (do shell script "defaults read /Library/Preferences/com.apple.windowserver | grep -w Width")
 		set lngHeight to word 3 of (do shell script "defaults read /Library/Preferences/com.apple.windowserver | grep -w Height")
-		set lngHalf to lngWidth / 2
+		
 		set lngHeight to lngHeight - 22
 		
+		--set lngHalf to lngWidth / 2
+		set lngThird to lngWidth / 3
+		
 		tell application "System Events"
-			tell process "FoldingText" to tell window 1 to set {position, size} to {{lngHalf, 22}, {lngHalf, lngHeight}}
-			tell process "Marked" to tell window 1 to set {position, size} to {{0, 22}, {lngHalf, lngHeight}}
+			-- 50/50
+			--tell process "FoldingText" to tell window 1 to set {position, size} to {{lngHalf, 22}, {lngHalf, lngHeight}}
+			--tell process "Marked" to tell window 1 to set {position, size} to {{0, 22}, {lngHalf, lngHeight}}
+			
+			-- or 1/3 2/3
+			tell process "FoldingText" to tell window 1 to set {position, size} to {{lngThird, 22}, {lngThird * 2, lngHeight}}
+			tell process "Marked" to tell window 1 to set {position, size} to {{0, 22}, {lngThird, lngHeight}}
 		end tell
 	end if
 end run
