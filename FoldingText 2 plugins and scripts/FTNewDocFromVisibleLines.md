@@ -2,7 +2,7 @@
 
 I often need a table of contents, or a shorter and less fully elaborated copy of a larger document.
 
-With FoldingText nodePath filtering (and/or a bit of manual folding for fine-tuning), I can show only the level of detail that I want in FoldingText, and then make a shorter snapshot document (including only the visible lines) by running a [script]([FTNewDocFromVisibleLines.applescript](./FTNewDocFromVisibleLines.applescript)) like the one below (from something like KeyBoard Maestro).
+With FoldingText nodePath filtering (and/or a bit of manual folding for fine-tuning), I can show only the level of detail that I want in FoldingText, and then make a shorter snapshot document (including only the visible lines) by running a [script](./FTNewDocFromVisibleLines.applescript) like the one below (from something like KeyBoard Maestro).
 
 For example, if I use Jamie Kowalski's [Filter plugin](https://github.com/jamiekowalski/foldingtext-extra/tree/master/filter.ftplugin) to show only the top two heading levels in the FoldingText User's Guide, with a query like:
 
