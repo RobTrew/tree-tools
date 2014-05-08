@@ -1,48 +1,1 @@
-property pTitle : "Open FoldingText file in Marked"
-property pVer : "0.03"
-property pAuthor : "Robin Trew"
-
-property pblnPositionWindows : true -- Set this to false to disable the window positioning at the end of the script
-
-on run
-	tell application "FoldingText"
-		set lstDocs to documents
-		if lstDocs = {} then return
-		set {strName, oFile} to {name, file} of item 1 of lstDocs
-		activate
-		if oFile is missing value then
-			display dialog "The document: " & return & return & strName & Â
-				return & return & "needs to be saved before Marked can preview it." buttons {"OK"} Â
-				default button "OK" with title pTitle & "  ver. " & pVer
-			return
-		end if
-	end tell
-	
-	---- Marked
-	tell application "Marked"
-		activate
-		open oFile
-	end tell
-	
-	-- Try to position windows left and right (to disable this, if it doesn't suit your workflow or your screen setup,
-	-- set pblnPositionWindows at the top of the script to false )
-	if pblnPositionWindows then
-		set lngWidth to word 3 of (do shell script "defaults read /Library/Preferences/com.apple.windowserver | grep -w Width")
-		set lngHeight to word 3 of (do shell script "defaults read /Library/Preferences/com.apple.windowserver | grep -w Height")
-		
-		set lngHeight to lngHeight - 22
-		
-		--set lngHalf to lngWidth / 2
-		set lngThird to lngWidth / 3
-		
-		tell application "System Events"
-			-- 50/50
-			--tell process "FoldingText" to tell window 1 to set {position, size} to {{lngHalf, 22}, {lngHalf, lngHeight}}
-			--tell process "Marked" to tell window 1 to set {position, size} to {{0, 22}, {lngHalf, lngHeight}}
-			
-			-- or 1/3 2/3
-			tell process "FoldingText" to tell window 1 to set {position, size} to {{lngThird, 22}, {lngThird * 2, lngHeight}}
-			tell process "Marked" to tell window 1 to set {position, size} to {{0, 22}, {lngThird, lngHeight}}
-		end tell
-	end if
-end run
+property pTitle : "Open FoldingText file in Marked"property pVer : "0.03"property pAuthor : "Robin Trew"property pblnPositionWindows : true -- Set this to false to disable the window positioning at the end of the scripton run	tell application "FoldingText"		set lstDocs to documents		if lstDocs = {} then return		set oDoc to item 1 of lstDocs		set {strName, oFile} to {name, file} of item 1 of lstDocs		activate		if oFile is missing value then			display dialog "The document: " & return & return & strName & Â¬				return & return & "needs to be saved before Marked can preview it." buttons {"OK"} Â¬				default button "OK" with title pTitle & "  ver. " & pVer			return		end if		set strPath to POSIX path of oFile	end tell		---- Marked	do shell script "open -a Marked " & quoted form of strPath		-- Try to position windows left and right (to disable this, if it doesn't suit your workflow or your screen setup,	-- set pblnPositionWindows at the top of the script to false )	if pblnPositionWindows then		set lngWidth to word 3 of (do shell script "defaults read /Library/Preferences/com.apple.windowserver | grep -w Width")		set lngHeight to word 3 of (do shell script "defaults read /Library/Preferences/com.apple.windowserver | grep -w Height")				set lngHeight to lngHeight - 22				--set lngHalf to lngWidth / 2		set lngThird to lngWidth / 3				tell application "System Events"			-- 50/50			--tell process "FoldingText" to tell window 1 to set {position, size} to {{lngHalf, 22}, {lngHalf, lngHeight}}			--tell process "Marked" to tell window 1 to set {position, size} to {{0, 22}, {lngHalf, lngHeight}}						-- or 1/3 2/3			tell process "FoldingText" to tell window 1 to set {position, size} to {{lngThird, 22}, {lngThird * 2, lngHeight}}			tell process "Marked" to tell window 1 to set {position, size} to {{0, 22}, {lngThird, lngHeight}}		end tell	end ifend run
