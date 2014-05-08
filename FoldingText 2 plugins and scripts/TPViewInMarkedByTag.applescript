@@ -1,4 +1,4 @@
-property pTitle : "View TaskPaper Pespective in Marked - Actions grouped by Tags"property pVer : "0.1"property pAuthor : "Rob Trew"property pblnDebug : falseproperty pDescription : "
+property pTitle : "View TaskPaper Pespectives in Marked - Example: Actions grouped by Tags"property pVer : "0.1"property pAuthor : "Rob Trew"property pblnDebug : falseproperty pDescription : "
 
 Creates a view, based on the active TaskPaper document,
 and displays it in Marked2app.com
