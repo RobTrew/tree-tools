@@ -20,7 +20,7 @@ function(editor, options) {
 		lstTagged.forEach(function(oNode) {
 			lstReport.push(strListPrefix + oNode.text());
 		});
-		lstReport.push('\\n');
+		lstReport.push(''); // gap before next heading
 	});
 
 		return lstReport.join('\\n');
