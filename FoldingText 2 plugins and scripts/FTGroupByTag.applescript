@@ -13,16 +13,15 @@ function(editor, options) {
 		strListPrefix = '- ', lstTagged = [],
 		lstReport = [], strTag;
 
-		lstTags.forEach(function(strTag) {
-			var strTitle = strTag[0].toUpperCase() + strTag.slice(1);
-
-			lstReport.push([strHeadPrefix, strTitle].join(' '));
-			lstTagged = tree.evaluateNodePath('//@' + strTag);
-			lstTagged.forEach(function(oNode) {
-				lstReport.push(strListPrefix + oNode.text());
-			});
-			lstReport.push(''); // gap before next heading
+	lstTags.forEach(function(strTag) {
+		var strTitle = strTag[0].toUpperCase() + strTag.slice(1);
+		lstReport.push([strHeadPrefix, strTag].join(' '));
+		lstTagged = tree.evaluateNodePath('//@' + strTag);
+		lstTagged.forEach(function(oNode) {
+			lstReport.push(strListPrefix + oNode.text());
 		});
+		lstReport.push('\\n');
+	});
 
 		return lstReport.join('\\n');
 }
