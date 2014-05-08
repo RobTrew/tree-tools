@@ -15,7 +15,7 @@ function(editor, options) {
 
 	lstTags.forEach(function(strTag) {
 		var strTitle = strTag[0].toUpperCase() + strTag.slice(1);
-		lstReport.push([strHeadPrefix, strTag].join(' '));
+		lstReport.push([strHeadPrefix, strTitle].join(' '));
 		lstTagged = tree.evaluateNodePath('//@' + strTag);
 		lstTagged.forEach(function(oNode) {
 			lstReport.push(strListPrefix + oNode.text());
