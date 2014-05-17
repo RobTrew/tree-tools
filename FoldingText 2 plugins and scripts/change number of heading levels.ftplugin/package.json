@@ -1,0 +1,11 @@
+{
+    "name": "Change number of heading levels",
+    "version": "1.2.0",
+    "description": "Hash headings for one more/less outline level",
+    "engines": {
+        "foldingtext": ">=2.0.0",
+        "taskpaper": ">=3.0.0"
+    },
+    "homepage": "https://github.com/RobTrew/tree-tools"
+}
+

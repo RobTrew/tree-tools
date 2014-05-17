@@ -1,0 +1,11 @@
+{
+    "name": "Change document expansion level",
+    "version": "1.2.0",
+    "description": "Expand more and expand less",
+    "engines": {
+        "foldingtext": ">=2.0.0",
+        "taskpaper": ">=3.0.0"
+    },
+    "homepage": "https://github.com/RobTrew/tree-tools"
+}
+

@@ -1,0 +1,11 @@
+{
+    "name": "Live translation of relative and informal dates to ISO",
+    "version": "1.2.0",
+    "description": "Uses JK Panel",
+    "engines": {
+        "foldingtext": ">=2.0.0",
+        "taskpaper": ">=3.0.0"
+    },
+    "homepage": "https://github.com/RobTrew/tree-tools"
+}
+

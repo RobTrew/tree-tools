@@ -20,9 +20,12 @@ define(function(require, exports, module) {
 	}
 
 	function sortedKeys(editor) {
-		var lstMaps = editor._keyMaps,
+		//debugger;
+		var //varMap = editor.reverseKeyMapLookup(),
+			lstMaps = editor._keyMaps,
 			lngMaps = lstMaps.length, i,
 			dctMap = {}, strKey, varVal, lstKeys=[];
+
 
 		for (i=0; i< lngMaps; i++) {
 			dctMap = lstMaps[i];

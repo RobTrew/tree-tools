@@ -1,0 +1,11 @@
+{
+    "name": "Functions for sharing data with Reminders.app entries",
+    "version": "1.2.0",
+    "description": "Manages links and date tag reading and writing",
+    "engines": {
+        "foldingtext": ">=2.0.0",
+        "taskpaper": ">=3.0.0"
+    },
+    "homepage": "https://github.com/RobTrew/tree-tools"
+}
+
