@@ -3,7 +3,7 @@
 define(function(require, exports, module) {
 	'use strict';
 
-	var Extensions = require('ft/core/extensions');
+	var Extensions = require('ft/core/extensions').Extensions;
 
 	function maxhash(tree) {
 		var lstHead = tree.evaluateNodePath('//@type=heading'),

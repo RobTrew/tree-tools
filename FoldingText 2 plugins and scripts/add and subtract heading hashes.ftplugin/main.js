@@ -1,42 +1,39 @@
-// Add or remove a heading hash (selected line)
+// Add or remove a heading hash (selected lines)
 // (Removing the last hash toggles the line between header
 // and unordered list item)
 
 define(function(require, exports, module) {
 	'use strict';
 
-	var Extensions = require('ft/core/extensions'),
+	var Extensions = require('ft/core/extensions').Extensions,
 		dctDeep = {'name':'deeper heading', 'keys':'Shift-Ctrl-]'},
 		dctShallow = {'name':'shallower heading', 'keys':'Shift-Ctrl-['},
 		dctKeys = {};
 
-	function shiftHeader(editor, lngDelta) {
+	function shiftLevels(editor, lngDelta) {
 		var rngSeln = editor.selectedRange(),
+			lstNodes = rngSeln.nodesInRange(),
+			oLastNode = null,
 			tree = editor.tree(),
-			oNode = rngSeln.startNode,
 			lngShift = 0, lngLevel = 0,
-			lngChar = rngSeln.location() - oNode.lineTextStart(),
+
 			rngShifted;
 
-		if (oNode.type() !== 'heading') {
-			oNode.setType('heading');
-			oNode.setTypeIndentLevel(1);
-		} else {
+		lstNodes.forEach(function(oNode) {
 			lngLevel = oNode.typeIndentLevel() + lngDelta;
 			if (lngLevel > 6) {
 				lngLevel = 6;
 			} else if (lngLevel < 1) {
-				oNode.setType('unordered');
+				oNode.setType('heading');
 				lngLevel = 1;
-			} else {
-				lngShift = lngDelta; // cursor position adjustment after change
 			}
 			oNode.setTypeIndentLevel(lngLevel);
-		}
-		if (lngChar < 0) {lngChar = 0;}
-		rngShifted = tree.createRangeFromLocation(
-			oNode.lineTextStart() + lngChar + lngShift, rngSeln.length());
+		});
+		oLastNode = lstNodes[lstNodes.length -1];
+		rngShifted = tree.createRangeFromNodes(
+				lstNodes[0], 0, oLastNode, -1);
 		editor.setSelectedRange(rngShifted);
+
 	}
 
 	//function keySymbols(strKeys) {
@@ -53,7 +50,7 @@ define(function(require, exports, module) {
 			//dctDeep.keys),
 		performCommand: function (editor) {
 
-			shiftHeader(editor, 1);
+			shiftLevels(editor, 1);
 		}
 	});
 
@@ -63,7 +60,7 @@ define(function(require, exports, module) {
 			//dctShallow.keys),
 		performCommand: function (editor) {
 
-			shiftHeader(editor, -1);
+			shiftLevels(editor, -1);
 		}
 	});
 

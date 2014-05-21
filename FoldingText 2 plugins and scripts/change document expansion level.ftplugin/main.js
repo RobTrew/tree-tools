@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
 	'use strict';
 
-	var Extensions = require('ft/core/extensions');
+	var Extensions = require('ft/core/extensions').Extensions;
 
 	// deepest nesting level in this sub-tree ?
 	function maxdepth(node) {

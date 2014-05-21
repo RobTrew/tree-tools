@@ -13,7 +13,7 @@
 define(function(require, exports, module) {
 	'use strict';
 
-	var Extensions = require('ft/core/extensions'),
+	var Extensions = require('ft/core/extensions').Extensions,
 		dateLogic = require('../smalltime.ftplugin/main.js'),
 		Panel = require('../jmk_panel.ftplugin/jmk_panel.js').Panel,
 		panel,

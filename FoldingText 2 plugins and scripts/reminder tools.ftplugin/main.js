@@ -8,7 +8,7 @@
 define(function(require, exports, module) {
 	'use strict';
 
-	var Extensions = require('ft/core/extensions'),
+	var Extensions = require('ft/core/extensions').Extensions,
 		dateLogic = require('../smalltime.ftplugin/main.js'),
 		Editor;
 

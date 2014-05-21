@@ -4,7 +4,7 @@
 define(function(require, exports, module) {
 	'use strict';
 
-	var Extensions = require('ft/core/extensions'),
+	var Extensions = require('ft/core/extensions').Extensions,
 		pasteboard = require('ft/system/pasteboard'),
 		dctShowKeys = {'name':'show map', 'keys':'Shift-Cmd-Ctrl-Alt-K'},
 		dctKeys = {};
