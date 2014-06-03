@@ -33,7 +33,7 @@ Here are two sample scripts, one for [FoldingText 2](http://www.foldingtext.com)
 
 #### Experimenting with the new FoldingText debugger
 
-Not that you can run these scripts in a debug mode and trace their execution if you want. To do that:
+Note that you can run these scripts in a debug mode and trace their execution if you want. To do that:
 
 1. Edit `pblnDebug` at the start of the script to `true`
 2. insert the line `debugger;` wherever you want a break-point,
