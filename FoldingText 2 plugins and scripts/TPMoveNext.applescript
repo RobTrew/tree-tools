@@ -108,6 +108,7 @@ property pTitle : "Move the @next tag along, leaving @done in its wake"property
 
 				// AND OTHERWISE TAG THE IDENTIFIED SUCCESSOR (CLEARING THE TAG FROM OTHER NODES IN THIS FILE)
 				oFirstNode.addTag('done', fmtTP(new Date()));
+				oFirstNode.removeTag(strTag);
 				if (oNextNode !== null)  {
 					lstNodes.forEach(function(oNode) {
 						oNode.removeTag(strTag);
@@ -127,7 +128,6 @@ property pTitle : "Move the @next tag along, leaving @done in its wake"property
 					strPath = '//@id=' + oProject.id + '//(not @done)';
 					lstRemaining = tree.evaluateNodePath(strPath);
 					if (lstRemaining.length) {
-						oFirstNode.removeTag(strTag);
 						lstRemaining[0].addTag(strTag);
 					} else {
 						oProject.addTag('done', fmtTP(new Date()));
