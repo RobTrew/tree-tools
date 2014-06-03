@@ -21,8 +21,8 @@ We can call the Javascript from an Applescript, and perhaps use that from someth
 
 Here are two sample scripts, one for [FoldingText 2](http://www.foldingtext.com), and one for [TaskPaper 3](http://oldsupport.foldingtext.com/discussions/development-versions/210-taskpaper-3-dev-build-126) which automate the business of marking a line as `@done(yyy-mm-dd hh:mm)` and moving the `@next` tag to the next line in the project which isn’t completed, and which doesn’t have any other disqualifying tags.
 
-- [FTMoveNext.applescript](./FTMoveNext.applescript)
-- [TPMoveNext.applescript](./TPMoveNext.applescript)
+- [FTMoveNext.applescript](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%202%20plugins%20and%20scripts/FTMoveNext.applescript)
+- [TPMoveNext.applescript](https://github.com/RobTrew/tree-tools/blob/master/FoldingText%202%20plugins%20and%20scripts/TPMoveNext.applescript)
 
 #### Customising the scripts
 
