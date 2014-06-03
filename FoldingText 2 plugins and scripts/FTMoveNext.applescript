@@ -1,4 +1,4 @@
-property pTitle : "Move the @next tag along, leaving @done in its wake"property pVer : "0.1" -- DRAFT ...property pAuthor : "RobTrew"property pblnDebug : false-- ROUGH DRAFT:-- **MOVE** THE @NEXT OR @NOW TAG (edit pstrTag below) ON TO THE NEXT UNCOMPLETED ITEM IN THE PROJECT-- [Marking the current line as @done(yyy-mm-dd hh:mm) ]-- (If all lines under this heading/project are now @done, then mark the heading/project itself as @done)-- (and if there are no lines after this which are not @done, but there are some before, jump to the first of them and place the @next tag there)property pstrTag : "next"property plstExcept : {"done", "wait"}property precOptions : {tag:pstrTag, except:plstExcept}property pstrJS : "
+property pTitle : "Move the @next tag along, leaving @done in its wake"property pVer : "0.2" -- DRAFT ...property pAuthor : "RobTrew"property pblnDebug : false-- ROUGH DRAFT:-- **MOVE** THE @NEXT OR @NOW TAG (edit pstrTag below) ON TO THE NEXT UNCOMPLETED ITEM IN THE PROJECT-- [Marking the current line as @done(yyy-mm-dd hh:mm) ]-- (If all lines under this heading/project are now @done, then mark the heading/project itself as @done)-- (and if there are no lines after this which are not @done, but there are some before, jump to the first of them and place the @next tag there)property pstrTag : "next"property plstExcept : {"done", "wait"}property precOptions : {tag:pstrTag, except:plstExcept}property pstrJS : "
 
 		function(editor, options) {
 
@@ -80,7 +80,12 @@ property pTitle : "Move the @next tag along, leaving @done in its wake"property
 			// NON-BLANK LINE WHICH HAS NO DISQUALIFYING TAGS
 
 			// (nodes in the selected project which are tagged with @now or @next etc)
-			strPath = '//@id=' + oProject.id + '//@' + strTag;
+			// (if the current line is not enclosed by a project, then look anywhere for the bookmark tag)
+			if (oProject !== null) {
+				strPath = '//@id=' + oProject.id + '//@' + strTag;
+			} else {
+				strPath = '//@' + strTag;
+			}
 			lstNodes = tree.evaluateNodePath(strPath);
 
 			if (lstNodes.length) {
