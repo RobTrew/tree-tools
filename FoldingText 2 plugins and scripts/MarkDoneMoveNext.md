@@ -9,9 +9,11 @@ I assign a keystroke to:
 - Marking the current line as `@done(yyy-mm-dd hh:mm)`,
 - and moving the `@next` tag on (to the next item in the current project which is not tagged `@done`).
 
-If we are on the last line of a project:
+If we are on the last remaining line of a project:
 - The project/heading section itself is flagged as  `@done(yyy-mm-dd hh:mm)` if no uncompleted items remain.
 - If any earlier lines remain uncompleted, then the `@next` tag jumps to the first of them.
+- The script then backs up the project outline to any containing project and walks the whole outline recursively in search of an eligible @next 
+	- (continuing until the whole document is complete)
 
 #### FoldingText 2 and TaskPaper 3 scripts
 
