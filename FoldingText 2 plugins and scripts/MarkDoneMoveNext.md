@@ -14,6 +14,17 @@ If we are on the last remaining line of a project:
 - If any earlier lines remain uncompleted, then the `@next` tag jumps to the first of them.
 - The script then backs up the project outline to any containing project and walks the whole outline recursively in search of an eligible @next 
 	- (continuing until the whole document is complete)
+	
+#### To use the script
+- Choose the appropriate version (FoldingText or TaskPaper 3 Dev)
+- If there is no @next tag in your project, put your cursor on the line you want to start with.
+- If there is already a @next somewhere in the project, you can leave your cursor anywhere in the project – no need to move it.
+- Run the script from something like [KeyBoard Maestro](http://www.keyboardmaestro.com/main/) or [FastScripts](http://www.red-sweater.com/fastscripts/)
+- A line which had no @next tag will simply get one,
+- but if one of the project lines already had a @next tag:
+	1.	It will be stamped as `@done(yyyy-mm-dd hh:mm)`
+	2.	the @next tag will move to the next eligible line, and
+	3.	if all lines in this project are now `@done`, the project itself will be stamped as done, and the @next tag will move on to the next project in the file, if there is one.
 
 #### FoldingText 2 and TaskPaper 3 scripts
 
