@@ -49,8 +49,7 @@ on run
 	
 	tell application "FoldingText"
 		activate
-		set strOPMLFile to (POSIX path of Â
-			(choose file with prompt pTitle default location strSrcFolder))
+		set strOPMLFile to (POSIX path of (choose file with prompt pTitle default location strSrcFolder))
 		
 		-- REMEMBER THIS FOLDER FOR THE NEXT RUN - VALUES OF APPLESCRIPT PROPERTIES PERSIST BETWEEN RUNS
 		set {dlm, my text item delimiters} to {my text item delimiters, "/"}
@@ -59,8 +58,7 @@ on run
 		
 		if strOPMLFile does not end with ".opml" then
 			activate
-			display dialog strOPMLFile & return & return & Â
-				"File must have .opml extension" buttons {"OK"} default button "OK" with title pTitle & "  ver. " & pVer
+			display dialog strOPMLFile & return & return & "File must have .opml extension" buttons {"OK"} default button "OK" with title pTitle & "  ver. " & pVer
 			return
 		end if
 		

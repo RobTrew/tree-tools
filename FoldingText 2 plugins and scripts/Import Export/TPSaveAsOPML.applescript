@@ -162,8 +162,7 @@ on run
 						set {strBaseName, strFTPath} to {name, POSIX path of ((its file) as alias)}
 					on error
 						activate
-						display dialog pTargetApp & " file not yet saved: " & return & return & Â
-							"Save before exporting to OPML." buttons {"OK"} default button "OK" with title pTitle & "  ver " & pVer
+						display dialog pTargetApp & " file not yet saved: " & return & return & "Save before exporting to OPML." buttons {"OK"} default button "OK" with title pTitle & "  ver " & pVer
 						return
 					end try
 					set strOutPath to my ChooseFilePathAndSave(it, strFTPath, strBaseName, "opml", pblnWholeDocument)
@@ -171,8 +170,7 @@ on run
 					-- AND IF WE HAVE A DESTINATION, WRITE OPML TO IT
 					if strOutPath is not missing value then
 						set recOptions to precOptions
-						if title of recOptions = "" then Â
-							set title of recOptions to name of it
+						if title of recOptions = "" then set title of recOptions to name of it
 						
 						-- TRANSLATE TO AN OPML STRING
 						set varResult to (evaluate script pstrJS with options recOptions)
@@ -222,8 +220,7 @@ on ChooseFilePathAndSave(oApp, strPath, strBaseName, strExtn, blnWholeDoc)
 		activate
 		set strOutPath to missing value
 		try
-			set strOutPath to (POSIX path of Â
-				(choose file name with prompt strTitle default name strStem & "." & strExtn default location strOutFolder))
+			set strOutPath to (POSIX path of (choose file name with prompt strTitle default name strStem & "." & strExtn default location strOutFolder))
 		end try
 	end tell
 	return strOutPath

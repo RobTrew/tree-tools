@@ -73,8 +73,7 @@ on run
 		set strSuffix to "." & pstrOutFormat
 		if not (strOutFile ends with strSuffix) then set strOutFile to strOutFile & strSuffix
 		
-		set strCmd to "echo " & quoted form of strMMD & " | " & pstrMMD & " | " & pstrPandoc & " -f html -t " & Â
-			pstrOutFormat & " -o " & quoted form of strOutFile
+		set strCmd to "echo " & quoted form of strMMD & " | " & pstrMMD & " | " & pstrPandoc & " -f html -t " & pstrOutFormat & " -o " & quoted form of strOutFile
 		try
 			set strResult to do shell script strCmd
 		on error errMsg
@@ -90,8 +89,7 @@ on run
 			if pblnNotify then Notify("Markdown to .docx", "", "Saved", strOutFile & linefeed & linefeed & pstrAttribution)
 		end if
 	else
-		if pblnNotify then Notify("Markdown to .docx", "", "No text to save as .docx", "No FoldingText document open," & Â
-			linefeed & linefeed & "and no text in clipboard ...")
+		if pblnNotify then Notify("Markdown to .docx", "", "No text to save as .docx", "No FoldingText document open," & linefeed & linefeed & "and no text in clipboard ...")
 	end if
 end run
 
@@ -113,8 +111,7 @@ on ChooseFilePathAndSave(strSource, strPath, strName)
 	set my text item delimiters to dlm
 	tell application id "sevs"
 		activate
-		set oFile to Â
-			(choose file name with prompt strSource & ": Save As .docx" default name strOutName default location strOutFolder)
+		set oFile to (choose file name with prompt strSource & ": Save As .docx" default name strOutName default location strOutFolder)
 	end tell
 	return POSIX path of oFile
 end ChooseFilePathAndSave

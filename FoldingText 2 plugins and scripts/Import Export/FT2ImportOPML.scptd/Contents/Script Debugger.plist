@@ -250,7 +250,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>1564</integer>
+								<integer>2405</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -262,7 +262,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 562}, {890, 747}}</string>
+						<string>{{0, 514}, {890, 707}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
