@@ -1,4 +1,4 @@
-property pTitle : "FoldingText:  Save As .docx"
+property pTitle : "FoldingText 2  Save As .docx"
 property pVer : "0.05"
 
 property pstrOutFormat : "docx"
