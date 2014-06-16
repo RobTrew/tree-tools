@@ -1,10 +1,18 @@
 
 ### Automatically complete, pretty-print, and convert MultiMarkdown tables in FoldingText
 
-##### Two Keyboard Maestro macros
+#### Two Keyboard Maestro macros
 - Convert to, or pretty-print, an [MMD Table](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide#tables) (flat or nested)
 - Convert from a (flat or nested) MMD table to an MD outline.
 [FT Table and Outline.kmmacros](./FT%20Table%20and%20Outline.kmmacros)
+
+
+### Installation
+- If you have installed [Github for Mac ](https://mac.github.com) you should be able to open and install the MK Macros by clicking the open button at the top of [this page]((./FT%20Table%20and%20Outline.kmmacros))
+- Otherwise save the plist text on that page as a text file with the .kmmacros extension, and open it in KeyBoard Maestro. 
+### Use
+- Place your cursor anywhere in rough table or MD outline,
+- run one of the two macros from KM.
 
 #### Pretty-print as MMD table 
 ##### (from selected rough table or md outline)
