@@ -37,62 +37,77 @@
 						<key>Path</key>
 						<string></string>
 						<key>Text</key>
-						<string>-- Select the current block of text:
--- 1. back to preceding blank line, or start of document
--- 2. forward to following blank line, or end of document
-tell application "FoldingText"
-	tell front document
-		-- Get start and end of selected text (non empty) nodes
-		set oSeln to read selection
-		set strPath to (nodePath of oSeln) &amp; " except //@type=empty"
-		set lstRange to read nodes at path strPath
-		
-		-- exit if no text nodes have been selected
-		if lstRange ≠ {} then
-			
-			-- Get the start and end of the text selection
-			set lngStart to textIndex of item 1 of lstRange
-			tell item -1 of lstRange to set lngEnd to (its textIndex) + (length of (its |line|))
-			
-			-- list any blank lines in the text
-			set lstGaps to read nodes at path "//@type=empty"
-			
-			-- Get any preceding gap
-			set blnFound to false
-			set lngGaps to length of lstGaps
-			set i to 1
-			if lngGaps &gt; 0 then
-				repeat with i from lngGaps to 1 by -1
-					set oGap to item i of lstGaps
-					set lngPreGap to textIndex of oGap
-					if lngPreGap &lt; lngStart then
-						set lngPreGap to lngPreGap + (length of (|line| of oGap)) + 1
-						set blnFound to true
-						exit repeat
-					end if
-				end repeat
+						<string>property pblnDebug : false
+
+property pstrJS : "
+
+	function(editor, options) {
+
+		function selectBlock(editor) {
+			// select back to previous gap (or start of doc)
+			// and forward to next gap (or end of doc)
+
+			var	rngSeln = editor.selectedRange(),
+
+			idSelnStart = rngSeln.startNode.id,
+			idSelnEnd = rngSeln.endNode.id,
+
+			// PATHS: PREVIOUS GAP, AND NEXT GAP
+			strPathPrevGap = '//@id=' + idSelnStart + '/preceding::(@type=empty)[-1]',
+			strPathNextGap = '//@id=' + idSelnEnd + '/following::(@type=empty)[0]',
+
+			tree = editor.tree(),
+			lstBefore = tree.evaluateNodePath(strPathPrevGap),
+			lstAfter = tree.evaluateNodePath(strPathNextGap),
+
+			lngFrom, lngTo, rngNew;
+
+			// most recent empty line, or start of doc
+			if (lstBefore.length) {
+				lngFrom = lstBefore[0].lineTextStart()+1;
+			} else {
+				lngFrom = 0;
+			}
+
+			// next empty line, or end of doc
+			if (lstAfter.length) {
+				lngTo = lstAfter[0].lineTextStart()-1;
+			} else {
+				lngTo = tree.textLength();
+			}
+
+			// define the range by start position and length
+			rngNew = tree.createRangeFromLocation(lngFrom, lngTo-lngFrom);
+
+			// and select it
+			editor.setSelectedRange(rngNew);
+
+			return true;
+		}
+
+		return selectBlock(editor);
+
+	}
+"
+
+on run
+	tell application "FoldingText"
+		set varResult to missing value
+		if not pblnDebug then
+			set lstDocs to documents
+			if lstDocs ≠ {} then
+				tell item 1 of lstDocs
+					set varResult to (evaluate script pstrJS)
+				end tell
 			end if
-			if not blnFound then set lngPreGap to 0
-			
-			-- Get any following gap
-			set blnFound to false
-			if lngGaps &gt; 0 then
-				repeat with j from i to lngGaps
-					set oGap to item j of lstGaps
-					set lngPostGap to textIndex of oGap
-					if lngPostGap &gt; lngEnd then
-						set blnFound to true
-						exit repeat
-					end if
-				end repeat
-			end if
-			if not blnFound then set lngPostGap to length of (read text)
-			
-			-- and extend the selection to the whole text block
-			update selection with changes {textRange:{location:lngPreGap, |length|:(lngPostGap - lngPreGap)}}
+		else
+			-- debug script automatically refers to the SDK version of the editor
+			-- which must be open: FoldingText &gt; Help &gt; SDK &gt; Run Editor
+			set varResult to (debug script pstrJS)
 		end if
+		return varResult
 	end tell
-end tell</string>
+end run</string>
 						<key>TimeOutAbortsMacro</key>
 						<true/>
 						<key>TrimResults</key>
@@ -1486,9 +1501,9 @@ if __name__ == '__main__':
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>410468518.57959402</real>
+				<real>424614515.570099</real>
 				<key>Name</key>
-				<string>→ Outline</string>
+				<string>Lines containing cursor → Outline</string>
 				<key>Triggers</key>
 				<array>
 					<dict>
@@ -1516,9 +1531,9 @@ if __name__ == '__main__':
 			<array>
 				<dict>
 					<key>BundleIdentifier</key>
-					<string>com.foldingtext.FoldingText</string>
+					<string>com.foldingtext.paddle.FoldingText</string>
 					<key>Name</key>
-					<string>FoldingText.app</string>
+					<string>FoldingText</string>
 					<key>NewFile</key>
 					<string>/Applications/FoldingText.app</string>
 				</dict>
@@ -1556,65 +1571,62 @@ if __name__ == '__main__':
 						<key>IsActive</key>
 						<true/>
 						<key>IsDisclosed</key>
-						<false/>
+						<true/>
 						<key>MacroActionType</key>
 						<string>ExecuteAppleScript</string>
 						<key>Path</key>
 						<string></string>
 						<key>Text</key>
-						<string>tell application "FoldingText"
-	tell front document
-		-- Get start and end of selected text (non empty) nodes
-		set oSeln to read selection
-		set strPath to (nodePath of oSeln) &amp; " except //@type=empty"
-		set lstRange to read nodes at path strPath
-		
-		-- exit if no text nodes have been selected
-		if lstRange ≠ {} then
-			
-			-- Get the start and end of the text selection
-			set lngStart to textIndex of item 1 of lstRange
-			tell item -1 of lstRange to set lngEnd to (its textIndex) + (length of (its |line|))
-			
-			-- list any blank lines in the text
-			set lstGaps to read nodes at path "//@type=empty"
-			
-			-- Get any preceding gap
-			set blnFound to false
-			set lngGaps to length of lstGaps
-			set i to 1
-			if lngGaps &gt; 0 then
-				repeat with i from lngGaps to 1 by -1
-					set oGap to item i of lstGaps
-					set lngPreGap to textIndex of oGap
-					if lngPreGap &lt; lngStart then
-						set lngPreGap to lngPreGap + (length of (|line| of oGap)) + 1
-						set blnFound to true
-						exit repeat
-					end if
-				end repeat
-			end if
-			if not blnFound then set lngPreGap to 0
-			
-			-- Get any following gap
-			set blnFound to false
-			if lngGaps &gt; 0 then
-				repeat with j from i to lngGaps
-					set oGap to item j of lstGaps
-					set lngPostGap to textIndex of oGap
-					if lngPostGap &gt; lngEnd then
-						set blnFound to true
-						exit repeat
-					end if
-				end repeat
-			end if
-			if not blnFound then set lngPostGap to length of (read text)
-			
-			-- and extend the selection to the whole text block
-			update selection with changes {textRange:{location:lngPreGap, |length|:(lngPostGap - lngPreGap)}}
-		end if
-	end tell
-end tell</string>
+						<string>property pblnDebug : falseproperty pstrJS : "
+
+	function(editor, options) {
+
+		function selectBlock(editor) {
+			// select back to previous gap (or start of doc)
+			// and forward to next gap (or end of doc)
+
+			var	rngSeln = editor.selectedRange(),
+
+			idSelnStart = rngSeln.startNode.id,
+			idSelnEnd = rngSeln.endNode.id,
+
+			// PATHS: PREVIOUS GAP, AND NEXT GAP
+			strPathPrevGap = '//@id=' + idSelnStart + '/preceding::(@type=empty)[-1]',
+			strPathNextGap = '//@id=' + idSelnEnd + '/following::(@type=empty)[0]',
+
+			tree = editor.tree(),
+			lstBefore = tree.evaluateNodePath(strPathPrevGap),
+			lstAfter = tree.evaluateNodePath(strPathNextGap),
+
+			lngFrom, lngTo, rngNew;
+
+			// most recent empty line, or start of doc
+			if (lstBefore.length) {
+				lngFrom = lstBefore[0].lineTextStart()+1;
+			} else {
+				lngFrom = 0;
+			}
+
+			// next empty line, or end of doc
+			if (lstAfter.length) {
+				lngTo = lstAfter[0].lineTextStart()-1;
+			} else {
+				lngTo = tree.textLength();
+			}
+
+			// define the range by start position and length
+			rngNew = tree.createRangeFromLocation(lngFrom, lngTo-lngFrom);
+
+			// and select it
+			editor.setSelectedRange(rngNew);
+
+			return true;
+		}
+
+		return selectBlock(editor);
+
+	}
+"on run	tell application "FoldingText"		set varResult to missing value		if not pblnDebug then			set lstDocs to documents			if lstDocs ≠ {} then				tell item 1 of lstDocs					set varResult to (evaluate script pstrJS)				end tell			end if		else			-- debug script automatically refers to the SDK version of the editor			-- which must be open: FoldingText &gt; Help &gt; SDK &gt; Run Editor			set varResult to (debug script pstrJS)		end if		return varResult	end tellend run</string>
 						<key>TimeOutAbortsMacro</key>
 						<true/>
 						<key>TrimResults</key>
@@ -2973,7 +2985,7 @@ if __name__ == '__main__':
 								<key>MacroActionType</key>
 								<string>Pause</string>
 								<key>Time</key>
-								<string>.25</string>
+								<string>.1</string>
 								<key>TimeOutAbortsMacro</key>
 								<true/>
 							</dict>
@@ -3007,9 +3019,9 @@ if __name__ == '__main__':
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>410468526.46476001</real>
+				<real>424614160.49547398</real>
 				<key>Name</key>
-				<string>→ Table</string>
+				<string>Lines containing cursor → MMD Table (monospaced prettyprinting)</string>
 				<key>Triggers</key>
 				<array>
 					<dict>
@@ -3037,9 +3049,9 @@ if __name__ == '__main__':
 			<array>
 				<dict>
 					<key>BundleIdentifier</key>
-					<string>com.foldingtext.FoldingText</string>
+					<string>com.foldingtext.paddle.FoldingText</string>
 					<key>Name</key>
-					<string>FoldingText.app</string>
+					<string>FoldingText</string>
 					<key>NewFile</key>
 					<string>/Applications/FoldingText.app</string>
 				</dict>
