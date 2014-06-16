@@ -67,13 +67,6 @@ Is converted to:
 |  1  | 4  | 9  |  16 | 25 | 36 |  49 |  64 |  81 |  
 ```
 
-|              Three Sections             |||||||||  
-|:---:|:--:|:--:|:---:|:--:|:--:|:---:|:---:|:---:|  
-| Section One ||| Section Two ||| Section Three |||  
-|  1  | 4  | 9  |  16 | 25 | 36 |  49 |  64 |  81 |  
-
-
-
 
 #### Convert (nested or flat) table to outline
 
