@@ -1,0 +1,31 @@
+### Expand whole document more, Collapse whole document 
+
+This plugin creates two keyboard shortcuts:
+- Collapse whole document one more level **⌘⌥-**
+- Expand whole document one more level	**⌘⌥+**
+
+(Not only hash headings, but also lists and sublists are folded and unfolded)
+
+
+
+
+#### Examples
+
+Whole document (headings and nested lists) collapsed to a particular level:
+
+![Level 3](./Level3WholeDoc.png)
+	
+![Level 4](./Level4WholeDoc.png)
+
+![Level 2](./Level2WholeDoc.png)
+
+
+#### Installation in FoldingText Dev 2, or TaskPaper Dev 3
+- From the application's main menu, choose `File > Open Application Folder`
+- Copy the `.ftplugin` folder and its contents into the `Plug-Ins` sub-folder of the application folder
+- Close and restart the application
+
+  Note that you can adjust the keyboard assignment of plugins by editing their _main.js_ file in a text editor, and adjusting the `editor.addKeyMap` section.
+
+  Any modifier keys in the `editor.addKeyMap` section of main.js in the .ftplugin folder must be kept in the following order `Shift-Cmd-Ctrl-Alt-`
+
