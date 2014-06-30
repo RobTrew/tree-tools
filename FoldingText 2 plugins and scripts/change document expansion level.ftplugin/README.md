@@ -1,4 +1,4 @@
-### Expand whole document more, Collapse whole document 
+### Collapse whole document more, and Expand whole document more
 
 This plugin creates two keyboard shortcuts:
 - Collapse whole document one more level **⌘⌥-**
@@ -11,13 +11,19 @@ This plugin creates two keyboard shortcuts:
 
 #### Examples
 
-Whole document (headings and nested lists) collapsed to a particular level:
+Whole document (headings and nested lists) collapsed/expanded to:
 
-![Level 3](./Level3WholeDoc.png)
+###### Level 3
+
+![](./Level3WholeDoc.png)
+
+###### Level 4
 	
-![Level 4](./Level4WholeDoc.png)
+![](./Level4WholeDoc.png)
 
-![Level 2](./Level2WholeDoc.png)
+###### Level 2
+
+![](./Level2WholeDoc.png)
 
 
 #### Installation in FoldingText Dev 2, or TaskPaper Dev 3
