@@ -28,7 +28,7 @@ Whole document (headings and nested lists) collapsed/expanded to:
 ![](./Level2WholeDoc.png)
 
 
-#### Installation in FoldingText Dev 2, or TaskPaper Dev 3
+#### Installation in FoldingText 2, or TaskPaper Dev 3
 
 - From the application's main menu, choose `File > Open Application Folder`
 - Copy the _Change document expansion level_ `.ftplugin` folder and its contents into the `Plug-Ins` sub-folder of the application folder
