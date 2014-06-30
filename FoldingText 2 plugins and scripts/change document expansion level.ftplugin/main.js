@@ -78,7 +78,7 @@ define(function(require, exports, module) {
 				if (lngLevel > 1) {
 					setFoldLevel(editor, lngLevel - 1);
 				}
-			} else { // folder the outer fringe
+			} else { // fold the outer fringe
 				setFoldLevel(editor, maxdepth(editor.tree().root) - 1);
 			}
 		}
