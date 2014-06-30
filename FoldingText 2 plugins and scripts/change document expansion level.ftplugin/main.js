@@ -53,7 +53,6 @@ define(function(require, exports, module) {
 		editor.collapseNodes(lstNodes, false);
 	}
 
-
 	Extensions.add('com.foldingtext.editor.commands', {
 		name: 'expand more',
 		description: 'Expand outline one more level',
@@ -69,7 +68,6 @@ define(function(require, exports, module) {
 		}
 
 	});
-
 
 	Extensions.add('com.foldingtext.editor.commands', {
 		name: 'collapse more',
