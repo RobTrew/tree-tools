@@ -13,6 +13,30 @@
 	<array>
 		<dict>
 			<key>abbreviation</key>
+			<string>@al</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2012-11-24T23:03:24Z</date>
+			<key>flags</key>
+			<integer>0</integer>
+			<key>label</key>
+			<string></string>
+			<key>lastUsed</key>
+			<date>2014-05-06T10:33:05Z</date>
+			<key>modificationDate</key>
+			<date>2014-04-27T10:33:49Z</date>
+			<key>plainText</key>
+			<string>@alarm(%snippet:ftsmt%%|)</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>useCount</key>
+			<integer>61</integer>
+			<key>uuidString</key>
+			<string>7BF1D188-4E49-460B-AA95-BCEE19F98922</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
 			<string></string>
 			<key>abbreviationMode</key>
 			<integer>0</integer>
@@ -23,10 +47,10 @@
 			<key>label</key>
 			<string></string>
 			<key>modificationDate</key>
-			<date>2014-04-24T21:30:40Z</date>
+			<date>2014-04-28T09:15:01Z</date>
 			<key>plainText</key>
 			<string>INSTALLATION
-These snippets require installation of the plugin at:
+These snippets require installation of plugins at:
 https://github.com/RobTrew/tree-tools/tree/master/FoldingText%202%20plugins%20and%20scripts
 
 In FoldingText:
@@ -52,15 +76,15 @@ In FoldingText:
 			<key>label</key>
 			<string></string>
 			<key>lastUsed</key>
-			<date>2014-04-24T21:24:18Z</date>
+			<date>2014-05-09T10:22:52Z</date>
 			<key>modificationDate</key>
-			<date>2014-04-24T21:20:46Z</date>
+			<date>2014-04-24T21:50:26Z</date>
 			<key>plainText</key>
-			<string>@start(%snippet:smt%%|)</string>
+			<string>@start(%snippet:ftsmt%%|)</string>
 			<key>snippetType</key>
 			<integer>0</integer>
 			<key>useCount</key>
-			<integer>45</integer>
+			<integer>51</integer>
 			<key>uuidString</key>
 			<string>00B9035B-DE9F-464C-84C5-DD4A63797369</string>
 		</dict>
@@ -76,21 +100,21 @@ In FoldingText:
 			<key>label</key>
 			<string></string>
 			<key>lastUsed</key>
-			<date>2014-04-24T21:22:54Z</date>
+			<date>2014-07-15T09:51:57Z</date>
 			<key>modificationDate</key>
-			<date>2014-04-24T20:53:11Z</date>
+			<date>2014-04-24T21:50:37Z</date>
 			<key>plainText</key>
-			<string>@due(%snippet:smt%%|)</string>
+			<string>@due(%snippet:ftsmt%%|)</string>
 			<key>snippetType</key>
 			<integer>0</integer>
 			<key>useCount</key>
-			<integer>45</integer>
+			<integer>76</integer>
 			<key>uuidString</key>
 			<string>DCD61060-751F-4436-B9F5-322B0EB5B166</string>
 		</dict>
 		<dict>
 			<key>abbreviation</key>
-			<string>smt</string>
+			<string>ftsmt</string>
 			<key>abbreviationMode</key>
 			<integer>0</integer>
 			<key>creationDate</key>
@@ -102,9 +126,9 @@ In FoldingText:
 			<key>lastUsed</key>
 			<date>2012-11-25T12:26:42Z</date>
 			<key>modificationDate</key>
-			<date>2014-04-24T20:49:26Z</date>
+			<date>2014-04-28T12:56:54Z</date>
 			<key>plainText</key>
-			<string>property pName : "smalltime"property pDescription : "'open date phrase panel'"property pVer : "0.1"property pPluginLink : "https://github.com/RobTrew/tree-tools/tree/master/FoldingText%202%20plugins%20and%20scripts"tell application "FoldingText"	set lstDocs to documents	if lstDocs ≠ {} then		activate		tell item 1 of lstDocs			set varResult to (evaluate script "function(editor, options) {
+			<string>property pName : "informal dates and adjustments"property pDescription : "'open date phrase panel'"property pVer : "0.1"property pPluginLink : "https://github.com/RobTrew/tree-tools/tree/master/FoldingText%202%20plugins%20and%20scripts"tell application "FoldingText"	set lstDocs to documents	if lstDocs ≠ {} then		activate		tell item 1 of lstDocs			set varResult to (evaluate script "function(editor, options) {
 				return editor.performCommand(options.command);
 			}" with options {command:pName})		end tell		if varResult = false then			set strBtnLink to "Go to Plugin page"			tell (display dialog "Plugin not installed:" &amp; linefeed &amp; linefeed &amp; pName &amp; " – " &amp; pDescription &amp; linefeed &amp; linefeed &amp; pPluginLink buttons {strBtnLink, "OK"} default button "OK" with title pName &amp; "  ver. " &amp; pVer)				if button returned = strBtnLink then ¬					tell me to do shell script "open " &amp; quoted form of pPluginLink			end tell		end if	end ifend tell</string>
 			<key>snippetType</key>
