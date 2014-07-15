@@ -68,4 +68,5 @@ _Ago_ | Before the current moment (if the unit is hours), otherwise, before midn
 #### Installation in FoldingText Dev 2, or TaskPaper Dev 3
 - From the application's main menu, choose `File > Open Application Folder`
 - Copy the `.ftplugin` folder and its contents into the `Plug-Ins` sub-folder of the application folder
+- In the same way, also copy the `.ftplugin` folder and contents of [Jamie Kowalski’s jmk_panel plugin](https://github.com/jamiekowalski/foldingtext-extra) into the  `Plug-Ins` sub-folder of the application folder
 - Close and restart the application
